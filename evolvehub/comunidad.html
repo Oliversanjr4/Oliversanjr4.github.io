@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comunidad | EvolveHub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo">EvolveHub.</a>
+            <button class="mobile-toggle" aria-label="Menu">☰</button>
+            <nav class="nav-links">
+                <a href="index.html">Inicio</a>
+                <a href="planes.html">Planes</a>
+                <a href="subvenciones.html">Subvenciones</a>
+                <a href="comunidad.html" class="active">Comunidad</a>
+                <a href="contacto.html">Contacto</a>
+                <a href="diagnostico.html" class="btn btn-primary">Diagnóstico</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" style="min-height: 60vh;">
+            <div class="hero-bg"></div>
+            <div class="container hero-content">
+                <h1 class="text-gradient">Conecta con otros profesionales</h1>
+                <p>Comparte experiencias, aprende y crece junto a la comunidad de entrenadores y nutricionistas
+                    digitales.</p>
+
+                <div class="glass"
+                    style="max-width: 500px; margin: var(--spacing-md) auto; padding: var(--spacing-md); text-align: left;">
+                    <h3 style="margin-bottom: var(--spacing-sm);">Únete a la conversación</h3>
+                    <p style="margin-bottom: var(--spacing-md); font-size: 0.9rem; color: var(--text-muted);">Para
+                        participar en los foros y acceder a recursos exclusivos, déjanos tus datos.</p>
+
+                    <form action="#" method="POST" style="display: flex; flex-direction: column; gap: 1rem;">
+                        <input type="text" placeholder="Tu nombre"
+                            style="padding: 10px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background: var(--bg-surface); color: white;"
+                            required>
+                        <input type="email" placeholder="Tu correo electrónico"
+                            style="padding: 10px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background: var(--bg-surface); color: white;"
+                            required>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Unirme a la
+                            comunidad</button>
+                    </form>
+                    <p style="margin-top: 1rem; font-size: 0.8rem; color: var(--text-muted); text-align: center;">Te
+                        enviaremos una invitación a tu correo.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container" style="text-align: center; color: var(--text-muted); padding: var(--spacing-md) 0;">
+            <p>&copy; 2025 EvolveHub. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="assets/main.js"></script>
+</body>
+
+</html>

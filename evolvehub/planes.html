@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planes | EvolveHub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles.css">
+    <style>
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-md);
+        }
+
+        .plan-card {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .plan-card.popular {
+            border-color: var(--primary);
+            box-shadow: 0 0 30px rgba(109, 40, 217, 0.15);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: var(--primary);
+            color: white;
+            font-size: 0.75rem;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .price-tag {
+            margin: var(--spacing-sm) 0;
+        }
+
+        .price-main {
+            font-size: 2.5rem;
+            font-family: var(--font-display);
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .price-sub {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            display: block;
+        }
+
+        .plan-features {
+            margin: var(--spacing-md) 0;
+            flex-grow: 1;
+        }
+
+        .feature-item {
+            margin-bottom: var(--spacing-xs);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .feature-item::before {
+            content: "✓";
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .plan-support {
+            background: rgba(255, 255, 255, 0.03);
+            padding: var(--spacing-sm);
+            border-radius: var(--radius-sm);
+            margin-top: var(--spacing-sm);
+        }
+
+        .plan-target {
+            font-style: italic;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: var(--spacing-sm);
+        }
+    </style>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo">EvolveHub.</a>
+            <button class="mobile-toggle" aria-label="Menu">☰</button>
+            <nav class="nav-links">
+                <a href="index.html">Inicio</a>
+                <a href="planes.html" class="active">Planes</a>
+                <a href="subvenciones.html">Subvenciones</a>
+                <a href="comunidad.html">Comunidad</a>
+                <a href="contacto.html">Contacto</a>
+                <a href="diagnostico.html" class="btn btn-primary">Diagnóstico</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="container" style="padding-top: var(--spacing-xl);">
+            <div style="text-align: center; max-width: 800px; margin: 0 auto var(--spacing-lg);">
+                <h1 class="text-gradient">Elige el plan perfecto para tu evolución</h1>
+                <p>Desde la digitalización básica hasta la transformación total. Todos los planes incluyen una fase de
+                    alta para configurar tu sistema y una cuota mensual de soporte y mantenimiento.</p>
+            </div>
+
+            <div class="plans-grid">
+                <!-- Plan Starter -->
+                <div class="card glass plan-card">
+                    <h3>Starter</h3>
+                    <p class="plan-target">Tu primer paso digital</p>
+                    <div class="price-tag">
+                        <span class="price-sub">Alta: 449€</span>
+                        <span class="price-main">39€<span
+                                style="font-size: 1rem; color: var(--text-muted); font-weight: normal;">/mes</span></span>
+                    </div>
+
+                    <p style="font-size: 0.9rem; margin-bottom: 1rem;"><strong>Ideal para:</strong> Profesionales que
+                        recién empiezan y necesitan presencia básica.</p>
+
+                    <div class="plan-features">
+                        <strong style="display:block; margin-bottom:0.5rem;">Incluye:</strong>
+                        <div class="feature-item">Mini web/landing con tu marca</div>
+                        <div class="feature-item">Gestión de clientes centralizada</div>
+                        <div class="feature-item">Cobros ordenados</div>
+                        <div class="feature-item">Ahorro de tareas repetitivas</div>
+                    </div>
+
+                    <div class="plan-support">
+                        <strong style="font-size:0.85rem;">Soporte:</strong>
+                        <div style="font-size:0.85rem; color:var(--text-muted)">WhatsApp/Email, Guía de uso, Ajustes mes
+                            1</div>
+                    </div>
+
+                    <div style="margin-top: auto; padding-top: var(--spacing-md);">
+                        <div id='product-component-1765815268308'></div>
+                        <script type="text/javascript">
+                            /*<![CDATA[*/
+                            (function () {
+                                var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
+                                if (window.ShopifyBuy) {
+                                    if (window.ShopifyBuy.UI) {
+                                        ShopifyBuyInit();
+                                    } else {
+                                        loadScript();
+                                    }
+                                } else {
+                                    loadScript();
+                                }
+                                function loadScript() {
+                                    var script = document.createElement('script');
+                                    script.async = true;
+                                    script.src = scriptURL;
+                                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
+                                    script.onload = ShopifyBuyInit;
+                                }
+                                function ShopifyBuyInit() {
+                                    var client = ShopifyBuy.buildClient({
+                                        domain: 'c0x1j0-7w.myshopify.com',
+                                        storefrontAccessToken: '8cdf6b27bc16b25d1765f2e483fbcd11',
+                                    });
+                                    ShopifyBuy.UI.onReady(client).then(function (ui) {
+                                        ui.createComponent('product', {
+                                            id: '15476218134912',
+                                            node: document.getElementById('product-component-1765815268308'),
+                                            options: {
+                                                product: {
+                                                    contents: {
+                                                        img: false,
+                                                        title: false,
+                                                        price: false,
+                                                        button: true
+                                                    },
+                                                    buttonDestination: 'checkout',
+                                                    text: {
+                                                        button: 'Comprar Starter'
+                                                    },
+                                                    styles: {
+                                                        button: {
+                                                            "width": "100%",
+                                                            "padding": "14px 20px",
+                                                            "font-family": "Inter, sans-serif",
+                                                            "font-size": "0.95rem",
+                                                            "font-weight": "600",
+                                                            "border-radius": "12px",
+                                                            "background-color": "transparent",
+                                                            "color": "#7753ff",
+                                                            "border": "1px solid #7753ff",
+                                                            ":hover": {
+                                                                "background-color": "#7753ff",
+                                                                "color": "#ffffff"
+                                                            },
+                                                            ":focus": {
+                                                                "background-color": "#7753ff",
+                                                                "color": "#ffffff"
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                cart: {
+                                                    popup: false
+                                                }
+                                            }
+                                        });
+                                    });
+                                }
+                            })();
+                        </script>
+
+
+
+                    </div>
+                </div>
+
+                <!-- Plan Pro -->
+                <div class="card glass plan-card popular">
+                    <div class="popular-badge">Más Popular</div>
+                    <h3 class="text-gradient">Pro</h3>
+                    <p class="plan-target">Haz crecer tu negocio</p>
+                    <div class="price-tag">
+                        <span class="price-sub">Alta: 749€</span>
+                        <span class="price-main">69€<span
+                                style="font-size: 1rem; color: var(--text-muted); font-weight: normal;">/mes</span></span>
+                    </div>
+
+                    <p style="font-size: 0.9rem; margin-bottom: 1rem;"><strong>Ideal para:</strong> Profesionales con
+                        clientes que sienten desorden.</p>
+
+                    <div class="plan-features">
+                        <strong style="display:block; margin-bottom:0.5rem;">Incluye:</strong>
+                        <div class="feature-item">Imagen digital profesional</div>
+                        <div class="feature-item">Agenda y gestión ordenada</div>
+                        <div class="feature-item">Seguimiento de cobros</div>
+                        <div class="feature-item">Automatización básica</div>
+                        <div class="feature-item">Recomendaciones personalizadas</div>
+                    </div>
+
+                    <div class="plan-support">
+                        <strong style="font-size:0.85rem;">Soporte:</strong>
+                        <div style="font-size:0.85rem; color:var(--text-muted)">Prioritario, Acompañamiento, Mini
+                            sesiones quincenales (mes 1)</div>
+                    </div>
+
+                    <div style="margin-top: auto; padding-top: var(--spacing-md);">
+                        <div id="product-component-1765815293999"></div>
+
+                        <script type="text/javascript">
+                            (function () {
+                                var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
+
+                                if (window.ShopifyBuy && window.ShopifyBuy.UI) {
+                                    ShopifyBuyInit();
+                                } else {
+                                    var script = document.createElement('script');
+                                    script.async = true;
+                                    script.src = scriptURL;
+                                    (document.head || document.body).appendChild(script);
+                                    script.onload = ShopifyBuyInit;
+                                }
+
+                                function ShopifyBuyInit() {
+                                    var client = ShopifyBuy.buildClient({
+                                        domain: 'c0x1j0-7w.myshopify.com',
+                                        storefrontAccessToken: '8cdf6b27bc16b25d1765f2e483fbcd11',
+                                    });
+
+                                    ShopifyBuy.UI.onReady(client).then(function (ui) {
+                                        ui.createComponent('product', {
+                                            id: '15470432682368',
+                                            node: document.getElementById('product-component-1765815293999'),
+                                            options: {
+                                                product: {
+                                                    contents: {
+                                                        img: false,
+                                                        title: false,
+                                                        price: false,
+                                                        button: true
+                                                    },
+                                                    buttonDestination: 'checkout',
+                                                    text: {
+                                                        button: 'Comprar Pro'
+                                                    },
+                                                    styles: {
+                                                        button: {
+                                                            "width": "100%",
+                                                            "padding": "14px 20px",
+                                                            "font-family": "Inter, sans-serif",
+                                                            "font-size": "0.95rem",
+                                                            "font-weight": "600",
+                                                            "border-radius": "12px",
+                                                            "background-color": "transparent",
+                                                            "color": "#7753ff",
+                                                            "border": "1px solid #7753ff",
+                                                            ":hover": {
+                                                                "background-color": "#7753ff",
+                                                                "color": "#ffffff"
+                                                            },
+                                                            ":focus": {
+                                                                "background-color": "#7753ff",
+                                                                "color": "#ffffff"
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                cart: {
+                                                    popup: false
+                                                }
+                                            }
+                                        });
+                                    });
+                                }
+                            })();
+                        </script>
+
+                    </div>
+                </div>
+
+                <!-- Plan Premium -->
+                <div class="card glass plan-card">
+                    <h3>Premium</h3>
+                    <p class="plan-target">Escala con procesos sólidos</p>
+                    <div class="price-tag">
+                        <span class="price-sub">Alta: 1.099€</span>
+                        <span class="price-main">109€<span
+                                style="font-size: 1rem; color: var(--text-muted); font-weight: normal;">/mes</span></span>
+                    </div>
+
+                    <p style="font-size: 0.9rem; margin-bottom: 1rem;"><strong>Ideal para:</strong> Profesionales
+                        establecidos que quieren delegar.</p>
+
+                    <div class="plan-features">
+                        <strong style="display:block; margin-bottom:0.5rem;">Incluye:</strong>
+                        <div class="feature-item">Web profesional completa</div>
+                        <div class="feature-item">Gestión avanzada (historial, objetivos)</div>
+                        <div class="feature-item">Automatizaciones de ahorro de tiempo</div>
+                        <div class="feature-item">Análisis de negocio</div>
+                        <div class="feature-item">Experiencia fluida</div>
+                    </div>
+
+                    <div class="plan-support">
+                        <strong style="font-size:0.85rem;">Soporte:</strong>
+                        <div style="font-size:0.85rem; color:var(--text-muted)">Premium (Videollamadas), Optimización
+                            constante (2 m), Revisiones mensuales</div>
+                    </div>
+
+                    <div style="margin-top: auto; padding-top: var(--spacing-md);">
+                        <!--Nuevo-->
+                        <div id="product-component-1765815318306"></div>
+
+                        <script type="text/javascript">
+                            (function () {
+                                var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
+
+                                if (window.ShopifyBuy && window.ShopifyBuy.UI) {
+                                    ShopifyBuyInit();
+                                } else {
+                                    var script = document.createElement('script');
+                                    script.async = true;
+                                    script.src = scriptURL;
+                                    (document.head || document.body).appendChild(script);
+                                    script.onload = ShopifyBuyInit;
+                                }
+
+                                function ShopifyBuyInit() {
+                                    var client = ShopifyBuy.buildClient({
+                                        domain: 'c0x1j0-7w.myshopify.com',
+                                        storefrontAccessToken: '8cdf6b27bc16b25d1765f2e483fbcd11',
+                                    });
+
+                                    ShopifyBuy.UI.onReady(client).then(function (ui) {
+                                        ui.createComponent('product', {
+                                            id: '15470432649600',
+                                            node: document.getElementById('product-component-1765815318306'),
+                                            options: {
+                                                product: {
+                                                    contents: {
+                                                        img: false,
+                                                        title: false,
+                                                        price: false,
+                                                        button: true
+                                                    },
+                                                    buttonDestination: 'checkout',
+                                                    text: {
+                                                        button: 'Comprar Premium'
+                                                    },
+                                                    styles: {
+                                                        button: {
+                                                            "width": "100%",
+                                                            "padding": "14px 20px",
+                                                            "font-family": "Inter, sans-serif",
+                                                            "font-size": "0.95rem",
+                                                            "font-weight": "600",
+                                                            "border-radius": "12px",
+                                                            "background-color": "transparent",
+                                                            "color": "#7753ff",
+                                                            "border": "1px solid #7753ff",
+                                                            ":hover": {
+                                                                "background-color": "#7753ff",
+                                                                "color": "#ffffff"
+                                                            },
+                                                            ":focus": {
+                                                                "background-color": "#7753ff",
+                                                                "color": "#ffffff"
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                cart: {
+                                                    popup: false
+                                                }
+                                            }
+                                        });
+                                    });
+                                }
+                            })();
+                        </script>
+
+
+                        <!--Fin-->
+                    </div>
+                </div>
+
+                <!-- Plan Elite -->
+                <div class="card glass plan-card">
+                    <h3>Elite</h3>
+                    <p class="plan-target">Profesionalización al máximo</p>
+                    <div class="price-tag">
+                        <span class="price-sub">Alta: 1.499€</span>
+                        <span class="price-main">149€<span
+                                style="font-size: 1rem; color: var(--text-muted); font-weight: normal;">/mes</span></span>
+                    </div>
+
+                    <p style="font-size: 0.9rem; margin-bottom: 1rem;"><strong>Ideal para:</strong> Negocios que quieren
+                        un sistema a medida.</p>
+
+                    <div class="plan-features">
+                        <strong style="display:block; margin-bottom:0.5rem;">Incluye:</strong>
+                        <div class="feature-item">Plataforma totalmente personalizada</div>
+                        <div class="feature-item">Gestión completa integral</div>
+                        <div class="feature-item">Automatizaciones avanzadas</div>
+                        <div class="feature-item">Dashboard con KPIs</div>
+                        <div class="feature-item">Integración de herramientas</div>
+                    </div>
+
+                    <div class="plan-support">
+                        <strong style="font-size:0.85rem;">Soporte:</strong>
+                        <div style="font-size:0.85rem; color:var(--text-muted)">Acompañamiento total (3 m), Ilimitado,
+                            Revisiones quincenales</div>
+                    </div>
+
+                    <div style="margin-top: auto; padding-top: var(--spacing-md);">
+                        <div id="product-component-1765815347017"></div>
+
+                        <script type="text/javascript">
+                            (function () {
+                                var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
+
+                                if (window.ShopifyBuy && window.ShopifyBuy.UI) {
+                                    ShopifyBuyInit();
+                                } else {
+                                    var script = document.createElement('script');
+                                    script.async = true;
+                                    script.src = scriptURL;
+                                    (document.head || document.body).appendChild(script);
+                                    script.onload = ShopifyBuyInit;
+                                }
+
+                                function ShopifyBuyInit() {
+                                    var client = ShopifyBuy.buildClient({
+                                        domain: 'c0x1j0-7w.myshopify.com',
+                                        storefrontAccessToken: '8cdf6b27bc16b25d1765f2e483fbcd11',
+                                    });
+
+                                    ShopifyBuy.UI.onReady(client).then(function (ui) {
+                                        ui.createComponent('product', {
+                                            id: '15470432616832',
+                                            node: document.getElementById('product-component-1765815347017'),
+                                            options: {
+                                                product: {
+                                                    contents: {
+                                                        img: false,
+                                                        title: false,
+                                                        price: false,
+                                                        button: true
+                                                    },
+                                                    buttonDestination: 'checkout',
+                                                    text: {
+                                                        button: 'Comprar Elite'
+                                                    },
+                                                    styles: {
+                                                        button: {
+                                                            "width": "100%",
+                                                            "padding": "14px 20px",
+                                                            "font-family": "Inter, sans-serif",
+                                                            "font-size": "0.95rem",
+                                                            "font-weight": "600",
+                                                            "border-radius": "12px",
+                                                            "background-color": "transparent",
+                                                            "color": "#7753ff",
+                                                            "border": "1px solid #7753ff",
+                                                            ":hover": {
+                                                                "background-color": "#7753ff",
+                                                                "color": "#ffffff"
+                                                            },
+                                                            ":focus": {
+                                                                "background-color": "#7753ff",
+                                                                "color": "#ffffff"
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                cart: {
+                                                    popup: false
+                                                }
+                                            }
+                                        });
+                                    });
+                                }
+                            })();
+                        </script>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: var(--spacing-lg);">
+                <p>¿No tienes claro cuál es para ti?</p>
+                <a href="diagnostico.html" class="btn btn-primary" style="margin-top: var(--spacing-sm);">Solicitar
+                    propuesta personalizada</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container" style="text-align: center; color: var(--text-muted); padding: var(--spacing-md) 0;">
+            <p>&copy; 2025 EvolveHub. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="assets/main.js"></script>
+</body>
+
+</html>
