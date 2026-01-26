@@ -3,26 +3,25 @@
   --bg-body: #0a0a0c;
   --bg-surface: #131316;
   --bg-surface-glass: rgba(19, 19, 22, 0.7);
-  --primary: #6d28d9; /* Deep Purple */
+  --primary: #6d28d9;
+  /* Deep Purple */
   --primary-glow: #8b5cf6;
-  --accent: #06b6d4; /* Cyan */
+  --accent: #06b6d4;
+  /* Cyan */
   --accent-glow: #22d3ee;
   --text-main: #f3f4f6;
   --text-muted: #9ca3af;
   --border-color: rgba(255, 255, 255, 0.1);
   --success: #10b981;
-  
   /* Typography */
   --font-main: 'Inter', system-ui, -apple-system, sans-serif;
   --font-display: 'Outfit', system-ui, -apple-system, sans-serif;
-  
   /* Spacing */
   --spacing-xs: 0.5rem;
   --spacing-sm: 1rem;
   --spacing-md: 2rem;
   --spacing-lg: 4rem;
   --spacing-xl: 8rem;
-  
   /* Components */
   --radius-sm: 8px;
   --radius-md: 16px;
@@ -49,7 +48,12 @@ body {
 }
 
 /* Typography */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-display);
   font-weight: 700;
   line-height: 1.2;
@@ -187,7 +191,8 @@ section {
   color: var(--text-muted);
 }
 
-.nav-links a:hover, .nav-links a.active {
+.nav-links a:hover,
+.nav-links a.active {
   color: var(--text-main);
 }
 
@@ -295,4 +300,41 @@ footer {
   .mobile-toggle {
     display: block;
   }
+
+  .site-header {
+    height: 60px;
+  }
+
+  .logo img {
+    max-height: 40px;
+  }
+}
+
+/* Header layout */
+.site-header {
+  height: 72px;
+  /* altura clara y controlada */
+  display: flex;
+  align-items: center;
+}
+
+/* Contenedor interno */
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+/* Imagen del logo */
+.logo img {
+  height: 60%;
+  max-height: 48px;
+  width: auto;
 }
