@@ -4,13 +4,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Planes | EvolveHub</title>
+    <title>Servicios | EvolveHub</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@700;800&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="assets/styles.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="./img/favicon-32x32.png?v=2">
+    <link rel="icon" type="image/png" sizes="16x16" href="./img/favicon-16x16.png?v=2">
+    <link rel="shortcut icon" href="./img/favicon.ico">
     <style>
+        /* Custom Styles for Servicios Page */
+        :root {
+            --primary-glow: rgba(109, 40, 217, 0.4);
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Hero */
+        .page-hero {
+            text-align: center;
+            padding: var(--spacing-xl) 0 var(--spacing-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, var(--primary-glow) 0%, transparent 70%);
+            z-index: -1;
+            pointer-events: none;
+            animation: pulse-glow 8s infinite alternate;
+        }
+
+        @keyframes pulse-glow {
+            0% {
+                opacity: 0.5;
+                transform: translateX(-50%) scale(0.8);
+            }
+
+            100% {
+                opacity: 0.8;
+                transform: translateX(-50%) scale(1.2);
+            }
+        }
+
+        .page-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .page-hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto var(--spacing-md);
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* How it Works */
+        .steps-section {
+            padding: var(--spacing-xl) 0;
+            position: relative;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-md);
+            position: relative;
+        }
+
+        .step-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            text-align: center;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .step-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: rgba(255, 255, 255, 0.1);
+            line-height: 1;
+            margin-bottom: var(--spacing-sm);
+            font-family: var(--font-display);
+        }
+
+        .step-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: var(--spacing-xs);
+            color: white;
+        }
+
+        /* Packs Grid - Similar to previous plans but updated */
         .plans-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -21,76 +122,247 @@
         .plan-card {
             display: flex;
             flex-direction: column;
+            text-align: left;
             height: 100%;
             position: relative;
-            overflow: hidden;
         }
 
-        .plan-card.popular {
-            border-color: var(--primary);
-            box-shadow: 0 0 30px rgba(109, 40, 217, 0.15);
-        }
-
-        .popular-badge {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            background: var(--primary);
-            color: white;
-            font-size: 0.75rem;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-weight: 600;
-        }
-
-        .price-tag {
+        .plan-card .plan-price {
             margin: var(--spacing-sm) 0;
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: var(--spacing-sm);
         }
 
-        .price-main {
-            font-size: 2.5rem;
+        .price-setup {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .price-monthly {
+            font-size: 2rem;
+            font-weight: 700;
             font-family: var(--font-display);
-            font-weight: 800;
             color: var(--text-main);
         }
 
-        .price-sub {
-            font-size: 0.9rem;
+        .price-monthly span {
+            font-size: 1rem;
+            font-weight: 400;
             color: var(--text-muted);
-            display: block;
         }
 
-        .plan-features {
-            margin: var(--spacing-md) 0;
+        .plan-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: auto;
+            padding-top: var(--spacing-md);
+        }
+
+        .plan-actions .btn {
+            flex: 1;
+            padding: 10px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Individual Services */
+        .services-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+        }
+
+        .service-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--glass-border);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-sm);
+            display: flex;
+            flex-direction: column;
+            transition: background 0.3s ease;
+        }
+
+        .service-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .service-item h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .service-item p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            line-height: 1.5;
             flex-grow: 1;
         }
 
-        .feature-item {
-            margin-bottom: var(--spacing-xs);
-            font-size: 0.95rem;
-            display: flex;
-            align-items: flex-start;
-            gap: 8px;
+        .service-price-block {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
         }
 
-        .feature-item::before {
-            content: "✓";
+        .service-price-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+
+        .service-price-row:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Modals */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: #111;
+            border: 1px solid var(--glass-border);
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            border-radius: var(--radius-md);
+            position: relative;
+            padding: var(--spacing-lg);
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .close-modal:hover {
+            color: white;
+        }
+
+        .tech-details {
+            margin-top: var(--spacing-md);
+            padding-top: var(--spacing-md);
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .tech-details summary {
+            cursor: pointer;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .benefit-tag {
+            display: inline-block;
+            background: rgba(109, 40, 217, 0.2);
+            color: var(--primary);
+            font-size: 0.75rem;
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+        }
+
+        /* Check list styles */
+        .check-list {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+
+        .check-list li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        .check-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
             color: var(--success);
             font-weight: bold;
         }
 
-        .plan-support {
-            background: rgba(255, 255, 255, 0.03);
-            padding: var(--spacing-sm);
-            border-radius: var(--radius-sm);
-            margin-top: var(--spacing-sm);
+        /* Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
         }
 
-        .plan-target {
-            font-style: italic;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-bottom: var(--spacing-sm);
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 {
+            transition-delay: 0.1s;
+        }
+
+        .delay-2 {
+            transition-delay: 0.2s;
+        }
+
+        .delay-3 {
+            transition-delay: 0.3s;
+        }
+
+        .delay-4 {
+            transition-delay: 0.4s;
+        }
+
+        @media (max-width: 768px) {
+            .page-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .modal-content {
+                width: 95%;
+                padding: var(--spacing-md);
+            }
         }
     </style>
 </head>
@@ -98,13 +370,13 @@
 <body>
     <header class="site-header">
         <div class="container header-inner">
-              <a href="index.html" class="logo">
+            <a href="index.html" class="logo">
                 <img src="./img/logo_evolvehub.png" alt="EvolveHub">
             </a>
             <button class="mobile-toggle" aria-label="Menu">☰</button>
             <nav class="nav-links">
                 <a href="index.html">Inicio</a>
-                <a href="planes.html" class="active">Planes</a>
+                <a href="planes.html" class="active">Servicios</a>
                 <a href="subvenciones.html">Subvenciones</a>
                 <a href="comunidad.html">Comunidad</a>
                 <a href="contacto.html">Contacto</a>
@@ -114,440 +386,288 @@
     </header>
 
     <main>
-        <section class="container" style="padding-top: var(--spacing-xl);">
-            <div style="text-align: center; max-width: 800px; margin: 0 auto var(--spacing-lg);">
-                <h1 class="text-gradient">Elige el plan perfecto para tu evolución</h1>
-                <p>Desde la digitalización básica hasta la transformación total. Todos los planes incluyen una fase de
-                    alta para configurar tu sistema y una cuota mensual de soporte y mantenimiento.</p>
+        <!-- Hero Section -->
+        <section class="page-hero container reveal active">
+            <h1 class="text-gradient">Servicios Digitales & <br>Automatización Inteligente</h1>
+            <p>Digitalizamos tu negocio paso a paso para que ahorres tiempo, atiendas mejor a tus clientes y puedas
+                crecer.</p>
+            <a href="contacto.html" class="btn btn-primary btn-glow">Solicitar asesoría</a>
+        </section>
+
+        <!-- How it Works -->
+        <section class="container steps-section reveal">
+            <h2 class="section-title center">Cómo trabajamos</h2>
+            <div class="steps-grid">
+                <div class="step-card reveal delay-1">
+                    <div class="step-number">01</div>
+                    <h3>Analizamos tu negocio</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9em;">Estudiamos tus procesos actuales para
+                        identificar cuellos de botella y oportunidades claras de mejora.</p>
+                </div>
+                <div class="step-card reveal delay-2">
+                    <div class="step-number">02</div>
+                    <h3>Implementamos la solución</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9em;">Configuramos las herramientas y
+                        automatizaciones a medida sin que tengas que preocuparte por la técnica.</p>
+                </div>
+                <div class="step-card reveal delay-3">
+                    <div class="step-number">03</div>
+                    <h3>Te acompañamos</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9em;">No te dejamos solo. Te damos soporte continuo
+                        y optimizamos el sistema mes a mes.</p>
+                </div>
             </div>
+        </section>
+
+        <!-- Packs Section -->
+        <section class="container reveal" style="margin-bottom: var(--spacing-xl);">
+            <h2 class="section-title center">Packs de Servicios</h2>
+            <p class="center" style="max-width: 600px; margin: 0 auto; color: var(--text-muted);">Soluciones integrales
+                diseñadas para cada etapa de tu crecimiento digital.</p>
 
             <div class="plans-grid">
-                <!-- Plan Starter -->
-                <div class="card glass plan-card">
-                    <h3>Starter</h3>
-                    <p class="plan-target">Tu primer paso digital</p>
-                    <div class="price-tag">
-                        <span class="price-sub">Alta: 449€</span>
-                        <span class="price-main">39€<span
-                                style="font-size: 1rem; color: var(--text-muted); font-weight: normal;">/mes</span></span>
+                <!-- PACK 1 -->
+                <div class="card glass plan-card reveal delay-1">
+                    <div class="benefit-tag">Visibilidad</div>
+                    <h3>Presencia Digital</h3>
+                    <p class="plan-target">Tu negocio visible y profesional en internet desde el primer día.</p>
+
+                    <div class="plan-price">
+                        <span class="price-setup">Setup: 220 €</span>
+                        <div class="price-monthly">39 €<span>/mes</span></div>
                     </div>
 
-                    <p style="font-size: 0.9rem; margin-bottom: 1rem;"><strong>Ideal para:</strong> Profesionales que
-                        recién empiezan y necesitan presencia básica.</p>
+                    <ul class="check-list">
+                        <li>Página web / landing básica</li>
+                        <li>Mantenimiento web incluido</li>
+                        <li>Soporte básico y cambios menores</li>
+                    </ul>
 
-                    <div class="plan-features">
-                        <strong style="display:block; margin-bottom:0.5rem;">Incluye:</strong>
-                        <div class="feature-item">Mini web/landing con tu marca</div>
-                        <div class="feature-item">Gestión de clientes centralizada</div>
-                        <div class="feature-item">Cobros ordenados</div>
-                        <div class="feature-item">Ahorro de tareas repetitivas</div>
-                    </div>
-
-                    <div class="plan-support">
-                        <strong style="font-size:0.85rem;">Soporte:</strong>
-                        <div style="font-size:0.85rem; color:var(--text-muted)">WhatsApp/Email, Guía de uso, Ajustes mes
-                            1</div>
-                    </div>
-
-                    <div style="margin-top: auto; padding-top: var(--spacing-md);">
-                        <div id='product-component-1765815268308'></div>
-                        <script type="text/javascript">
-                            /*<![CDATA[*/
-                            (function () {
-                                var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
-                                if (window.ShopifyBuy) {
-                                    if (window.ShopifyBuy.UI) {
-                                        ShopifyBuyInit();
-                                    } else {
-                                        loadScript();
-                                    }
-                                } else {
-                                    loadScript();
-                                }
-                                function loadScript() {
-                                    var script = document.createElement('script');
-                                    script.async = true;
-                                    script.src = scriptURL;
-                                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
-                                    script.onload = ShopifyBuyInit;
-                                }
-                                function ShopifyBuyInit() {
-                                    var client = ShopifyBuy.buildClient({
-                                        domain: 'c0x1j0-7w.myshopify.com',
-                                        storefrontAccessToken: '8cdf6b27bc16b25d1765f2e483fbcd11',
-                                    });
-                                    ShopifyBuy.UI.onReady(client).then(function (ui) {
-                                        ui.createComponent('product', {
-                                            id: '15476218134912',
-                                            node: document.getElementById('product-component-1765815268308'),
-                                            options: {
-                                                product: {
-                                                    contents: {
-                                                        img: false,
-                                                        title: false,
-                                                        price: false,
-                                                        button: true
-                                                    },
-                                                    buttonDestination: 'checkout',
-                                                    text: {
-                                                        button: 'Comprar Starter'
-                                                    },
-                                                    styles: {
-                                                        button: {
-                                                            "width": "100%",
-                                                            "padding": "14px 20px",
-                                                            "font-family": "Inter, sans-serif",
-                                                            "font-size": "0.95rem",
-                                                            "font-weight": "600",
-                                                            "border-radius": "12px",
-                                                            "background-color": "transparent",
-                                                            "color": "#7753ff",
-                                                            "border": "1px solid #7753ff",
-                                                            ":hover": {
-                                                                "background-color": "#7753ff",
-                                                                "color": "#ffffff"
-                                                            },
-                                                            ":focus": {
-                                                                "background-color": "#7753ff",
-                                                                "color": "#ffffff"
-                                                            }
-                                                        }
-                                                    }
-                                                },
-                                                cart: {
-                                                    popup: false
-                                                }
-                                            }
-                                        });
-                                    });
-                                }
-                            })();
-                        </script>
-
-
-
+                    <div class="plan-actions">
+                        <button class="btn btn-outline" onclick="openModal('modal-pack1')">Ver detalles</button>
+                        <a href="contacto.html" class="btn btn-primary">Contratar</a>
                     </div>
                 </div>
 
-                <!-- Plan Pro -->
-                <div class="card glass plan-card popular">
-                    <div class="popular-badge">Más Popular</div>
-                    <h3 class="text-gradient">Pro</h3>
-                    <p class="plan-target">Haz crecer tu negocio</p>
-                    <div class="price-tag">
-                        <span class="price-sub">Alta: 749€</span>
-                        <span class="price-main">69€<span
-                                style="font-size: 1rem; color: var(--text-muted); font-weight: normal;">/mes</span></span>
+                <!-- PACK 2 -->
+                <div class="card glass plan-card reveal delay-2">
+                    <div class="benefit-tag">Atención 24/7</div>
+                    <h3>Atención Automática</h3>
+                    <p class="plan-target">Responde a tus clientes 24/7 sin esfuerzo.</p>
+
+                    <div class="plan-price">
+                        <span class="price-setup">Setup: 390 €</span>
+                        <div class="price-monthly">99 €<span>/mes</span></div>
                     </div>
 
-                    <p style="font-size: 0.9rem; margin-bottom: 1rem;"><strong>Ideal para:</strong> Profesionales con
-                        clientes que sienten desorden.</p>
+                    <ul class="check-list">
+                        <li>Agente IA para web</li>
+                        <li>Chatbot IA multicanal</li>
+                        <li>Ajustes y revisión mensual</li>
+                    </ul>
 
-                    <div class="plan-features">
-                        <strong style="display:block; margin-bottom:0.5rem;">Incluye:</strong>
-                        <div class="feature-item">Imagen digital profesional</div>
-                        <div class="feature-item">Agenda y gestión ordenada</div>
-                        <div class="feature-item">Seguimiento de cobros</div>
-                        <div class="feature-item">Automatización básica</div>
-                        <div class="feature-item">Recomendaciones personalizadas</div>
-                    </div>
-
-                    <div class="plan-support">
-                        <strong style="font-size:0.85rem;">Soporte:</strong>
-                        <div style="font-size:0.85rem; color:var(--text-muted)">Prioritario, Acompañamiento, Mini
-                            sesiones quincenales (mes 1)</div>
-                    </div>
-
-                    <div style="margin-top: auto; padding-top: var(--spacing-md);">
-                        <div id="product-component-1765815293999"></div>
-
-                        <script type="text/javascript">
-                            (function () {
-                                var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
-
-                                if (window.ShopifyBuy && window.ShopifyBuy.UI) {
-                                    ShopifyBuyInit();
-                                } else {
-                                    var script = document.createElement('script');
-                                    script.async = true;
-                                    script.src = scriptURL;
-                                    (document.head || document.body).appendChild(script);
-                                    script.onload = ShopifyBuyInit;
-                                }
-
-                                function ShopifyBuyInit() {
-                                    var client = ShopifyBuy.buildClient({
-                                        domain: 'c0x1j0-7w.myshopify.com',
-                                        storefrontAccessToken: '8cdf6b27bc16b25d1765f2e483fbcd11',
-                                    });
-
-                                    ShopifyBuy.UI.onReady(client).then(function (ui) {
-                                        ui.createComponent('product', {
-                                            id: '15470432682368',
-                                            node: document.getElementById('product-component-1765815293999'),
-                                            options: {
-                                                product: {
-                                                    contents: {
-                                                        img: false,
-                                                        title: false,
-                                                        price: false,
-                                                        button: true
-                                                    },
-                                                    buttonDestination: 'checkout',
-                                                    text: {
-                                                        button: 'Comprar Pro'
-                                                    },
-                                                    styles: {
-                                                        button: {
-                                                            "width": "100%",
-                                                            "padding": "14px 20px",
-                                                            "font-family": "Inter, sans-serif",
-                                                            "font-size": "0.95rem",
-                                                            "font-weight": "600",
-                                                            "border-radius": "12px",
-                                                            "background-color": "transparent",
-                                                            "color": "#7753ff",
-                                                            "border": "1px solid #7753ff",
-                                                            ":hover": {
-                                                                "background-color": "#7753ff",
-                                                                "color": "#ffffff"
-                                                            },
-                                                            ":focus": {
-                                                                "background-color": "#7753ff",
-                                                                "color": "#ffffff"
-                                                            }
-                                                        }
-                                                    }
-                                                },
-                                                cart: {
-                                                    popup: false
-                                                }
-                                            }
-                                        });
-                                    });
-                                }
-                            })();
-                        </script>
-
+                    <div class="plan-actions">
+                        <button class="btn btn-outline" onclick="openModal('modal-pack2')">Ver detalles</button>
+                        <a href="contacto.html" class="btn btn-primary">Contratar</a>
                     </div>
                 </div>
 
-                <!-- Plan Premium -->
-                <div class="card glass plan-card">
-                    <h3>Premium</h3>
-                    <p class="plan-target">Escala con procesos sólidos</p>
-                    <div class="price-tag">
-                        <span class="price-sub">Alta: 1.099€</span>
-                        <span class="price-main">109€<span
-                                style="font-size: 1rem; color: var(--text-muted); font-weight: normal;">/mes</span></span>
+                <!-- PACK 3 -->
+                <div class="card glass plan-card popular reveal delay-3">
+                    <div class="popular-badge"
+                        style="position:absolute; top:10px; right:10px; background:var(--primary); padding:2px 8px; font-size:0.7rem; border-radius:10px;">
+                        Recomendado</div>
+                    <div class="benefit-tag">Eficiencia</div>
+                    <h3>Automatización y Control</h3>
+                    <p class="plan-target">Menos caos, más control y menos trabajo manual.</p>
+
+                    <div class="plan-price">
+                        <span class="price-setup">Setup: 490 €</span>
+                        <div class="price-monthly">119 €<span>/mes</span></div>
                     </div>
 
-                    <p style="font-size: 0.9rem; margin-bottom: 1rem;"><strong>Ideal para:</strong> Profesionales
-                        establecidos que quieren delegar.</p>
+                    <ul class="check-list">
+                        <li>CRM para PYMES</li>
+                        <li>Automatización de procesos</li>
+                        <li>Optimización y soporte continuo</li>
+                    </ul>
 
-                    <div class="plan-features">
-                        <strong style="display:block; margin-bottom:0.5rem;">Incluye:</strong>
-                        <div class="feature-item">Web profesional completa</div>
-                        <div class="feature-item">Gestión avanzada (historial, objetivos)</div>
-                        <div class="feature-item">Automatizaciones de ahorro de tiempo</div>
-                        <div class="feature-item">Análisis de negocio</div>
-                        <div class="feature-item">Experiencia fluida</div>
-                    </div>
-
-                    <div class="plan-support">
-                        <strong style="font-size:0.85rem;">Soporte:</strong>
-                        <div style="font-size:0.85rem; color:var(--text-muted)">Premium (Videollamadas), Optimización
-                            constante (2 m), Revisiones mensuales</div>
-                    </div>
-
-                    <div style="margin-top: auto; padding-top: var(--spacing-md);">
-                        <!--Nuevo-->
-                        <div id="product-component-1765815318306"></div>
-
-                        <script type="text/javascript">
-                            (function () {
-                                var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
-
-                                if (window.ShopifyBuy && window.ShopifyBuy.UI) {
-                                    ShopifyBuyInit();
-                                } else {
-                                    var script = document.createElement('script');
-                                    script.async = true;
-                                    script.src = scriptURL;
-                                    (document.head || document.body).appendChild(script);
-                                    script.onload = ShopifyBuyInit;
-                                }
-
-                                function ShopifyBuyInit() {
-                                    var client = ShopifyBuy.buildClient({
-                                        domain: 'c0x1j0-7w.myshopify.com',
-                                        storefrontAccessToken: '8cdf6b27bc16b25d1765f2e483fbcd11',
-                                    });
-
-                                    ShopifyBuy.UI.onReady(client).then(function (ui) {
-                                        ui.createComponent('product', {
-                                            id: '15470432649600',
-                                            node: document.getElementById('product-component-1765815318306'),
-                                            options: {
-                                                product: {
-                                                    contents: {
-                                                        img: false,
-                                                        title: false,
-                                                        price: false,
-                                                        button: true
-                                                    },
-                                                    buttonDestination: 'checkout',
-                                                    text: {
-                                                        button: 'Comprar Premium'
-                                                    },
-                                                    styles: {
-                                                        button: {
-                                                            "width": "100%",
-                                                            "padding": "14px 20px",
-                                                            "font-family": "Inter, sans-serif",
-                                                            "font-size": "0.95rem",
-                                                            "font-weight": "600",
-                                                            "border-radius": "12px",
-                                                            "background-color": "transparent",
-                                                            "color": "#7753ff",
-                                                            "border": "1px solid #7753ff",
-                                                            ":hover": {
-                                                                "background-color": "#7753ff",
-                                                                "color": "#ffffff"
-                                                            },
-                                                            ":focus": {
-                                                                "background-color": "#7753ff",
-                                                                "color": "#ffffff"
-                                                            }
-                                                        }
-                                                    }
-                                                },
-                                                cart: {
-                                                    popup: false
-                                                }
-                                            }
-                                        });
-                                    });
-                                }
-                            })();
-                        </script>
-
-
-                        <!--Fin-->
+                    <div class="plan-actions">
+                        <button class="btn btn-outline" onclick="openModal('modal-pack3')">Ver detalles</button>
+                        <a href="contacto.html" class="btn btn-primary">Contratar</a>
                     </div>
                 </div>
 
-                <!-- Plan Elite -->
-                <div class="card glass plan-card">
-                    <h3>Elite</h3>
-                    <p class="plan-target">Profesionalización al máximo</p>
-                    <div class="price-tag">
-                        <span class="price-sub">Alta: 1.499€</span>
-                        <span class="price-main">149€<span
-                                style="font-size: 1rem; color: var(--text-muted); font-weight: normal;">/mes</span></span>
+                <!-- PACK 4 -->
+                <div class="card glass plan-card reveal delay-4">
+                    <div class="benefit-tag">Transformación Total</div>
+                    <h3>Digitalización Completa</h3>
+                    <p class="plan-target">Todo tu negocio conectado y preparado para crecer.</p>
+
+                    <div class="plan-price">
+                        <span class="price-setup">Setup: 690 €</span>
+                        <div class="price-monthly">169 €<span>/mes</span></div>
                     </div>
 
-                    <p style="font-size: 0.9rem; margin-bottom: 1rem;"><strong>Ideal para:</strong> Negocios que quieren
-                        un sistema a medida.</p>
+                    <ul class="check-list">
+                        <li>Web profesional + Chatbot IA</li>
+                        <li>CRM + Automatizaciones</li>
+                        <li>Integraciones IA / ERP básicas</li>
+                        <li>Soporte prioritario</li>
+                    </ul>
 
-                    <div class="plan-features">
-                        <strong style="display:block; margin-bottom:0.5rem;">Incluye:</strong>
-                        <div class="feature-item">Plataforma totalmente personalizada</div>
-                        <div class="feature-item">Gestión completa integral</div>
-                        <div class="feature-item">Automatizaciones avanzadas</div>
-                        <div class="feature-item">Dashboard con KPIs</div>
-                        <div class="feature-item">Integración de herramientas</div>
-                    </div>
-
-                    <div class="plan-support">
-                        <strong style="font-size:0.85rem;">Soporte:</strong>
-                        <div style="font-size:0.85rem; color:var(--text-muted)">Acompañamiento total (3 m), Ilimitado,
-                            Revisiones quincenales</div>
-                    </div>
-
-                    <div style="margin-top: auto; padding-top: var(--spacing-md);">
-                        <div id="product-component-1765815347017"></div>
-
-                        <script type="text/javascript">
-                            (function () {
-                                var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
-
-                                if (window.ShopifyBuy && window.ShopifyBuy.UI) {
-                                    ShopifyBuyInit();
-                                } else {
-                                    var script = document.createElement('script');
-                                    script.async = true;
-                                    script.src = scriptURL;
-                                    (document.head || document.body).appendChild(script);
-                                    script.onload = ShopifyBuyInit;
-                                }
-
-                                function ShopifyBuyInit() {
-                                    var client = ShopifyBuy.buildClient({
-                                        domain: 'c0x1j0-7w.myshopify.com',
-                                        storefrontAccessToken: '8cdf6b27bc16b25d1765f2e483fbcd11',
-                                    });
-
-                                    ShopifyBuy.UI.onReady(client).then(function (ui) {
-                                        ui.createComponent('product', {
-                                            id: '15470432616832',
-                                            node: document.getElementById('product-component-1765815347017'),
-                                            options: {
-                                                product: {
-                                                    contents: {
-                                                        img: false,
-                                                        title: false,
-                                                        price: false,
-                                                        button: true
-                                                    },
-                                                    buttonDestination: 'checkout',
-                                                    text: {
-                                                        button: 'Comprar Elite'
-                                                    },
-                                                    styles: {
-                                                        button: {
-                                                            "width": "100%",
-                                                            "padding": "14px 20px",
-                                                            "font-family": "Inter, sans-serif",
-                                                            "font-size": "0.95rem",
-                                                            "font-weight": "600",
-                                                            "border-radius": "12px",
-                                                            "background-color": "transparent",
-                                                            "color": "#7753ff",
-                                                            "border": "1px solid #7753ff",
-                                                            ":hover": {
-                                                                "background-color": "#7753ff",
-                                                                "color": "#ffffff"
-                                                            },
-                                                            ":focus": {
-                                                                "background-color": "#7753ff",
-                                                                "color": "#ffffff"
-                                                            }
-                                                        }
-                                                    }
-                                                },
-                                                cart: {
-                                                    popup: false
-                                                }
-                                            }
-                                        });
-                                    });
-                                }
-                            })();
-                        </script>
+                    <div class="plan-actions">
+                        <button class="btn btn-outline" onclick="openModal('modal-pack4')">Ver detalles</button>
+                        <a href="contacto.html" class="btn btn-primary">Contratar</a>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <div style="text-align: center; margin-top: var(--spacing-lg);">
-                <p>¿No tienes claro cuál es para ti?</p>
-                <a href="diagnostico.html" class="btn btn-primary" style="margin-top: var(--spacing-sm);">Solicitar
-                    propuesta personalizada</a>
+        <!-- Individual Services -->
+        <section class="container reveal" style="margin-bottom: var(--spacing-xl);">
+            <h2 class="section-title center">Servicios Individuales</h2>
+            <div class="services-list">
+                <!-- S1 -->
+                <div class="service-item reveal">
+                    <h3>Página web / Landing básica</h3>
+                    <p>Ideal para empezar. Una página rápida, elegante y efectiva.</p>
+                    <div class="service-price-block">
+                        <div class="service-price-row"><span>Setup</span> <strong>190 €</strong></div>
+                        <div class="service-price-row"><span>Soporte</span> <strong>29 €/mes</strong></div>
+                    </div>
+                    <div class="plan-actions">
+                        <button class="btn btn-outline" onclick="openModal('modal-s1')">Ver detalles</button>
+                        <a href="contacto.html" class="btn btn-primary">Contratar</a>
+                    </div>
+                </div>
+
+                <!-- S2 -->
+                <div class="service-item reveal">
+                    <h3>Página web / Landing profesional</h3>
+                    <p>Diseño avanzado con múltiples secciones y funcionalidades.</p>
+                    <div class="service-price-block">
+                        <div class="service-price-row"><span>Setup</span> <strong>390 €</strong></div>
+                        <div class="service-price-row"><span>Soporte</span> <strong>49 €/mes</strong></div>
+                    </div>
+                    <div class="plan-actions">
+                        <button class="btn btn-outline" onclick="openModal('modal-s2')">Ver detalles</button>
+                        <a href="contacto.html" class="btn btn-primary">Contratar</a>
+                    </div>
+                </div>
+
+                <!-- S3 -->
+                <div class="service-item reveal">
+                    <h3>Agente de IA para web existente</h3>
+                    <p>Integra inteligencia artificial en tu web actual.</p>
+                    <div class="service-price-block">
+                        <div class="service-price-row"><span>Setup</span> <strong>190 €</strong></div>
+                        <div class="service-price-row"><span>Soporte</span> <strong>69 €/mes</strong></div>
+                    </div>
+                    <div class="plan-actions">
+                        <button class="btn btn-outline" onclick="openModal('modal-s3')">Ver detalles</button>
+                        <a href="contacto.html" class="btn btn-primary">Contratar</a>
+                    </div>
+                </div>
+
+                <!-- S4 -->
+                <div class="service-item reveal">
+                    <h3>Chatbot IA Multicanal 24/7</h3>
+                    <p>Atiende en Web, WhatsApp y redes sociales a la vez.</p>
+                    <div class="service-price-block">
+                        <div class="service-price-row"><span>Setup</span> <strong>290 €</strong></div>
+                        <div class="service-price-row"><span>Soporte</span> <strong>99 €/mes</strong></div>
+                    </div>
+                    <div class="plan-actions">
+                        <button class="btn btn-outline" onclick="openModal('modal-s4')">Ver detalles</button>
+                        <a href="contacto.html" class="btn btn-primary">Contratar</a>
+                    </div>
+                </div>
+
+                <!-- S5 -->
+                <div class="service-item reveal">
+                    <h3>Agente IA para Atención Telefónica</h3>
+                    <p>Tu IA contesta llamadas, agenda citas y resuelve dudas.</p>
+                    <div class="service-price-block">
+                        <div class="service-price-row"><span>Setup</span> <strong>490 €</strong></div>
+                        <div class="service-price-row"><span>Soporte</span> <strong>149 €/mes</strong></div>
+                    </div>
+                    <div class="plan-actions">
+                        <button class="btn btn-outline" onclick="openModal('modal-s5')">Ver detalles</button>
+                        <a href="contacto.html" class="btn btn-primary">Contratar</a>
+                    </div>
+                </div>
+
+                <!-- S6 -->
+                <div class="service-item reveal">
+                    <h3>CRM para PYMES</h3>
+                    <p>Centraliza tus clientes y ventas en un solo lugar.</p>
+                    <div class="service-price-block">
+                        <div class="service-price-row"><span>Setup</span> <strong>290 €</strong></div>
+                        <div class="service-price-row"><span>Soporte</span> <strong>79 €/mes</strong></div>
+                    </div>
+                    <div class="plan-actions">
+                        <button class="btn btn-outline" onclick="openModal('modal-s6')">Ver detalles</button>
+                        <a href="contacto.html" class="btn btn-primary">Contratar</a>
+                    </div>
+                </div>
+
+                <!-- S7 -->
+                <div class="service-item reveal">
+                    <h3>Automatización de Procesos</h3>
+                    <p>Elimina tareas repetitivas y ahorra horas cada semana.</p>
+                    <div class="service-price-block">
+                        <div class="service-price-row"><span>Setup</span> <strong>Desde 250 €</strong></div>
+                        <div class="service-price-row"><span>Soporte</span> <strong>Desde 79 €/mes</strong></div>
+                    </div>
+                    <div class="plan-actions">
+                        <button class="btn btn-outline" onclick="openModal('modal-s7')">Ver detalles</button>
+                        <a href="contacto.html" class="btn btn-primary">Contratar</a>
+                    </div>
+                </div>
+
+                <!-- S8 -->
+                <div class="service-item reveal">
+                    <h3>Integración IA + ERP (Odoo)</h3>
+                    <p>Potencia tu ERP con inteligencia artificial avanzada.</p>
+                    <div class="service-price-block">
+                        <div class="service-price-row"><span>Setup</span> <strong>Desde 390 €</strong></div>
+                        <div class="service-price-row"><span>Soporte</span> <strong>Desde 99 €/mes</strong></div>
+                    </div>
+                    <div class="plan-actions">
+                        <button class="btn btn-outline" onclick="openModal('modal-s8')">Ver detalles</button>
+                        <a href="contacto.html" class="btn btn-primary">Contratar</a>
+                    </div>
+                </div>
+
+                <!-- S9 -->
+                <div class="service-item reveal">
+                    <h3>Mantenimiento y Soporte Técnico</h3>
+                    <p>Asegura que todo funcione siempre correctamente.</p>
+                    <div class="service-price-block">
+                        <div class="service-price-row"><span>Setup</span> <strong>0 €</strong></div>
+                        <div class="service-price-row"><span>Soporte</span> <strong>Desde 70 €/mes</strong></div>
+                    </div>
+                    <div class="plan-actions">
+                        <button class="btn btn-outline" onclick="openModal('modal-s9')">Ver detalles</button>
+                        <a href="contacto.html" class="btn btn-primary">Contratar</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="container reveal" style="text-align: center; margin-bottom: var(--spacing-xl);">
+            <div class="glass" style="padding: var(--spacing-lg);">
+                <h2 style="margin-bottom: var(--spacing-sm);">Empieza poco a poco o digitaliza todo tu negocio</h2>
+                <p style="margin-bottom: var(--spacing-md); color: var(--text-muted);">Nos adaptamos a ti con soluciones
+                    escalables.</p>
+                <a href="contacto.html" class="btn btn-primary btn-glow">Hablar con un experto</a>
             </div>
         </section>
     </main>
 
-      <footer>
+    <footer>
         <div class="container" style="text-align: center; color: var(--text-muted); padding: var(--spacing-md) 0;">
             <p>&copy; 2026 EvolveHub. Todos los derechos reservados.</p>
             <div style="margin-top: 1rem; font-size: 0.9rem;">
@@ -559,9 +679,281 @@
         </div>
     </footer>
 
+    <!-- Modals Container -->
+
+    <!-- Modal Template (Copied and customized for each item) -->
+    <!-- PACK 1 Modal -->
+    <div id="modal-pack1" class="modal-overlay" onclick="closeModal(event, this)">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModalBtn(this)">×</button>
+            <h2 class="text-gradient">Presencia Digital</h2>
+            <p class="plan-target">Tu negocio visible y profesional.</p>
+            <div style="margin: 1rem 0;">
+                <p>Este pack es ideal para negocios que necesitan establecer su marca en internet de forma sólida y
+                    segura, sin complicaciones técnicas.</p>
+                <br>
+                <h4>¿Qué incluye?</h4>
+                <ul class="check-list">
+                    <li>Diseño y desarrollo de Landing Page optimizada.</li>
+                    <li>Configuración de dominio y alojamiento.</li>
+                    <li>Soporte técnico para mantener tu web siempre activa.</li>
+                </ul>
+            </div>
+
+            <details class="tech-details">
+                <summary>Detalles técnicos</summary>
+                <p style="font-size: 0.9rem; color: var(--text-muted);">
+                    - Hosting de alto rendimiento incluido.<br>
+                    - Certificado SSL de seguridad.<br>
+                    - Optimización básica SEO on-page.<br>
+                    - Monitorización de uptime 24/7.
+                </p>
+            </details>
+
+            <div style="margin-top: 2rem; text-align: center;">
+                <a href="contacto.html" class="btn btn-primary">Contratar ahora</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- PACK 2 Modal -->
+    <div id="modal-pack2" class="modal-overlay" onclick="closeModal(event, this)">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModalBtn(this)">×</button>
+            <h2 class="text-gradient">Atención Automática</h2>
+            <p class="plan-target">Tu atención al cliente, automatizada.</p>
+            <div style="margin: 1rem 0;">
+                <p>No pierdas más clientes por tardar en responder. Tu asistente virtual se encarga de las dudas
+                    frecuentes y la captación inicial.</p>
+                <br>
+                <h4>¿Qué incluye?</h4>
+                <ul class="check-list">
+                    <li>Agente IA integrado en tu web.</li>
+                    <li>Chatbot capaz de conversar en múltiples canales.</li>
+                    <li>Revisión mensual para mejorar las respuestas de la IA.</li>
+                </ul>
+            </div>
+
+            <details class="tech-details">
+                <summary>Detalles técnicos</summary>
+                <p style="font-size: 0.9rem; color: var(--text-muted);">
+                    - Procesamiento de Lenguaje Natural (NLP).<br>
+                    - Integración vía API / Widget Web.<br>
+                    - Panel de control de conversaciones.<br>
+                    - Base de conocimiento entrenable.
+                </p>
+            </details>
+            <div style="margin-top: 2rem; text-align: center;">
+                <a href="contacto.html" class="btn btn-primary">Contratar ahora</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- PACK 3 Modal -->
+    <div id="modal-pack3" class="modal-overlay" onclick="closeModal(event, this)">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModalBtn(this)">×</button>
+            <h2 class="text-gradient">Automatización y Control</h2>
+            <p class="plan-target">Recupera el control de tus procesos.</p>
+            <div style="margin: 1rem 0;">
+                <p>Centraliza la información de tus clientes y automatiza tareas administrativas para enfocarte en
+                    vender y servir.</p>
+                <br>
+                <h4>¿Qué incluye?</h4>
+                <ul class="check-list">
+                    <li>Implementación de CRM adaptado a PYMES.</li>
+                    <li>Automatización de flujos de trabajo (emails, tareas).</li>
+                    <li>Soporte continuo para optimizar tus procesos.</li>
+                </ul>
+            </div>
+
+            <details class="tech-details">
+                <summary>Detalles técnicos</summary>
+                <p style="font-size: 0.9rem; color: var(--text-muted);">
+                    - Configuración de Pipelines de ventas.<br>
+                    - Automatizaciones con Zapier / Make.<br>
+                    - Gestión de bases de datos de clientes.<br>
+                    - Reportes de rendimiento.
+                </p>
+            </details>
+            <div style="margin-top: 2rem; text-align: center;">
+                <a href="contacto.html" class="btn btn-primary">Contratar ahora</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- PACK 4 Modal -->
+    <div id="modal-pack4" class="modal-overlay" onclick="closeModal(event, this)">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModalBtn(this)">×</button>
+            <h2 class="text-gradient">Digitalización Completa</h2>
+            <p class="plan-target">La solución definitiva.</p>
+            <div style="margin: 1rem 0;">
+                <p>Transforma radicalmente tu negocio unificando web, inteligencia artificial y gestión interna en un
+                    solo ecosistema.</p>
+                <br>
+                <h4>¿Qué incluye?</h4>
+                <ul class="check-list">
+                    <li>Web Profesional + Chatbot IA.</li>
+                    <li>CRM completo + Automatizaciones avanzadas.</li>
+                    <li>Integración básica con ERPs y sistemas de IA.</li>
+                    <li>Soporte prioritario.</li>
+                </ul>
+            </div>
+
+            <details class="tech-details">
+                <summary>Detalles técnicos</summary>
+                <p style="font-size: 0.9rem; color: var(--text-muted);">
+                    - Stack tecnológico completo e integrado.<br>
+                    - Sincronización de datos bidireccional.<br>
+                    - Consultoría estratégica mensual.<br>
+                    - Auditoría de seguridad y rendimiento.
+                </p>
+            </details>
+            <div style="margin-top: 2rem; text-align: center;">
+                <a href="contacto.html" class="btn btn-primary">Contratar ahora</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- SERVICE MODAL (Generic) -->
+    <div id="modal-generic-service" class="modal-overlay" onclick="closeModal(event, this)">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModalBtn(this)">×</button>
+            <h2 id="modal-service-title" class="text-gradient">Servicio</h2>
+            <p id="modal-service-subtitle" class="plan-target">Descripción corta</p>
+            <div style="margin: 1rem 0;" id="modal-service-body">
+                <!-- Content injected via JS -->
+            </div>
+
+            <details class="tech-details">
+                <summary>Detalles técnicos</summary>
+                <p id="modal-service-tech" style="font-size: 0.9rem; color: var(--text-muted);">
+                    <!-- Tech details injected via JS -->
+                </p>
+            </details>
+            <div style="margin-top: 2rem; text-align: center;">
+                <a href="contacto.html" class="btn btn-primary">Contratar ahora</a>
+            </div>
+        </div>
+    </div>
+
     <script src="assets/main.js"></script>
+    <script>
+        // Reveal Animation on Scroll
+        function reveal() {
+            var reveals = document.querySelectorAll('.reveal');
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add('active');
+                }
+            }
+        }
+        window.addEventListener('scroll', reveal);
+        // Trigger once on load
+        reveal();
+
+        // Modal Logic
+        function openModal(id) {
+            // Check if it's a specific pack modal
+            const modal = document.getElementById(id);
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+                return;
+            }
+
+            // If it's a service modal (s1-s9), populate generic modal
+            if (id.startsWith('modal-s')) {
+                const serviceId = id.replace('modal-', '');
+                const data = servicesData[serviceId];
+                if (data) {
+                    document.getElementById('modal-service-title').textContent = data.title;
+                    document.getElementById('modal-service-subtitle').textContent = data.subtitle;
+                    document.getElementById('modal-service-body').innerHTML = `<p>${data.desc}</p>`;
+                    document.getElementById('modal-service-tech').innerHTML = data.tech;
+
+                    const genericModal = document.getElementById('modal-generic-service');
+                    genericModal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+        }
+
+        function closeModal(event, overlay) {
+            if (event.target === overlay) {
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        function closeModalBtn(btn) {
+            const overlay = btn.closest('.modal-overlay');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Data for Services
+        const servicesData = {
+            's1': {
+                title: 'Página web / Landing básica',
+                subtitle: 'Presencia inmediata',
+                desc: 'Una landing page diseñada para convertir. Estructura clara, carga rápida y diseño atractivo.',
+                tech: 'HTML5/CSS3, Responsive Design, Formulario de contacto básico, SEO técnico básico.'
+            },
+            's2': {
+                title: 'Página web / Landing profesional',
+                subtitle: 'Tu imagen corporativa completa',
+                desc: 'Sitio web multipágina con blog, servicios detallados y mayor capacidad de contenido.',
+                tech: 'CMS o Código a medida, Optimización de velocidad, Integración con Analytics, SEO avanzado.'
+            },
+            's3': {
+                title: 'Agente de IA para web existente',
+                subtitle: 'Inteligencia en tu sitio actual',
+                desc: 'Añadimos un cerebro a tu web actual capaz de responder preguntas sobre tu negocio.',
+                tech: 'Embed Script, Entrenamiento con tus datos, Personalización de tono y estilo.'
+            },
+            's4': {
+                title: 'Chatbot IA Multicanal 24/7',
+                subtitle: 'Omnicanalidad real',
+                desc: 'Unifica la atención en Web, WhatsApp, Instagram y Facebook con un solo asistente inteligente.',
+                tech: 'API WhatsApp Business, Integración Meta, Flujos conversacionales complejos.'
+            },
+            's5': {
+                title: 'Agente IA para Atención Telefónica',
+                subtitle: 'Nunca pierdas una llamada',
+                desc: 'IA de voz capaz de mantener conversaciones naturales, agendar citas y tomar recados.',
+                tech: 'Voice AI, Integración con calendario, Transcripción de llamadas, Desvío inteligente.'
+            },
+            's6': {
+                title: 'CRM para PYMES',
+                subtitle: 'Organización total',
+                desc: 'Implementación y configuración de un CRM fácil de usar para que no se te escape ninguna venta.',
+                tech: 'Configuración de embudos, Importación de datos, Formación de uso.'
+            },
+            's7': {
+                title: 'Automatización de Procesos',
+                subtitle: 'Trabaja menos, produce más',
+                desc: 'Conectamos tus herramientas para que hablen entre ellas y realicen tareas solas.',
+                tech: 'Webhooks, APIs, Zapier/Make, Scripts personalizados.'
+            },
+            's8': {
+                title: 'Integración IA + ERP (Odoo)',
+                subtitle: 'Potencia empresarial',
+                desc: 'Conectamos la potencia de la IA generativa con la robustez de un ERP como Odoo.',
+                tech: 'Módulos Odoo personalizados, API OpenAI/Anthropic, Automatización de contabilidad/inventario.'
+            },
+            's9': {
+                title: 'Mantenimiento y Soporte Técnico',
+                subtitle: 'Tranquilidad garantizada',
+                desc: 'Nos encargamos de las actualizaciones, copias de seguridad y resolución de incidencias.',
+                tech: 'Backups diarios, Monitoreo de seguridad, Actualización de plugins/sistema.'
+            }
+        };
+    </script>
 </body>
 
-
 </html>
-
