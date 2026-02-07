@@ -338,3 +338,14 @@ footer {
   max-height: 48px;
   width: auto;
 }
+
+/* Separación entre párrafos en el contenido del modal */
+#modal-service-body p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+/* Evita espacio extra al final */
+#modal-service-body p:last-child {
+  margin-bottom: 0;
+}
