@@ -352,9 +352,31 @@
                 padding: var(--spacing-md);
             }
         }
+
+        /* Modal Rich Content Styles */
+        #modal-service-body h4 {
+            color: var(--text-main);
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: var(--primary-glow);
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 4px;
+        }
+
+        #modal-service-body p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        #modal-service-body ul.check-list {
+            margin-bottom: 1.5rem;
+        }
     </style>
 </head>
 <script src="//code.tidio.co/erdia6cl3sndiixagbvobc13xrby1gww.js" async></script>
+
 <body>
     <header class="site-header">
         <div class="container header-inner">
@@ -414,31 +436,10 @@
                 diseñadas para cada etapa de tu crecimiento digital.</p>
 
             <div class="plans-grid">
+
+
                 <!-- PACK 1 -->
                 <div class="card glass plan-card reveal delay-1">
-                    <div class="benefit-tag">Visibilidad</div>
-                    <h3>Presencia Digital</h3>
-                    <p class="plan-target">Tu negocio visible y profesional en internet desde el primer día.</p>
-
-                    <div class="plan-price">
-                        <span class="price-setup">Setup: 220 €</span>
-                        <div class="price-monthly">39 €<span>/mes</span></div>
-                    </div>
-
-                    <ul class="check-list">
-                        <li>Página web / landing básica</li>
-                        <li>Mantenimiento web incluido</li>
-                        <li>Soporte básico y cambios menores</li>
-                    </ul>
-
-                    <div class="plan-actions">
-                        <button class="btn btn-outline" onclick="openModal('modal-pack1')">Ver detalles</button>
-                        <a href="contacto.html" class="btn btn-primary">Contratar</a>
-                    </div>
-                </div>
-
-                <!-- PACK 2 -->
-                <div class="card glass plan-card reveal delay-2">
                     <div class="benefit-tag">Atención 24/7</div>
                     <h3>Atención Automática</h3>
                     <p class="plan-target">Responde a tus clientes 24/7 sin esfuerzo.</p>
@@ -451,17 +452,18 @@
                     <ul class="check-list">
                         <li>Agente IA para web</li>
                         <li>Chatbot IA multicanal</li>
+                        <li>Agente IA para atención telefónica</li>
                         <li>Ajustes y revisión mensual</li>
                     </ul>
 
                     <div class="plan-actions">
-                        <button class="btn btn-outline" onclick="openModal('modal-pack2')">Ver detalles</button>
+                        <button class="btn btn-outline" onclick="openModal('modal-pack1')">Ver detalles</button>
                         <a href="contacto.html" class="btn btn-primary">Contratar</a>
                     </div>
                 </div>
 
-                <!-- PACK 3 -->
-                <div class="card glass plan-card popular reveal delay-3">
+                <!-- PACK 2 -->
+                <div class="card glass plan-card popular reveal delay-2">
                     <div class="popular-badge"
                         style="position:absolute; top:10px; right:10px; background:var(--primary); padding:2px 8px; font-size:0.7rem; border-radius:10px;">
                         Recomendado</div>
@@ -481,13 +483,13 @@
                     </ul>
 
                     <div class="plan-actions">
-                        <button class="btn btn-outline" onclick="openModal('modal-pack3')">Ver detalles</button>
+                        <button class="btn btn-outline" onclick="openModal('modal-pack2')">Ver detalles</button>
                         <a href="contacto.html" class="btn btn-primary">Contratar</a>
                     </div>
                 </div>
 
-                <!-- PACK 4 -->
-                <div class="card glass plan-card reveal delay-4">
+                <!-- PACK 3 -->
+                <div class="card glass plan-card reveal delay-3">
                     <div class="benefit-tag">Transformación Total</div>
                     <h3>Digitalización Completa</h3>
                     <p class="plan-target">Todo tu negocio conectado y preparado para crecer.</p>
@@ -505,6 +507,30 @@
                     </ul>
 
                     <div class="plan-actions">
+                        <button class="btn btn-outline" onclick="openModal('modal-pack3')">Ver detalles</button>
+                        <a href="contacto.html" class="btn btn-primary">Contratar</a>
+                    </div>
+                </div>
+
+                <!-- PACK 4 -->
+                <div class="card glass plan-card reveal delay-4">
+                    <div class="benefit-tag">Visibilidad</div>
+                    <h3>Presencia Digital</h3>
+                    <p class="plan-target">Tu negocio visible y profesional en internet desde el primer día.</p>
+
+                    <div class="plan-price">
+                        <span class="price-setup">Setup: 990 €</span>
+                        <div class="price-monthly">399 €<span>/mes</span></div>
+                    </div>
+
+                    <ul class="check-list">
+                        <li>Página web / landing profesional</li>
+                        <li>Atencion automatica de todos los canales</li>
+                        <li>Automatización de procesos</li>
+                        <li>Soporte y mantenimiento</li>
+                    </ul>
+
+                    <div class="plan-actions">
                         <button class="btn btn-outline" onclick="openModal('modal-pack4')">Ver detalles</button>
                         <a href="contacto.html" class="btn btn-primary">Contratar</a>
                     </div>
@@ -518,8 +544,9 @@
             <div class="services-list">
                 <!-- S1 -->
                 <div class="service-item reveal">
-                    <h3>Página web / Landing básica</h3>
-                    <p>Tu presencia online rápida y efectiva. Una web / landing page profesional diseñada para captar clientes desde el primer día.</p>
+                    <h3>Página web / Landing page básica</h3>
+                    <p>Tu presencia online rápida y efectiva. Una web / landing page profesional diseñada para captar
+                        clientes desde el primer día.</p>
                     <div class="service-price-block">
                         <div class="service-price-row"><span>Setup</span> <strong>190 €</strong></div>
                         <div class="service-price-row"><span>Soporte</span> <strong>29 €/mes</strong></div>
@@ -532,8 +559,9 @@
 
                 <!-- S2 -->
                 <div class="service-item reveal">
-                    <h3>Página web / Landing profesional</h3>
-                    <p>Una web profesional que refleja tu marca. Sitio multipágina completo para empresas que quieren crecer y destacar.</p>
+                    <h3>Página web / Landing page profesional</h3>
+                    <p>Una web profesional que refleja tu marca. Sitio multipágina completo para empresas que quieren
+                        crecer y destacar.</p>
                     <div class="service-price-block">
                         <div class="service-price-row"><span>Setup</span> <strong>390 €</strong></div>
                         <div class="service-price-row"><span>Soporte</span> <strong>69 €/mes</strong></div>
@@ -547,10 +575,11 @@
                 <!-- S3 -->
                 <div class="service-item reveal">
                     <h3>Agente de IA para web existente</h3>
-                    <p>Un asistente inteligente en tu web 24/7. Responde dudas y atiende a tus clientes automáticamente.</p>
+                    <p>Un asistente inteligente en tu web 24/7. Responde dudas y atiende a tus clientes automáticamente.
+                    </p>
                     <div class="service-price-block">
                         <div class="service-price-row"><span>Setup</span> <strong>190 €</strong></div>
-                        <div class="service-price-row"><span>Soporte</span> <strong>69 €/mes</strong></div>
+                        <div class="service-price-row"><span>Soporte</span> <strong>Desde 69 €/mes</strong></div>
                     </div>
                     <div class="plan-actions">
                         <button class="btn btn-outline" onclick="openModal('modal-s3')">Ver detalles</button>
@@ -561,10 +590,11 @@
                 <!-- S4 -->
                 <div class="service-item reveal">
                     <h3>Chatbot IA Multicanal 24/7</h3>
-                    <p>Atiende a tus clientes en todos los canales. Un solo chatbot con IA para redes sociales y mensajería.</p>
+                    <p>Atiende a tus clientes en todos los canales. Un solo chatbot con IA para redes sociales y
+                        mensajería.</p>
                     <div class="service-price-block">
                         <div class="service-price-row"><span>Setup</span> <strong>290 €</strong></div>
-                        <div class="service-price-row"><span>Soporte</span> <strong>99 €/mes</strong></div>
+                        <div class="service-price-row"><span>Soporte</span> <strong>Desde 99 €/mes</strong></div>
                     </div>
                     <div class="plan-actions">
                         <button class="btn btn-outline" onclick="openModal('modal-s4')">Ver detalles</button>
@@ -574,11 +604,11 @@
 
                 <!-- S5 -->
                 <div class="service-item reveal">
-                    <h3>Agente IA para Atención Telefónica</h3>
+                    <h3>Agente IA para atención telefónica</h3>
                     <p>Tu recepcionista virtual inteligente. Responde llamadas como una persona real, sin esperas.</p>
                     <div class="service-price-block">
                         <div class="service-price-row"><span>Setup</span> <strong>490 €</strong></div>
-                        <div class="service-price-row"><span>Soporte</span> <strong>149 €/mes</strong></div>
+                        <div class="service-price-row"><span>Soporte</span> <strong>Desde 149 €/mes</strong></div>
                     </div>
                     <div class="plan-actions">
                         <button class="btn btn-outline" onclick="openModal('modal-s5')">Ver detalles</button>
@@ -602,7 +632,7 @@
 
                 <!-- S7 -->
                 <div class="service-item reveal">
-                    <h3>Automatización de Procesos</h3>
+                    <h3>Automatización de procesos</h3>
                     <p>Automatiza tareas y gana tiempo. Procesos inteligentes para vender y gestionar mejor.</p>
                     <div class="service-price-block">
                         <div class="service-price-row"><span>Setup</span> <strong>Desde 250 €</strong></div>
@@ -616,7 +646,7 @@
 
                 <!-- S8 -->
                 <div class="service-item reveal">
-                    <h3>Integración IA + ERP (Odoo)</h3>
+                    <h3>Integración IA + ERP</h3>
                     <p>Inteligencia artificial para tu gestión empresarial. Conectamos IA avanzada con tu ERP.</p>
                     <div class="service-price-block">
                         <div class="service-price-row"><span>Setup</span> <strong>Desde 390 €</strong></div>
@@ -628,12 +658,26 @@
                     </div>
                 </div>
 
+                <!-- S10: Aplicación a medida -->
+                <div class="service-item reveal">
+                    <h3>Aplicación a medida</h3>
+                    <p>Software creado exactamente para tu negocio. Una aplicación hecha a medida de tus procesos
+                        reales.</p>
+                    <div class="service-price-block">
+                        <div class="service-price-row"><span>Setup</span> <strong>Desde 990€</strong></div>
+                        <div class="service-price-row"><span>Soporte</span> <strong>399€/mes</strong></div>
+                    </div>
+                    <div class="plan-actions">
+                        <button class="btn btn-outline" onclick="openModal('modal-s10')">Ver detalles</button>
+                        <a href="contacto.html" class="btn btn-primary">Contratar</a>
+                    </div>
+                </div>
+
                 <!-- S9 -->
                 <div class="service-item reveal">
-                    <h3>Mantenimiento y Soporte Técnico</h3>
+                    <h3>Soporte y mantenimiento</h3>
                     <p>Nos encargamos de la parte técnica. Soporte continuo para que todo funcione siempre.</p>
                     <div class="service-price-block">
-                        <div class="service-price-row"><span>Setup</span> <strong>0 €</strong></div>
                         <div class="service-price-row"><span>Soporte</span> <strong>Desde 70 €/mes</strong></div>
                     </div>
                     <div class="plan-actions">
@@ -649,7 +693,7 @@
             <div class="glass" style="padding: var(--spacing-lg);">
                 <h2 style="margin-bottom: var(--spacing-sm);">Empieza poco a poco o digitaliza todo tu negocio</h2>
                 <p style="margin-bottom: var(--spacing-md); color: var(--text-muted);">Nos adaptamos a ti con soluciones
-                    escalables.</p>
+                    escalables. Excplicanos lo que quieres y nosotros lo haremos realidad.</p>
                 <a href="contacto.html" class="btn btn-primary btn-glow">Hablar con un experto</a>
             </div>
         </section>
@@ -670,33 +714,10 @@
     <!-- Modals Container -->
 
     <!-- Modal Template (Copied and customized for each item) -->
+
+
     <!-- PACK 1 Modal -->
     <div id="modal-pack1" class="modal-overlay" onclick="closeModal(event, this)">
-        <div class="modal-content">
-            <button class="close-modal" onclick="closeModalBtn(this)">×</button>
-            <h2 class="text-gradient">Presencia Digital</h2>
-            <p class="plan-target">Tu negocio visible y profesional.</p>
-            <div style="margin: 1rem 0;">
-                <p>Este pack es ideal para negocios que necesitan establecer su marca en internet de forma sólida y
-                    segura, sin complicaciones técnicas.</p>
-                <br>
-                <h4>¿Qué incluye?</h4>
-                <ul class="check-list">
-                    <li>Diseño y desarrollo de Landing Page optimizada.</li>
-                    <li>Configuración de dominio y alojamiento.</li>
-                    <li>Soporte técnico para mantener tu web siempre activa.</li>
-                </ul>
-            </div>
-
-          
-            <div style="margin-top: 2rem; text-align: center;">
-                <a href="contacto.html" class="btn btn-primary">Contratar ahora</a>
-            </div>
-        </div>
-    </div>
-
-    <!-- PACK 2 Modal -->
-    <div id="modal-pack2" class="modal-overlay" onclick="closeModal(event, this)">
         <div class="modal-content">
             <button class="close-modal" onclick="closeModalBtn(this)">×</button>
             <h2 class="text-gradient">Atención Automática</h2>
@@ -713,15 +734,15 @@
                 </ul>
             </div>
 
-            
+
             <div style="margin-top: 2rem; text-align: center;">
                 <a href="contacto.html" class="btn btn-primary">Contratar ahora</a>
             </div>
         </div>
     </div>
 
-    <!-- PACK 3 Modal -->
-    <div id="modal-pack3" class="modal-overlay" onclick="closeModal(event, this)">
+    <!-- PACK 2 Modal -->
+    <div id="modal-pack2" class="modal-overlay" onclick="closeModal(event, this)">
         <div class="modal-content">
             <button class="close-modal" onclick="closeModalBtn(this)">×</button>
             <h2 class="text-gradient">Automatización y Control</h2>
@@ -738,15 +759,15 @@
                 </ul>
             </div>
 
-           
+
             <div style="margin-top: 2rem; text-align: center;">
                 <a href="contacto.html" class="btn btn-primary">Contratar ahora</a>
             </div>
         </div>
     </div>
 
-    <!-- PACK 4 Modal -->
-    <div id="modal-pack4" class="modal-overlay" onclick="closeModal(event, this)">
+    <!-- PACK 3 Modal -->
+    <div id="modal-pack3" class="modal-overlay" onclick="closeModal(event, this)">
         <div class="modal-content">
             <button class="close-modal" onclick="closeModalBtn(this)">×</button>
             <h2 class="text-gradient">Digitalización Completa</h2>
@@ -764,13 +785,71 @@
                 </ul>
             </div>
 
-            
+
             <div style="margin-top: 2rem; text-align: center;">
                 <a href="contacto.html" class="btn btn-primary">Contratar ahora</a>
             </div>
         </div>
     </div>
 
+    <!-- PACK 4 Modal -->
+    <div id="modal-pack4" class="modal-overlay" onclick="closeModal(event, this)">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModalBtn(this)">×</button>
+            <h2 class="text-gradient">Presencia Digital</h2>
+            <p class="plan-target">Tu negocio funcionando solo, con software hecho para ti.</p>
+            <div style="margin: 1rem 0;">
+                <p>Este pack está diseñado para empresas que quieren delegar completamente la parte operativa y
+                    tecnológica del negocio, sin depender de personas para tareas repetitivas.</p>
+                <br>
+                <h4>Beneficios clave</h4>
+                <ul class="check-list">
+                    <li>Atención automática en todos los canales, 24/7</li>
+                    <li>Nunca pierdes mensajes ni llamadas</li>
+                    <li>Procesos internos automatizados</li>
+                    <li>Software adaptado a cómo trabaja tu empresa</li>
+                    <li>Menos costes operativos, más control y escalabilidad</li>
+                </ul>
+                <h4>¿Qué incluye?</h4>
+                <h6>Presencia digital</h6>
+                <ul class="check-list">
+                    <li>Página web profesional multipágina</li>
+                    <li>Gestión de dominio</li>
+                    <li>SEO listo para IA</li>
+                    <li>Hosting con 99,9% de uptime</li>
+                    <li>Panel de control</li>
+                    <li>Soporte y mantenimiento</li>
+                </ul>
+                <h6>Atención automática con IA</h6>
+                <ul class="check-list">
+                    <li>Agente de IA integrado en la web</li>
+                    <li>Chatbot IA multicanal 24/7:</li>
+                    <ul class="check-list">
+                        <li>WhatsApp</li>
+                        <li>Instagram</li>
+                        <li>Facebook Messenger</li>
+                        <li>TikTok</li>
+                        <li>SMS</li>
+                        <li>Correo electrónico</li>
+                    </ul>
+                    <li>Agente de IA para atención telefónica</li>
+                </ul>
+                <h6>Automatización de procesos</h6>
+                <ul class="check-list">
+                    <li>Atención automática en todos los canales, 24/7</li>
+                    <li>Automatización de ventas</li>
+                    <li>Automatización de atención al cliente</li>
+                    <li>Automatización de gestión interna</li>
+                    <li>Integraciones entre sistemas</li>
+                </ul>
+            </div>
+
+
+            <div style="margin-top: 2rem; text-align: center;">
+                <a href="contacto.html" class="btn btn-primary">Contratar ahora</a>
+            </div>
+        </div>
+    </div>
     <!-- SERVICE MODAL (Generic) -->
     <div id="modal-generic-service" class="modal-overlay" onclick="closeModal(event, this)">
         <div class="modal-content">
@@ -781,7 +860,7 @@
                 <!-- Content injected via JS -->
             </div>
 
-           
+
             <div style="margin-top: 2rem; text-align: center;">
                 <a href="contacto.html" class="btn btn-primary">Contratar ahora</a>
             </div>
@@ -816,19 +895,15 @@
                 return;
             }
 
-            // If it's a service modal (s1-s9), populate generic modal
+            // If it's a service modal (s1-s10), populate generic modal
             if (id.startsWith('modal-s')) {
                 const serviceId = id.replace('modal-', '');
                 const data = servicesData[serviceId];
                 if (data) {
                     document.getElementById('modal-service-title').textContent = data.title;
                     document.getElementById('modal-service-subtitle').textContent = data.subtitle;
-                    document.getElementById('modal-service-body').innerHTML =
-                        data.desc
-                            .split('\n')
-                            .map(p => `<p>${p}</p>`)
-                            .join('');
-                    
+                    // Render HTML directly
+                    document.getElementById('modal-service-body').innerHTML = data.desc;
 
                     const genericModal = document.getElementById('modal-generic-service');
                     genericModal.classList.add('active');
@@ -853,58 +928,242 @@
         // Data for Services
         const servicesData = {
             's1': {
-                title: 'Página web / Landing básica',
-                subtitle: 'Presencia inmediata',
-                desc: 'Creamos una página web sencilla, moderna y optimizada para convertir visitantes en clientes. Es ideal para negocios que necesitan estar online de forma rápida, clara y profesional sin complicaciones técnicas.\n La web está diseñada con una estructura estratégica: mensaje claro, llamada a la acción visible y carga rápida en cualquier dispositivo. Nos encargamos de la gestión del dominio y dejamos tu web preparada con SEO listo para IA, lo que facilita que te encuentren tanto en buscadores tradicionales como en asistentes inteligentes. \n Incluye alojamiento estable con 99,9% de disponibilidad garantizada, soporte técnico y un panel de control fácil de usar, para que tengas el control sin depender de terceros.',
-                
+                title: 'Página web / Landing page básica',
+                subtitle: 'Tu presencia online rápida, clara y profesional.',
+                desc: `
+                    <p>Ideal para emprendedores y negocios que necesitan empezar rápido sin complicaciones técnicas. La web se estructura estratégicamente para comunicar tu propuesta de valor y guiar al visitante hacia la acción.</p>
+                    
+                    <h4>Beneficios clave</h4>
+                    <ul class="check-list">
+                        <li>Presencia inmediata en internet</li>
+                        <li>Diseño pensado para convertir visitas en clientes</li>
+                        <li>Web rápida, clara y accesible desde cualquier dispositivo</li>
+                    </ul>
+
+                    <h4>Qué incluye</h4>
+                    <ul class="check-list">
+                        <li>Landing page profesional</li>
+                        <li>Gestión de dominio</li>
+                        <li>SEO listo para IA</li>
+                        <li>Hosting con 99,9% de uptime</li>
+                        <li>Panel de control</li>
+                        <li>Soporte técnico</li>
+                    </ul>
+                   
+                `
             },
             's2': {
-                title: 'Página web / Landing profesional',
-                subtitle: 'Tu imagen corporativa completa',
-                desc: 'Desarrollamos un sitio web profesional y escalable que transmite confianza, autoridad y una imagen corporativa sólida. Incluye varias secciones como servicios, información de la empresa, contacto y blog, permitiendo comunicar tu propuesta de valor de forma clara y detallada. \n La web está optimizada para velocidad, diseño responsive y SEO listo para IA, ayudando a atraer tráfico cualificado y mejorar tu posicionamiento. Gestionamos el dominio, el hosting y garantizamos una disponibilidad del 99,9%. \n Además, contarás con soporte técnico continuo y un panel de control avanzado para gestionar contenidos y mantener tu web actualizada fácilmente.',
-                
+                title: 'Página web / Landing page profesional',
+                subtitle: 'Una web que representa tu marca y te ayuda a crecer.',
+                desc: `
+                    <p>Pensada para diferenciarse, posicionarse mejor y comunicar sus servicios con profundidad. El diseño, la estructura y el rendimiento están orientados a generar confianza y oportunidades reales.</p>
+
+                    <h4>Beneficios clave</h4>
+                    <ul class="check-list">
+                        <li>Imagen corporativa profesional</li>
+                        <li>Más contenido, más confianza</li>
+                        <li>Preparada para crecer con tu negocio</li>
+                    </ul>
+
+                    <h4>Qué incluye</h4>
+                    <ul class="check-list">
+                        <li>Web multipágina (servicios, contacto, blog, etc.)</li>
+                        <li>Gestión de dominio</li>
+                        <li>SEO listo para IA</li>
+                        <li>Hosting con 99,9% de uptime</li>
+                        <li>Panel de control avanzado</li>
+                        <li>Soporte técnico</li>
+                    </ul>
+                    
+                `
             },
             's3': {
                 title: 'Agente de IA para web existente',
-                subtitle: 'Inteligencia en tu sitio actual',
-                desc: 'Integramos un agente de inteligencia artificial directamente en tu web actual, sin necesidad de rediseños ni cambios complejos. Este asistente responde automáticamente a las preguntas más frecuentes de tus clientes, guía a los visitantes y mejora la experiencia de navegación. \n El agente se entrena con la información de tu negocio, por lo que responde de forma coherente, profesional y alineada con tu marca. Está disponible las 24 horas, reduce la carga de atención humana y aumenta las oportunidades de conversión. \n Es una solución ideal para ofrecer atención inmediata y profesional sin incrementar costes.',
-                
+                subtitle: 'Un asistente inteligente dentro de tu web.',
+                desc: `
+                    <p>El agente se adapta a tu web actual y responde como un asistente real, guiando a los visitantes y resolviendo dudas sin intervención humana constante.</p>
+
+                    <h4>Beneficios clave</h4>
+                    <ul class="check-list">
+                        <li>Atención inmediata 24/7</li>
+                        <li>Menos consultas repetitivas</li>
+                        <li>Mejora la experiencia del usuario</li>
+                    </ul>
+
+                    <h4>Qué incluye</h4>
+                    <ul class="check-list">
+                        <li>Agente de IA integrado en tu web</li>
+                        <li>Entrenamiento con información del negocio</li>
+                        <li>Respuestas automáticas a preguntas frecuentes</li>
+                    </ul>
+                    
+                `
             },
             's4': {
                 title: 'Chatbot IA Multicanal 24/7',
-                subtitle: 'Omnicanalidad real',
-                desc: 'Implementamos un chatbot con inteligencia artificial que atiende a tus clientes de forma automática en múltiples canales: Instagram, Facebook Messenger, WhatsApp, SMS, correo electrónico y TikTok. \n El sistema puede conversar con un número ilimitado de personas al mismo tiempo, responder consultas, filtrar clientes potenciales y mantener una atención constante 24/7. Esto te permite ampliar tu alcance, mejorar la experiencia del cliente y ahorrar tiempo y recursos. \n Incluye soporte por correo electrónico para ajustes, mejoras y mantenimiento del sistema.',
-                
+                subtitle: 'Un solo chatbot para todos tus canales.',
+                desc: `
+                     <p>Centraliza toda la comunicación con clientes en un solo sistema inteligente que responde, filtra y atiende de forma automática, sin importar el canal ni la hora.</p>
+
+                    <h4>Beneficios clave</h4>
+                    <ul class="check-list">
+                        <li>Atención continua en todos los canales</li>
+                        <li>Contactos ilimitados</li>
+                        <li>Ahorro de tiempo y recursos</li>
+                    </ul>
+
+                    <h4>Qué incluye</h4>
+                    <ul class="check-list">
+                        <li>Instagram DM</li>
+                        <li>Facebook Messenger</li>
+                        <li>WhatsApp</li>
+                        <li>SMS y correo electrónico</li>
+                        <li>TikTok</li>
+                        <li>Soporte por correo</li>
+                    </ul>
+                   
+                `
             },
             's5': {
-                title: 'Agente IA para Atención Telefónica',
-                subtitle: 'Nunca pierdas una llamada',
-                desc: 'Creamos un agente de inteligencia artificial capaz de atender llamadas telefónicas de forma natural y profesional. Responde preguntas, ofrece información sobre tus servicios y sigue guiones personalizados según las necesidades de tu negocio. \n El agente funciona 24/7, evita llamadas perdidas y mejora la atención al cliente sin necesidad de ampliar tu equipo. Incluye automatización básica, como toma de mensajes o clasificación de llamadas, y soporte por correo electrónico. \n Es una solución eficiente para empresas con alto volumen de llamadas.',
-                
+                title: 'Agente IA para atención telefónica',
+                subtitle: 'Nunca más pierdas una llamada.',
+                desc: `
+                    <p>Ideal para empresas con alto volumen de llamadas o sin personal disponible todo el día. El agente responde, informa y clasifica llamadas de forma eficiente.</p>
+
+                    <h4>Beneficios clave</h4>
+                    <ul class="check-list">
+                        <li>Atención telefónica 24/7</li>
+                        <li>Respuestas claras y naturales</li>
+                        <li>Menos llamadas perdidas</li>
+                    </ul>
+
+                    <h4>Qué incluye</h4>
+                    <ul class="check-list">
+                        <li>Agente de voz con IA</li>
+                        <li>Configuración con información del negocio</li>
+                        <li>Automatización básica</li>
+                        <li>Soporte por correo</li>
+                    </ul>
+                    
+                `
             },
             's6': {
                 title: 'CRM',
-                subtitle: 'Organización total',
-                desc: 'Implementamos un CRM completo que centraliza la gestión de clientes, ventas, marketing e inventarios en una sola plataforma. Incluye automatización de flujos de trabajo, campañas de correo masivo, predicciones de ventas y herramientas avanzadas de análisis. \n El sistema se integra con herramientas como Office 365, Google Ads y asistentes de inteligencia artificial, permitiendo una visión unificada del negocio. Además, ofrece amplias opciones de personalización, seguridad avanzada y escalabilidad. \n Es la base ideal para equipos comerciales y empresas orientadas al crecimiento.',
-                
+                subtitle: 'Todo tu negocio en un solo lugar.',
+                desc: `
+                    <p>Un CRM completo, escalable y personalizable que centraliza la información del negocio y mejora la productividad de los equipos.</p>
+
+                    <h4>Beneficios clave</h4>
+                    <ul class="check-list">
+                        <li>Control total de clientes y oportunidades</li>
+                        <li>Automatización comercial</li>
+                        <li>Análisis y predicción de ventas</li>
+                    </ul>
+
+                    <h4>Qué incluye</h4>
+                    <ul class="check-list">
+                        <li>Email masivo y flujos de trabajo</li>
+                        <li>Predicciones y análisis avanzados</li>
+                        <li>Integraciones (Office 365, Google Ads, IA)</li>
+                        <li>Personalización avanzada</li>
+                        <li>Seguridad y administración empresarial</li>
+                    </ul>
+                    
+                `
             },
             's7': {
-                title: 'Automatización de Procesos',
-                subtitle: 'Trabaja menos, produce más',
-                desc: 'Diseñamos e implementamos automatizaciones personalizadas para optimizar procesos clave de tu negocio, como ventas, atención al cliente, gestión interna y seguimiento de leads. \n Integramos múltiples plataformas como WhatsApp, Instagram, Messenger y muchas más, eliminando tareas repetitivas y reduciendo errores humanos. El sistema trabaja de forma continua y eficiente, incluso cuando tu equipo no está disponible. \n Incluye estadísticas básicas para analizar resultados y soporte por correo electrónico para ajustes y mejoras.',
-                
+                title: 'Automatización de procesos',
+                subtitle: 'Tu negocio funcionando solo.',
+                desc: `
+                    <p>Automatizamos procesos clave de ventas, atención al cliente y gestión interna para que tu negocio sea más eficiente y escalable.</p>
+
+                    <h4>Beneficios clave</h4>
+                    <ul class="check-list">
+                        <li>Menos trabajo manual</li>
+                        <li>Procesos más rápidos y ordenados</li>
+                        <li>Reducción de errores</li>
+                    </ul>
+
+                    <h4>Qué incluye</h4>
+                    <ul class="check-list">
+                        <li>Automatizaciones personalizadas</li>
+                        <li>Integración con WhatsApp, Instagram, Messenger y más</li>
+                        <li>Estadísticas básicas</li>
+                        <li>Soporte por correo</li>
+                    </ul>
+                    
+                `
             },
             's8': {
-                title: 'Integración IA + ERP (Odoo)',
-                subtitle: 'Potencia empresarial',
-                desc: 'Integramos inteligencia artificial generativa con sistemas ERP como Odoo para llevar la gestión empresarial a otro nivel. Creamos módulos personalizados, conectamos APIs de IA y automatizamos procesos como contabilidad, inventario, análisis y toma de decisiones. \n Esta solución permite centralizar la información, reducir costes operativos y mejorar la eficiencia mediante sistemas inteligentes que trabajan con datos reales de tu negocio. \n Es una opción potente para empresas que buscan escalabilidad, control y automatización avanzada.',
-                
+                title: 'Integración IA + ERP',
+                subtitle: 'IA avanzada conectada a tu gestión empresarial.',
+                desc: `
+                    <p>Una solución potente para empresas que necesitan control, escalabilidad y automatización avanzada integrada directamente en su sistema de gestión.</p>
+
+                    <h4>Beneficios clave</h4>
+                    <ul class="check-list">
+                        <li>Procesos empresariales más inteligentes</li>
+                        <li>Menos costes operativos</li>
+                        <li>Decisiones basadas en datos</li>
+                    </ul>
+
+                    <h4>Qué incluye</h4>
+                    <ul class="check-list">
+                        <li>Integración con ERP (Odoo u otros)</li>
+                        <li>Módulos personalizados</li>
+                        <li>APIs de IA (OpenAI / Anthropic)</li>
+                        <li>Automatización de contabilidad e inventario</li>
+                    </ul>
+
+                `
             },
             's9': {
-                title: 'Mantenimiento y Soporte Técnico',
-                subtitle: 'Tranquilidad garantizada',
-                desc: 'Ofrecemos soporte técnico y mantenimiento continuo para asegurar que tus sistemas, webs y automatizaciones funcionen de forma estable y segura. \n Incluye actualizaciones, corrección de errores, mejoras de rendimiento, seguridad y asistencia ante incidencias. Nuestro objetivo es que te olvides de los problemas técnicos y te centres en hacer crecer tu negocio.',
-                
+                title: 'Aplicación a medida',
+                subtitle: 'Software creado exactamente para tu negocio.',
+                desc: `
+                    <p>Una aplicación hecha a medida de tus procesos reales. No pagas por funciones innecesarias y mantienes control total sobre datos y crecimiento.</p>
+
+                    <h4>Beneficios clave</h4>
+                    <ul class="check-list">
+                        <li>Sustituye Excel y procesos manuales</li>
+                        <li>Centraliza información</li>
+                        <li>Mejora la productividad del equipo</li>
+                    </ul>
+
+                    <h4>Qué incluye</h4>
+                    <ul class="check-list">
+                        <li>Análisis de necesidades</li>
+                        <li>Diseño funcional y técnico</li>
+                        <li>Desarrollo completo</li>
+                        <li>Integraciones (ERP, CRM, APIs)</li>
+                        <li>Pruebas, puesta en producción y formación</li>
+                    </ul>
+                    
+                `
+
+            },
+            's10': {
+                title: 'Soporte y mantenimiento',
+                subtitle: 'Nos ocupamos de la parte técnica.',
+                desc: `
+                    <p>Aseguramos el correcto funcionamiento de tus sistemas para que tú te centres en hacer crecer tu negocio.</p>
+
+                    <h4>Beneficios clave</h4>
+                    <ul class="check-list">
+                        <li>Tranquilidad y estabilidad</li>
+                        <li>Sistemas siempre actualizados</li>
+                        <li>Respuesta ante incidencias</li>
+                    </ul>
+
+                    <h4>Qué incluye</h4>
+                    <ul class="check-list">
+                        <li>Mantenimiento técnico</li>
+                        <li>Actualizaciones</li>
+                        <li>Corrección de errores</li>
+                        <li>Soporte continuo</li>
+                    </ul>
+
+                `
             }
         };
     </script>
