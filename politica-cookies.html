@@ -117,6 +117,231 @@
     </footer>
 
     <script src="assets/main.js"></script>
+    <!---->
+    <style>
+#obiWidgetButton {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #ffcc00;
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  font-size: 26px;
+  cursor: pointer;
+  z-index: 9999;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+#obiChatWindow {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  width: 360px;
+  height: 500px;
+  background: white;
+  border-radius: 12px;
+  display: none;
+  flex-direction: column;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  overflow: hidden;
+  z-index: 9999;
+  font-family: Arial, sans-serif;
+  transform: translateY(20px);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+#obiChatWindow.active {
+  display: flex;
+  transform: translateY(0);
+  opacity: 1;
+}
+
+#obiHeader {
+  background: #ffcc00;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+}
+
+#obiMessages {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+.obiBubble {
+  padding: 8px 12px;
+  margin-bottom: 8px;
+  border-radius: 16px;
+  max-width: 75%;
+}
+
+.obiUser {
+  background: #e6f0ff;
+  align-self: flex-end;
+}
+
+.obiBot {
+  background: #f1f1f1;
+  align-self: flex-start;
+}
+
+#obiInputArea {
+  display: flex;
+  border-top: 1px solid #ddd;
+}
+
+#obiInput {
+  flex: 1;
+  border: none;
+  padding: 10px;
+}
+
+#obiSend {
+  background: #ffcc00;
+  border: none;
+  padding: 0 15px;
+  cursor: pointer;
+}
+
+.obiHeaderButtons button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+</style>
+
+<button id="obiWidgetButton">🤖</button>
+
+<div id="obiChatWindow">
+  <div id="obiHeader">
+    OBI
+    <div class="obiHeaderButtons">
+      <button onclick="resetChat()">⟳</button>
+      <button onclick="toggleChat()">—</button>
+    </div>
+  </div>
+  <div id="obiMessages"></div>
+  <div id="obiInputArea">
+    <input type="text" id="obiInput" placeholder="Escribe tu mensaje..." />
+    <button id="obiSend">Enviar</button>
+  </div>
+</div>
+
+<script>
+const webhookURL = "https://n8n-n8n.gk97dq.easypanel.host/webhook-test/68ec93e2-c790-4ed7-bc6f-aee4acd79c6c";
+const API_KEY = "obi_2026_super_secret_key_8473";
+
+const button = document.getElementById("obiWidgetButton");
+const chatWindow = document.getElementById("obiChatWindow");
+const messagesContainer = document.getElementById("obiMessages");
+const input = document.getElementById("obiInput");
+const sendBtn = document.getElementById("obiSend");
+
+let sessionId = localStorage.getItem("obiSessionId");
+if (!sessionId) {
+  sessionId = "session_" + Math.random().toString(36).substring(2);
+  localStorage.setItem("obiSessionId", sessionId);
+}
+
+let chatHistory = JSON.parse(localStorage.getItem("obiChatHistory")) || [];
+let lastMessageTime = 0;
+
+function saveHistory() {
+  localStorage.setItem("obiChatHistory", JSON.stringify(chatHistory));
+}
+
+function renderHistory() {
+  messagesContainer.innerHTML = "";
+  chatHistory.forEach(msg => addBubble(msg.sender, msg.text, false));
+}
+
+function addBubble(sender, text, save = true) {
+  const bubble = document.createElement("div");
+  bubble.classList.add("obiBubble", sender === "user" ? "obiUser" : "obiBot");
+  bubble.innerText = text;
+  messagesContainer.appendChild(bubble);
+
+  if (save) {
+    chatHistory.push({ sender, text });
+    saveHistory();
+  }
+
+  messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
+
+function toggleChat() {
+  chatWindow.classList.toggle("active");
+}
+
+button.addEventListener("click", toggleChat);
+
+function resetChat() {
+  localStorage.removeItem("obiChatHistory");
+  localStorage.removeItem("obiSessionId");
+  chatHistory = [];
+  renderHistory();
+}
+
+async function sendMessage() {
+  const now = Date.now();
+
+  // Anti spam (1 mensaje cada 2 segundos)
+  if (now - lastMessageTime < 2000) return;
+  lastMessageTime = now;
+
+  const text = input.value.trim();
+  if (!text) return;
+
+  addBubble("user", text);
+  input.value = "";
+
+  const typing = document.createElement("div");
+  typing.classList.add("obiBubble", "obiBot");
+  typing.id = "typing";
+  typing.innerText = "OBI está escribiendo...";
+  messagesContainer.appendChild(typing);
+
+  try {
+    const res = await fetch(webhookURL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-api-key": API_KEY
+      },
+      body: JSON.stringify({
+        chatInput: text,
+        sessionId: sessionId
+      })
+    });
+
+    const data = await res.json();
+    document.getElementById("typing").remove();
+    addBubble("bot", data.output || "Error inesperado.");
+  } catch (err) {
+    document.getElementById("typing").remove();
+    addBubble("bot", "Error de conexión.");
+  }
+}
+
+sendBtn.addEventListener("click", sendMessage);
+input.addEventListener("keypress", e => {
+  if (e.key === "Enter") sendMessage();
+});
+
+renderHistory();
+</script>
+<!---->
+
 </body>
 
 </html>
