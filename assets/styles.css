@@ -349,3 +349,10 @@ footer {
 #modal-service-body p:last-child {
   margin-bottom: 0;
 }
+
+:root {
+  --chat--color--primary: #111827;
+  --chat--color--secondary: #2563eb;
+  --chat--window--border-radius: 16px;
+  --chat--toggle--size: 58px;
+}

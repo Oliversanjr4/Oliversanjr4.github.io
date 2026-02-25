@@ -1,3 +1,4 @@
+import './style.css';
 document.addEventListener('DOMContentLoaded', () => {
     // Header Scroll Effect
     const header = document.querySelector('.site-header');
