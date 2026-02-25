@@ -16,6 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
             '¿En qué puedo ayudarte hoy?'
         ],
 
-        enableStreaming: true
+        enableStreaming: false
     });
 });
