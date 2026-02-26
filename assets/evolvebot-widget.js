@@ -25,7 +25,13 @@ document.addEventListener('DOMContentLoaded', () => {
 			inputPlaceholder: 'Type your question..',
 		},
 	},
-
+ theme: {
+    primaryColor: '#3e01a7',      // morado principal
+    secondaryColor: '#0f00dd',    // azul botón principal
+    backgroundColor: '#0B0F1A',   // fondo oscuro
+    textColor: '#FFFFFF',
+    borderRadius: '20px'
+  },
 
   branding: {
     logo: 'https://evolvehub.es/logo_evolvehub.png',
