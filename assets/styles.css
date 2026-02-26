@@ -351,9 +351,36 @@ footer {
 }
 
 :root {
-  --chat--color--primary: #111827;
-  --chat--color--secondary: #2563eb;
-  --chat--window--border-radius: 16px;
-  --chat--toggle--size: 58px;
+   --chat--color--primary: #7C3AED;        /* morado principal */
+  --chat--color--secondary: #06B6D4;      /* azul botón */
+  --chat--window--border-radius: 20px;
+  --chat--toggle--size: 64px;
+}
+
+/* Fondo general del chat */
+.n8n-chat {
+  --n8n-chat-primary: #7C3AED;
+  --n8n-chat-secondary: #06B6D4;
+  --n8n-chat-background: #0B0F1A;
+  --n8n-chat-text: #FFFFFF;
+  --n8n-chat-border-radius: 16px;
+}
+
+/* Burbuja del bot */
+.n8n-chat .message.bot {
+  background: linear-gradient(135deg, #7C3AED, #06B6D4);
+  color: white;
+}
+
+/* Burbuja usuario */
+.n8n-chat .message.user {
+  background: #1E293B;
+  color: white;
+}
+
+/* Botón flotante */
+.n8n-chat-toggle {
+  background: linear-gradient(135deg, #7C3AED, #06B6D4) !important;
+  box-shadow: 0 0 20px rgba(124, 58, 237, 0.6);
 }
 

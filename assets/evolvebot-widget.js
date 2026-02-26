@@ -9,12 +9,28 @@ document.addEventListener('DOMContentLoaded', () => {
         mode: 'window',
 
         showWelcomeScreen: true,
-
+        loadPreviousSession: true,
+        metadata: {},
         initialMessages: [
             'Hola 👋',
             'Soy EvolveBot, el asistente virtual de EvolveHub.',
             '¿En qué puedo ayudarte hoy?'
         ],
+        i18n: {
+		en: {
+			title: 'EvolveHub',
+			subtitle: "Inicia un chat. Estamos aqui para ayudarte las 24/7.\n Agenda una reunion para más información.",
+			footer: '',
+			getStarted: 'New Conversation',
+			inputPlaceholder: 'Type your question..',
+		},
+	},
+
+
+  branding: {
+    logo: 'https://evolvehub.es/logo_evolvehub.png',
+    name: 'EvolveHub AI'
+  },
 
         enableStreaming: false
     });
