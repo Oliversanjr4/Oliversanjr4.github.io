@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7f13ec",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#0a0a0c",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<title>EvolveHub | Token Expirado</title>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+
+<!-- Main Content -->
+<main class="flex-1 flex flex-col items-center justify-center px-4 py-20">
+<div class="max-w-[640px] w-full text-center">
+<!-- Error Icon / Graphic -->
+<div class="mb-10 flex justify-center">
+<div class="relative">
+<div class="absolute inset-0 bg-primary/20 blur-3xl rounded-full"></div>
+<div class="relative size-24 md:size-32 bg-primary/10 border border-primary/20 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-5xl md:text-6xl">
+                                lock_clock
+                            </span>
+</div>
+</div>
+</div>
+<!-- Messaging -->
+<div class="space-y-6">
+<h4 class="text-primary text-sm font-extrabold uppercase tracking-widest">Seguridad</h4>
+<h1 class="text-5xl md:text-7xl font-extrabold tracking-tight leading-none text-slate-900 dark:text-white">
+                        Token Expirado
+                    </h1>
+<p class="text-lg md:text-xl text-slate-600 dark:text-slate-400 font-medium max-w-lg mx-auto leading-relaxed">
+                        Lo sentimos, el enlace de acceso ya no es válido por motivos de seguridad. Por favor, solicita uno nuevo para continuar con tu reserva.
+                    </p>
+</div>
+<!-- Actions -->
+
+</div>
+</main>
+<!-- Footer Decoration -->
+<footer class="py-10 px-6 text-center border-t border-white/5">
+<p class="text-slate-500 text-xs font-medium tracking-[0.2em] uppercase">
+                © 2026 EvolveHub. Todos los derechos reservados.
+            </p>
+</footer>
+<!-- Abstract Background Glows -->
+<div class="fixed top-[-10%] left-[-10%] size-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
+<div class="fixed bottom-[-10%] right-[-10%] size-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
+</div>
+</body></html>
