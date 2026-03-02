@@ -150,6 +150,30 @@
     <script src="assets/main.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
 
+<style>
+:root {
+  --chat--color--primary: #7C3AED !important;
+  --chat--color--secondary: #06B6D4 !important;
+  --chat--window--border-radius: 20px !important;
+}
+
+/* Header */
+.n8n-chat-window-header {
+  background: linear-gradient(135deg, #7C3AED, #06B6D4) !important;
+  color: white !important;
+}
+
+/* Fondo ventana */
+.n8n-chat-window {
+  background: #1b0a29 !important;
+}
+
+/* Botón flotante */
+.n8n-chat-toggle {
+  background: linear-gradient(135deg, #7C3AED, #06B6D4) !important;
+}
+</style>
+
 <script type="module">
   import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
 
@@ -164,20 +188,20 @@
     '¿En qué puedo ayudarte hoy?'
     ],
         i18n: {
-		en: {
+		es: {
 			title: 'EvolveHub',
-			subtitle: "",
+			subtitle: "Inicia un chat. Estamos aquí para ayudarte 24/7.",
 			footer: '',
-			getStarted: 'New Conversation',
-			inputPlaceholder: 'Type your question..',
+			getStarted: 'Nueva Conversacion',
+			inputPlaceholder: 'Escribe aqui..',
 		},
 	},
  theme: {
-    primaryColor: '#3e01a7',      // morado principal
-    secondaryColor: '#0f00dd',    // azul botón principal
-    backgroundColor: '#0B0F1A',   // fondo oscuro
-    textColor: '#FFFFFF',
-    borderRadius: '20px'
+      primaryColor: '#7C3AED',
+  secondaryColor: '#06B6D4',
+  backgroundColor: '#1b0a29',
+  textColor: '#FFFFFF',
+  borderRadius: '20px',
   },
 
   branding: {
