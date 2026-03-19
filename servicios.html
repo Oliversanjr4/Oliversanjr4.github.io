@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios | EvolveHub</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Custom CSS Base -->
+    <link rel="stylesheet" href="assets/styles.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#131313',
+                        surface: '#1a1a1a',
+                        primary: '#8a2be2',
+                        primaryLight: '#a35ced',
+                    },
+                    fontFamily: {
+                        headline: ['"Space Grotesk"', 'sans-serif'],
+                        body: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="icon" type="image/png" sizes="32x32" href="./imagen/favicon-32x32.png?v=2">
+    <link rel="icon" type="image/png" sizes="16x16" href="./imagen/favicon-16x16.png?v=2">
+    <link rel="shortcut icon" href="./imagen/favicon.ico">
+</head>
+
+<body class="bg-dark text-white font-body overflow-x-hidden selection:bg-primary selection:text-white">
+
+    <!-- Header -->
+    <header
+        class="fixed top-0 w-full z-50 bg-dark/70 backdrop-blur-md border-b border-white/10 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2 z-50">
+                <img src="./imagen/logo_evolvehub.png" alt="EvolveHub" class="h-8 w-auto">
+            </a>
+
+            <!-- Desktop Menu -->
+            <nav class="hidden md:flex items-center gap-8">
+                <a href="index.html"
+                    class="text-white/70 hover:text-white transition-colors text-sm font-medium">Inicio</a>
+                <a href="servicios.html"
+                    class="text-white hover:text-primary transition-colors text-sm font-medium">Servicios</a>
+                <a href="subvenciones.html"
+                    class="text-white/70 hover:text-white transition-colors text-sm font-medium">Subvenciones</a>
+                <a href="contacto.html"
+                    class="text-white/70 hover:text-white transition-colors text-sm font-medium">Contacto</a>
+            </nav>
+
+            <div class="hidden md:block">
+                <a href="diagnostico.html" class="btn btn-primary text-sm px-6 py-2.5">Solicitar diagnóstico</a>
+            </div>
+
+            <!-- Mobile Toggle -->
+            <button id="mobile-toggle" class="md:hidden text-white z-50" aria-label="Menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 12h18M3 6h18M3 18h18" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu"
+            class="hidden absolute top-20 left-0 w-full bg-dark/95 backdrop-blur-xl border-b border-white/10 px-6 py-6 flex flex-col gap-6">
+            <a href="index.html" class="text-white/70 text-lg font-medium">Inicio</a>
+            <a href="servicios.html" class="text-white text-lg font-medium">Servicios</a>
+            <a href="subvenciones.html" class="text-white/70 text-lg font-medium">Subvenciones</a>
+            <a href="contacto.html" class="text-white/70 text-lg font-medium">Contacto</a>
+            <a href="diagnostico.html" class="btn btn-primary text-center mt-4">Solicitar diagnóstico</a>
+        </div>
+    </header>
+
+    <main class="pt-32">
+        <!-- Hero Servicios -->
+        <section class="py-16 md:py-24 relative">
+            <div class="absolute top-0 right-0 w-96 h-96 bg-primary/20 rounded-full blur-[120px] pointer-events-none">
+            </div>
+
+            <div class="max-w-7xl mx-auto px-6 text-center relative z-10">
+                <div
+                    class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/30 bg-primary/10 w-max mb-6 mx-auto">
+                    <span class="text-xs font-medium text-primaryLight uppercase tracking-wider">Metodología
+                        EvolveHub</span>
+                </div>
+                <h1 class="font-headline text-4xl md:text-6xl font-bold mb-6">Soluciones <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-white to-primaryLight">Estratégicas.</span>
+                </h1>
+                <p class="text-lg text-white/70 max-w-2xl mx-auto">No vendemos herramientas aisladas. Diseñamos
+                    ecosistemas digitales completos que operan como el motor central de tu negocio.</p>
+            </div>
+        </section>
+
+        <!-- Cómo trabajamos detallado -->
+        <section class="py-20 bg-surface/30 border-y border-white/5 relative">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="mb-16">
+                    <h2 class="font-headline text-3xl font-bold mb-4">Framework de Ejecución</h2>
+                    <p class="text-white/70">Nuestro proceso de despliegue paso a paso.</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="glass-panel p-8 flex gap-6">
+                        <div class="text-primary font-headline text-5xl font-bold opacity-30">01</div>
+                        <div>
+                            <h3 class="font-headline text-xl font-bold mb-2">Auditoría y Diagnóstico</h3>
+                            <p class="text-white/60 text-sm leading-relaxed">Mapeamos tus procesos actuales manuales.
+                                Identificamos cuellos de botella en la captación, seguimiento y entrega del servicio.
+                                Definimos el alcance exacto de la mejora.</p>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel p-8 flex gap-6">
+                        <div class="text-primary font-headline text-5xl font-bold opacity-30">02</div>
+                        <div>
+                            <h3 class="font-headline text-xl font-bold mb-2">Diseño de Arquitectura</h3>
+                            <p class="text-white/60 text-sm leading-relaxed">Proponemos un stack tecnológico (Web + CRM
+                                + Automatización). Cada pieza tiene un propósito: convertir, gestionar o retener. Nada
+                                de software innecesario.</p>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel p-8 flex gap-6">
+                        <div class="text-primary font-headline text-5xl font-bold opacity-30">03</div>
+                        <div>
+                            <h3 class="font-headline text-xl font-bold mb-2">Implementación Core</h3>
+                            <p class="text-white/60 text-sm leading-relaxed">Construimos la landing page, configuramos
+                                el funnel en el CRM y programamos los flujos de automatización que conectan ambos mundos
+                                de forma invisible.</p>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel p-8 flex gap-6">
+                        <div class="text-primary font-headline text-5xl font-bold opacity-30">04</div>
+                        <div>
+                            <h3 class="font-headline text-xl font-bold mb-2">Integración de Agentes e IA</h3>
+                            <p class="text-white/60 text-sm leading-relaxed">(Para soluciones avanzadas). Conectamos
+                                asistentes conversacionales que cualifican leads y agendas citas sin intervención
+                                humana.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Packs / Precios -->
+        <section class="py-24 relative">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="font-headline text-3xl md:text-5xl font-bold mb-6">Packs de <span
+                            class="text-primaryLight">Transformación</span></h2>
+                    <p class="text-white/70 text-lg max-w-2xl mx-auto">Soluciones llave en mano adaptadas a la madurez
+                        digital de tu empresa.</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Pack Básico -->
+                    <div
+                        class="glass-panel p-8 flex flex-col h-full border-white/5 hover:border-white/20 transition-colors relative">
+                        <h3 class="font-headline text-2xl font-bold mb-2">Fundación Digital</h3>
+                        <p class="text-white/50 text-sm mb-6">Establece una presencia sólida y ordena el contacto.</p>
+                        <div class="text-3xl font-bold font-headline mb-8 text-primaryLight">Básico</div>
+
+                        <p class="text-sm font-semibold mb-4 text-white">¿Qué incluye?</p>
+                        <ul class="space-y-4 mb-10 flex-grow">
+                            <li class="flex items-start gap-3">
+                                <svg class="mt-1 text-primary w-4 h-4" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor" stroke-width="2">
+                                    <path d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span class="text-white/70 text-sm">Landing Page optimizada para conversión</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <svg class="mt-1 text-primary w-4 h-4" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor" stroke-width="2">
+                                    <path d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span class="text-white/70 text-sm">Formularios de contacto inteligentes</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <svg class="mt-1 text-primary w-4 h-4" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor" stroke-width="2">
+                                    <path d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span class="text-white/70 text-sm">Notificaciones automáticas básicas</span>
+                            </li>
+                        </ul>
+
+                        <div class="text-xs text-white/50 mb-6 bg-white/5 p-3 rounded-md">Para: Negocios que necesitan
+                            una carta de presentación premium y ordenar la entrada de leads.</div>
+                        <a href="contacto.html" class="btn btn-secondary w-full">Solicitar propuesta</a>
+                    </div>
+
+                    <!-- Pack Crecimiento -->
+                    <div
+                        class="glass-panel p-8 flex flex-col h-full border-primary/40 relative transform md:-translate-y-4 shadow-[0_0_40px_rgba(138,43,226,0.1)]">
+                        <div
+                            class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary text-white text-xs font-bold px-4 py-1 rounded-full uppercase tracking-wider">
+                            Más Popular</div>
+
+                        <h3 class="font-headline text-2xl font-bold mb-2">Motor de Ventas</h3>
+                        <p class="text-white/50 text-sm mb-6">Domina el embudo y automatiza operaciones.</p>
+                        <div
+                            class="text-3xl font-bold font-headline mb-8 text-transparent bg-clip-text bg-gradient-to-r from-white to-primaryLight">
+                            Crecimiento</div>
+
+                        <p class="text-sm font-semibold mb-4 text-white">Todo lo del básico, más:</p>
+                        <ul class="space-y-4 mb-10 flex-grow">
+                            <li class="flex items-start gap-3">
+                                <svg class="mt-1 text-primaryLight w-4 h-4" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor" stroke-width="2">
+                                    <path d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span class="text-white/70 text-sm">Implementación completa CRM</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <svg class="mt-1 text-primaryLight w-4 h-4" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor" stroke-width="2">
+                                    <path d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span class="text-white/70 text-sm">Automatización de seguimientos (Email/SMS)</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <svg class="mt-1 text-primaryLight w-4 h-4" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor" stroke-width="2">
+                                    <path d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span class="text-white/70 text-sm">Analítica centralizada de conversiones</span>
+                            </li>
+                        </ul>
+
+                        <div class="text-xs text-white/50 mb-6 bg-white/5 p-3 rounded-md">Para: Quienes ya venden pero
+                            están saturados gestionando leads manualmente.</div>
+                        <a href="diagnostico.html" class="btn btn-primary w-full kinetic-gradient">Empezar ahora</a>
+                    </div>
+
+                    <!-- Pack Avanzado -->
+                    <div
+                        class="glass-panel p-8 flex flex-col h-full border-white/5 hover:border-white/20 transition-colors relative">
+                        <h3 class="font-headline text-2xl font-bold mb-2">Escalado Autónomo</h3>
+                        <p class="text-white/50 text-sm mb-6">El sistema operativo definitivo con inteligencia
+                            artificial.</p>
+                        <div class="text-3xl font-bold font-headline mb-8 text-white">Avanzado</div>
+
+                        <p class="text-sm font-semibold mb-4 text-white">Todo lo anterior, más:</p>
+                        <ul class="space-y-4 mb-10 flex-grow">
+                            <li class="flex items-start gap-3">
+                                <svg class="mt-1 text-primary w-4 h-4" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor" stroke-width="2">
+                                    <path d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span class="text-white/70 text-sm">Agentes IA entrenados con tu conocimiento</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <svg class="mt-1 text-primary w-4 h-4" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor" stroke-width="2">
+                                    <path d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span class="text-white/70 text-sm">Respuestas automáticas en WhatsApp 24/7</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <svg class="mt-1 text-primary w-4 h-4" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor" stroke-width="2">
+                                    <path d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span class="text-white/70 text-sm">Integraciones profundas a medida (ERP, etc.)</span>
+                            </li>
+                        </ul>
+
+                        <div class="text-xs text-white/50 mb-6 bg-white/5 p-3 rounded-md">Para: Empresas con alto
+                            volumen de leads que quieren atención inmediata 24/7.</div>
+                        <a href="contacto.html" class="btn btn-secondary w-full">Agendar consultoría</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Servicios Individuales Cards -->
+        <section class="py-24 bg-surface/30">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="mb-16">
+                    <h2 class="font-headline text-3xl font-bold mb-4">¿Necesitas algo específico?</h2>
+                    <p class="text-white/70">Módulos individuales que puedes integrar en tu arquitectura actual.</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Desarrollo Web -->
+                    <div class="glass p-6 group hover:border-primary/50 transition-colors flex flex-col h-full">
+                        <div
+                            class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4 text-primaryLight">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="currentColor">
+                                <path stroke="currentColor" stroke-width="2"
+                                    d="m18 16 4-4-4-4M6 8 2 12l4 4M14.5 4l-5 16" />
+                            </svg>
+                        </div>
+                        <h4 class="font-headline text-lg font-bold mb-2">Desarrollo Web Premium</h4>
+                        <div class="text-sm flex-grow">
+                            <p class="text-white/50 mb-2"><strong class="text-white/80">El Problema:</strong> Una web
+                                que parece un folleto estático y no capta datos.</p>
+                            <p class="text-white/50"><strong class="text-primaryLight text-opacity-80">El
+                                    Resultado:</strong> Una landing enfocada a conversión, ultrarrápida (Tailwind/React)
+                                y conectada a tu base de datos.</p>
+                        </div>
+                        <a href="contacto.html" class="btn btn-secondary w-full text-center mt-6">Solicitar
+                            propuesta</a>
+                    </div>
+
+                    <!-- CRM -->
+                    <div class="glass p-6 group hover:border-primary/50 transition-colors flex flex-col h-full">
+                        <div
+                            class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4 text-primaryLight">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="currentColor">
+                                <path stroke="currentColor" stroke-width="2"
+                                    d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                <circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="2" />
+                                <path stroke="currentColor" stroke-width="2" d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                                <path stroke="currentColor" stroke-width="2" d="M16 3.13a4 4 0 0 1 0 7.75" />
+                            </svg>
+                        </div>
+                        <h4 class="font-headline text-lg font-bold mb-2">Despliegue de CRM</h4>
+                        <div class="text-sm flex-grow">
+                            <p class="text-white/50 mb-2"><strong class="text-white/80">El Problema:</strong> Leads
+                                dispersos en WhatsApp, notas y Excel. Seguimientos olvidados.</p>
+                            <p class="text-white/50"><strong class="text-primaryLight text-opacity-80">El
+                                    Resultado:</strong> Visibilidad total del embudo. Sabes exactamente qué está pasando
+                                con cada cliente potencial.</p>
+                        </div>
+                        <a href="contacto.html" class="btn btn-secondary w-full text-center mt-6">Solicitar
+                            propuesta</a>
+                    </div>
+
+                    <!-- Automatización -->
+                    <div class="glass p-6 group hover:border-primary/50 transition-colors flex flex-col h-full">
+                        <div
+                            class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4 text-primaryLight">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="currentColor">
+                                <path stroke="currentColor" stroke-width="2" d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                            </svg>
+                        </div>
+                        <h4 class="font-headline text-lg font-bold mb-2">Automatización (n8n, Make)</h4>
+                        <div class="text-sm flex-grow">
+                            <p class="text-white/50 mb-2"><strong class="text-white/80">El Problema:</strong> Tareas
+                                copiando y pegando datos entre aplicaciones manualmente.</p>
+                            <p class="text-white/50"><strong class="text-primaryLight text-opacity-80">El
+                                    Resultado:</strong> Flujos automáticos que envían contratos, facturas y correos
+                                según el estado del cliente.</p>
+                        </div>
+                        <a href="contacto.html" class="btn btn-secondary w-full text-center mt-6">Solicitar
+                            propuesta</a>
+                    </div>
+
+                    <!-- Integraciones IA -->
+                    <div class="glass p-6 group hover:border-primary/50 transition-colors flex flex-col h-full">
+                        <div
+                            class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4 text-primaryLight">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="currentColor">
+                                <path stroke="currentColor" stroke-width="2"
+                                    d="M12 2a8 8 0 0 0-8 8v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10a8 8 0 0 0-8-8z" />
+                                <path stroke="currentColor" stroke-width="2"
+                                    d="M8 14h.01M16 14h.01M12 18c-1.5 0-2.5-.5-3-1M12 6v2" />
+                            </svg>
+                        </div>
+                        <h4 class="font-headline text-lg font-bold mb-2">Agentes Inteligentes</h4>
+                        <div class="text-sm flex-grow">
+                            <p class="text-white/50 mb-2"><strong class="text-white/80">El Problema:</strong> Leads que
+                                se enfrían porque no pueden ser atendidos inmediatamente a las 10 PM.</p>
+                            <p class="text-white/50"><strong class="text-primaryLight text-opacity-80">El
+                                    Resultado:</strong> Respuestas instantáneas contextuales que cualifican al contacto
+                                y lo agendan en tu calendario.</p>
+                        </div>
+                        <a href="contacto.html" class="btn btn-secondary w-full text-center mt-6">Solicitar
+                            propuesta</a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 bg-dark pt-20 pb-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <div class="col-span-1 md:col-span-2">
+                    <img src="./img/logo_evolvehub.png" alt="EvolveHub" class="h-8 w-auto mb-6">
+                    <p class="text-white/50 max-w-md mb-6">Impulsando negocios con arquitecturas digitales de alto
+                        rendimiento. Automatización, IA y desarrollo premium.</p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="diagnostico.html" class="btn btn-primary text-sm px-6 py-2">Solicitar diagnóstico
+                            gratuito</a>
+                        <a href="https://wa.me/34600000000"
+                            class="btn btn-secondary text-sm px-6 py-2 border-green-500/30 hover:border-green-500 hover:bg-green-500/10 hover:text-green-400">WhatsApp
+                            directo</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-headline font-bold text-white mb-6">Mapa del sitio</h4>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="text-white/50 hover:text-white transition-colors">Inicio</a>
+                        </li>
+                        <li><a href="servicios.html"
+                                class="text-white/50 hover:text-white transition-colors">Servicios</a></li>
+                        <li><a href="subvenciones.html"
+                                class="text-white/50 hover:text-white transition-colors">Subvenciones</a></li>
+                        <li><a href="contacto.html"
+                                class="text-white/50 hover:text-white transition-colors">Contacto</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-headline font-bold text-white mb-6">Legal</h4>
+                    <ul class="space-y-3">
+                        <li><a href="aviso-legal.html" class="text-white/50 hover:text-white transition-colors">Aviso
+                                Legal</a></li>
+                        <li><a href="politica-privacidad.html"
+                                class="text-white/50 hover:text-white transition-colors">Política de Privacidad</a></li>
+                        <li><a href="politica-cookies.html"
+                                class="text-white/50 hover:text-white transition-colors">Política de Cookies</a></li>
+                        <li><a href="terminos-condiciones.html"
+                                class="text-white/50 hover:text-white transition-colors">Términos y Condiciones</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-white/30 text-sm">&copy; 2026 EvolveHub. Todos los derechos reservados.</p>
+                <div class="flex gap-4">
+                    <a href="www.linkedin.com/in/oliver-san-josé-roldán-58a08a29a"
+                        class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/50 hover:text-white hover:border-white/30 transition-all"><svg
+                            width="18" height="18" viewBox="0 0 24 24" fill="none" class="currentColor">
+                            <path stroke="currentColor" stroke-width="2"
+                                d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                            <rect width="4" height="12" x="2" y="9" stroke="currentColor" stroke-width="2" />
+                            <circle cx="4" cy="4" r="2" stroke="currentColor" stroke-width="2" />
+                        </svg></a>
+                    <a href="https://www.instagram.com/evolvehub_sd?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                        class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/50 hover:text-white hover:border-white/30 transition-all"><svg
+                            width="18" height="18" viewBox="0 0 24 24" fill="none" class="currentColor">
+                            <rect width="20" height="20" x="2" y="2" rx="5" ry="5" stroke="currentColor"
+                                stroke-width="2" />
+                            <path stroke="currentColor" stroke-width="2"
+                                d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                            <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" stroke="currentColor" stroke-width="2" />
+                        </svg></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu Script -->
+    <script>
+        const btn = document.getElementById('mobile-toggle');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+    </script>
+
+    <!-- N8N Chatbot integration -->
+    <script src="assets/main.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+
+    <style>
+        :root {
+            --chat--color--primary: #8a2be2 !important;
+            --chat--color--secondary: #a35ced !important;
+            --chat--window--border-radius: 20px !important;
+        }
+
+        .n8n-chat-window-header {
+            background: linear-gradient(135deg, #8a2be2, #6317ab) !important;
+            color: white !important;
+        }
+
+        .n8n-chat-window {
+            background: #1a1a1a !important;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .n8n-chat-toggle {
+            background: linear-gradient(135deg, #8a2be2, #6317ab) !important;
+        }
+    </style>
+
+    <script type="module">
+        import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+        createChat({
+            webhookUrl: 'https://n8n-n8n.gk97dq.easypanel.host/webhook/53570680-bbdd-4aed-9912-9485c67edd9c/chat',
+            mode: 'window',
+            showWelcomeScreen: true,
+            loadPreviousSession: true,
+            initialMessages: [
+                'Hola 👋',
+                'Soy el agente de IA de EvolveHub.',
+                '¿En qué nivel de madurez digital se encuentra tu negocio?'
+            ],
+            i18n: {
+                es: {
+                    title: 'EvolveHub',
+                    subtitle: "Inteligencia artificial 24/7.",
+                    footer: '',
+                    getStarted: 'Nueva Conversación',
+                    inputPlaceholder: 'Escribe aquí...',
+                },
+            },
+            theme: {
+                primaryColor: '#8a2be2',
+                secondaryColor: '#6317ab',
+                backgroundColor: '#1a1a1a',
+                textColor: '#FFFFFF',
+                borderRadius: '20px',
+            },
+            branding: {
+                logo: 'https://evolvehub.es/logo_evolvehub.png',
+                name: 'EvolveHub AI'
+            },
+            enableStreaming: false
+        });
+    </script>
+</body>
+
+</html>

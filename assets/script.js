@@ -4,7 +4,7 @@ const qsa = s => document.querySelectorAll(s);
 
 // Year
 const year = qs('#year');
-if(year) year.textContent = new Date().getFullYear();
+if (year) year.textContent = new Date().getFullYear();
 
 // Mobile nav
 const hamburger = qs('#hamburger');
@@ -20,13 +20,13 @@ const closeModal = qs('#closeModal');
 const cancelSignup = qs('#cancelSignup');
 const heroGetStarted = qs('#heroGetStarted');
 
-function showModal(){
-  if(!signupModal) return;
-  signupModal.setAttribute('aria-hidden','false');
+function showModal() {
+  if (!signupModal) return;
+  signupModal.setAttribute('aria-hidden', 'false');
 }
-function hideModal(){
-  if(!signupModal) return;
-  signupModal.setAttribute('aria-hidden','true');
+function hideModal() {
+  if (!signupModal) return;
+  signupModal.setAttribute('aria-hidden', 'true');
 }
 
 openSignup && openSignup.addEventListener('click', showModal);
@@ -34,12 +34,12 @@ heroGetStarted && heroGetStarted.addEventListener('click', showModal);
 closeModal && closeModal.addEventListener('click', hideModal);
 cancelSignup && cancelSignup.addEventListener('click', hideModal);
 signupModal && signupModal.addEventListener('click', e => {
-  if(e.target === signupModal) hideModal();
+  if (e.target === signupModal) hideModal();
 });
 
 // Form handling (simulado)
 const signupForm = qs('#signupForm');
-if(signupForm) signupForm.addEventListener('submit', (e) => {
+if (signupForm) signupForm.addEventListener('submit', (e) => {
   e.preventDefault();
   const fd = new FormData(signupForm);
   const email = fd.get('email') || '';
@@ -49,7 +49,7 @@ if(signupForm) signupForm.addEventListener('submit', (e) => {
 });
 
 const contactForm = qs('#contactForm');
-if(contactForm) contactForm.addEventListener('submit', (e) => {
+if (contactForm) contactForm.addEventListener('submit', (e) => {
   e.preventDefault();
   const fd = new FormData(contactForm);
   const email = fd.get('email') || '';
@@ -61,5 +61,5 @@ qs('#clearForm') && qs('#clearForm').addEventListener('click', () => qs('#contac
 
 // Small accessibility: close modal with ESC
 document.addEventListener('keydown', (e) => {
-  if(e.key === 'Escape') hideModal();
+  if (e.key === 'Escape') hideModal();
 });
