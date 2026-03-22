@@ -150,8 +150,7 @@
                         <h3 class="font-headline text-2xl font-bold mb-2">Envíanos un mensaje</h3>
                         <p class="text-sm text-white/50 mb-6">Te responderemos en menos de 24 horas laborables.</p>
 
-                        <form action="https://formspree.io/f/your_form_endpoint_here" method="POST"
-                            class="space-y-4 flex-grow flex flex-col justify-between">
+                        <form id="contactoForm" class="space-y-4 flex-grow flex flex-col justify-between">
                             <div class="space-y-4">
                                 <div>
                                     <label class="block text-xs font-medium text-white/70 mb-1">Nombre</label>
@@ -214,7 +213,8 @@
                         <p class="text-white/70 mb-8 max-w-md">Nuestro chatbot de Inteligencia Artificial está
                             disponible 24/7 para entender tus necesidades y agendar una llamada estratégica en el
                             momento que mejor te convenga.</p>
-                        <button onclick="if(window.abrirChatbot) window.abrirChatbot(); else { const t = document.querySelector('.chat-window-toggle') || document.querySelector('.n8n-chat-toggle'); if(t) t.click(); }"
+                        <button
+                            onclick="if(window.abrirChatbot) window.abrirChatbot(); else { const t = document.querySelector('.chat-window-toggle') || document.querySelector('.n8n-chat-toggle'); if(t) t.click(); }"
                             class="btn btn-primary kinetic-gradient px-8 py-3 flex items-center gap-2 relative z-10 cursor-pointer">
                             <span>Abrir ChatBot</span>
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -345,7 +345,7 @@
             enableStreaming: false
         });
 
-        window.abrirChatbot = function() {
+        window.abrirChatbot = function () {
             if (window.chatInstance && typeof window.chatInstance.open === 'function') {
                 window.chatInstance.open();
             } else if (window.chatInstance && typeof window.chatInstance.toggle === 'function') {
@@ -361,6 +361,88 @@
                 }
             }
         };
+    </script>
+    <!-- Toast Success -->
+    <div id="toast-success"
+        class="fixed bottom-5 right-5 bg-green-500 text-white px-6 py-3 rounded-xl shadow-2xl transform translate-y-20 opacity-0 transition-all duration-300 z-[100] flex items-center gap-2 pointer-events-none">
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+        </svg>
+        <span class="font-medium">Mensaje enviado con éxito</span>
+    </div>
+
+    <!-- Toast Error -->
+    <div id="toast-error"
+        class="fixed bottom-5 right-5 bg-red-600 text-white px-6 py-3 rounded-xl shadow-2xl transform translate-y-20 opacity-0 transition-all duration-300 z-[100] flex items-center gap-2 pointer-events-none">
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+        <span class="font-medium">Error al enviar el mensaje</span>
+    </div>
+
+    <script>
+        function showToast() {
+            const toast = document.getElementById('toast-success');
+            if (toast) {
+                toast.classList.remove('translate-y-20', 'opacity-0');
+                setTimeout(() => {
+                    toast.classList.add('translate-y-20', 'opacity-0');
+                }, 4000);
+            }
+        }
+
+        function showErrorToast(msg) {
+            const toast = document.getElementById('toast-error');
+            if (toast) {
+                if (msg) toast.querySelector('span').innerText = msg;
+                toast.classList.remove('translate-y-20', 'opacity-0');
+                setTimeout(() => {
+                    toast.classList.add('translate-y-20', 'opacity-0');
+                }, 5000);
+            }
+        }
+
+        const contactoForm = document.getElementById('contactoForm');
+        if (contactoForm) {
+            contactoForm.addEventListener('submit', async function (e) {
+                e.preventDefault();
+
+                const formData = new FormData(contactoForm);
+                const data = Object.fromEntries(formData.entries());
+
+                const submitBtn = contactoForm.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = 'Enviando...';
+                submitBtn.disabled = true;
+
+                try {
+                    // Reemplaza esta URL con la URL de tu Webhook de n8n de Producción
+                    const webhookUrl = 'https://n8n-n8n.gk97dq.easypanel.host/webhook/evolvehub-form';
+
+                    const response = await fetch(webhookUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            source: 'contacto',
+                            data: data
+                        })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error status: ${response.status}`);
+                    }
+
+                    showToast();
+                    contactoForm.reset();
+                } catch (error) {
+                    console.error('Error al enviar el formulario:', error);
+                    showErrorToast("El servidor n8n no responde o rechazó el envío.");
+                } finally {
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                }
+            });
+        }
     </script>
 </body>
 

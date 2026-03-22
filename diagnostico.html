@@ -309,20 +309,104 @@
             showStep(stepNum);
         }
 
-        // Form Submission Simulation
-        document.getElementById('diagnosticoForm').addEventListener('submit', function (e) {
+        // Form Submission a n8n
+        document.getElementById('diagnosticoForm').addEventListener('submit', async function (e) {
             e.preventDefault();
 
             // Ocultar pasos, mostrar loading
             document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
             document.getElementById('resultState').classList.add('active');
 
-            // Simular petición
-            setTimeout(() => {
+            // Capturar manualmente los campos, ya que algunos no tienen atributo 'name'
+            const data = {
+                empresa: document.getElementById('empresa').value,
+                sector: document.getElementById('sector').value,
+                tamano: document.querySelector('input[name="tamano"]:checked')?.value || '',
+                gestion: document.getElementById('gestion').value,
+                problema: document.getElementById('problema').value,
+                objetivo: document.querySelector('input[name="objetivo"]:checked')?.value || '',
+                email: document.getElementById('email').value
+            };
+
+            try {
+                // Reemplaza esta URL con la URL de tu Webhook de n8n de Producción
+                const webhookUrl = 'https://n8n-n8n.gk97dq.easypanel.host/webhook/evolvehub-form';
+
+                const response = await fetch(webhookUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        source: 'diagnostico',
+                        data: data
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error status: ${response.status}`);
+                }
+
+                // Ocultar spinner y mostrar mensaje original de completado dentro del card
                 document.getElementById('spinner').classList.add('hidden');
                 document.getElementById('resultMsg').classList.remove('hidden');
-            }, 2000);
+
+                // Mostrar también el mensaje flotante de éxito
+                if (typeof showToast === 'function') showToast();
+
+            } catch (error) {
+                console.error("Error al enviar el formulario:", error);
+                
+                // Mostrar alerta roja flotante
+                if (typeof showErrorToast === 'function') {
+                    showErrorToast("El servidor n8n no responde o rechazó el envío.");
+                } else {
+                    alert("El servidor n8n no responde o rechazó el envío.");
+                }
+
+                // Volver atrás en caso de error para no perder datos
+                document.getElementById('resultState').classList.remove('active');
+                document.getElementById('step3').classList.add('active');
+            }
         });
+    </script>
+    <!-- Toast Success -->
+    <div id="toast-success"
+        class="fixed bottom-5 right-5 bg-green-500 text-white px-6 py-3 rounded-xl shadow-2xl transform translate-y-20 opacity-0 transition-all duration-300 z-[100] flex items-center gap-2 pointer-events-none">
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+        </svg>
+        <span class="font-medium">Mensaje enviado con éxito</span>
+    </div>
+
+    <!-- Toast Error -->
+    <div id="toast-error"
+        class="fixed bottom-5 right-5 bg-red-600 text-white px-6 py-3 rounded-xl shadow-2xl transform translate-y-20 opacity-0 transition-all duration-300 z-[100] flex items-center gap-2 pointer-events-none">
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+        <span class="font-medium">Error al enviar el mensaje</span>
+    </div>
+
+    <script>
+        function showToast() {
+            const toast = document.getElementById('toast-success');
+            if (toast) {
+                toast.classList.remove('translate-y-20', 'opacity-0');
+                setTimeout(() => {
+                    toast.classList.add('translate-y-20', 'opacity-0');
+                }, 4000);
+            }
+        }
+
+        function showErrorToast(msg) {
+            const toast = document.getElementById('toast-error');
+            if (toast) {
+                if (msg) toast.querySelector('span').innerText = msg;
+                toast.classList.remove('translate-y-20', 'opacity-0');
+                setTimeout(() => {
+                    toast.classList.add('translate-y-20', 'opacity-0');
+                }, 5000);
+            }
+        }
     </script>
 </body>
 
