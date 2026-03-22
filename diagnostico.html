@@ -83,14 +83,17 @@
 
                 <div class="flex items-center justify-center gap-4 mt-8">
                     <!-- Progress Dots -->
-                    <div class="flex items-center gap-2">
+                    <div class="flex items-center gap-1 sm:gap-2">
                         <div id="dot-1" class="w-2.5 h-2.5 rounded-full bg-primary transition-colors duration-300">
                         </div>
-                        <div class="w-8 h-px bg-white/20"></div>
+                        <div class="w-6 sm:w-8 h-px bg-white/20"></div>
                         <div id="dot-2" class="w-2.5 h-2.5 rounded-full bg-white/20 transition-colors duration-300">
                         </div>
-                        <div class="w-8 h-px bg-white/20"></div>
+                        <div class="w-6 sm:w-8 h-px bg-white/20"></div>
                         <div id="dot-3" class="w-2.5 h-2.5 rounded-full bg-white/20 transition-colors duration-300">
+                        </div>
+                        <div class="w-6 sm:w-8 h-px bg-white/20"></div>
+                        <div id="dot-4" class="w-2.5 h-2.5 rounded-full bg-white/20 transition-colors duration-300">
                         </div>
                     </div>
                 </div>
@@ -99,143 +102,458 @@
             <!-- Form Container -->
             <div class="glass-panel p-8 md:p-10 shadow-[0_0_50px_rgba(138,43,226,0.1)]">
                 <form id="diagnosticoForm">
-                    <!-- Paso 1: Datos Básicos -->
+                    <!-- Paso 1: Información del negocio -->
                     <div id="step1" class="step active">
-                        <h2 class="font-headline text-xl font-bold mb-6 text-primaryLight">1. Sobre tu negocio</h2>
-                        <div class="space-y-5">
-                            <div>
-                                <label class="block text-sm font-medium text-white/80 mb-2">Nombre de la Empresa o
-                                    Proyecto</label>
-                                <input type="text" id="empresa" required
-                                    class="w-full bg-dark/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors"
-                                    placeholder="Ej: Clínica Vita">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-white/80 mb-2">Sector Principal</label>
-                                <select id="sector" required
-                                    class="w-full bg-dark/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary appearance-none transition-colors">
-                                    <option value="" disabled selected>Selecciona una opción...</option>
-                                    <option value="salud">Salud y Bienestar</option>
-                                    <option value="servicios">Servicios Profesionales</option>
-                                    <option value="ecommerce">E-commerce / Retail</option>
-                                    <option value="formacion">Formación / Educación</option>
-                                    <option value="otro">Otro</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-white/80 mb-2">Tamaño / Equipo</label>
-                                <div class="grid grid-cols-2 gap-3">
-                                    <label
-                                        class="border border-white/10 rounded-lg px-4 py-3 cursor-pointer hover:border-primary/50 transition-colors bg-white/5 flex items-center justify-center has-[:checked]:border-primary has-[:checked]:bg-primary/10">
-                                        <input type="radio" name="tamano" value="1" class="hidden" required>
-                                        <span>Solo yo (Autónomo)</span>
-                                    </label>
-                                    <label
-                                        class="border border-white/10 rounded-lg px-4 py-3 cursor-pointer hover:border-primary/50 transition-colors bg-white/5 flex items-center justify-center has-[:checked]:border-primary has-[:checked]:bg-primary/10">
-                                        <input type="radio" name="tamano" value="2-5" class="hidden">
-                                        <span>2 a 5 personas</span>
-                                    </label>
-                                    <label
-                                        class="border border-white/10 rounded-lg px-4 py-3 cursor-pointer hover:border-primary/50 transition-colors bg-white/5 flex items-center justify-center has-[:checked]:border-primary has-[:checked]:bg-primary/10">
-                                        <input type="radio" name="tamano" value="6-15" class="hidden">
-                                        <span>6 a 15 personas</span>
-                                    </label>
-                                    <label
-                                        class="border border-white/10 rounded-lg px-4 py-3 cursor-pointer hover:border-primary/50 transition-colors bg-white/5 flex items-center justify-center has-[:checked]:border-primary has-[:checked]:bg-primary/10">
-                                        <input type="radio" name="tamano" value="15+" class="hidden">
-                                        <span>+15 personas</span>
-                                    </label>
+                        <h2 class="font-headline text-xl font-bold mb-6 text-primaryLight">1. Información del negocio
+                        </h2>
+                        <div class="space-y-6">
+
+                            <!-- Grupo 1.1: Info personal y empresa -->
+                            <div class="bg-white/5 border border-white/10 rounded-xl p-5 space-y-4">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-white/80 mb-2">Nombre
+                                            completo</label>
+                                        <input type="text" name="nombre" required
+                                            class="w-full bg-dark/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-white/80 mb-2">Nombre de la
+                                            empresa</label>
+                                        <input type="text" name="empresa" required
+                                            class="w-full bg-dark/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-white/80 mb-2">Sector o actividad
+                                        principal</label>
+                                    <input type="text" name="sector" required
+                                        class="w-full bg-dark/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-white/80 mb-3">Número de
+                                        empleados</label>
+                                    <div class="grid grid-cols-2 lg:grid-cols-3 gap-2">
+                                        <label
+                                            class="border border-white/10 rounded-lg px-3 py-2 text-center text-sm cursor-pointer hover:border-primary/50 transition-colors bg-dark/30 has-[:checked]:border-primary has-[:checked]:bg-primary/10">
+                                            <input type="radio" name="empleados" value="Solo yo" class="sr-only"
+                                                required>Solo yo
+                                        </label>
+                                        <label
+                                            class="border border-white/10 rounded-lg px-3 py-2 text-center text-sm cursor-pointer hover:border-primary/50 transition-colors bg-dark/30 has-[:checked]:border-primary has-[:checked]:bg-primary/10">
+                                            <input type="radio" name="empleados" value="2-5" class="sr-only">2-5
+                                        </label>
+                                        <label
+                                            class="border border-white/10 rounded-lg px-3 py-2 text-center text-sm cursor-pointer hover:border-primary/50 transition-colors bg-dark/30 has-[:checked]:border-primary has-[:checked]:bg-primary/10">
+                                            <input type="radio" name="empleados" value="6-10" class="sr-only">6-10
+                                        </label>
+                                        <label
+                                            class="border border-white/10 rounded-lg px-3 py-2 text-center text-sm cursor-pointer hover:border-primary/50 transition-colors bg-dark/30 has-[:checked]:border-primary has-[:checked]:bg-primary/10">
+                                            <input type="radio" name="empleados" value="11-25" class="sr-only">11-25
+                                        </label>
+                                        <label
+                                            class="border border-white/10 rounded-lg px-3 py-2 text-center text-sm cursor-pointer hover:border-primary/50 transition-colors bg-dark/30 has-[:checked]:border-primary has-[:checked]:bg-primary/10">
+                                            <input type="radio" name="empleados" value="26-50" class="sr-only">26-50
+                                        </label>
+                                        <label
+                                            class="border border-white/10 rounded-lg px-3 py-2 text-center text-sm cursor-pointer hover:border-primary/50 transition-colors bg-dark/30 has-[:checked]:border-primary has-[:checked]:bg-primary/10">
+                                            <input type="radio" name="empleados" value="50+" class="sr-only">50+
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="mt-8 flex justify-end">
                             <button type="button" onclick="nextStep(2)"
-                                class="btn btn-primary w-full md:w-auto px-8">Siguiente paso <svg
-                                    class="w-4 h-4 ml-2 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                    stroke-width="2">
+                                class="btn btn-primary w-full md:w-auto px-8">Siguiente <svg class="w-4 h-4 ml-2 inline"
+                                    fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                     <path d="M5 12h14M12 5l7 7-7 7" />
                                 </svg></button>
                         </div>
                     </div>
 
-                    <!-- Paso 2: Situación Actual -->
+                    <!-- Paso 2: Estado Actual -->
                     <div id="step2" class="step">
-                        <h2 class="font-headline text-xl font-bold mb-6 text-primaryLight">2. Operativa actual</h2>
-                        <div class="space-y-5">
+                        <h2 class="font-headline text-xl font-bold mb-6 text-primaryLight">2. Estado Actual</h2>
+                        <div class="space-y-6">
+
+                            <!-- Grupo 2.1: Tiempo operando -->
                             <div>
-                                <label class="block text-sm font-medium text-white/80 mb-2">¿Cómo gestionas tus clientes
-                                    actualmente?</label>
-                                <select id="gestion" required
-                                    class="w-full bg-dark/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary appearance-none">
-                                    <option value="" disabled selected>Selecciona tu principal método...</option>
-                                    <option value="mental">Papel, WhatsApp y memoria</option>
-                                    <option value="excel">Hojas de cálculo (Excel/Sheets)</option>
-                                    <option value="crm_basico">Un CRM básico no optimizado</option>
-                                    <option value="crm_avanzado">CRM avanzado conectado a todo</option>
+                                <label class="block text-sm font-medium text-white/80 mb-3">¿Cuánto tiempo lleva
+                                    operando tu negocio?</label>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <label
+                                        class="border border-white/10 rounded-lg px-4 py-3 text-sm cursor-pointer hover:border-primary/50 transition-colors bg-white/5 flex items-center justify-center has-[:checked]:border-primary has-[:checked]:bg-primary/10">
+                                        <input type="radio" name="tiempo_operando" value="Menos de 1 año"
+                                            class="sr-only" required><span>Menos de 1 año</span>
+                                    </label>
+                                    <label
+                                        class="border border-white/10 rounded-lg px-4 py-3 text-sm cursor-pointer hover:border-primary/50 transition-colors bg-white/5 flex items-center justify-center has-[:checked]:border-primary has-[:checked]:bg-primary/10">
+                                        <input type="radio" name="tiempo_operando" value="1-3 años"
+                                            class="sr-only"><span>1-3 años</span>
+                                    </label>
+                                    <label
+                                        class="border border-white/10 rounded-lg px-4 py-3 text-sm cursor-pointer hover:border-primary/50 transition-colors bg-white/5 flex items-center justify-center has-[:checked]:border-primary has-[:checked]:bg-primary/10">
+                                        <input type="radio" name="tiempo_operando" value="3-5 años"
+                                            class="sr-only"><span>3-5 años</span>
+                                    </label>
+                                    <label
+                                        class="border border-white/10 rounded-lg px-4 py-3 text-sm cursor-pointer hover:border-primary/50 transition-colors bg-white/5 flex items-center justify-center has-[:checked]:border-primary has-[:checked]:bg-primary/10">
+                                        <input type="radio" name="tiempo_operando" value="Más de 5 años"
+                                            class="sr-only"><span>Más de 5 años</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Grupo 2.2: Desafío Actual -->
+                            <div>
+                                <label class="block text-sm font-medium text-white/80 mb-3">¿Cuál es tu MAYOR desafío
+                                    actual?</label>
+                                <select name="mayor_desafio" required
+                                    onchange="document.getElementById('desafio_otro_container').classList.toggle('hidden', this.value !== 'Otro')"
+                                    class="w-full bg-dark/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary appearance-none transition-colors">
+                                    <option value="" disabled selected>Selecciona tu mayor desafío...</option>
+                                    <option value="Atraer nuevos clientes">Atraer nuevos clientes</option>
+                                    <option value="Retener clientes existentes">Retener clientes existentes</option>
+                                    <option value="Optimizar procesos internos">Optimizar procesos internos</option>
+                                    <option value="Gestión de inventario/stock">Gestión de inventario/stock</option>
+                                    <option value="Control financiero/facturación">Control financiero/facturación
+                                    </option>
+                                    <option value="Gestión del equipo">Gestión del equipo</option>
+                                    <option value="Presencia online/visibilidad">Presencia online/visibilidad</option>
+                                    <option value="Competencia en el mercado">Competencia en el mercado</option>
+                                    <option value="Otro">Otro</option>
                                 </select>
+                                <div id="desafio_otro_container" class="hidden mt-3">
+                                    <input type="text" name="mayor_desafio_otro"
+                                        placeholder="Especifica tu mayor desafío..."
+                                        class="w-full bg-dark/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors text-sm">
+                                </div>
                             </div>
+
+                            <!-- Grupo 2.3: Herramientas -->
                             <div>
-                                <label class="block text-sm font-medium text-white/80 mb-2">¿Cuál es tu mayor cuello de
-                                    botella en el día a día?</label>
-                                <textarea id="problema" rows="3" required
-                                    class="w-full bg-dark/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary resize-none"
-                                    placeholder="Ej: Pierdo mucho tiempo enviando presupuestos iguales o WhatsApps a mano..."></textarea>
+                                <label class="block text-sm font-medium text-white/80 mb-3">¿Qué herramientas digitales
+                                    usas actualmente? <span class="text-xs text-white/50">(selecciona todas las que
+                                        apliquen)</span></label>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                                    <label
+                                        class="flex items-center gap-3 border border-white/10 p-3 rounded-lg hover:border-primary/50 bg-white/5 cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/10 transition-all">
+                                        <input type="checkbox" name="herramientas" value="Web propia"
+                                            class="w-4 h-4 accent-primary rounded bg-dark border-white/20"> Web propia
+                                    </label>
+                                    <label
+                                        class="flex items-center gap-3 border border-white/10 p-3 rounded-lg hover:border-primary/50 bg-white/5 cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/10 transition-all">
+                                        <input type="checkbox" name="herramientas" value="Redes sociales"
+                                            class="w-4 h-4 accent-primary rounded bg-dark border-white/20"> Redes
+                                        sociales
+                                    </label>
+                                    <label
+                                        class="flex items-center gap-3 border border-white/10 p-3 rounded-lg hover:border-primary/50 bg-white/5 cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/10 transition-all">
+                                        <input type="checkbox" name="herramientas" value="Software de facturación"
+                                            class="w-4 h-4 accent-primary rounded bg-dark border-white/20"> Software de
+                                        facturación
+                                    </label>
+                                    <label
+                                        class="flex items-center gap-3 border border-white/10 p-3 rounded-lg hover:border-primary/50 bg-white/5 cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/10 transition-all">
+                                        <input type="checkbox" name="herramientas" value="CRM"
+                                            class="w-4 h-4 accent-primary rounded bg-dark border-white/20"> CRM (gestión
+                                        de clientes)
+                                    </label>
+                                    <label
+                                        class="flex items-center gap-3 border border-white/10 p-3 rounded-lg hover:border-primary/50 bg-white/5 cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/10 transition-all">
+                                        <input type="checkbox" name="herramientas" value="ERP"
+                                            class="w-4 h-4 accent-primary rounded bg-dark border-white/20"> Sistema de
+                                        gestión (ERP)
+                                    </label>
+                                    <label
+                                        class="flex items-center gap-3 border border-white/10 p-3 rounded-lg hover:border-primary/50 bg-white/5 cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/10 transition-all">
+                                        <input type="checkbox" name="herramientas" value="Email marketing"
+                                            class="w-4 h-4 accent-primary rounded bg-dark border-white/20"> Email
+                                        marketing
+                                    </label>
+                                    <label
+                                        class="flex items-center gap-3 border border-white/10 p-3 rounded-lg hover:border-primary/50 bg-white/5 cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/10 transition-all">
+                                        <input type="checkbox" name="herramientas" value="E-commerce"
+                                            class="w-4 h-4 accent-primary rounded bg-dark border-white/20"> E-commerce /
+                                        tienda
+                                    </label>
+                                    <label
+                                        class="flex items-center gap-3 border border-white/10 p-3 rounded-lg hover:border-primary/50 bg-white/5 cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/10 transition-all">
+                                        <input type="checkbox" name="herramientas" value="Ninguna o muy pocas"
+                                            class="w-4 h-4 accent-primary rounded bg-dark border-white/20"> Ninguna /
+                                        Muy pocas
+                                    </label>
+                                    <label
+                                        class="flex items-center gap-3 border border-white/10 p-3 rounded-lg hover:border-primary/50 bg-white/5 cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/10 transition-all">
+                                        <input type="checkbox" name="herramientas" value="Otras"
+                                            onchange="document.getElementById('herramientas_otro_container').classList.toggle('hidden', !this.checked)"
+                                            class="w-4 h-4 accent-primary rounded bg-dark border-white/20"> Otras
+                                    </label>
+                                    <div id="herramientas_otro_container" class="hidden col-span-1 sm:col-span-2 mt-1">
+                                        <input type="text" name="herramientas_otras"
+                                            placeholder="Escribe qué otras herramientas usas..."
+                                            class="w-full bg-dark/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors text-sm">
+                                    </div>
+                                </div>
                             </div>
+
                         </div>
                         <div class="mt-8 flex justify-between gap-4">
                             <button type="button" onclick="prevStep(1)"
                                 class="btn btn-secondary w-full md:w-auto px-6">Atrás</button>
                             <button type="button" onclick="nextStep(3)"
-                                class="btn btn-primary w-full md:w-auto px-8">Último paso <svg
-                                    class="w-4 h-4 ml-2 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                    stroke-width="2">
+                                class="btn btn-primary w-full md:w-auto px-8">Siguiente <svg class="w-4 h-4 ml-2 inline"
+                                    fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                     <path d="M5 12h14M12 5l7 7-7 7" />
                                 </svg></button>
                         </div>
                     </div>
 
-                    <!-- Paso 3: Objetivos y Contacto -->
+                    <!-- Paso 3: Objetivos y Prioridades -->
                     <div id="step3" class="step">
-                        <h2 class="font-headline text-xl font-bold mb-6 text-primaryLight">3. Metas y Contacto</h2>
-                        <div class="space-y-5">
+                        <h2 class="font-headline text-xl font-bold mb-6 text-primaryLight">3. Objetivos y Prioridades
+                        </h2>
+                        <div class="space-y-6">
+
+                            <!-- Grupo 3.1: Escala 1 al 5 -->
                             <div>
-                                <label class="block text-sm font-medium text-white/80 mb-2">Mi objetivo principal
-                                    es:</label>
-                                <div class="grid grid-cols-1 gap-3">
-                                    <label
-                                        class="border border-white/10 rounded-lg px-4 py-3 cursor-pointer hover:border-primary/50 transition-colors bg-white/5 flex items-start gap-3 has-[:checked]:border-primary has-[:checked]:bg-primary/10">
-                                        <input type="radio" name="objetivo" value="crecer" class="mt-1" required>
-                                        <div>
-                                            <span class="block font-medium">Crecer y Vender Más</span>
-                                            <span class="text-xs text-white/50">Quiero aumentar mi captación y no perder
-                                                leads.</span>
+                                <label class="block text-sm font-medium text-white/80 mb-4">En una escala del 1 al 5,
+                                    ¿cómo de digitalizado está tu negocio?</label>
+                                <div class="flex justify-between items-center max-w-sm mx-auto">
+                                    <label class="flex flex-col items-center gap-2 cursor-pointer group">
+                                        <div
+                                            class="w-10 h-10 rounded-full border-2 border-white/20 flex items-center justify-center font-bold text-lg group-has-[:checked]:bg-primary group-has-[:checked]:border-primary group-hover:border-primary/50 transition-all">
+                                            <input type="radio" name="escala_digitalizacion" value="1 (Nada)"
+                                                class="sr-only" required>1
                                         </div>
                                     </label>
-                                    <label
-                                        class="border border-white/10 rounded-lg px-4 py-3 cursor-pointer hover:border-primary/50 transition-colors bg-white/5 flex items-start gap-3 has-[:checked]:border-primary has-[:checked]:bg-primary/10">
-                                        <input type="radio" name="objetivo" value="automatizar" class="mt-1">
-                                        <div>
-                                            <span class="block font-medium">Automatizar y Ordenar</span>
-                                            <span class="text-xs text-white/50">Tengo ventas pero vivo saturado
-                                                operando.</span>
+                                    <div class="h-px bg-white/10 flex-grow mx-2"></div>
+                                    <label class="flex flex-col items-center gap-2 cursor-pointer group">
+                                        <div
+                                            class="w-10 h-10 rounded-full border-2 border-white/20 flex items-center justify-center font-bold text-lg group-has-[:checked]:bg-primary group-has-[:checked]:border-primary group-hover:border-primary/50 transition-all">
+                                            <input type="radio" name="escala_digitalizacion" value="2" class="sr-only">2
+                                        </div>
+                                    </label>
+                                    <div class="h-px bg-white/10 flex-grow mx-2"></div>
+                                    <label class="flex flex-col items-center gap-2 cursor-pointer group">
+                                        <div
+                                            class="w-10 h-10 rounded-full border-2 border-white/20 flex items-center justify-center font-bold text-lg group-has-[:checked]:bg-primary group-has-[:checked]:border-primary group-hover:border-primary/50 transition-all">
+                                            <input type="radio" name="escala_digitalizacion" value="3" class="sr-only">3
+                                        </div>
+                                    </label>
+                                    <div class="h-px bg-white/10 flex-grow mx-2"></div>
+                                    <label class="flex flex-col items-center gap-2 cursor-pointer group">
+                                        <div
+                                            class="w-10 h-10 rounded-full border-2 border-white/20 flex items-center justify-center font-bold text-lg group-has-[:checked]:bg-primary group-has-[:checked]:border-primary group-hover:border-primary/50 transition-all">
+                                            <input type="radio" name="escala_digitalizacion" value="4" class="sr-only">4
+                                        </div>
+                                    </label>
+                                    <div class="h-px bg-white/10 flex-grow mx-2"></div>
+                                    <label class="flex flex-col items-center gap-2 cursor-pointer group">
+                                        <div
+                                            class="w-10 h-10 rounded-full border-2 border-white/20 flex items-center justify-center font-bold text-lg group-has-[:checked]:bg-primary group-has-[:checked]:border-primary group-hover:border-primary/50 transition-all">
+                                            <input type="radio" name="escala_digitalizacion" value="5 (Total)"
+                                                class="sr-only">5
                                         </div>
                                     </label>
                                 </div>
+                                <div
+                                    class="flex justify-between text-xs text-white/40 max-w-sm mx-auto mt-2 font-medium uppercase tracking-wider">
+                                    <span>Nada</span>
+                                    <span>Total</span>
+                                </div>
                             </div>
-                            <div class="pt-4 border-t border-white/10 mt-6">
-                                <label class="block text-sm font-medium text-white/80 mb-2">Tu Email para enviarte los
-                                    resultados</label>
-                                <input type="email" id="email" required
-                                    class="w-full bg-dark/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors"
-                                    placeholder="hola@tuempresa.com">
+
+                            <!-- Grupo 3.2: Objetivos a 6 meses -->
+                            <div>
+                                <label class="block text-sm font-medium text-white/80 mb-3">¿Qué te gustaría conseguir
+                                    en los próximos 6 meses? <span class="text-xs text-white/50">(máximo
+                                        3)</span></label>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                                    <label
+                                        class="flex items-center gap-3 border border-white/10 p-3 rounded-lg hover:border-primary/50 bg-white/5 cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/10 transition-all">
+                                        <input type="checkbox" name="objetivos_6_meses" value="Aumentar ventas"
+                                            class="w-4 h-4 accent-primary rounded bg-dark border-white/20"> Aumentar
+                                        ventas
+                                    </label>
+                                    <label
+                                        class="flex items-center gap-3 border border-white/10 p-3 rounded-lg hover:border-primary/50 bg-white/5 cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/10 transition-all">
+                                        <input type="checkbox" name="objetivos_6_meses"
+                                            value="Mejorar eficiencia operativa"
+                                            class="w-4 h-4 accent-primary rounded bg-dark border-white/20"> Mejorar
+                                        eficiencia
+                                    </label>
+                                    <label
+                                        class="flex items-center gap-3 border border-white/10 p-3 rounded-lg hover:border-primary/50 bg-white/5 cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/10 transition-all">
+                                        <input type="checkbox" name="objetivos_6_meses" value="Reducir costes"
+                                            class="w-4 h-4 accent-primary rounded bg-dark border-white/20"> Reducir
+                                        costes
+                                    </label>
+                                    <label
+                                        class="flex items-center gap-3 border border-white/10 p-3 rounded-lg hover:border-primary/50 bg-white/5 cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/10 transition-all">
+                                        <input type="checkbox" name="objetivos_6_meses" value="Automatizar procesos"
+                                            class="w-4 h-4 accent-primary rounded bg-dark border-white/20"> Automatizar
+                                        procesos
+                                    </label>
+                                    <label
+                                        class="flex items-center gap-3 border border-white/10 p-3 rounded-lg hover:border-primary/50 bg-white/5 cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/10 transition-all">
+                                        <input type="checkbox" name="objetivos_6_meses"
+                                            value="Mejorar experiencia del cliente"
+                                            class="w-4 h-4 accent-primary rounded bg-dark border-white/20"> Experiencia
+                                        del cliente
+                                    </label>
+                                    <label
+                                        class="flex items-center gap-3 border border-white/10 p-3 rounded-lg hover:border-primary/50 bg-white/5 cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/10 transition-all">
+                                        <input type="checkbox" name="objetivos_6_meses" value="Decisiones con datos"
+                                            class="w-4 h-4 accent-primary rounded bg-dark border-white/20"> Decisiones
+                                        con datos
+                                    </label>
+                                    <label
+                                        class="flex items-center gap-3 border border-white/10 p-3 rounded-lg hover:border-primary/50 bg-white/5 cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/10 transition-all">
+                                        <input type="checkbox" name="objetivos_6_meses" value="Expandir mercados"
+                                            class="w-4 h-4 accent-primary rounded bg-dark border-white/20"> Expandir
+                                        mercados
+                                    </label>
+                                    <label
+                                        class="flex items-center gap-3 border border-white/10 p-3 rounded-lg hover:border-primary/50 bg-white/5 cursor-pointer has-[:checked]:border-primary has-[:checked]:bg-primary/10 transition-all">
+                                        <input type="checkbox" name="objetivos_6_meses" value="Otro"
+                                            onchange="document.getElementById('objetivos_otro_container').classList.toggle('hidden', !this.checked)"
+                                            class="w-4 h-4 accent-primary rounded bg-dark border-white/20"> Otro
+                                    </label>
+                                    <div id="objetivos_otro_container" class="hidden col-span-1 sm:col-span-2 mt-1">
+                                        <input type="text" name="objetivos_otros"
+                                            placeholder="Especifica tu objetivo..."
+                                            class="w-full bg-dark/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors text-sm">
+                                    </div>
+                                </div>
                             </div>
+
+                            <!-- Grupo 3.3: Tiempo Repetitivo -->
+                            <div>
+                                <label class="block text-sm font-medium text-white/80 mb-3">¿Cuánto tiempo dedicas
+                                    semanalmente a tareas repetitivas/administrativas?</label>
+                                <div class="grid grid-cols-2 lg:grid-cols-3 gap-3 text-sm">
+                                    <label
+                                        class="border border-white/10 rounded-lg px-4 py-3 text-center cursor-pointer hover:border-primary/50 transition-colors bg-white/5 flex items-center justify-center has-[:checked]:border-primary has-[:checked]:bg-primary/10">
+                                        <input type="radio" name="tiempo_repetitivo" value="< 5 horas" class="sr-only"
+                                            required><span>&lt; 5 horas</span>
+                                    </label>
+                                    <label
+                                        class="border border-white/10 rounded-lg px-4 py-3 text-center cursor-pointer hover:border-primary/50 transition-colors bg-white/5 flex items-center justify-center has-[:checked]:border-primary has-[:checked]:bg-primary/10">
+                                        <input type="radio" name="tiempo_repetitivo" value="5-10 horas"
+                                            class="sr-only"><span>5-10 horas</span>
+                                    </label>
+                                    <label
+                                        class="border border-white/10 rounded-lg px-4 py-3 text-center cursor-pointer hover:border-primary/50 transition-colors bg-white/5 flex items-center justify-center has-[:checked]:border-primary has-[:checked]:bg-primary/10">
+                                        <input type="radio" name="tiempo_repetitivo" value="10-20 horas"
+                                            class="sr-only"><span>10-20 horas</span>
+                                    </label>
+                                    <label
+                                        class="border border-white/10 rounded-lg px-4 py-3 text-center cursor-pointer hover:border-primary/50 transition-colors bg-white/5 flex items-center justify-center has-[:checked]:border-primary has-[:checked]:bg-primary/10">
+                                        <input type="radio" name="tiempo_repetitivo" value="> 20 horas"
+                                            class="sr-only"><span>&gt; 20 horas</span>
+                                    </label>
+                                    <label
+                                        class="border border-white/10 rounded-lg px-4 py-3 text-center cursor-pointer hover:border-primary/50 transition-colors bg-white/5 flex items-center justify-center has-[:checked]:border-primary has-[:checked]:bg-primary/10">
+                                        <input type="radio" name="tiempo_repetitivo" value="No lo sé"
+                                            class="sr-only"><span>No lo sé</span>
+                                    </label>
+                                </div>
+                            </div>
+
                         </div>
                         <div class="mt-8 flex justify-between gap-4">
                             <button type="button" onclick="prevStep(2)"
                                 class="btn btn-secondary w-full md:w-auto px-6">Atrás</button>
+                            <button type="button" onclick="nextStep(4)"
+                                class="btn btn-primary w-full md:w-auto px-8">Siguiente <svg class="w-4 h-4 ml-2 inline"
+                                    fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path d="M5 12h14M12 5l7 7-7 7" />
+                                </svg></button>
+                        </div>
+                    </div>
+
+                    <!-- Paso 4: Cierre -->
+                    <div id="step4" class="step">
+                        <h2 class="font-headline text-xl font-bold mb-6 text-primaryLight">4. Cierre</h2>
+                        <div class="space-y-6">
+
+                            <!-- Grupo 4.1: Urgencia -->
+                            <div>
+                                <label class="block text-sm font-medium text-white/80 mb-3">¿Cuál es tu urgencia para
+                                    implementar cambios?</label>
+                                <div class="space-y-3">
+                                    <label
+                                        class="border border-white/10 rounded-lg p-3 cursor-pointer hover:border-primary/50 transition-colors bg-white/5 flex items-start gap-3 has-[:checked]:border-primary has-[:checked]:bg-primary/10">
+                                        <input type="radio" name="urgencia" value="Urgente" class="mt-1 accent-primary"
+                                            required>
+                                        <div><span class="block font-medium text-sm">Urgente</span><span
+                                                class="text-xs text-white/50">Necesito soluciones ya</span></div>
+                                    </label>
+                                    <label
+                                        class="border border-white/10 rounded-lg p-3 cursor-pointer hover:border-primary/50 transition-colors bg-white/5 flex items-start gap-3 has-[:checked]:border-primary has-[:checked]:bg-primary/10">
+                                        <input type="radio" name="urgencia" value="Importante"
+                                            class="mt-1 accent-primary">
+                                        <div><span class="block font-medium text-sm">Importante</span><span
+                                                class="text-xs text-white/50">En 1-3 meses</span></div>
+                                    </label>
+                                    <label
+                                        class="border border-white/10 rounded-lg p-3 cursor-pointer hover:border-primary/50 transition-colors bg-white/5 flex items-start gap-3 has-[:checked]:border-primary has-[:checked]:bg-primary/10">
+                                        <input type="radio" name="urgencia" value="Explorando opciones"
+                                            class="mt-1 accent-primary">
+                                        <div><span class="block font-medium text-sm">Explorando opciones</span><span
+                                                class="text-xs text-white/50">Sin prisa</span></div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Grupo 4.2: Extras -->
+                            <div>
+                                <label class="block text-sm font-medium text-white/80 mb-2">¿Hay algo más que quieras
+                                    compartir sobre tu negocio? <span
+                                        class="text-xs text-white/50">(opcional)</span></label>
+                                <textarea name="comentarios" rows="2"
+                                    class="w-full bg-dark/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors resize-y text-sm"
+                                    placeholder="..."></textarea>
+                            </div>
+
+                            <!-- Grupo 4.3: Contacto -->
+                            <div class="pt-4 border-t border-white/10 mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-white/80 mb-2">Email (Para enviar
+                                        resultados)</label>
+                                    <input type="email" name="email" required
+                                        class="w-full bg-dark/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors text-sm"
+                                        placeholder="hola@tuempresa.com">
+                                    <script>
+                                        const emailInput = document.getElementById('email');
+
+                                        emailInput.addEventListener('input', function () {
+                                            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+                                            if (!emailRegex.test(this.value)) {
+                                                this.setCustomValidity('Por favor, introduce un correo válido (ejemplo: usuario@dominio.com)');
+                                            } else {
+                                                this.setCustomValidity('');
+                                            }
+                                        });
+                                    </script>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-white/80 mb-2">Teléfono móvil</label>
+                                    <input type="tel" name="telefono" required
+                                        class="w-full bg-dark/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors text-sm"
+                                        placeholder="+34 600... ">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-8 flex justify-between gap-4">
+                            <button type="button" onclick="prevStep(3)"
+                                class="btn btn-secondary w-full md:w-auto px-6">Atrás</button>
                             <button type="submit"
-                                class="btn btn-primary w-full md:w-auto px-8 kinetic-gradient text-white shadow-[0_0_20px_rgba(138,43,226,0.3)]">Ver
-                                Resultados</button>
+                                class="btn btn-primary w-full px-8 kinetic-gradient text-white shadow-[0_0_20px_rgba(138,43,226,0.3)]">Finalizar
+                                y enviar</button>
                         </div>
                     </div>
 
@@ -263,49 +581,46 @@
     </main>
 
     <script>
-        // Form Multi-step Logic
+        // Progress Dots Logic
+        const dots = [document.getElementById('dot-1'), document.getElementById('dot-2'), document.getElementById('dot-3'), document.getElementById('dot-4')];
+
         function showStep(stepNum) {
             document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
             document.getElementById(`step${stepNum}`).classList.add('active');
 
-            // Update Dots
-            [1, 2, 3].forEach(num => {
-                const dot = document.getElementById(`dot-${num}`);
-                if (num <= stepNum) {
-                    dot.classList.remove('bg-white/20');
-                    dot.classList.add('bg-primary');
+            dots.forEach((dot, index) => {
+                if (index < stepNum) {
+                    dot.classList.add('border-primary', 'bg-primary/20');
+                    dot.classList.remove('border-white/20');
+                    dot.querySelector('div').classList.add('bg-primary');
+                    dot.querySelector('div').classList.remove('bg-white/20');
                 } else {
-                    dot.classList.add('bg-white/20');
-                    dot.classList.remove('bg-primary');
+                    dot.classList.remove('border-primary', 'bg-primary/20');
+                    dot.classList.add('border-white/20');
+                    dot.querySelector('div').classList.remove('bg-primary');
+                    dot.querySelector('div').classList.add('bg-white/20');
                 }
             });
-        }
-
-        function nextStep(stepNum) {
-            // Basic validation for previous step
-            const prevStepObj = document.getElementById(`step${stepNum - 1}`);
-            const requiredInputs = prevStepObj.querySelectorAll('[required]');
-            let allValid = true;
-
-            requiredInputs.forEach(input => {
-                if (input.type === 'radio') {
-                    const group = document.getElementsByName(input.name);
-                    let checked = false;
-                    group.forEach(r => { if (r.checked) checked = true; });
-                    if (!checked) allValid = false;
-                } else {
-                    if (!input.value.trim()) allValid = false;
-                }
-            });
-
-            if (allValid) {
-                showStep(stepNum);
-            } else {
-                alert("Por favor completa los campos requeridos antes de continuar.");
-            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function prevStep(stepNum) {
+            showStep(stepNum);
+        }
+
+        function nextStep(stepNum) {
+            const currentStep = document.querySelector('.step.active');
+
+            // Validar HTML5 nativo
+            const inputs = Array.from(currentStep.querySelectorAll('input, select, textarea'));
+            for (let input of inputs) {
+                if (!input.checkValidity()) {
+                    input.reportValidity();
+                    return; // Detener avance
+                }
+            }
+
+            // Cambiar pantalla
             showStep(stepNum);
         }
 
@@ -317,16 +632,27 @@
             document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
             document.getElementById('resultState').classList.add('active');
 
-            // Capturar manualmente los campos, ya que algunos no tienen atributo 'name'
-            const data = {
-                empresa: document.getElementById('empresa').value,
-                sector: document.getElementById('sector').value,
-                tamano: document.querySelector('input[name="tamano"]:checked')?.value || '',
-                gestion: document.getElementById('gestion').value,
-                problema: document.getElementById('problema').value,
-                objetivo: document.querySelector('input[name="objetivo"]:checked')?.value || '',
-                email: document.getElementById('email').value
-            };
+            // Capturar automáticamente todos los campos con FormData
+            const formData = new FormData(e.target);
+            const data = {};
+
+            for (const [key, value] of formData.entries()) {
+                if (data[key]) {
+                    if (!Array.isArray(data[key])) {
+                        data[key] = [data[key]];
+                    }
+                    data[key].push(value);
+                } else {
+                    data[key] = value;
+                }
+            }
+
+            // Convertir arrays a listas en texto
+            for (const key in data) {
+                if (Array.isArray(data[key])) {
+                    data[key] = data[key].join(', ');
+                }
+            }
 
             try {
                 // Reemplaza esta URL con la URL de tu Webhook de n8n de Producción
@@ -336,7 +662,7 @@
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        source: 'diagnostico',
+                        source: 'diagnostico_completo',
                         data: data
                     })
                 });
@@ -345,24 +671,20 @@
                     throw new Error(`HTTP error status: ${response.status}`);
                 }
 
-                // Ocultar spinner y mostrar mensaje original de completado dentro del card
                 document.getElementById('spinner').classList.add('hidden');
                 document.getElementById('resultMsg').classList.remove('hidden');
 
-                // Mostrar también el mensaje flotante de éxito
                 if (typeof showToast === 'function') showToast();
 
             } catch (error) {
                 console.error("Error al enviar el formulario:", error);
-                
-                // Mostrar alerta roja flotante
+
                 if (typeof showErrorToast === 'function') {
                     showErrorToast("El servidor n8n no responde o rechazó el envío.");
                 } else {
                     alert("El servidor n8n no responde o rechazó el envío.");
                 }
 
-                // Volver atrás en caso de error para no perder datos
                 document.getElementById('resultState').classList.remove('active');
                 document.getElementById('step3').classList.add('active');
             }
