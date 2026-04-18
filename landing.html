@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recupera Citas y Llena tu Agenda | EvolveHub</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Custom CSS Base -->
+    <link rel="stylesheet" href="assets/styles.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#131313',
+                        surface: '#1a1a1a',
+                        primary: '#8a2be2',
+                        primaryLight: '#a35ced',
+                    },
+                    fontFamily: {
+                        headline: ['"Space Grotesk"', 'sans-serif'],
+                        body: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="icon" type="image/png" sizes="32x32" href="./imagen/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./imagen/favicon-16x16.png">
+    <link rel="shortcut icon" href="./imagen/favicon.ico">
+
+    <style>
+        /* Ajuste extra para asegurar visibilidad total sin distracciones */
+        .glass-panel-custom {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .glass-panel-custom:hover {
+            background: rgba(138, 43, 226, 0.05);
+            border-color: rgba(138, 43, 226, 0.2);
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+
+<body class="bg-dark text-white font-body overflow-x-hidden selection:bg-primary selection:text-white">
+
+    <!-- Header -->
+    <header class="fixed top-0 w-full z-50 bg-dark/90 backdrop-blur-md border-b border-white/10 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-5 md:px-6 py-3 md:py-4 flex items-center justify-between">
+            <a href="landing.html" class="flex items-center">
+                <img src="./imagen/logo_e.png" alt="EvolveHub" class="h-[30px] md:h-[40px] w-auto ml-1 md:ml-5">
+            </a>
+            <!-- Right side empty or simple text -->
+        </div>
+    </header>
+
+    <main class="pt-32 pb-20">
+        <!-- 1. HERO SECTION -->
+        <section class="relative pt-12 pb-24 text-center px-6">
+            <div
+                class="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] max-w-2xl h-80 bg-primary/20 rounded-full blur-[100px] pointer-events-none">
+            </div>
+
+            <div class="max-w-4xl mx-auto relative z-10">
+                <h1 class="font-headline text-4xl md:text-6xl font-bold leading-tight mb-6">
+                    Recupera citas perdidas y llena tu agenda <br class="hidden md:block" />
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-primaryLight to-[#c195ff]">sin
+                        depender del teléfono</span>
+                </h1>
+
+                <p class="text-lg md:text-xl text-white/80 leading-relaxed max-w-2xl mx-auto mb-4">
+                    Automatizamos WhatsApp y llamadas para que no pierdas clientes, reduzcas cancelaciones y aumentes
+                    ingresos.
+                </p>
+
+                <p class="text-sm text-white/50 mb-10 max-w-xl mx-auto">
+                    En 10-15 min ves si esto tiene sentido o no, sin compromiso y aplicado a tu caso.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+
+                    <a href="https://calendly.com/oliversanjr/30min"
+                        class="w-full sm:w-auto btn btn-primary bg-gradient-to-r from-primary to-primaryLight text-xl font-bold font-headline rounded-full px-10 py-5 shadow-[0_0_20px_rgba(138,43,226,0.5)] hover:shadow-[0_0_40px_rgba(138,43,226,0.7)] hover:scale-105 transition-all duration-300">
+                        Reservar llamada
+                    </a>
+                    <a href="diagnostico.html"
+                        class="w-full sm:w-auto btn btn-secondary bg-white/10 text-base rounded-full px-8 py-3 border border-white/20 hover:bg-white/20 opacity-80 hover:opacity-100 transition-all duration-300">
+                        Hacer diagnóstico
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. PROBLEMA -->
+        <section class="py-20 relative border-t border-white/5 bg-surface/30 px-6">
+            <div class="max-w-3xl mx-auto">
+                <p class="font-headline text-2xl md:text-3xl font-bold mb-10 text-center">
+                    Si tienes un centro de estética, esto es lo habitual:
+                </p>
+
+                <ul class="space-y-6 max-w-2xl mx-auto mb-12">
+                    <li class="flex items-center gap-4">
+                        <div
+                            class="min-w-8 min-h-8 rounded-full bg-red-500/10 text-red-400 flex items-center justify-center border border-red-500/20">
+                            <span class="font-bold">×</span>
+                        </div>
+                        <p class="text-lg text-white/80">Llamadas que no se cogen cuando estás atendiendo.</p>
+                    </li>
+                    <li class="flex items-center gap-4">
+                        <div
+                            class="min-w-8 min-h-8 rounded-full bg-red-500/10 text-red-400 flex items-center justify-center border border-red-500/20">
+                            <span class="font-bold">×</span>
+                        </div>
+                        <p class="text-lg text-white/80">Mensajes de WhatsApp que se responden tarde.</p>
+                    </li>
+                    <li class="flex items-center gap-4">
+                        <div
+                            class="min-w-8 min-h-8 rounded-full bg-red-500/10 text-red-400 flex items-center justify-center border border-red-500/20">
+                            <span class="font-bold">×</span>
+                        </div>
+                        <p class="text-lg text-white/80">Citas que se pierden o se cancelan sin control.</p>
+                    </li>
+                    <li class="flex items-center gap-4">
+                        <div
+                            class="min-w-8 min-h-8 rounded-full bg-red-500/10 text-red-400 flex items-center justify-center border border-red-500/20">
+                            <span class="font-bold">×</span>
+                        </div>
+                        <p class="text-lg text-white/80">Clientes que preguntan pero no reservan.</p>
+                    </li>
+                    <li class="flex items-center gap-4">
+                        <div
+                            class="min-w-8 min-h-8 rounded-full bg-red-500/10 text-red-400 flex items-center justify-center border border-red-500/20">
+                            <span class="font-bold">×</span>
+                        </div>
+                        <p class="text-lg text-white/80">Pacientes que no vuelven por falta de seguimiento.</p>
+                    </li>
+                </ul>
+
+                <div class="p-6 rounded-2xl bg-white/5 border border-white/10 text-center">
+                    <p class="text-xl font-medium text-white/90">
+                        "Y todo esto no parece grave... <span class="text-primaryLight font-bold">hasta que sumas el
+                            dinero que se pierde cada semana.</span>"
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. SOLUCIÓN -->
+        <section class="py-20 relative px-6">
+            <div
+                class="absolute right-0 top-1/2 -translate-y-1/2 w-64 h-64 bg-primary/10 rounded-full blur-[80px] pointer-events-none">
+            </div>
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="font-headline text-3xl md:text-5xl font-bold mb-6">
+                    Lo que hacemos es implantar un sistema <br class="hidden md:block" />
+                    <span class="text-primaryLight">que se encarga de todo eso por ti</span>
+                </h2>
+
+                <div class="grid md:grid-cols-2 gap-6 mt-12 mb-12 text-left">
+                    <div class="glass-panel-custom p-6 flex flex-col gap-3">
+                        <div
+                            class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primaryLight mb-2">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path
+                                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                            </svg>
+                        </div>
+                        <h4 class="font-bold text-lg">Atiende automáticamente</h4>
+                        <p class="text-white/70 text-sm">Responde al instante WhatsApp y llamadas, 24/7 sin que muevas
+                            un dedo.</p>
+                    </div>
+
+                    <div class="glass-panel-custom p-6 flex flex-col gap-3">
+                        <div
+                            class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primaryLight mb-2">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                                <line x1="16" y1="2" x2="16" y2="6" />
+                                <line x1="8" y1="2" x2="8" y2="6" />
+                                <line x1="3" y1="10" x2="21" y2="10" />
+                            </svg>
+                        </div>
+                        <h4 class="font-bold text-lg">Controla la agenda</h4>
+                        <p class="text-white/70 text-sm">Agenda citas, gestiona cambios de horario y tramita
+                            cancelaciones.</p>
+                    </div>
+
+                    <div class="glass-panel-custom p-6 flex flex-col gap-3">
+                        <div
+                            class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primaryLight mb-2">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                                <polyline points="22 4 12 14.01 9 11.01" />
+                            </svg>
+                        </div>
+                        <h4 class="font-bold text-lg">Confirma y recuerda</h4>
+                        <p class="text-white/70 text-sm">Envía recordatorios previos para blindar tu agenda y evitar
+                            ausencias.</p>
+                    </div>
+
+                    <div class="glass-panel-custom p-6 flex flex-col gap-3">
+                        <div
+                            class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primaryLight mb-2">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                <circle cx="9" cy="7" r="4" />
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                            </svg>
+                        </div>
+                        <h4 class="font-bold text-lg">Hace seguimiento</h4>
+                        <p class="text-white/70 text-sm">Contacta a clientes antiguos para reactivarlos y que vuelvan a
+                            reservar.</p>
+                    </div>
+                </div>
+
+                <p
+                    class="text-xl font-bold bg-dark p-6 rounded-xl border border-white/5 shadow-2xl inline-block mt-4 text-white/90">
+                    "No sustituye a tu equipo. Elimina lo repetitivo y evita que se pierdan oportunidades."
+                </p>
+            </div>
+        </section>
+
+        <!-- 4. BENEFICIOS -->
+        <section class="py-20 relative bg-primary/5 border-y border-white/5 px-6">
+            <div class="max-w-4xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-8 mb-12">
+                    <div class="border-l-2 border-primary pl-6">
+                        <h3 class="font-headline text-2xl font-bold mb-2 text-white">Más citas</h3>
+                        <p class="text-white/70">Porque todo se responde al momento, capturando al lead cuando tiene el
+                            interés.</p>
+                    </div>
+                    <div class="border-l-2 border-primary pl-6">
+                        <h3 class="font-headline text-2xl font-bold mb-2 text-white">Menos cancelaciones</h3>
+                        <p class="text-white/70">Porque los clientes reciben recordatorios y exigimos confirmaciones
+                            proactivas.</p>
+                    </div>
+                    <div class="border-l-2 border-primary pl-6">
+                        <h3 class="font-headline text-2xl font-bold mb-2 text-white">Más clientes recurrentes</h3>
+                        <p class="text-white/70">Porque hay un seguimiento automático que no requiere memoria ni
+                            esfuerzo humano.</p>
+                    </div>
+                    <div class="border-l-2 border-primary pl-6">
+                        <h3 class="font-headline text-2xl font-bold mb-2 text-white">Más tiempo para tu equipo</h3>
+                        <p class="text-white/70">Menos llamadas, menos caos. Más foco en atender increíblemente bien en
+                            persona.</p>
+                    </div>
+                </div>
+
+                <div
+                    class="text-center mt-12 text-xl md:text-2xl font-bold font-headline text-primaryLight drop-shadow-[0_0_10px_rgba(138,43,226,0.3)]">
+                    "Es pasar de reaccionar a tener control real de tu agenda."
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. PRUEBA -->
+        <section class="py-20 px-6">
+            <div
+                class="max-w-3xl mx-auto bg-dark border border-white/10 rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-red-500/10 blur-[50px] pointer-events-none"></div>
+
+                <h3 class="text-center font-headline text-2xl font-bold mb-8 text-white">
+                    Un centro medio con 30 citas semanales y ticket de 80 €:
+                </h3>
+
+                <ul class="space-y-4 max-w-xl mx-auto mb-10 text-lg">
+                    <li class="flex items-center gap-4 text-white/80">
+                        <div class="w-2 h-2 rounded-full bg-red-500"></div>
+                        Pierde 6–9 citas por cancelaciones.
+                    </li>
+                    <li class="flex items-center gap-4 text-white/80">
+                        <div class="w-2 h-2 rounded-full bg-red-500"></div>
+                        Pierde 3–5 citas por llamadas no atendidas.
+                    </li>
+                    <li class="flex items-center gap-4 text-white/80">
+                        <div class="w-2 h-2 rounded-full bg-red-500"></div>
+                        Pierde más por falta de seguimiento o retraso en WhatsApp.
+                    </li>
+                </ul>
+
+                <div class="bg-red-500/5 border border-red-500/20 p-6 rounded-xl text-center">
+                    <p class="text-xl font-bold text-white">
+                        Esto puede suponer <span class="text-red-400">más de 1.000 € a la semana</span> en ingresos que
+                        se escapan.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. CTA / CIERRE INTERMEDIO -->
+        <section class="py-20 relative px-6 text-center">
+            <div
+                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] h-64 bg-primary/20 rounded-full blur-[100px] pointer-events-none">
+            </div>
+
+            <div class="max-w-2xl mx-auto relative z-10">
+                <h2 class="font-headline text-3xl font-bold mb-8">
+                    Si quieres ver cuánto estás perdiendo en tu caso concreto y si esto tiene sentido para tu negocio:
+                </h2>
+
+                <a href="https://calendly.com/oliversanjr/30min"
+                    class="inline-block btn btn-primary bg-gradient-to-r from-primary to-primaryLight text-2xl font-bold font-headline rounded-full px-10 py-5 w-full sm:w-auto shadow-[0_0_20px_rgba(138,43,226,0.6)] hover:shadow-[0_0_40px_rgba(138,43,226,0.8)] hover:scale-105 transition-all duration-300">
+                    Reservar llamada
+                </a>
+
+                <p class="mt-6 text-white/50 text-sm">
+                    En 10-15 min lo vemos contigo, sin compromiso y aplicado a tu caso.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 bg-dark py-12 relative z-10">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col items-center text-center">
+            <img src="./imagen/logo_evolvehub.png" alt="EvolveHub" class="h-10 md:h-12 w-auto mb-8 opacity-80 hover:opacity-100 transition-opacity">
+            <p class="text-white/60 mb-6 font-medium">Si lo prefieres, puedes escribirnos directamente:</p>
+            <div class="flex flex-col md:flex-row justify-center items-center gap-6">
+                <a href="tel:+34689519776"
+                    class="flex items-center gap-2 text-white hover:text-primary transition-colors">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path
+                            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                    </svg>
+                    +34 689 519 776
+                </a>
+                <a href="mailto:contacto@evolvehub.es"
+                    class="flex items-center gap-2 text-white hover:text-primary transition-colors">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                        <polyline points="22,6 12,13 2,6" />
+                    </svg>
+                    oliversanjr@evolvehub.es
+                </a>
+            </div>
+            <p class="text-white/30 text-xs mt-12">&copy; 2026 EvolveHub. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserva de Llamada | EvolveHub</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Custom CSS Base -->
+    <link rel="stylesheet" href="assets/styles.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#131313',
+                        surface: '#1a1a1a',
+                        primary: '#8a2be2',
+                        primaryLight: '#a35ced',
+                    },
+                    fontFamily: {
+                        headline: ['"Space Grotesk"', 'sans-serif'],
+                        body: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="icon" type="image/png" sizes="32x32" href="./imagen/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./imagen/favicon-16x16.png">
+    <link rel="shortcut icon" href="./imagen/favicon.ico">
+
+    <!-- Calendly widget CSS -->
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+
+    <style>
+        .input-field {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0.75rem;
+            padding: 1rem;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #8a2be2;
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 10px rgba(138, 43, 226, 0.3);
+        }
+
+        .input-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-dark text-white font-body overflow-x-hidden selection:bg-primary selection:text-white min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="fixed top-0 w-full z-50 bg-dark/90 backdrop-blur-md border-b border-white/10 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-5 md:px-6 py-3 md:py-4 flex items-center justify-between">
+            <a href="landing.html" class="flex items-center">
+                <img src="./imagen/logo_e.png" alt="EvolveHub" class="h-[30px] md:h-[40px] w-auto ml-1 md:ml-5">
+            </a>
+            <span class="text-white/50 text-sm hidden md:block">Sesión estratégica (10-15 min)</span>
+        </div>
+    </header>
+
+    <main class="flex-grow flex items-center justify-center pt-28 pb-12 px-6 relative">
+        <div
+            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] max-w-2xl h-80 bg-primary/10 rounded-full blur-[100px] pointer-events-none">
+        </div>
+
+        <div class="w-full max-w-2xl relative z-10">
+
+            <div class="text-center mb-8">
+                <h1 id="stepTitle" class="font-headline text-3xl md:text-4xl font-bold mb-4">Paso 1: Antes de elegir
+                    horario</h1>
+                <p id="stepSubtitle" class="text-white/70">Necesitamos entender tu situación actual para aprovechar al
+                    máximo los 15 minutos de la llamada.</p>
+            </div>
+
+            <!-- Contenedor Principal (Tarjeta) -->
+            <div class="bg-surface/50 border border-white/10 rounded-2xl p-6 md:p-10 shadow-2xl backdrop-blur-md">
+
+                <!-- Formulario Inicial -->
+                <form id="reservaForm" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="input-label" for="nombre">Nombre completo *</label>
+                            <input type="text" id="nombre" name="nombre" class="input-field" required
+                                placeholder="Tu nombre">
+                        </div>
+                        <div>
+                            <label class="input-label" for="telefono">Teléfono (WhatsApp) *</label>
+                            <input type="tel" id="telefono" name="telefono" class="input-field" required
+                                placeholder="+34 600 000 000">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="input-label" for="email">Correo electrónico *</label>
+                        <input type="email" id="email" name="email" class="input-field" required
+                            placeholder="tu@correo.com">
+                    </div>
+
+                    <div>
+                        <label class="input-label" for="tipo_negocio">Tipo de negocio *</label>
+                        <select id="tipo_negocio" name="tipo_negocio" class="input-field appearance-none" required>
+                            <option value="" disabled selected>Selecciona una opción</option>
+                            <option value="clinica_estetica">Clínica de Estética / Belleza</option>
+                            <option value="centro_odontologico">Centro Odontológico / Médico</option>
+                            <option value="peluqueria">Peluquería / Barbería</option>
+                            <option value="otro">Otro tipo de centro</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="input-label" for="gestion_actual">¿Cómo gestionas ahora tus citas y clientes?
+                            *</label>
+                        <textarea id="gestion_actual" name="gestion_actual" rows="3" class="input-field resize-none"
+                            required
+                            placeholder="Ej: Las apunto en una agenda de papel, uso Google Calendar y respondo yo el WhatsApp..."></textarea>
+                    </div>
+
+                    <button type="submit"
+                        class="w-full btn py-4 mt-4 btn-primary bg-gradient-to-r from-primary to-primaryLight text-white font-bold font-headline rounded-full shadow-[0_0_20px_rgba(138,43,226,0.5)] hover:shadow-[0_0_40px_rgba(138,43,226,0.7)] hover:scale-105 transition-all duration-300">
+                        Continuar para elegir día y hora
+                    </button>
+
+                    <p class="text-xs text-center text-white/40 mt-4">Tus datos están seguros. Al continuar aceptas
+                        nuestra política de privacidad.</p>
+                </form>
+
+                <!-- Contenedor Calendly (Oculto inicialmente) -->
+                <div id="calendlyContainer" class="hidden">
+                    <div class="calendly-inline-widget" data-url="https://calendly.com/oliversanjr/30min"
+                        style="min-width:320px;height:600px;"></div>
+
+                    <div class="mt-6 text-center">
+                        <p class="text-sm text-white/50 mb-4">¿Ya has elegido tu hora?</p>
+                        <!-- Simulamos la redirección (en un flujo real Calendly tiene eventos para redirigir) -->
+                        <a href="post-reserva.html" class="text-primaryLight hover:text-white underline text-sm">Ir al
+                            último paso (Test temporal)</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('reservaForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // 1. Recoger datos form (Simulado)
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            console.log('Enviando datos al Webhook:', data);
+
+            fetch('https://n8n-n8n.gk97dq.easypanel.host/webhook/reserva', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    ...data,
+                    estado: "formulario_enviado",
+                    fecha: new Date().toISOString()
+                })
+            });
+
+            // 2. Transición Visual
+            this.classList.add('hidden');
+
+            const stepTitle = document.getElementById('stepTitle');
+            const stepSubtitle = document.getElementById('stepSubtitle');
+
+            stepTitle.innerText = 'Paso 2: Elige fecha y hora';
+            stepSubtitle.innerHTML = 'Selecciona el momento que mejor te venga.<br>⚠️ <span class="text-primaryLight">Importante:</span> Asegúrate de poder estar en un sitio tranquilo esos 15 min.';
+
+            const calendly = document.getElementById('calendlyContainer');
+            calendly.classList.remove('hidden');
+
+            // Forzar actualización visual si Calendly se cargó oculto
+            window.dispatchEvent(new Event('resize'));
+        });
+
+        // Escuchar eventos de Calendly para redireccionar a post-reserva automáticamente cuando agenda
+        function isCalendlyEvent(e) {
+            return e.data && e.data.event && e.data.event.indexOf('calendly') === 0;
+        }
+
+        window.addEventListener('message', function (e) {
+            if (isCalendlyEvent(e)) {
+                if (e.data.event === 'calendly.event_scheduled') {
+                    // Evento reservado con éxito. Redirigimos.
+                    window.location.href = 'post-reserva.html';
+                }
+            }
+        });
+
+        let timeout;
+
+        document.querySelectorAll('#reservaForm input, #reservaForm textarea, #reservaForm select')
+            .forEach(el => {
+                el.addEventListener('input', () => {
+                    clearTimeout(timeout);
+
+                    timeout = setTimeout(() => {
+                        const formData = new FormData(document.getElementById('reservaForm'));
+                        const data = Object.fromEntries(formData);
+
+                        fetch('https://n8n-n8n.gk97dq.easypanel.host/webhook/reserva-parcial', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                ...data,
+                                estado: "formulario_parcial",
+                                fecha: new Date().toISOString()
+                            })
+                        });
+                    }, 5000); // espera 5 segundos sin escribir
+                });
+            });
+    </script>
+    <footer class="w-full border-t border-white/10 bg-dark py-8 mt-12 relative z-10">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col items-center">
+            <img src="./imagen/logo_evolvehub.png" alt="EvolveHub" class="h-10 md:h-12 w-auto mb-4 opacity-80 hover:opacity-100 transition-opacity">
+            <p class="text-white/40 text-xs">© 2026 EvolveHub. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+</body>
+
+</html>
