@@ -9,9 +9,11 @@ if (year) year.textContent = new Date().getFullYear();
 // Mobile nav
 const hamburger = qs('#hamburger');
 const mainNav = qs('#mainNav');
-hamburger && hamburger.addEventListener('click', () => {
-  mainNav.classList.toggle('show');
-});
+if (hamburger && mainNav) {
+  hamburger.addEventListener('click', () => {
+    mainNav.classList.toggle('show');
+  });
+}
 
 // Modal
 const signupModal = qs('#signupModal');
@@ -57,7 +59,13 @@ if (contactForm) contactForm.addEventListener('submit', (e) => {
   contactForm.reset();
 });
 
-qs('#clearForm') && qs('#clearForm').addEventListener('click', () => qs('#contactForm').reset());
+const clearBtn = qs('#clearForm');
+if (clearBtn) {
+  clearBtn.addEventListener('click', () => {
+    const cForm = qs('#contactForm');
+    if (cForm) cForm.reset();
+  });
+}
 
 // Small accessibility: close modal with ESC
 document.addEventListener('keydown', (e) => {

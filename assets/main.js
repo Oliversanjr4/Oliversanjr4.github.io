@@ -1,24 +1,33 @@
-import './style.css';
+// Remove ESM style import to avoid native browser loading errors
+// import './style.css';
+
 document.addEventListener('DOMContentLoaded', () => {
     // Header Scroll Effect
     const header = document.querySelector('.site-header');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-    });
+    if (header) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    }
 
-    // Mobile Menu
+    // Mobile Menu Toggler
     const toggle = document.querySelector('.mobile-toggle');
-    const nav = document.querySelector('.nav-links');
+    const nav = document.querySelector('.mobile-nav-overlay');
 
     if (toggle && nav) {
         toggle.addEventListener('click', () => {
-            nav.classList.toggle('active');
-            const icon = nav.classList.contains('active') ? '✕' : '☰';
-            toggle.textContent = icon;
+            nav.classList.toggle('hidden');
+            const isHidden = nav.classList.contains('hidden');
+            const iconSpan = toggle.querySelector('.material-symbols-outlined');
+            if (iconSpan) {
+                iconSpan.textContent = isHidden ? 'menu' : 'close';
+            } else {
+                toggle.textContent = isHidden ? '☰' : '✕';
+            }
         });
     }
 
@@ -34,10 +43,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 targetElement.scrollIntoView({
                     behavior: 'smooth'
                 });
-                // Close mobile menu if open
-                if (nav.classList.contains('active')) {
-                    nav.classList.remove('active');
-                    toggle.textContent = '☰';
+                
+                // Close mobile menu overlay if open
+                if (nav && !nav.classList.contains('hidden')) {
+                    nav.classList.add('hidden');
+                    const iconSpan = toggle ? toggle.querySelector('.material-symbols-outlined') : null;
+                    if (iconSpan) {
+                        iconSpan.textContent = 'menu';
+                    } else if (toggle) {
+                        toggle.textContent = '☰';
+                    }
                 }
             }
         });

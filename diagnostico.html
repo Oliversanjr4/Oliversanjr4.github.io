@@ -2,6 +2,17 @@
 <html lang="es" class="scroll-smooth">
 
 <head>
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-P6WZNMNS');</script>
+    <!-- End Google Tag Manager -->
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Diagnóstico Digital | EvolveHub</title>
@@ -10,481 +21,974 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&display=swap"
         rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        dark: '#131313',
-                        surface: '#1a1a1a',
-                        primary: '#8a2be2',
-                        primaryLight: '#a35ced',
-                    },
-                    fontFamily: {
-                        headline: ['"Space Grotesk"', 'sans-serif'],
-                        body: ['Inter', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
     <link rel="stylesheet" href="assets/styles.css">
-    <link rel="icon" type="image/png" sizes="32x32" href="./imagen/favicon-32x32.png?v=2">
-    <link rel="icon" type="image/png" sizes="16x16" href="./imagen/favicon-16x16.png?v=2">
-    <link rel="shortcut icon" href="./imagen/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/imagen/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/imagen/favicon-16x16.png">
+    <link rel="shortcut icon" href="assets/imagen/favicon.ico">
 
     <style>
+        body {
+            background-color: #FAF8F5;
+            /* Matches bg-deep-onyx */
+            color: #111827;
+            /* Matches text-white-broken */
+        }
+
+        /* Focus state for keyboard navigation (WCAG AA compliant) */
+        :focus-visible {
+            outline: 2px solid #7C3AED !important;
+            outline-offset: 4px !important;
+        }
+
+        input:focus-visible,
+        textarea:focus-visible,
+        select:focus-visible {
+            outline: none !important;
+            border-color: #7C3AED !important;
+            box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.4) !important;
+        }
+
+        /* Reduced Motion media query */
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto !important;
+            }
+
+            .step {
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
+            }
+
+            * {
+                animation-delay: 0s !important;
+                animation-duration: 0s !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0s !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* Guided Glass Panel */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            /* Premium light glass container */
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(17, 24, 39, 0.08);
+            /* Matches glass-border */
+            box-shadow: 0 20px 50px rgba(17, 24, 39, 0.08);
+        }
+
+        /* Dual Background Layers for Cinematic Crossfade */
+        .bg-layer {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Support for keyboard selection styling on premium radio cards */
+        .premium-radio:has(input:checked) {
+            border-color: #7C3AED !important;
+            background: rgba(124, 58, 237, 0.08) !important;
+            box-shadow: 0 0 15px rgba(124, 58, 237, 0.15);
+        }
+
+        .premium-radio:has(input:focus-visible) {
+            outline: 2px solid #7C3AED !important;
+            outline-offset: 2px !important;
+        }
+
         .step {
-            display: none;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .step.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Glass Cards for inputs */
+        .premium-radio {
+            border: 1px solid rgba(17, 24, 39, 0.1);
+            background: rgba(255, 255, 255, 0.6);
+            color: #111827;
+            /* Matches text-white-broken */
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .premium-radio:hover {
+            border-color: rgba(124, 58, 237, 0.4);
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .premium-radio-checked {
+            border-color: #7C3AED !important;
+            background: rgba(124, 58, 237, 0.08) !important;
+            box-shadow: 0 0 15px rgba(124, 58, 237, 0.15);
+        }
+
+        /* Bottom border input */
+        .line-input {
+            border-bottom: 1.5px solid rgba(17, 24, 39, 0.2);
+            background: transparent;
+            color: #111827;
+            transition: border-color 0.3s ease;
+        }
+
+        .line-input::placeholder {
+            color: rgba(17, 24, 39, 0.4);
+        }
+
+        .line-input:focus {
+            border-color: #7C3AED;
+            outline: none;
+            box-shadow: none;
+        }
+
+        .logo-navbar {
+            height: 40px;
+            width: auto;
             display: block;
-            animation: fade-in-up 0.4s ease forwards;
+        }
+
+        @media (max-width: 768px) {
+            .logo-navbar {
+                height: 31px;
+            }
+        }
+
+        /* Override tailwind text colors inside the glass panel for light mode readability */
+        .glass-panel h1,
+        .glass-panel h2,
+        .glass-panel h3,
+        .glass-panel h4,
+        .glass-panel .text-white {
+            color: #111827 !important;
+            /* Matches charcoal */
+        }
+
+        .glass-panel p,
+        .glass-panel label,
+        .glass-panel .text-gray-300,
+        .glass-panel .text-gray-400 {
+            color: #555555 !important;
+            /* Matches grey-warm */
+        }
+
+        .glass-panel .text-purple-300,
+        .glass-panel #stepCounter {
+            color: #7C3AED !important;
+            /* Matches action-purple */
+        }
+
+        .glass-panel button,
+        .glass-panel button *,
+        .glass-panel a.bg-action-purple,
+        .glass-panel a.bg-action-purple * {
+            color: #ffffff !important;
+            /* Maintain white contrast on purple buttons */
+        }
+
+        /* Style for back/prev buttons */
+        .glass-panel button[onclick^="prevStep"] {
+            border-color: rgba(17, 24, 39, 0.15) !important;
+            color: #555555 !important;
+        }
+
+        .glass-panel button[onclick^="prevStep"]:hover {
+            background-color: rgba(17, 24, 39, 0.04) !important;
+            color: #111827 !important;
+        }
+
+        /* Style for borders in light glass mode */
+        .glass-panel .border-white\/10,
+        .glass-panel .border-glass-border {
+            border-color: rgba(17, 24, 39, 0.08) !important;
+        }
+
+        /* Style for resultState card */
+        .glass-panel #resultState div.bg-white\/5 {
+            background-color: rgba(17, 24, 39, 0.04) !important;
+            border-color: rgba(17, 24, 39, 0.08) !important;
+        }
+
+        /* Style for toast messages to be dark/light consistent */
+        #toast-success,
+        #toast-error {
+            background-color: #ffffff !important;
+            border-color: rgba(17, 24, 39, 0.08) !important;
+            color: #111827 !important;
+            box-shadow: 0 10px 30px rgba(17, 24, 39, 0.1) !important;
+        }
+
+        /* Style for card exit back arrow button */
+        .diag-back-btn {
+            color: #555555 !important;
+            border-color: rgba(17, 24, 39, 0.08) !important;
+            background-color: rgba(255, 255, 255, 0.4) !important;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        }
+
+        .diag-back-btn:hover {
+            color: #7C3AED !important;
+            background-color: rgba(124, 58, 237, 0.08) !important;
+            border-color: rgba(124, 58, 237, 0.2) !important;
         }
     </style>
 </head>
 
 <body
-    class="bg-dark text-white font-body overflow-x-hidden selection:bg-primary selection:text-white flex flex-col min-h-screen">
+    class="bg-deep-onyx text-white-broken font-body overflow-x-hidden selection:bg-action-purple selection:text-white flex flex-col min-h-screen relative">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P6WZNMNS" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
 
-    <!-- Header -->
+
+    <!-- Skip to main content link for keyboard users -->
+    <a href="#main-content"
+        class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-action-purple focus:text-white focus:px-6 focus:py-3 focus:rounded-lg focus:font-semibold focus:border focus:border-white/20 focus:shadow-lg">
+        Saltar al contenido principal
+    </a>
+
+    <!-- Screen Reader Announcer -->
+    <div id="sr-announcer" class="sr-only" aria-live="polite"></div>
+
+    <!-- Header / Navigation -->
     <header
-        class="fixed top-0 w-full z-50 bg-dark/90 backdrop-blur-md border-b border-white/10 transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-5 md:px-6 py-3 md:py-4 flex items-center justify-between">
-            <a href="index.html" class="flex items-center">
-                <img src="./imagen/logo_e.png" alt="EvolveHub" class="h-[30px] md:h-[40px] w-auto ml-1 md:ml-5">
+        class="site-header fixed top-0 w-full z-50 bg-dark-surface/80 backdrop-blur-md border-b border-glass-border">
+        <nav
+            class="flex justify-between items-center h-20 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto relative">
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="flex items-center gap-2">
+                    <img alt="EvolveHub Logo" class="logo-navbar" src="assets/imagen/logo_evolvehub.png" />
+                </a>
+            </div>
+            <div class="hidden md:flex items-center gap-10">
+                <a class="text-grey-warm hover:text-white-broken transition-colors duration-300 font-label-caps text-label-caps"
+                    href="index.html#dia-a-dia">El día a día</a>
+                <a class="text-grey-warm hover:text-white-broken transition-colors duration-300 font-label-caps text-label-caps"
+                    href="index.html#beneficios">Beneficios</a>
+                <a class="text-grey-warm hover:text-white-broken transition-colors duration-300 font-label-caps text-label-caps"
+                    href="index.html#sistema">Cómo funciona</a>
+                <a class="text-grey-warm hover:text-white-broken transition-colors duration-300 font-label-caps text-label-caps"
+                    href="index.html#demo">Probar demo</a>
+                <a class="text-grey-warm hover:text-white-broken transition-colors duration-300 font-label-caps text-label-caps"
+                    href="index.html#calendario">Reservar hueco</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="hidden md:block">
+                    <a href="diagnostico.html"
+                        class="inline-block bg-action-purple text-white font-label-caps text-[11px] px-5 py-2.5 rounded-lg font-medium transition-all duration-300 hover:bg-opacity-95 action-button-glow">
+                        Diagnóstico gratuito
+                    </a>
+                </div>
+                <!-- Hamburger toggle button -->
+                <button type="button"
+                    class="mobile-toggle md:hidden flex items-center justify-center w-9 h-9 rounded-lg border border-glass-border bg-glass-surface/30 text-white-broken focus:outline-none focus:ring-2 focus:ring-action-purple"
+                    aria-label="Abrir menú de navegación">
+                    <span class="material-symbols-outlined text-xl" aria-hidden="true">menu</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Mobile Dropdown Navigation Overlay -->
+        <nav class="mobile-nav-overlay hidden fixed inset-x-0 top-20 bg-deep-onyx/95 backdrop-blur-lg border-b border-glass-border flex flex-col p-6 space-y-4 md:hidden z-40 max-h-[calc(100vh-80px)] overflow-y-auto"
+            aria-label="Menú de navegación móvil">
+            <a class="text-grey-warm hover:text-white-broken transition-colors duration-300 font-label-caps text-sm py-2 border-b border-glass-border/30"
+                href="index.html#dia-a-dia">El día a día</a>
+            <a class="text-grey-warm hover:text-white-broken transition-colors duration-300 font-label-caps text-sm py-2 border-b border-glass-border/30"
+                href="index.html#beneficios">Beneficios</a>
+            <a class="text-grey-warm hover:text-white-broken transition-colors duration-300 font-label-caps text-sm py-2 border-b border-glass-border/30"
+                href="index.html#sistema">Cómo funciona</a>
+            <a class="text-grey-warm hover:text-white-broken transition-colors duration-300 font-label-caps text-sm py-2 border-b border-glass-border/30"
+                href="index.html#demo">Probar demo</a>
+            <a class="text-grey-warm hover:text-white-broken transition-colors duration-300 font-label-caps text-sm py-2 border-b border-glass-border/30"
+                href="index.html#calendario">Reservar hueco</a>
+            <a class="inline-block bg-action-purple text-center text-white font-label-caps text-[11px] py-3.5 rounded-lg font-medium transition-all duration-300"
+                href="diagnostico.html">
+                Diagnóstico gratuito
             </a>
-            <a href="index.html"
-                class="text-white/50 hover:text-white transition-colors text-sm flex items-center gap-2">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="m15 18-6-6 6-6" />
-                </svg> Volver a inicio
-            </a>
-        </div>
+        </nav>
     </header>
 
-    <main class="pt-28 pb-24 flex-grow flex items-center justify-center relative">
-        <div
-            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] pointer-events-none">
-        </div>
+    <!-- Main Guided Screen Layout (Fullscreen Background) -->
+    <main id="main-content" class="flex-grow flex items-center justify-center pt-28 pb-12 relative min-h-screen w-full">
+        <!-- Dual Background Layers for Crossfading -->
+        <div id="bg-layer-1" class="bg-layer opacity-100 z-0"
+            style="background-image: url('assets/imagen/recepcion_logo.png');"></div>
+        <div id="bg-layer-2" class="bg-layer opacity-0 z-0"></div>
+        <div class="absolute inset-0 bg-dark-surface/70 backdrop-blur-[1px] z-10"></div>
 
-        <div class="w-full max-w-2xl px-6 relative z-10">
-            <!-- Form Header & Progress -->
-            <div class="text-center mb-10">
-                <h1 class="font-headline text-3xl md:text-4xl font-bold mb-4">Preguntas para ver qué partes de tu día a
-                    día se pueden hacer más fáciles</h1>
-                <p class="text-white/70"> En menos de 2 minutos podrás ver si hay partes que se pueden hacer más fáciles
-                    y estables.</p>
+        <!-- Wizard Card (Glass Panel) -->
+        <div class="relative z-20 w-full max-w-2xl mx-4">
+            <div
+                class="glass-panel rounded-[32px] p-8 md:p-12 shadow-2xl relative overflow-hidden flex flex-col min-h-[520px] justify-between">
 
-                <div class="flex flex-col items-center justify-center mt-8">
-                    <p class="text-sm text-white/50 mb-2 font-medium tracking-wide">Paso <span id="stepCounter">1</span>
-                        de 6</p>
-                    <div class="w-full max-w-xs h-1.5 bg-white/10 rounded-full overflow-hidden">
-                        <div id="progressBar" class="h-full bg-primary transition-all duration-500 w-1/5"></div>
-                    </div>
+                <!-- Tiny Progress bar at the top -->
+                <div class="absolute top-0 left-0 w-full h-1 bg-grey-warm/15 z-30">
+                    <div id="progressBar" class="h-full bg-action-purple transition-all duration-500 w-1/6"></div>
                 </div>
-            </div>
 
-            <!-- Form Container -->
-            <div class="glass-panel p-8 md:p-10 shadow-[0_0_50px_rgba(138,43,226,0.1)]">
-                <form id="diagnosticoForm">
-                    <!-- Paso 1: Lead -->
-                    <div id="step1" class="step active">
-                        <h2 class="font-headline text-xl font-bold mb-6 text-primaryLight">Antes de empezar...</h2>
-                        <div class="space-y-6">
-                            <div class="bg-white/5 border border-white/10 rounded-xl p-5 space-y-4">
-                                <div class="grid grid-cols-1 gap-4">
+                <div class="w-full flex-grow flex flex-col justify-center py-4">
+                    <!-- Steps Counter -->
+                    <div class="mb-6 flex justify-between items-center gap-4" id="stepCounterContainer">
+                        <div class="flex items-center gap-2.5">
+                            <a href="index.html"
+                                class="diag-back-btn flex items-center justify-center w-8 h-8 rounded-full border"
+                                aria-label="Volver al inicio">
+                                <span class="material-symbols-outlined text-sm"
+                                    style="color: inherit !important;">arrow_back</span>
+                            </a>
+                            <span
+                                class="text-[9px] font-label-caps text-gray-400 uppercase tracking-widest block">Diagnóstico
+                                Digital</span>
+                        </div>
+                        <span class="text-xs text-gray-300">Paso <span id="stepCounter"
+                                class="font-bold text-purple-300">1</span> de 6</span>
+                    </div>
+
+                    <form id="diagnosticoForm" class <!-- Paso 1: Lead -->
+                        <div id="step1" class="step active space-y-6">
+                            <div class="space-y-3">
+                                <h1
+                                    class="font-display-md text-3xl md:text-5xl text-white tracking-tight leading-tight">
+                                    Antes de empezar...
+                                </h1>
+                                <p class="text-gray-300 text-sm leading-relaxed">
+                                    Queremos entender la realidad de tu centro para darte un análisis útil. Por favor,
+                                    dinos tu nombre y a dónde enviamos el diagnóstico.
+                                </p>
+                            </div>
+
+                            <div class="space-y-4">
+                                <div>
+                                    <label for="diag-nombre"
+                                        class="block text-[13px] font-label-caps text-gray-400 mb-2 uppercase tracking-wider">Nombre
+                                        completo</label>
+                                    <input type="text" name="nombre" id="diag-nombre"
+                                        class="w-full line-input py-2 text-sm text-white focus:outline-none"
+                                        placeholder="Tu nombre" required>
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div>
-                                        <label class="block text-sm font-medium text-white/80 mb-2">Nombre
-                                            completo</label>
-                                        <input type="text" name="nombre"
-                                            class="w-full bg-dark/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors"
-                                            required>
+                                        <label for="diag-telefono"
+                                            class="block text-[13px] font-label-caps text-gray-400 mb-2 uppercase tracking-wider">Teléfono
+                                            de contacto</label>
+                                        <input type="tel" name="telefono" id="diag-telefono"
+                                            class="w-full line-input py-2 text-sm text-white focus:outline-none"
+                                            placeholder="Ej: +34 600... (Opcional si dejas email)">
                                     </div>
                                     <div>
-                                        <label class="block text-sm font-medium text-white/80 mb-2">Contacto (Teléfono o
-                                            Email)</label>
-                                        <div class="space-y-3">
-                                            <input type="tel" name="telefono"
-                                                class="w-full bg-dark/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors"
-                                                placeholder="Ej: +34 600... (Opcional si dejas email)">
-
-                                            <input type="email" name="email"
-                                                class="w-full bg-dark/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors"
-                                                placeholder="Ej: correo@ejemplo.com (Opcional si dejas teléfono)">
-                                        </div>
+                                        <label for="diag-email"
+                                            class="block text-[13px] font-label-caps text-gray-400 mb-2 uppercase tracking-wider">Correo
+                                            electrónico</label>
+                                        <input type="email" name="email" id="diag-email"
+                                            class="w-full line-input py-2 text-sm text-white focus:outline-none"
+                                            placeholder="Ej: tu@email.com (Opcional si dejas teléfono)">
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="mt-8 flex justify-end">
-                            <button type="button" onclick="nextStep(2)"
-                                class="btn w-full px-8 btn-primary bg-gradient-to-r from-primary to-primaryLight text-white font-bold font-headline rounded-full shadow-[0_0_20px_rgba(138,43,226,0.5)] hover:shadow-[0_0_40px_rgba(138,43,226,0.7)] hover:scale-105 transition-all duration-300 py-4 text-lg flex items-center justify-center gap-2">Empezar
-                                diagnóstico <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                    stroke-width="2">
-                                    <path d="M5 12h14M12 5l7 7-7 7" />
-                                </svg></button>
-                        </div>
-                    </div>
 
-                    <!-- Paso 2: Contexto -->
-                    <div id="step2" class="step">
-                        <h2 class="font-headline text-xl font-bold mb-6 text-primaryLight">Para orientarte mejor,
-                            cuéntame un poco sobre tu centro</h2>
-                        <div class="space-y-6">
-                            <div class="bg-white/5 border border-white/10 rounded-xl p-5 space-y-6">
-                                <div>
-                                    <label class="block text-sm font-medium text-white/80 mb-3">Número de citas a la
-                                        semana</label>
-                                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                                        <label
-                                            class="border border-white/10 rounded-lg px-3 py-2 text-center text-sm cursor-pointer hover:border-primary/50 transition-colors bg-dark/30 has-[:checked]:border-primary has-[:checked]:bg-primary/10">
+                            <div class="pt-4">
+                                <button type="button" onclick="nextStep(2)"
+                                    class="w-full bg-action-purple text-white py-4 rounded-xl font-label-caps text-sm font-medium transition-all duration-300 hover:bg-opacity-90 flex items-center justify-center gap-2">
+                                    <span>Empezar diagnóstico</span>
+                                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Paso 2: Contexto -->
+                        <div id="step2" class="step hidden space-y-6">
+                            <div class="space-y-3">
+                                <h2
+                                    class="font-display-md text-3xl md:text-5xl text-white tracking-tight leading-tight">
+                                    Cuéntanos sobre tu centro estético
+                                </h2>
+                                <p class="text-gray-300 text-sm leading-relaxed">
+                                    Selecciona el volumen aproximado de tu centro para adaptar los cálculos de
+                                    rendimiento.
+                                </p>
+                            </div>
+
+                            <div class="space-y-5">
+                                <!-- volumen_citas radio selection -->
+                                <div class="space-y-2">
+                                    <label
+                                        class="block text-[13px] font-label-caps text-gray-400 mb-1 uppercase tracking-wider">¿Cuántas
+                                        citas programáis a la semana?</label>
+                                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                                        <label onclick="selectRadioCard(this)"
+                                            class="premium-radio border p-3.5 rounded-xl text-center text-sm cursor-pointer flex flex-col items-center justify-center gap-1">
                                             <input type="radio" name="volumen_citas" value="10-20" class="sr-only"
-                                                required>10-20
+                                                required>
+                                            <span class="font-semibold text-sm">10-20 citas</span>
                                         </label>
-                                        <label
-                                            class="border border-white/10 rounded-lg px-3 py-2 text-center text-sm cursor-pointer hover:border-primary/50 transition-colors bg-dark/30 has-[:checked]:border-primary has-[:checked]:bg-primary/10">
-                                            <input type="radio" name="volumen_citas" value="20-40" class="sr-only">20-40
+                                        <label onclick="selectRadioCard(this)"
+                                            class="premium-radio border p-3.5 rounded-xl text-center text-sm cursor-pointer flex flex-col items-center justify-center gap-1">
+                                            <input type="radio" name="volumen_citas" value="20-40" class="sr-only">
+                                            <span class="font-semibold text-sm">20-40 citas</span>
                                         </label>
-                                        <label
-                                            class="border border-white/10 rounded-lg px-3 py-2 text-center text-sm cursor-pointer hover:border-primary/50 transition-colors bg-dark/30 has-[:checked]:border-primary has-[:checked]:bg-primary/10">
-                                            <input type="radio" name="volumen_citas" value="40+" class="sr-only">40+
+                                        <label onclick="selectRadioCard(this)"
+                                            class="premium-radio border p-3.5 rounded-xl text-center text-sm cursor-pointer flex flex-col items-center justify-center gap-1">
+                                            <input type="radio" name="volumen_citas" value="40+" class="sr-only">
+                                            <span class="font-semibold text-sm">Más de 40</span>
                                         </label>
                                     </div>
                                 </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-white/80 mb-3">Ticket medio</label>
-                                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                                        <label
-                                            class="border border-white/10 rounded-lg px-3 py-2 text-center text-sm cursor-pointer hover:border-primary/50 transition-colors bg-dark/30 has-[:checked]:border-primary has-[:checked]:bg-primary/10">
+
+                                <!-- ticket_medio radio selection -->
+                                <div class="space-y-2">
+                                    <label
+                                        class="block text-[13px] font-label-caps text-gray-400 mb-1 uppercase tracking-wider">¿Cuál
+                                        es tu ticket medio por servicio?</label>
+                                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                                        <label onclick="selectRadioCard(this)"
+                                            class="premium-radio border p-3.5 rounded-xl text-center text-sm cursor-pointer flex flex-col items-center justify-center gap-1">
                                             <input type="radio" name="ticket_medio" data-value="40" value="Menos de 50€"
-                                                class="sr-only" required>Menos de 50€
+                                                class="sr-only" required>
+                                            <span class="font-semibold text-sm">Menos de 50€</span>
                                         </label>
-                                        <label
-                                            class="border border-white/10 rounded-lg px-3 py-2 text-center text-sm cursor-pointer hover:border-primary/50 transition-colors bg-dark/30 has-[:checked]:border-primary has-[:checked]:bg-primary/10">
+                                        <label onclick="selectRadioCard(this)"
+                                            class="premium-radio border p-3.5 rounded-xl text-center text-sm cursor-pointer flex flex-col items-center justify-center gap-1">
                                             <input type="radio" name="ticket_medio" data-value="75" value="50-100€"
-                                                class="sr-only">50-100€
+                                                class="sr-only">
+                                            <span class="font-semibold text-sm">50€ - 100€</span>
                                         </label>
-                                        <label
-                                            class="border border-white/10 rounded-lg px-3 py-2 text-center text-sm cursor-pointer hover:border-primary/50 transition-colors bg-dark/30 has-[:checked]:border-primary has-[:checked]:bg-primary/10">
+                                        <label onclick="selectRadioCard(this)"
+                                            class="premium-radio border p-3.5 rounded-xl text-center text-sm cursor-pointer flex flex-col items-center justify-center gap-1">
                                             <input type="radio" name="ticket_medio" data-value="120" value="100€+"
-                                                class="sr-only">100€+
+                                                class="sr-only">
+                                            <span class="font-semibold text-sm">Más de 100€</span>
                                         </label>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="mt-8 flex flex-col-reverse md:flex-row justify-between gap-4">
-                            <button type="button" onclick="prevStep(1)"
-                                class="btn w-full md:w-auto px-8 btn-secondary bg-white/10 text-white rounded-full border border-white/20 hover:bg-white/20 transition-all duration-300 py-4 text-lg">Atrás</button>
-                            <button type="button" onclick="nextStep(3)"
-                                class="btn w-full md:w-auto px-8 btn-primary bg-gradient-to-r from-primary to-primaryLight text-white font-bold font-headline rounded-full shadow-[0_0_20px_rgba(138,43,226,0.5)] hover:shadow-[0_0_40px_rgba(138,43,226,0.7)] transition-all duration-300 py-4 text-lg flex items-center justify-center gap-2">Siguiente
-                                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                    stroke-width="2">
-                                    <path d="M5 12h14M12 5l7 7-7 7" />
-                                </svg></button>
-                        </div>
-                    </div>
 
-                    <!-- Paso 3: Día a día -->
-                    <div id="step3" class="step">
-                        <h2 class="font-headline text-xl font-bold mb-6 text-primaryLight">En el día a día, ¿cómo
-                            gestionáis esto?</h2>
-                        <div class="space-y-6">
-                            <div>
-                                <label class="block text-sm font-medium text-white/80 mb-3">Cuando estás atendiendo y
-                                    entra una llamada…</label>
-                                <div class="grid grid-cols-1 gap-3">
-                                    <label
-                                        class="border border-white/10 rounded-lg px-4 py-3 text-sm cursor-pointer hover:border-primary/50 transition-colors bg-white/5 flex items-center has-[:checked]:border-primary has-[:checked]:bg-primary/10">
-                                        <input type="radio" name="llamadas" data-fault="0" value="La cogemos si podemos"
-                                            class="sr-only" required><span>La cogemos si podemos</span>
-                                    </label>
-                                    <label
-                                        class="border border-white/10 rounded-lg px-4 py-3 text-sm cursor-pointer hover:border-primary/50 transition-colors bg-white/5 flex items-center has-[:checked]:border-primary has-[:checked]:bg-primary/10">
-                                        <input type="radio" name="llamadas" data-fault="1" value="La devolvemos después"
-                                            class="sr-only"><span>La devolvemos después</span>
-                                    </label>
-                                    <label
-                                        class="border border-white/10 rounded-lg px-4 py-3 text-sm cursor-pointer hover:border-primary/50 transition-colors bg-white/5 flex items-center has-[:checked]:border-primary has-[:checked]:bg-primary/10">
-                                        <input type="radio" name="llamadas" data-fault="1"
-                                            value="A veces se queda sin atender" class="sr-only"><span>A veces se queda
-                                            sin atender</span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-white/80 mb-3">WhatsApp</label>
-                                <div class="grid grid-cols-1 gap-3">
-                                    <label
-                                        class="border border-white/10 rounded-lg px-4 py-3 text-sm cursor-pointer hover:border-primary/50 transition-colors bg-white/5 flex items-center has-[:checked]:border-primary has-[:checked]:bg-primary/10">
-                                        <input type="radio" name="whatsapp" data-fault="0"
-                                            value="Respondemos al momento" class="sr-only" required><span>Respondemos al
-                                            momento</span>
-                                    </label>
-                                    <label
-                                        class="border border-white/10 rounded-lg px-4 py-3 text-sm cursor-pointer hover:border-primary/50 transition-colors bg-white/5 flex items-center has-[:checked]:border-primary has-[:checked]:bg-primary/10">
-                                        <input type="radio" name="whatsapp" data-fault="1" value="A veces tardamos"
-                                            class="sr-only"><span>A veces tardamos</span>
-                                    </label>
-                                    <label
-                                        class="border border-white/10 rounded-lg px-4 py-3 text-sm cursor-pointer hover:border-primary/50 transition-colors bg-white/5 flex items-center has-[:checked]:border-primary has-[:checked]:bg-primary/10">
-                                        <input type="radio" name="whatsapp" data-fault="1" value="Depende del día"
-                                            class="sr-only"><span>Depende del día</span>
-                                    </label>
-                                </div>
+                            <div class="flex items-center justify-between gap-4 pt-4">
+                                <button type="button" onclick="prevStep(1)"
+                                    class="border border-white/10 text-gray-400 hover:text-white px-6 py-4 rounded-xl font-label-caps text-sm transition-colors">Atrás</button>
+                                <button type="button" onclick="nextStep(3)"
+                                    class="bg-action-purple text-white px-8 py-4 rounded-xl font-label-caps text-sm font-medium transition-all duration-300 hover:bg-opacity-90 flex items-center gap-1.5">
+                                    <span>Siguiente</span>
+                                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                                </button>
                             </div>
                         </div>
-                        <div class="mt-8 flex flex-col-reverse md:flex-row justify-between gap-4">
-                            <button type="button" onclick="prevStep(2)"
-                                class="btn w-full md:w-auto px-8 btn-secondary bg-white/10 text-white rounded-full border border-white/20 hover:bg-white/20 transition-all duration-300 py-4 text-lg">Atrás</button>
-                            <button type="button" onclick="nextStep(4)"
-                                class="btn w-full md:w-auto px-8 btn-primary bg-gradient-to-r from-primary to-primaryLight text-white font-bold font-headline rounded-full shadow-[0_0_20px_rgba(138,43,226,0.5)] hover:shadow-[0_0_40px_rgba(138,43,226,0.7)] transition-all duration-300 py-4 text-lg flex items-center justify-center gap-2">Siguiente
-                                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                    stroke-width="2">
-                                    <path d="M5 12h14M12 5l7 7-7 7" />
-                                </svg></button>
-                        </div>
-                    </div>
 
-                    <!-- Paso 4: Agenda -->
-                    <div id="step4" class="step">
-                        <h2 class="font-headline text-xl font-bold mb-6 text-primaryLight">Sobre la agenda</h2>
-                        <div class="space-y-6">
-                            <div>
-                                <label class="block text-sm font-medium text-white/80 mb-3">¿Cuántas citas se cancelan o
-                                    no vienen a la semana?</label>
-                                <div class="grid grid-cols-1 gap-3">
+                        <!-- Paso 3: Día a día -->
+                        <div id="step3" class="step hidden space-y-6">
+                            <div class="space-y-3">
+                                <h2
+                                    class="font-display-md text-3xl md:text-5xl text-white tracking-tight leading-tight">
+                                    Gestión de llamadas y mensajes
+                                </h2>
+                                <p class="text-gray-300 text-sm leading-relaxed">
+                                    ¿Qué ocurre en el día a día cuando os comunicáis con vuestros clientes?
+                                </p>
+                            </div>
+
+                            <div class="space-y-4">
+                                <!-- llamadas selection -->
+                                <div class="space-y-2">
                                     <label
-                                        class="border border-white/10 rounded-lg px-4 py-3 text-sm cursor-pointer hover:border-primary/50 transition-colors bg-white/5 flex items-center has-[:checked]:border-primary has-[:checked]:bg-primary/10">
-                                        <input type="radio" name="cancelaciones" data-value="1" value="0-2"
-                                            class="sr-only" required><span>0-2</span>
-                                    </label>
+                                        class="block text-[13px] font-label-caps text-gray-400 mb-1 uppercase tracking-wider">Cuando
+                                        estás en cabina y entra una llamada...</label>
+                                    <div class="grid grid-cols-1 gap-2">
+                                        <label onclick="selectRadioCard(this, true, 4)"
+                                            class="premium-radio border p-3.5 rounded-xl text-sm cursor-pointer flex items-center justify-between gap-3">
+                                            <div class="flex items-center gap-3">
+                                                <input type="radio" name="llamadas" data-fault="0"
+                                                    value="La cogemos si podemos" class="sr-only" required>
+                                                <span class="font-medium text-sm text-left">La cogemos si podemos</span>
+                                            </div>
+                                        </label>
+                                        <label onclick="selectRadioCard(this, true, 4)"
+                                            class="premium-radio border p-3.5 rounded-xl text-sm cursor-pointer flex items-center justify-between gap-3">
+                                            <div class="flex items-center gap-3">
+                                                <input type="radio" name="llamadas" data-fault="1"
+                                                    value="La devolvemos después" class="sr-only">
+                                                <span class="font-medium text-sm text-left">La devolvemos después</span>
+                                            </div>
+                                        </label>
+                                        <label onclick="selectRadioCard(this, true, 4)"
+                                            class="premium-radio border p-3.5 rounded-xl text-sm cursor-pointer flex items-center justify-between gap-3">
+                                            <div class="flex items-center gap-3">
+                                                <input type="radio" name="llamadas" data-fault="1"
+                                                    value="A veces se queda sin atender" class="sr-only">
+                                                <span class="font-medium text-sm text-left">A veces se queda sin
+                                                    atender</span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- whatsapp selection -->
+                                <div class="space-y-2">
                                     <label
-                                        class="border border-white/10 rounded-lg px-4 py-3 text-sm cursor-pointer hover:border-primary/50 transition-colors bg-white/5 flex items-center has-[:checked]:border-primary has-[:checked]:bg-primary/10">
-                                        <input type="radio" name="cancelaciones" data-value="4" value="3-5"
-                                            class="sr-only"><span>3-5</span>
-                                    </label>
-                                    <label
-                                        class="border border-white/10 rounded-lg px-4 py-3 text-sm cursor-pointer hover:border-primary/50 transition-colors bg-white/5 flex items-center has-[:checked]:border-primary has-[:checked]:bg-primary/10">
-                                        <input type="radio" name="cancelaciones" data-value="7" value="5+"
-                                            class="sr-only"><span>5+</span>
-                                    </label>
+                                        class="block text-[13px] font-label-caps text-gray-400 mb-1 uppercase tracking-wider">¿Cómo
+                                        respondéis a los WhatsApp de clientes?</label>
+                                    <div class="grid grid-cols-1 gap-2">
+                                        <label onclick="selectRadioCard(this, true, 4)"
+                                            class="premium-radio border p-3.5 rounded-xl text-sm cursor-pointer flex items-center justify-between gap-3">
+                                            <div class="flex items-center gap-3">
+                                                <input type="radio" name="whatsapp" data-fault="0"
+                                                    value="Respondemos al momento" class="sr-only" required>
+                                                <span class="font-medium text-sm text-left">Respondemos al
+                                                    momento</span>
+                                            </div>
+                                        </label>
+                                        <label onclick="selectRadioCard(this, true, 4)"
+                                            class="premium-radio border p-3.5 rounded-xl text-sm cursor-pointer flex items-center justify-between gap-3">
+                                            <div class="flex items-center gap-3">
+                                                <input type="radio" name="whatsapp" data-fault="1"
+                                                    value="A veces tardamos" class="sr-only">
+                                                <span class="font-medium text-sm text-left">A veces tardamos</span>
+                                            </div>
+                                        </label>
+                                        <label onclick="selectRadioCard(this, true, 4)"
+                                            class="premium-radio border p-3.5 rounded-xl text-sm cursor-pointer flex items-center justify-between gap-3">
+                                            <div class="flex items-center gap-3">
+                                                <input type="radio" name="whatsapp" data-fault="1"
+                                                    value="Depende del día" class="sr-only">
+                                                <span class="font-medium text-sm text-left">Depende del día</span>
+                                            </div>
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
-                            <div>
-                                <label class="block text-sm font-medium text-white/80 mb-3">Cuando alguien
-                                    cancela…</label>
-                                <div class="grid grid-cols-1 gap-3">
-                                    <label
-                                        class="border border-white/10 rounded-lg px-4 py-3 text-sm cursor-pointer hover:border-primary/50 transition-colors bg-white/5 flex items-center has-[:checked]:border-primary has-[:checked]:bg-primary/10">
-                                        <input type="radio" name="reorganizacion" data-fault="0"
-                                            value="Reorganizamos manualmente" class="sr-only"
-                                            required><span>Reorganizamos manualmente</span>
-                                    </label>
-                                    <label
-                                        class="border border-white/10 rounded-lg px-4 py-3 text-sm cursor-pointer hover:border-primary/50 transition-colors bg-white/5 flex items-center has-[:checked]:border-primary has-[:checked]:bg-primary/10">
-                                        <input type="radio" name="reorganizacion" data-fault="1"
-                                            value="Se queda ese hueco libre" class="sr-only"><span>Se queda ese hueco
-                                            libre</span>
-                                    </label>
-                                    <label
-                                        class="border border-white/10 rounded-lg px-4 py-3 text-sm cursor-pointer hover:border-primary/50 transition-colors bg-white/5 flex items-center has-[:checked]:border-primary has-[:checked]:bg-primary/10">
-                                        <input type="radio" name="reorganizacion" data-fault="1"
-                                            value="Depende del momento" class="sr-only"><span>Depende del momento</span>
-                                    </label>
-                                </div>
+
+                            <div class="flex items-center justify-between gap-4 pt-4">
+                                <button type="button" onclick="prevStep(2)"
+                                    class="border border-white/10 text-gray-400 hover:text-white px-6 py-4 rounded-xl font-label-caps text-sm transition-colors">Atrás</button>
+                                <button type="button" onclick="nextStep(4)"
+                                    class="bg-action-purple text-white px-8 py-4 rounded-xl font-label-caps text-sm font-medium transition-all duration-300 hover:bg-opacity-90 flex items-center gap-1.5">
+                                    <span>Siguiente</span>
+                                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                                </button>
                             </div>
                         </div>
-                        <div class="mt-8 flex flex-col-reverse md:flex-row justify-between gap-4">
-                            <button type="button" onclick="prevStep(3)"
-                                class="btn w-full md:w-auto px-8 btn-secondary bg-white/10 text-white rounded-full border border-white/20 hover:bg-white/20 transition-all duration-300 py-4 text-lg">Atrás</button>
-                            <button type="button" onclick="nextStep(5)"
-                                class="btn w-full md:w-auto px-8 btn-primary bg-gradient-to-r from-primary to-primaryLight text-white font-bold font-headline rounded-full shadow-[0_0_20px_rgba(138,43,226,0.5)] hover:shadow-[0_0_40px_rgba(138,43,226,0.7)] transition-all duration-300 py-4 text-lg flex items-center justify-center gap-2">Siguiente
-                                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                    stroke-width="2">
-                                    <path d="M5 12h14M12 5l7 7-7 7" />
-                                </svg></button>
-                        </div>
-                    </div>
 
-                    <!-- Paso 5: Seguimiento -->
-                    <div id="step5" class="step">
-                        <h2 class="font-headline text-xl font-bold mb-6 text-primaryLight">Relación con tus clientes
-                        </h2>
-                        <div class="space-y-6">
-                            <div>
-                                <label class="block text-sm font-medium text-white/80 mb-3">¿Hacéis seguimiento a
-                                    clientes para que vuelvan?</label>
-                                <div class="grid grid-cols-1 gap-3">
+                        <!-- Paso 4: Agenda -->
+                        <div id="step4" class="step hidden space-y-6">
+                            <div class="space-y-3">
+                                <h2
+                                    class="font-display-md text-3xl md:text-5xl text-white tracking-tight leading-tight">
+                                    Gestión de cancelaciones
+                                </h2>
+                                <p class="text-gray-300 text-sm leading-relaxed">
+                                    Hablemos de los huecos vacíos y cancelaciones imprevistas.
+                                </p>
+                            </div>
+
+                            <div class="space-y-4">
+                                <!-- cancelaciones selection -->
+                                <div class="space-y-2">
                                     <label
-                                        class="border border-white/10 rounded-lg px-4 py-3 text-sm cursor-pointer hover:border-primary/50 transition-colors bg-white/5 flex items-center has-[:checked]:border-primary has-[:checked]:bg-primary/10">
-                                        <input type="radio" name="seguimiento" data-fault="0"
-                                            value="Sí, de forma constante" class="sr-only" required><span>Sí, de forma
-                                            constante</span>
-                                    </label>
+                                        class="block text-[13px] font-label-caps text-gray-400 mb-1 uppercase tracking-wider">¿Cuántas
+                                        citas se cancelan o no asisten a la semana?</label>
+                                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                                        <label onclick="selectRadioCard(this)"
+                                            class="premium-radio border p-3.5 rounded-xl text-center text-sm cursor-pointer flex flex-col items-center justify-center gap-1">
+                                            <input type="radio" name="cancelaciones" data-value="1" value="0-2"
+                                                class="sr-only" required>
+                                            <span class="font-semibold text-sm">Muy pocas (0-2)</span>
+                                        </label>
+                                        <label onclick="selectRadioCard(this)"
+                                            class="premium-radio border p-3.5 rounded-xl text-center text-sm cursor-pointer flex flex-col items-center justify-center gap-1">
+                                            <input type="radio" name="cancelaciones" data-value="4" value="3-5"
+                                                class="sr-only">
+                                            <span class="font-semibold text-sm">Algunas (3-5)</span>
+                                        </label>
+                                        <label onclick="selectRadioCard(this)"
+                                            class="premium-radio border p-3.5 rounded-xl text-center text-sm cursor-pointer flex flex-col items-center justify-center gap-1">
+                                            <input type="radio" name="cancelaciones" data-value="7" value="5+"
+                                                class="sr-only">
+                                            <span class="font-semibold text-sm">Muchas (Más de 5)</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- reorganizacion selection -->
+                                <div class="space-y-2">
                                     <label
-                                        class="border border-white/10 rounded-lg px-4 py-3 text-sm cursor-pointer hover:border-primary/50 transition-colors bg-white/5 flex items-center has-[:checked]:border-primary has-[:checked]:bg-primary/10">
-                                        <input type="radio" name="seguimiento" data-fault="1" value="A veces"
-                                            class="sr-only"><span>A veces</span>
-                                    </label>
-                                    <label
-                                        class="border border-white/10 rounded-lg px-4 py-3 text-sm cursor-pointer hover:border-primary/50 transition-colors bg-white/5 flex items-center has-[:checked]:border-primary has-[:checked]:bg-primary/10">
-                                        <input type="radio" name="seguimiento" data-fault="1" value="No"
-                                            class="sr-only"><span>No</span>
-                                    </label>
+                                        class="block text-[13px] font-label-caps text-gray-400 mb-1 uppercase tracking-wider">Cuando
+                                        alguien cancela a última hora...</label>
+                                    <div class="grid grid-cols-1 gap-2">
+                                        <label onclick="selectRadioCard(this, true, 5)"
+                                            class="premium-radio border p-3.5 rounded-xl text-sm cursor-pointer flex items-center justify-between gap-3">
+                                            <div class="flex items-center gap-3">
+                                                <input type="radio" name="reorganizacion" data-fault="0"
+                                                    value="Reorganizamos manualmente" class="sr-only" required>
+                                                <span class="font-medium text-sm text-left">Llamamos o escribimos a la
+                                                    lista de espera</span>
+                                            </div>
+                                        </label>
+                                        <label onclick="selectRadioCard(this, true, 5)"
+                                            class="premium-radio border p-3.5 rounded-xl text-sm cursor-pointer flex items-center justify-between gap-3">
+                                            <div class="flex items-center gap-3">
+                                                <input type="radio" name="reorganizacion" data-fault="1"
+                                                    value="Se queda ese hueco libre" class="sr-only">
+                                                <span class="font-medium text-sm text-left">El hueco suele quedarse
+                                                    libre</span>
+                                            </div>
+                                        </label>
+                                        <label onclick="selectRadioCard(this, true, 5)"
+                                            class="premium-radio border p-3.5 rounded-xl text-sm cursor-pointer flex items-center justify-between gap-3">
+                                            <div class="flex items-center gap-3">
+                                                <input type="radio" name="reorganizacion" data-fault="1"
+                                                    value="Depende del momento" class="sr-only">
+                                                <span class="font-medium text-sm text-left">Depende del momento</span>
+                                            </div>
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
-                            <div>
-                                <label class="block text-sm font-medium text-white/80 mb-3">Cuando alguien pregunta pero
-                                    no reserva…</label>
-                                <div class="grid grid-cols-1 gap-3">
-                                    <label
-                                        class="border border-white/10 rounded-lg px-4 py-3 text-sm cursor-pointer hover:border-primary/50 transition-colors bg-white/5 flex items-center has-[:checked]:border-primary has-[:checked]:bg-primary/10">
-                                        <input type="radio" name="preguntan_no_reservan" data-fault="0"
-                                            value="Hacemos seguimiento" class="sr-only" required><span>Hacemos
-                                            seguimiento</span>
-                                    </label>
-                                    <label
-                                        class="border border-white/10 rounded-lg px-4 py-3 text-sm cursor-pointer hover:border-primary/50 transition-colors bg-white/5 flex items-center has-[:checked]:border-primary has-[:checked]:bg-primary/10">
-                                        <input type="radio" name="preguntan_no_reservan" data-fault="1" value="A veces"
-                                            class="sr-only"><span>A veces</span>
-                                    </label>
-                                    <label
-                                        class="border border-white/10 rounded-lg px-4 py-3 text-sm cursor-pointer hover:border-primary/50 transition-colors bg-white/5 flex items-center has-[:checked]:border-primary has-[:checked]:bg-primary/10">
-                                        <input type="radio" name="preguntan_no_reservan" data-fault="1" value="No"
-                                            class="sr-only"><span>No</span>
-                                    </label>
-                                </div>
+
+                            <div class="flex items-center justify-between gap-4 pt-4">
+                                <button type="button" onclick="prevStep(3)"
+                                    class="border border-white/10 text-gray-400 hover:text-white px-6 py-4 rounded-xl font-label-caps text-sm transition-colors">Atrás</button>
+                                <button type="button" onclick="nextStep(5)"
+                                    class="bg-action-purple text-white px-8 py-4 rounded-xl font-label-caps text-sm font-medium transition-all duration-300 hover:bg-opacity-90 flex items-center gap-1.5">
+                                    <span>Siguiente</span>
+                                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                                </button>
                             </div>
                         </div>
-                        <div class="mt-8 flex flex-col-reverse md:flex-row justify-between gap-4">
-                            <button type="button" onclick="prevStep(4)"
-                                class="btn w-full md:w-auto px-8 btn-secondary bg-white/10 text-white rounded-full border border-white/20 hover:bg-white/20 transition-all duration-300 py-4 text-lg">Atrás</button>
-                            <button type="button" onclick="nextStep(6)"
-                                class="btn w-full md:w-auto px-8 btn-primary bg-gradient-to-r from-primary to-primaryLight text-white font-bold font-headline rounded-full shadow-[0_0_20px_rgba(138,43,226,0.5)] hover:shadow-[0_0_40px_rgba(138,43,226,0.7)] transition-all duration-300 py-4 text-lg flex items-center justify-center gap-2">Siguiente
-                                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                    stroke-width="2">
-                                    <path d="M5 12h14M12 5l7 7-7 7" />
-                                </svg></button>
-                        </div>
-                    </div>
 
-                    <!-- Paso 6: Impacto -->
-                    <div id="step6" class="step">
-                        <h2 class="font-headline text-xl font-bold mb-6 text-primaryLight">Pensándolo en frío</h2>
-                        <div class="space-y-6">
-                            <div>
-                                <label class="block text-sm font-medium text-white/80 mb-3">Si cada semana pudieras
-                                    organizar mejor esta parte…</label>
-                                <div class="grid grid-cols-1 gap-3">
+                        <!-- Paso 5: Seguimiento -->
+                        <div id="step5" class="step hidden space-y-6">
+                            <div class="space-y-3">
+                                <h2
+                                    class="font-display-md text-3xl md:text-5xl text-white tracking-tight leading-tight">
+                                    Fidelización y relación
+                                </h2>
+                                <p class="text-gray-300 text-sm leading-relaxed">
+                                    ¿Cómo gestionáis la recurrencia y el seguimiento a los clientes?
+                                </p>
+                            </div>
+
+                            <div class="space-y-4">
+                                <!-- seguimiento selection -->
+                                <div class="space-y-2">
                                     <label
-                                        class="border border-white/10 rounded-lg px-4 py-3 text-sm cursor-pointer hover:border-primary/50 transition-colors bg-white/5 flex items-center has-[:checked]:border-primary has-[:checked]:bg-primary/10">
-                                        <input type="radio" name="impacto" value="Tendría más tiempo para mí"
-                                            class="sr-only" required><span>Tendría más tiempo para mí</span>
-                                    </label>
+                                        class="block text-[13px] font-label-caps text-gray-400 mb-1 uppercase tracking-wider">¿Hacéis
+                                        seguimiento para proponer nuevas citas?</label>
+                                    <div class="grid grid-cols-1 gap-2">
+                                        <label onclick="selectRadioCard(this, true, 6)"
+                                            class="premium-radio border p-3.5 rounded-xl text-sm cursor-pointer flex items-center justify-between gap-3">
+                                            <div class="flex items-center gap-3">
+                                                <input type="radio" name="seguimiento" data-fault="0"
+                                                    value="Sí, de forma constante" class="sr-only" required>
+                                                <span class="font-medium text-sm text-left">Sí, periódicamente</span>
+                                            </div>
+                                        </label>
+                                        <label onclick="selectRadioCard(this, true, 6)"
+                                            class="premium-radio border p-3.5 rounded-xl text-sm cursor-pointer flex items-center justify-between gap-3">
+                                            <div class="flex items-center gap-3">
+                                                <input type="radio" name="seguimiento" data-fault="1" value="A veces"
+                                                    class="sr-only">
+                                                <span class="font-medium text-sm text-left">A veces</span>
+                                            </div>
+                                        </label>
+                                        <label onclick="selectRadioCard(this, true, 6)"
+                                            class="premium-radio border p-3.5 rounded-xl text-sm cursor-pointer flex items-center justify-between gap-3">
+                                            <div class="flex items-center gap-3">
+                                                <input type="radio" name="seguimiento" data-fault="1" value="No"
+                                                    class="sr-only">
+                                                <span class="font-medium text-sm text-left">No</span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- preguntan_no_reservan selection -->
+                                <div class="space-y-2">
                                     <label
-                                        class="border border-white/10 rounded-lg px-4 py-3 text-sm cursor-pointer hover:border-primary/50 transition-colors bg-white/5 flex items-center has-[:checked]:border-primary has-[:checked]:bg-primary/10">
-                                        <input type="radio" name="impacto" value="Podría atender mejor a mis clientas"
-                                            class="sr-only"><span>Podría atender mejor a mis clientas</span>
-                                    </label>
-                                    <label
-                                        class="border border-white/10 rounded-lg px-4 py-3 text-sm cursor-pointer hover:border-primary/50 transition-colors bg-white/5 flex items-center has-[:checked]:border-primary has-[:checked]:bg-primary/10">
-                                        <input type="radio" name="impacto" value="Tendría una agenda más estable"
-                                            class="sr-only"><span>Tendría una agenda más estable</span>
-                                    </label>
-                                    <label
-                                        class="border border-white/10 rounded-lg px-4 py-3 text-sm cursor-pointer hover:border-primary/50 transition-colors bg-white/5 flex items-center has-[:checked]:border-primary has-[:checked]:bg-primary/10">
-                                        <input type="radio" name="impacto" value="No creo que cambiara mucho"
-                                            class="sr-only"><span>No creo que cambiara mucho</span>
-                                    </label>
+                                        class="block text-[13px] font-label-caps text-gray-400 mb-1 uppercase tracking-wider">Cuando
+                                        alguien pregunta por WhatsApp pero no llega a reservar...</label>
+                                    <div class="grid grid-cols-1 gap-2">
+                                        <label onclick="selectRadioCard(this, true, 6)"
+                                            class="premium-radio border p-3.5 rounded-xl text-sm cursor-pointer flex items-center justify-between gap-3">
+                                            <div class="flex items-center gap-3">
+                                                <input type="radio" name="preguntan_no_reservan" data-fault="0"
+                                                    value="Hacemos seguimiento" class="sr-only" required>
+                                                <span class="font-medium text-sm text-left">Les volvemos a
+                                                    escribir</span>
+                                            </div>
+                                        </label>
+                                        <label onclick="selectRadioCard(this, true, 6)"
+                                            class="premium-radio border p-3.5 rounded-xl text-sm cursor-pointer flex items-center justify-between gap-3">
+                                            <div class="flex items-center gap-3">
+                                                <input type="radio" name="preguntan_no_reservan" data-fault="1"
+                                                    value="A veces" class="sr-only">
+                                                <span class="font-medium text-sm text-left">A veces se le vuelve a
+                                                    escribir</span>
+                                            </div>
+                                        </label>
+                                        <label onclick="selectRadioCard(this, true, 6)"
+                                            class="premium-radio border p-3.5 rounded-xl text-sm cursor-pointer flex items-center justify-between gap-3">
+                                            <div class="flex items-center gap-3">
+                                                <input type="radio" name="preguntan_no_reservan" data-fault="1"
+                                                    value="No" class="sr-only">
+                                                <span class="font-medium text-sm text-left">El chat se queda guardado y
+                                                    no insistimos</span>
+                                            </div>
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="mt-8 flex flex-col-reverse md:flex-row justify-between gap-4">
-                            <button type="button" onclick="prevStep(5)"
-                                class="btn w-full md:w-auto px-8 btn-secondary bg-white/10 text-white rounded-full border border-white/20 hover:bg-white/20 transition-all duration-300 py-4 text-lg">Atrás</button>
-                            <button type="button" onclick="calculateAndSubmit()"
-                                class="btn w-full md:w-auto px-8 btn-primary bg-gradient-to-r from-primary to-primaryLight text-white font-bold font-headline rounded-full shadow-[0_0_20px_rgba(138,43,226,0.5)] hover:shadow-[0_0_40px_rgba(138,43,226,0.7)] hover:scale-105 transition-all duration-300 py-4 text-lg flex items-center justify-center gap-2">Enviar</button>
-                        </div>
-                    </div>
 
-                    <!-- Pantalla de Análisis -->
-                    <div id="analyzingState" class="step text-center py-16 hidden">
-                        <div class="w-20 h-20 rounded-full border-4 border-white/10 border-t-primary animate-spin mx-auto mb-6"
-                            id="spinner"></div>
-                        <h2 class="font-headline text-2xl font-bold mb-4 text-primaryLight">Analizando tu negocio...
-                        </h2>
-                    </div>
-
-                    <!-- Resultado Final -->
-                    <div id="resultState" class="step text-center py-10 hidden">
-                        <h2 class="font-headline text-3xl md:text-4xl font-bold mb-6">Hay margen para que tu centro
-                            funcione de forma más fluida y con más control
-                        </h2>
-
-                        <div
-                            class="bg-primary/10 border border-primary/20 rounded-2xl p-6 md:p-8 mb-8 max-w-lg mx-auto">
-                            <p class="text-white/90 text-lg mb-6">Por lo que has indicado, es probable que en tu centro
-                                haya margen para organizar mejor la atención y el seguimiento de clientes.</p>
-
-                            <p class="text-white/80 text-base mb-6">Con pequeños ajustes en esta parte se obtiene
-                                impacto tanto en ingresos como en tranquilidad en el día a día.</p>
+                            <div class="flex items-center justify-between gap-4 pt-4">
+                                <button type="button" onclick="prevStep(4)"
+                                    class="border border-white/10 text-gray-400 hover:text-white px-6 py-4 rounded-xl font-label-caps text-sm transition-colors">Atrás</button>
+                                <button type="button" onclick="nextStep(6)"
+                                    class="bg-action-purple text-white px-8 py-4 rounded-xl font-label-caps text-sm font-medium transition-all duration-300 hover:bg-opacity-90 flex items-center gap-1.5">
+                                    <span>Siguiente</span>
+                                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                                </button>
+                            </div>
                         </div>
 
-                        <p
-                            class="text-xl font-bold bg-dark p-6 rounded-xl border border-white/5 shadow-2xl inline-block mt-2 mb-8 text-white/90 max-w-2xl mx-auto">
-                            "No suele ser por falta de clientes, sino por cómo se gestiona todo cuando el ritmo del día
-                            aprieta."
-                        </p>
+                        <!-- Paso 6: Impacto -->
+                        <div id="step6" class="step hidden space-y-6">
+                            <div class="space-y-3">
+                                <h2
+                                    class="font-display-md text-3xl md:text-5xl text-white tracking-tight leading-tight">
+                                    Pensándolo en frío
+                                </h2>
+                                <p class="text-gray-300 text-sm leading-relaxed">
+                                    ¿Cuál es tu prioridad principal para mejorar el funcionamiento de tu negocio?
+                                </p>
+                            </div>
 
-                        <p class="text-white/70 mb-4 font-medium max-w-md mx-auto">Si quieres ver cómo se aplicaría esto
-                            en tu caso concreto y si realmente tiene sentido para tu centro:</p>
+                            <div class="space-y-4">
+                                <!-- impacto selection -->
+                                <div class="space-y-2">
+                                    <label
+                                        class="block text-[13px] font-label-caps text-gray-400 mb-1 uppercase tracking-wider">Si
+                                        pudieras organizar mejor la atención y reservas...</label>
+                                    <div class="grid grid-cols-1 gap-2">
+                                        <label onclick="selectRadioCard(this)"
+                                            class="premium-radio border p-3.5 rounded-xl text-sm cursor-pointer flex items-center justify-between gap-3">
+                                            <div class="flex items-center gap-3">
+                                                <input type="radio" name="impacto" value="Tendría más tiempo para mí"
+                                                    class="sr-only" required>
+                                                <span class="font-medium text-sm text-left">Tendría más tiempo libre
+                                                    para mí y menos estrés mental</span>
+                                            </div>
+                                        </label>
+                                        <label onclick="selectRadioCard(this)"
+                                            class="premium-radio border p-3.5 rounded-xl text-sm cursor-pointer flex items-center justify-between gap-3">
+                                            <div class="flex items-center gap-3">
+                                                <input type="radio" name="impacto"
+                                                    value="Podría atender mejor a mis clientas" class="sr-only">
+                                                <span class="font-medium text-sm text-left">Podría dar un trato más
+                                                    calmado y concentrado en cabina</span>
+                                            </div>
+                                        </label>
+                                        <label onclick="selectRadioCard(this)"
+                                            class="premium-radio border p-3.5 rounded-xl text-sm cursor-pointer flex items-center justify-between gap-3">
+                                            <div class="flex items-center gap-3">
+                                                <input type="radio" name="impacto"
+                                                    value="Tendría una agenda más estable" class="sr-only">
+                                                <span class="font-medium text-sm text-left">Tendría una agenda mucho más
+                                                    estable y sin huecos muertos</span>
+                                            </div>
+                                        </label>
+                                        <label onclick="selectRadioCard(this)"
+                                            class="premium-radio border p-3.5 rounded-xl text-sm cursor-pointer flex items-center justify-between gap-3">
+                                            <div class="flex items-center gap-3">
+                                                <input type="radio" name="impacto" value="No creo que cambiara mucho"
+                                                    class="sr-only">
+                                                <span class="font-medium text-sm text-left">No creo que cambiara
+                                                    sustancialmente la rutina actual</span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
 
+                            <div class="flex items-center justify-between gap-4 pt-4">
+                                <button type="button" onclick="prevStep(5)"
+                                    class="border border-white/10 text-gray-400 hover:text-white px-6 py-4 rounded-xl font-label-caps text-sm transition-colors">Atrás</button>
+                                <button type="button" onclick="calculateAndSubmit()"
+                                    class="bg-action-purple text-white px-10 py-4 rounded-xl font-label-caps text-sm font-medium transition-all duration-300 hover:bg-opacity-90 flex items-center gap-1.5 shadow-[0_0_20px_rgba(138,43,226,0.3)]">
+                                    <span>Ver análisis y diagnóstico</span>
+                                    <span class="material-symbols-outlined text-sm">done_all</span>
+                                </button>
+                            </div>
+                        </div>
 
-                        <a href="https://calendly.com/oliversanjr/30min"
-                            class="btn w-full max-w-xs mx-auto btn-primary bg-gradient-to-r from-primary to-primaryLight text-white font-bold font-headline rounded-full shadow-[0_0_20px_rgba(138,43,226,0.5)] hover:shadow-[0_0_40px_rgba(138,43,226,0.7)] hover:scale-105 transition-all duration-300 py-4 text-lg flex items-center justify-center gap-2">
-                            Ver mi caso en detalle
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                                <line x1="16" y1="2" x2="16" y2="6"></line>
-                                <line x1="8" y1="2" x2="8" y2="6"></line>
-                                <line x1="3" y1="10" x2="21" y2="10"></line>
-                            </svg>
-                        </a>
-                        <p class="text-white/50 text-xs mt-4">En 10–15 minutos lo vemos contigo, sin compromiso</p>
-                    </div>
-                </form>
+                        <!-- Pantalla de Análisis (Loading State) -->
+                        <div id="analyzingState" class="step hidden text-center py-20 space-y-6">
+                            <div class="w-16 h-16 rounded-full border-4 border-white/10 border-t-action-purple animate-spin mx-auto"
+                                id="spinner"></div>
+                            <h2 class="font-display-md text-2xl text-white tracking-tight">Analizando la gestión de tu
+                                centro...</h2>
+                            <p class="text-sm text-gray-300 max-w-xs mx-auto">Calculando márgenes de mejora en la
+                                agenda, tasa de cancelaciones e impacto financiero.</p>
+                        </div>
+
+                        <!-- Resultado Final (Redesigned with Premium Minimalist look) -->
+                        <div id="resultState" class="step hidden text-center py-6 space-y-8">
+                            <div class="space-y-4">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mx-auto text-purple-300">
+                                    <span class="material-symbols-outlined text-xl">auto_awesome</span>
+                                </div>
+                                <h2 id="resultTitle"
+                                    class="font-display-md text-2xl md:text-3xl text-white tracking-tight leading-tight max-w-xl mx-auto font-semibold">
+                                    Cargando tu diagnóstico...
+                                </h2>
+                                <p id="resultSubtitle" class="text-sm text-gray-300 max-w-md mx-auto leading-relaxed">
+                                    Analizando vuestros puntos fuertes y oportunidades de mejora.
+                                </p>
+                            </div>
+
+                            <div
+                                class="bg-white/5 border border-white/10 backdrop-blur-md rounded-2xl p-6 md:p-8 space-y-4 text-left max-w-lg mx-auto border-l-4 border-l-action-purple">
+                                <div id="reportParagraphs" class="space-y-4 text-gray-100 text-base leading-relaxed">
+                                    <!-- Injected paragraphs of the personalized report -->
+                                </div>
+                            </div>
+
+                            <div class="space-y-4 pt-4">
+                                <p class="text-sm text-gray-300 max-w-xs mx-auto leading-relaxed">¿Te gustaría ver cómo
+                                    sería un día en tu centro con esta forma de trabajar?</p>
+                                <a href="index.html#calendario"
+                                    class="w-full max-w-xs mx-auto bg-action-purple text-white font-label-caps text-sm py-5 rounded-lg flex items-center justify-center gap-2 font-medium transition-all duration-300 action-button-glow">
+                                    <span>Reservar llamada de 30 min</span>
+                                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                                </a>
+                                <p class="text-[13px] text-gray-400">Llamada corta de consultoría gratuita, sin
+                                    compromiso.</p>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+                <!-- Dynamic Sub-Quote inside Card for calming feedback -->
+                <p id="leftDecorationQuote"
+                    class="text-xs italic text-gray-400 text-center mt-6 transition-opacity duration-300">"Atender bien
+                    empieza por dar espacio."</p>
+
             </div>
         </div>
     </main>
 
+    <!-- Toasts (Glassmorphic) -->
+    <div id="toast-success"
+        class="fixed bottom-5 right-5 bg-black/90 border border-white/10 text-white px-6 py-4 rounded-xl shadow-2xl transform translate-y-20 opacity-0 transition-all duration-300 z-[100] flex items-center gap-2.5 pointer-events-none">
+        <span class="material-symbols-outlined text-green-400 text-base">check_circle</span>
+        <span class="text-xs font-medium">Diagnóstico completado con éxito</span>
+    </div>
+    <div id="toast-error"
+        class="fixed bottom-5 right-5 bg-black/90 border border-white/10 text-white px-6 py-4 rounded-xl shadow-2xl transform translate-y-20 opacity-0 transition-all duration-300 z-[100] flex items-center gap-2.5 pointer-events-none">
+        <span class="material-symbols-outlined text-red-400 text-base">error</span>
+        <span class="text-xs font-medium" id="toast-error-message">Ha ocurrido un error</span>
+    </div>
+
+    <!-- Onboarding Script Logic -->
     <script>
+        const stepDecorations = {
+            1: { img: "assets/imagen/recepcion_logo.png", quote: "Atender bien empieza por dar espacio." },
+            2: { img: "assets/imagen/recepcion_logo.png", quote: "Cada cita es una oportunidad de cuidado." },
+            3: { img: "assets/imagen/recepcion_logo.png", quote: "La paz mental no tiene precio." },
+            4: { img: "assets/imagen/camilla_tablet.jpg", quote: "Estabilidad para planificar con seguridad." },
+            5: { img: "assets/imagen/atencion_cliente.png", quote: "Una relación cercana en cada detalle." },
+            6: { img: "assets/imagen/cosmeticos_vela.png", quote: "Resultados que transforman tu día." },
+            'analyzingState': { img: "assets/imagen/recepcion_logo.png", quote: "Calculando tu tranquilidad..." },
+            'resultState': { img: "assets/imagen/recepcion_logo.png", quote: "El camino hacia un centro más fluido." }
+        };
+
+        let activeBgLayer = 1;
+
+        function updateLeftSideDecoration(stepKey) {
+            const dec = stepDecorations[stepKey];
+            if (!dec) return;
+
+            const bg1 = document.getElementById("bg-layer-1");
+            const bg2 = document.getElementById("bg-layer-2");
+            const q = document.getElementById("leftDecorationQuote");
+
+            if (bg1 && bg2) {
+                if (activeBgLayer === 1) {
+                    bg2.style.backgroundImage = `url('${dec.img}')`;
+                    bg2.classList.remove("opacity-0");
+                    bg2.classList.add("opacity-100");
+                    bg1.classList.remove("opacity-100");
+                    bg1.classList.add("opacity-0");
+                    activeBgLayer = 2;
+                } else {
+                    bg1.style.backgroundImage = `url('${dec.img}')`;
+                    bg1.classList.remove("opacity-0");
+                    bg1.classList.add("opacity-100");
+                    bg2.classList.remove("opacity-100");
+                    bg2.classList.add("opacity-0");
+                    activeBgLayer = 1;
+                }
+            }
+            if (q) {
+                q.style.opacity = '0';
+                setTimeout(() => {
+                    q.textContent = `"${dec.quote}"`;
+                    q.style.opacity = '1';
+                }, 300);
+            }
+        }
+
         function showStep(stepNum) {
-            document.querySelectorAll('.step').forEach(s => {
+            const steps = document.querySelectorAll('.step');
+            const targetStep = document.getElementById(`step${stepNum}`);
+
+            steps.forEach(s => {
                 s.classList.remove('active');
                 s.classList.add('hidden');
+                s.style.opacity = '0';
             });
-            const targetStep = document.getElementById(`step${stepNum}`);
+
             if (targetStep) {
                 targetStep.classList.remove('hidden');
-                targetStep.classList.add('active');
+                // Trigger transition after render
+                setTimeout(() => {
+                    targetStep.classList.add('active');
+                    targetStep.style.opacity = '1';
+                }, 30);
+            }
+
+            // Announce step transition to screen readers (WCAG AA)
+            const announcer = document.getElementById('sr-announcer');
+            if (announcer && targetStep) {
+                const title = targetStep.querySelector('h1, h2, h3')?.textContent.trim() || '';
+                announcer.textContent = `Paso ${stepNum} de 6: ${title}`;
             }
 
             const stepCounter = document.getElementById('stepCounter');
             const progressBar = document.getElementById('progressBar');
-            if (stepCounter && progressBar) {
-                stepCounter.innerText = stepNum > 6 ? 6 : stepNum;
-                progressBar.style.width = `${(Math.min(stepNum, 6) / 6) * 100}%`;
+            const stepCounterContainer = document.getElementById('stepCounterContainer');
+
+            if (stepNum > 6) {
+                if (stepCounterContainer) stepCounterContainer.classList.add('hidden');
+            } else {
+                if (stepCounterContainer) stepCounterContainer.classList.remove('hidden');
+                if (stepCounter) stepCounter.innerText = stepNum;
+                if (progressBar) progressBar.style.width = `${(stepNum / 6) * 100}%`;
             }
 
+            updateLeftSideDecoration(stepNum);
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -495,7 +999,7 @@
         async function nextStep(stepNum) {
             const currentStep = document.querySelector('.step.active');
 
-            if (currentStep.id === 'step1') {
+            if (currentStep && currentStep.id === 'step1') {
                 const telInput = document.querySelector('input[name="telefono"]');
                 const emailInput = document.querySelector('input[name="email"]');
                 const telValue = telInput.value.trim();
@@ -516,22 +1020,29 @@
             }
 
             // HTML5 Validation
-            const inputs = Array.from(currentStep.querySelectorAll('input, select, textarea'));
-            for (let input of inputs) {
-                if (!input.checkValidity()) {
-                    input.reportValidity();
-                    return;
+            if (currentStep) {
+                const inputs = Array.from(currentStep.querySelectorAll('input, select, textarea'));
+                for (let input of inputs) {
+                    if (!input.checkValidity()) {
+                        input.reportValidity();
+                        return;
+                    }
                 }
             }
 
-            // Lead Parcial (Paso 1 -> 2)
-            if (currentStep.id === 'step1' && stepNum === 2) {
+            // Partial Lead Sync (Step 1 -> 2)
+            if (currentStep && currentStep.id === 'step1' && stepNum === 2) {
                 const nombreEl = document.querySelector('input[name="nombre"]');
                 const telefonoEl = document.querySelector('input[name="telefono"]');
                 const emailEl = document.querySelector('input[name="email"]');
                 const nombre = nombreEl ? nombreEl.value : '';
                 const telefono = telefonoEl ? telefonoEl.value : '';
                 const email = emailEl ? emailEl.value : '';
+
+                // Save to localStorage (avoid Redundant Entry)
+                if (nombre) localStorage.setItem('evolvehub_user_name', nombre.trim());
+                if (email) localStorage.setItem('evolvehub_user_email', email.trim());
+                if (telefono) localStorage.setItem('evolvehub_user_phone', telefono.trim());
 
                 const webhookUrl = 'https://n8n-n8n.gk97dq.easypanel.host/webhook/evolvehub-form';
                 fetch(webhookUrl, {
@@ -547,6 +1058,27 @@
             showStep(stepNum);
         }
 
+        // Custom selection helper for modern radio cards (Typeform behavior)
+        function selectRadioCard(labelEl, autoAdvance = false, nextStepNum = 0) {
+            const name = labelEl.querySelector('input').name;
+            // Deselect others in the same radio group
+            labelEl.parentElement.querySelectorAll('label').forEach(lbl => {
+                lbl.classList.remove('premium-radio-checked');
+            });
+            // Select current
+            labelEl.classList.add('premium-radio-checked');
+            labelEl.querySelector('input').checked = true;
+
+            // Auto advance option - disabled as per user request to force continue button clicking
+            /*
+            if (autoAdvance && nextStepNum > 0) {
+                setTimeout(() => {
+                    nextStep(nextStepNum);
+                }, 400);
+            }
+            */
+        }
+
         // Prevent Enter from submitting the form unexpectedly
         document.getElementById('diagnosticoForm').addEventListener('keydown', function (e) {
             if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') {
@@ -559,6 +1091,128 @@
             return Math.round(num / 50) * 50;
         }
 
+        function calcularAtencion(data) {
+            let ptsLlamadas = 50;
+            if (data.llamadas === "La cogemos si podemos") ptsLlamadas = 75;
+            else if (data.llamadas === "La devolvemos después") ptsLlamadas = 50;
+            else if (data.llamadas === "A veces se queda sin atender") ptsLlamadas = 25;
+
+            let ptsWhatsapp = 50;
+            if (data.whatsapp === "Respondemos al momento") ptsWhatsapp = 100;
+            else if (data.whatsapp === "A veces tardamos") ptsWhatsapp = 50;
+            else if (data.whatsapp === "Depende del día") ptsWhatsapp = 35;
+
+            return Math.round((ptsLlamadas + ptsWhatsapp) / 2);
+        }
+
+        function calcularOrganizacion(data) {
+            let ptsReorg = 50;
+            if (data.reorganizacion === "Reorganizamos manualmente") ptsReorg = 100;
+            else if (data.reorganizacion === "Depende del momento") ptsReorg = 55;
+            else if (data.reorganizacion === "Se queda ese hueco libre") ptsReorg = 20;
+
+            let ptsCanc = 50;
+            if (data.cancelaciones === "0-2") ptsCanc = 100;
+            else if (data.cancelaciones === "3-5") ptsCanc = 60;
+            else if (data.cancelaciones === "5+") ptsCanc = 30;
+
+            return Math.round((ptsReorg + ptsCanc) / 2);
+        }
+
+        function calcularTiempo(data) {
+            let base = 100;
+            if (data.whatsapp === "Respondemos al momento") base -= 30;
+            if (data.llamadas === "La cogemos si podemos") base -= 25;
+            if (data.reorganizacion === "Reorganizamos manualmente") base -= 15;
+            if (data.seguimiento === "Sí, de forma constante") base -= 15;
+            if (data.preguntan_no_reservan === "Hacemos seguimiento") base -= 15;
+            if (data.impacto === "Tendría más tiempo para mí") base -= 10;
+
+            return Math.max(20, base);
+        }
+
+        function calcularExperiencia(data) {
+            let ptsSeg = 50;
+            if (data.seguimiento === "Sí, de forma constante") ptsSeg = 100;
+            else if (data.seguimiento === "A veces") ptsSeg = 55;
+            else if (data.seguimiento === "No") ptsSeg = 20;
+
+            let ptsPreg = 50;
+            if (data.preguntan_no_reservan === "Hacemos seguimiento") ptsPreg = 100;
+            else if (data.preguntan_no_reservan === "A veces") ptsPreg = 55;
+            else if (data.preguntan_no_reservan === "No") ptsPreg = 20;
+
+            return Math.round((ptsSeg + ptsPreg) / 2);
+        }
+
+        function calcularDelegacion(data) {
+            let base = 100;
+            if (data.whatsapp === "Respondemos al momento") base -= 25;
+            if (data.llamadas === "La cogemos si podemos") base -= 25;
+            if (data.reorganizacion === "Reorganizamos manualmente") base -= 20;
+            if (data.seguimiento === "Sí, de forma constante") base -= 15;
+            if (data.preguntan_no_reservan === "Hacemos seguimiento") base -= 15;
+
+            return Math.max(20, base);
+        }
+
+        function generarInformePersonalizado(analisis, data) {
+            const bloques = [];
+
+            // 1. Reconocer lo positivo
+            if (analisis.experiencia >= 75 || data.preguntan_no_reservan === "Hacemos seguimiento") {
+                bloques.push("Se nota que <strong>cuidas mucho la experiencia de tus clientas</strong> y que has construido algo con dedicación.");
+            } else if (analisis.organizacion >= 75 || data.reorganizacion === "Reorganizamos manualmente") {
+                bloques.push("Lo primero que transmite tu diagnóstico es que <strong>hay un centro detrás al que le importa hacer bien las cosas</strong>.");
+            } else {
+                bloques.push("Has conseguido sacar adelante un negocio que requiere <strong>mucho compromiso</strong>. Eso ya dice mucho de ti.");
+            }
+
+            // 2. Oportunidad de mejora
+            if (data.reorganizacion === "Se queda ese hueco libre" || data.llamadas === "A veces se queda sin atender") {
+                bloques.push("Lo que más potencial tiene para mejorar ahora mismo es que <strong>hay oportunidades que probablemente se escapan</strong> simplemente porque llegan cuando nadie puede atenderlas. La buena noticia es que hoy existen formas de cuidar también esos momentos.");
+            } else if (data.whatsapp === "Respondemos al momento") {
+                bloques.push("Lo que más potencial tiene para mejorar ahora mismo es liberar tu tiempo. Da la sensación de que <strong>gran parte del día requiere que estés disponible</strong> para que todo siga avanzando. Cuando eso ocurre durante meses, es difícil encontrar momentos para pensar en el negocio con calma.");
+            } else {
+                bloques.push("Lo que más potencial tiene para mejorar ahora mismo es la gestión de consultas. <strong>Muchas gestiones siguen dependiendo de que alguien tenga tiempo</strong> para responderlas en el momento. No es una cuestión de trabajar más, sino de conseguir que esa atención siga funcionando incluso cuando el equipo está ocupado.");
+            }
+
+            // 3. Reforzar lo que ya hace bien
+            if (analisis.organizacion >= 70) {
+                bloques.push("También destaca algo muy positivo: <strong>la organización de tu centro parece bastante sólida</strong> y eso hace mucho más fácil seguir creciendo sin complicarlo todo.");
+            } else if (analisis.atencion >= 70 || analisis.experiencia >= 70) {
+                bloques.push("Tus clientas probablemente <strong>ya reciben una buena atención</strong>. Ahora el siguiente paso consiste en que esa experiencia sea igual de buena incluso antes de entrar por la puerta.");
+            } else {
+                bloques.push("La parte positiva es que ya cuentas con una base de clientes activa, por lo que <strong>cualquier pequeña optimización</strong> en tu forma de atender tendrá un impacto directo en tu facturación y en tu tranquilidad.");
+            }
+
+            // 4. Inspirar
+            if (data.llamadas === "La cogemos si podemos" || data.impacto === "Tendría más tiempo para mí") {
+                bloques.push("Un buen negocio no es el que depende constantemente de su dueño. Es el que consigue <strong>seguir ofreciendo una gran experiencia</strong> incluso cuando el equipo está centrado en atender a sus clientas.");
+            } else {
+                bloques.push("Muchas veces pensamos que crecer significa hacer más. Pero muchas empresas descubren que <strong>el verdadero cambio llega cuando consiguen hacer mejor</strong> lo que ya hacen.");
+            }
+
+            // 5. Cierre con ilusión
+            bloques.push("La buena noticia es que la mayoría de estos cambios no requieren trabajar más. Solo <strong>reorganizar la forma en la que el centro funciona</strong>. Si algún día quieres ver cómo podría ser aplicado a tu caso concreto, estaré encantado de enseñártelo.");
+
+            return bloques;
+        }
+
+        function obtenerFaseHumana(data) {
+            if (data.whatsapp === "A veces tardamos" || data.whatsapp === "Depende del día" || data.llamadas === "A veces se queda sin atender") {
+                return {
+                    titulo: "Tu centro transmite cercanía.",
+                    subtitulo: "Ahora el siguiente paso es conseguir que esa cercanía también se note cuando una clienta escribe un domingo o a las diez de la noche."
+                };
+            } else {
+                return {
+                    titulo: "Tu centro está en una fase de crecimiento muy bonita.",
+                    subtitulo: "Ya hay una base sólida. Ahora toca recuperar tranquilidad mientras mejoras la experiencia que reciben tus clientas."
+                };
+            }
+        }
+
         async function calculateAndSubmit() {
             const form = document.getElementById('diagnosticoForm');
 
@@ -567,18 +1221,24 @@
                 return;
             }
 
-            // Mostrar pantalla "Analizando"
+            // Show "Analyzing" screen
             document.querySelectorAll('.step').forEach(s => {
                 s.classList.remove('active');
                 s.classList.add('hidden');
+                s.style.opacity = '0';
             });
             const analyzingState = document.getElementById('analyzingState');
             if (analyzingState) {
                 analyzingState.classList.remove('hidden');
-                analyzingState.classList.add('active');
+                setTimeout(() => {
+                    analyzingState.classList.add('active');
+                    analyzingState.style.opacity = '1';
+                }, 30);
             }
 
-            // Recopilar datos
+            updateLeftSideDecoration('analyzingState');
+
+            // Gather Data
             const formData = new FormData(form);
             const data = {};
 
@@ -594,7 +1254,7 @@
                 if (Array.isArray(data[key])) data[key] = data[key].join(', ');
             }
 
-            // Cálculos
+            // Calculations
             const ticketMedioEl = form.querySelector('input[name="ticket_medio"]:checked');
             const cancelacionesEl = form.querySelector('input[name="cancelaciones"]:checked');
 
@@ -603,7 +1263,7 @@
 
             let perdidaBase = ticket * perdidasSemana;
 
-            // Contador de fallos
+            // Fault multipliers
             const llamadasEl = form.querySelector('input[name="llamadas"]:checked');
             const whatsappEl = form.querySelector('input[name="whatsapp"]:checked');
             const seguimientoEl = form.querySelector('input[name="seguimiento"]:checked');
@@ -622,7 +1282,7 @@
             let min = roundIntelligently(resultado * 0.7);
             let max = roundIntelligently(resultado * 1.3);
 
-            // Capping de seguridad visual a 1500€
+            // Safety limit capping at 1500€
             if (max > 1500) {
                 max = 1500;
                 min = 1200;
@@ -635,11 +1295,33 @@
             const formattedMax = new Intl.NumberFormat('es-ES', { maximumFractionDigits: 0 }).format(max);
             const formattedMinAnual = new Intl.NumberFormat('es-ES', { maximumFractionDigits: 0 }).format(minAnual);
 
+            // Category-based analysis
+            const analisis = {
+                atencion: calcularAtencion(data),
+                organizacion: calcularOrganizacion(data),
+                tiempo: calcularTiempo(data),
+                experiencia: calcularExperiencia(data),
+                delegacion: calcularDelegacion(data)
+            };
+
+            const bloquesMensaje = generarInformePersonalizado(analisis, data);
+            const mensajeCompleto = bloquesMensaje.join('\n\n');
+            const fase = obtenerFaseHumana(data);
+
+            // Add calculations & report to webhook data
             data.calculo_semanal_min = formattedMin;
             data.calculo_semanal_max = formattedMax;
             data.calculo_anual_base = formattedMinAnual;
+            data.analisis_atencion = analisis.atencion;
+            data.analisis_organizacion = analisis.organizacion;
+            data.analisis_tiempo = analisis.tiempo;
+            data.analisis_experiencia = analisis.experiencia;
+            data.analisis_delegacion = analisis.delegacion;
+            data.mensaje_informe = mensajeCompleto;
+            data.fase_titulo = fase.titulo;
+            data.fase_subtitulo = fase.subtitulo;
 
-            // Esperar para el efecto visual
+            // Wait 2s for visual transition
             await new Promise(r => setTimeout(r, 2000));
 
             try {
@@ -653,13 +1335,23 @@
                     })
                 }).catch(e => console.error(e));
 
-                const lossWeeklyEl = document.getElementById('lossWeekly');
-                const lossAnnualEl = document.getElementById('lossAnnual');
-                const lossExplanationEl = document.getElementById('lossExplanation');
+                // Update UI elements
+                const resultTitleEl = document.getElementById('resultTitle');
+                const resultSubtitleEl = document.getElementById('resultSubtitle');
+                const reportParagraphsEl = document.getElementById('reportParagraphs');
 
-                if (lossWeeklyEl) lossWeeklyEl.textContent = `entre ${formattedMin}€ y ${formattedMax}€ a la semana`;
-                if (lossAnnualEl) lossAnnualEl.textContent = formattedMinAnual;
-                if (lossExplanationEl) lossExplanationEl.textContent = `entre ${formattedMin}€ y ${formattedMax}€ a la semana`;
+                if (resultTitleEl) resultTitleEl.textContent = fase.titulo;
+                if (resultSubtitleEl) resultSubtitleEl.textContent = fase.subtitulo;
+
+                if (reportParagraphsEl) {
+                    reportParagraphsEl.innerHTML = '';
+                    bloquesMensaje.forEach(parrafo => {
+                        const p = document.createElement('p');
+                        p.className = 'leading-relaxed';
+                        p.innerHTML = parrafo;
+                        reportParagraphsEl.appendChild(p);
+                    });
+                }
 
                 if (analyzingState) {
                     analyzingState.classList.add('hidden');
@@ -669,73 +1361,71 @@
                 const resultState = document.getElementById('resultState');
                 if (resultState) {
                     resultState.classList.remove('hidden');
-                    resultState.classList.add('active');
+                    setTimeout(() => {
+                        resultState.classList.add('active');
+                        resultState.style.opacity = '1';
+                    }, 30);
                 }
 
+                updateLeftSideDecoration('resultState');
+                showToast(true);
+
             } catch (error) {
-                console.error("Error general:", error);
-                if (typeof showErrorToast === 'function') showErrorToast("Error al procesar los resultados.");
+                console.error("General error processing:", error);
+                showToast(false, "Error al procesar los resultados.");
                 if (analyzingState) analyzingState.classList.add('hidden');
                 showStep(5);
             }
         }
 
-        function showExplanation() {
-            document.querySelectorAll('.step').forEach(s => {
-                s.classList.remove('active');
-                s.classList.add('hidden');
-            });
-            const explanationState = document.getElementById('explanationState');
-            if (explanationState) {
-                explanationState.classList.remove('hidden');
-                explanationState.classList.add('active');
+        function showToast(isSuccess, message = "") {
+            const toast = isSuccess ? document.getElementById("toast-success") : document.getElementById("toast-error");
+            if (!toast) return;
+
+            if (!isSuccess && message) {
+                const msgEl = document.getElementById("toast-error-message");
+                if (msgEl) msgEl.textContent = message;
             }
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            toast.classList.remove("translate-y-20", "opacity-0");
+            toast.classList.add("translate-y-0", "opacity-100");
+
+            setTimeout(() => {
+                toast.classList.remove("translate-y-0", "opacity-100");
+                toast.classList.add("translate-y-20", "opacity-0");
+            }, 4000);
         }
+
+        // Prefill form from localStorage to prevent Redundant Entry (WCAG 2.2)
+        document.addEventListener('DOMContentLoaded', () => {
+            const name = localStorage.getItem('evolvehub_user_name');
+            const email = localStorage.getItem('evolvehub_user_email');
+            const phone = localStorage.getItem('evolvehub_user_phone');
+
+            const nameInput = document.getElementById('diag-nombre');
+            const emailInput = document.getElementById('diag-email');
+            const telInput = document.getElementById('diag-telefono');
+
+            if (nameInput && name) nameInput.value = name;
+            if (emailInput && email) emailInput.value = email;
+            if (telInput && phone) telInput.value = phone;
+
+            // Mobile Menu Toggler
+            const mobileToggle = document.querySelector('.mobile-toggle');
+            const mobileNav = document.querySelector('.mobile-nav-overlay');
+
+            if (mobileToggle && mobileNav) {
+                mobileToggle.addEventListener('click', () => {
+                    mobileNav.classList.toggle('hidden');
+                    const isHidden = mobileNav.classList.contains('hidden');
+                    const iconSpan = mobileToggle.querySelector('.material-symbols-outlined');
+                    if (iconSpan) {
+                        iconSpan.textContent = isHidden ? 'menu' : 'close';
+                    }
+                });
+            }
+        });
     </script>
-
-    <!-- Toasts -->
-    <div id="toast-success"
-        class="fixed bottom-5 right-5 bg-green-500 text-white px-6 py-3 rounded-xl shadow-2xl transform translate-y-20 opacity-0 transition-all duration-300 z-[100] flex items-center gap-2 pointer-events-none">
-        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-        </svg>
-        <span class="font-medium">Mensaje enviado con éxito</span>
-    </div>
-
-    <div id="toast-error"
-        class="fixed bottom-5 right-5 bg-red-600 text-white px-6 py-3 rounded-xl shadow-2xl transform translate-y-20 opacity-0 transition-all duration-300 z-[100] flex items-center gap-2 pointer-events-none">
-        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-        <span class="font-medium">Error al enviar el mensaje</span>
-    </div>
-
-    <script>
-        function showToast() {
-            const toast = document.getElementById('toast-success');
-            if (toast) {
-                toast.classList.remove('translate-y-20', 'opacity-0');
-                setTimeout(() => toast.classList.add('translate-y-20', 'opacity-0'), 4000);
-            }
-        }
-
-        function showErrorToast(msg) {
-            const toast = document.getElementById('toast-error');
-            if (toast) {
-                if (msg) toast.querySelector('span').innerText = msg;
-                toast.classList.remove('translate-y-20', 'opacity-0');
-                setTimeout(() => toast.classList.add('translate-y-20', 'opacity-0'), 5000);
-            }
-        }
-    </script>
-    <footer class="w-full border-t border-white/10 bg-dark py-8 mt-12 relative z-10">
-        <div class="max-w-7xl mx-auto px-6 flex flex-col items-center">
-            <img src="./imagen/logo_evolvehub.png" alt="EvolveHub"
-                class="h-10 md:h-12 w-auto mb-4 opacity-80 hover:opacity-100 transition-opacity">
-            <p class="text-white/40 text-xs">© 2026 EvolveHub. Todos los derechos reservados.</p>
-        </div>
-    </footer>
 </body>
 
 </html>

@@ -1,455 +1,1216 @@
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
+<html class="dark" lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recupera Citas y Llena tu Agenda | EvolveHub</title>
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-P6WZNMNS');</script>
+    <!-- End Google Tag Manager -->
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>EvolveHub | Tranquilidad y Control para tu Centro de Estética</title>
+
+    <!-- Meta Description for SEO -->
+    <meta name="description"
+        content="Sistemas de gestión y atención automatizada para centros de estética. Diseñado para devolverte la tranquilidad en tu día a día." />
+
+    <link rel="stylesheet" href="assets/index-tailwind.css">
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap"
-        rel="stylesheet">
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
 
-    <!-- Custom CSS Base -->
-    <link rel="stylesheet" href="assets/styles.css">
-
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        dark: '#131313',
-                        surface: '#1a1a1a',
-                        primary: '#8a2be2',
-                        primaryLight: '#a35ced',
-                    },
-                    fontFamily: {
-                        headline: ['"Space Grotesk"', 'sans-serif'],
-                        body: ['Inter', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-    <link rel="icon" type="image/png" sizes="32x32" href="./imagen/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="./imagen/favicon-16x16.png">
-    <link rel="shortcut icon" href="./imagen/favicon.ico">
+    <!-- Firebase Compat SDKs (Loaded conditionally for the custom calendar) -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
 
     <style>
-        /* Ajuste extra para asegurar visibilidad total sin distracciones */
-        .glass-panel-custom {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 1.5rem;
-            transition: all 0.3s ease;
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
         }
 
-        .glass-panel-custom:hover {
-            background: rgba(138, 43, 226, 0.05);
-            border-color: rgba(138, 43, 226, 0.2);
-            transform: translateY(-5px);
+        body {
+            background-color: #FAF8F5;
+            color: #111827;
+        }
+
+        /* Focus state for keyboard navigation (WCAG AA compliant) */
+        :focus-visible {
+            outline: 2px solid #7C3AED !important;
+            outline-offset: 4px !important;
+        }
+
+        input:focus-visible,
+        textarea:focus-visible,
+        select:focus-visible {
+            outline: none !important;
+            border-color: #7C3AED !important;
+            box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.4) !important;
+        }
+
+        /* Reduced Motion media query */
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto !important;
+            }
+
+            .reveal-element {
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
+            }
+
+            * {
+                animation-delay: 0s !important;
+                animation-duration: 0s !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0s !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* Custom Scrollbar for premium aesthetic */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #FAF8F5;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #E5E7EB;
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #7C3AED;
+        }
+
+        /* Custom Scrollbar for Chat */
+        #chat-messages::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        #chat-messages::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+        }
+
+        #chat-messages::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
+
+        #chat-messages::-webkit-scrollbar-thumb:hover {
+            background: rgba(124, 58, 237, 0.5);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #111827 30%, #4B5563 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .action-button-glow:hover {
+            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .glass-blur-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(17, 24, 39, 0.06);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+        }
+
+        .glass-tab-active {
+            background: rgba(124, 58, 237, 0.08);
+            border-color: rgba(124, 58, 237, 0.2);
+        }
+
+        /* Typing indicator CSS */
+        .typing-dot {
+            width: 5px;
+            height: 5px;
+            background-color: #111827;
+            border-radius: 50%;
+            opacity: 0.4;
+            animation: typing-bounce 1s infinite alternate;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing-bounce {
+            to {
+                transform: translateY(-4px);
+                opacity: 1;
+            }
+        }
+
+        /* Scroll reveal class */
+        .reveal-element {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal-element.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .logo-navbar {
+            height: 40px;
+            width: auto;
+            display: block;
+        }
+
+        .logo-footer {
+            height: 48px;
+            width: auto;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .logo-navbar {
+                height: 31px;
+            }
+
+            .logo-footer {
+                height: 42px;
+            }
+        }
+
+        /* Smooth scrolling and scrollbar hidden for horizontal days row */
+        #calendar-days-row {
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+            /* Firefox */
+        }
+
+        #calendar-days-row::-webkit-scrollbar {
+            display: none;
+            /* Safari and Chrome */
         }
     </style>
 </head>
 
-<body class="bg-dark text-white font-body overflow-x-hidden selection:bg-primary selection:text-white">
+<body
+    class="overflow-x-hidden font-body-md bg-deep-onyx text-white-broken selection:bg-action-purple selection:text-white-broken">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P6WZNMNS" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
 
-    <!-- Header -->
+    <!-- Skip to main content link for keyboard users -->
+    <a href="#main-content"
+        class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-action-purple focus:text-white-broken focus:px-6 focus:py-3 focus:rounded-lg focus:font-semibold focus:border focus:border-white-broken/20 focus:shadow-lg">
+        Saltar al contenido principal
+    </a>
+
+    <!-- Header / Navigation -->
     <header
-        class="fixed top-0 w-full z-50 bg-dark/90 backdrop-blur-md border-b border-white/10 transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-5 md:px-6 py-3 md:py-4 flex items-center justify-between">
-            <a href="index.html" class="flex items-center">
-                <img src="./imagen/logo_e.png" alt="EvolveHub" class="h-[30px] md:h-[40px] w-auto ml-1 md:ml-5">
+        class="site-header fixed top-0 w-full z-50 bg-dark-surface/80 backdrop-blur-md border-b border-glass-border">
+        <nav
+            class="flex justify-between items-center h-20 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto relative">
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="flex items-center gap-2">
+                    <img alt="EvolveHub Logo" class="logo-navbar" src="assets/imagen/logo_evolvehub.png" />
+                </a>
+            </div>
+            <div class="hidden md:flex items-center gap-10">
+                <a class="text-grey-warm hover:text-white-broken transition-colors duration-300 font-label-caps text-label-caps"
+                    href="#dia-a-dia">El día a día</a>
+                <a class="text-grey-warm hover:text-white-broken transition-colors duration-300 font-label-caps text-label-caps"
+                    href="#beneficios">Beneficios</a>
+                <a class="text-grey-warm hover:text-white-broken transition-colors duration-300 font-label-caps text-label-caps"
+                    href="#sistema">Cómo funciona</a>
+                <a class="text-grey-warm hover:text-white-broken transition-colors duration-300 font-label-caps text-label-caps"
+                    href="#demo">Probar demo</a>
+                <a class="text-grey-warm hover:text-white-broken transition-colors duration-300 font-label-caps text-label-caps"
+                    href="#calendario">Reservar hueco</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="hidden md:block">
+                    <a href="diagnostico.html"
+                        class="inline-block bg-action-purple text-white font-label-caps text-[11px] px-5 py-2.5 rounded-lg font-medium transition-all duration-300 hover:bg-opacity-95 action-button-glow">
+                        Diagnóstico gratuito
+                    </a>
+                </div>
+                <!-- Hamburger toggle button -->
+                <button type="button"
+                    class="mobile-toggle md:hidden flex items-center justify-center w-9 h-9 rounded-lg border border-glass-border bg-glass-surface/30 text-white-broken focus:outline-none focus:ring-2 focus:ring-action-purple"
+                    aria-label="Abrir menú de navegación">
+                    <span class="material-symbols-outlined text-xl" aria-hidden="true">menu</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Mobile Dropdown Navigation Overlay -->
+        <nav class="mobile-nav-overlay hidden fixed inset-x-0 top-20 bg-deep-onyx/95 backdrop-blur-lg border-b border-glass-border flex flex-col p-6 space-y-4 md:hidden z-40 max-h-[calc(100vh-80px)] overflow-y-auto"
+            aria-label="Menú de navegación móvil">
+            <a class="text-grey-warm hover:text-white-broken transition-colors duration-300 font-label-caps text-sm py-2 border-b border-glass-border/30"
+                href="#dia-a-dia">El día a día</a>
+            <a class="text-grey-warm hover:text-white-broken transition-colors duration-300 font-label-caps text-sm py-2 border-b border-glass-border/30"
+                href="#beneficios">Beneficios</a>
+            <a class="text-grey-warm hover:text-white-broken transition-colors duration-300 font-label-caps text-sm py-2 border-b border-glass-border/30"
+                href="#sistema">Cómo funciona</a>
+            <a class="text-grey-warm hover:text-white-broken transition-colors duration-300 font-label-caps text-sm py-2 border-b border-glass-border/30"
+                href="#demo">Probar demo</a>
+            <a class="text-grey-warm hover:text-white-broken transition-colors duration-300 font-label-caps text-sm py-2 border-b border-glass-border/30"
+                href="#calendario">Reservar hueco</a>
+            <a class="inline-block bg-action-purple text-center text-white font-label-caps text-[11px] py-3.5 rounded-lg font-medium transition-all duration-300"
+                href="diagnostico.html">
+                Diagnóstico gratuito
             </a>
-            <!-- Right side empty or simple text -->
-        </div>
+        </nav>
     </header>
 
-    <main class="pt-32 pb-20">
-        <!-- 1. HERO SECTION -->
-        <section class="relative pt-12 pb-24 text-center px-6">
-            <div
-                class="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] max-w-2xl h-80 bg-primary/20 rounded-full blur-[100px] pointer-events-none">
+    <main id="main-content">
+
+        <!-- Hero Section -->
+        <section
+            class="relative min-h-screen flex items-center pt-32 pb-24 overflow-hidden bg-deep-onyx text-white-broken">
+            <!-- Fullscreen Video and Light Overlay -->
+            <div class="absolute inset-0 z-0">
+                <video autoplay loop muted playsinline
+                    class="w-full h-full object-cover opacity-80 filter brightness-[1.02]">
+                    <source src="https://assets.mixkit.co/videos/52162/52162-1080.mp4" type="video/mp4">
+                </video>
+                <div class="absolute inset-0 bg-dark-surface/70 backdrop-blur-[1px] z-10"></div>
             </div>
 
-            <div class="max-w-4xl mx-auto relative z-10">
-                <h1 class="font-headline text-4xl md:text-6xl font-bold leading-tight mb-6">
-                    Recupera citas perdidas y llena tu agenda <br class="hidden md:block" />
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-primaryLight to-[#c195ff]">sin
-                        depender del teléfono</span>
-                </h1>
+            <div class="relative z-20 max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop w-full">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+                    <!-- Hero Left Content -->
+                    <div class="lg:col-span-7 max-w-3xl space-y-8">
+                        <span
+                            class="font-label-caps text-label-caps text-action-purple tracking-widest uppercase block">EvolveHub</span>
+                        <h1
+                            class="font-display-lg text-[40px] sm:text-[48px] md:text-[64px] lg:text-[76px] leading-[1.08] tracking-tight text-white-broken font-semibold">
+                            Construye un centro donde cada cliente se sienta mejor atendido.
+                        </h1>
+                        <p
+                            class="font-display-md text-[20px] md:text-[24px] text-action-purple font-medium leading-normal">
+                            La tecnología trabaja en silencio para que tú puedas dedicar toda tu atención a las
+                            personas.
+                        </p>
+                        <p class="font-body-lg text-[16px] md:text-[18px] text-grey-warm leading-relaxed max-w-2xl">
+                            No se trata de responder más rápido. Se trata de conseguir que cada persona se sienta
+                            cuidada desde el primer contacto hasta mucho después de salir del centro. Ese es el tipo de
+                            experiencia que genera confianza, recomendaciones y clientes que vuelven.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                            <a href="#calendario"
+                                class="bg-action-purple text-white font-label-caps text-[14px] px-8 py-5 rounded-xl flex items-center justify-center font-semibold transition-all duration-300 action-button-glow">
+                                Quiero descubrir cómo sería mi centro
+                            </a>
+                            <a href="#demo"
+                                class="border border-glass-border bg-glass-surface hover:bg-dark-surface/90 text-white-broken font-label-caps text-[14px] px-8 py-5 rounded-xl flex items-center justify-center font-semibold transition-all duration-300 shadow-sm">
+                                Ver una demostración
+                            </a>
+                        </div>
+                    </div>
 
-                <p class="text-lg md:text-xl text-white/80 leading-relaxed max-w-2xl mx-auto mb-4">
-                    Automatizamos WhatsApp y llamadas para que no pierdas clientes, reduzcas cancelaciones y aumentes
-                    ingresos.
-                </p>
+                    <!-- Hero Right Showcase (Mockup in warm settings) -->
+                    <div class="hidden lg:block lg:col-span-5 relative">
+                        <!-- Frame styled elegantly -->
+                        <div
+                            class="w-full max-w-[360px] mx-auto rounded-[32px] border border-glass-border bg-dark-surface p-4 shadow-xl relative z-10 overflow-hidden">
+                            <!-- Header -->
+                            <div class="px-2 py-3 border-b border-glass-border bg-dark-surface flex items-center gap-3">
+                                <div
+                                    class="w-8 h-8 rounded-full bg-action-purple/10 flex items-center justify-center text-action-purple">
+                                    <span class="material-symbols-outlined text-sm">spa</span>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-white-broken text-sm">Tu Centro Estético</p>
+                                    <p class="text-[13px] text-grey-warm">Atención con Calma</p>
+                                </div>
+                            </div>
 
-                <p class="text-sm text-white/50 mb-10 max-w-xl mx-auto">
-                    En 10-15 min ves esto con nosotros, sin compromiso y aplicado a tu caso.
-                </p>
-
-                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-
-                    <a href="https://calendly.com/oliversanjr/30min"
-                        class="w-full sm:w-auto btn btn-primary bg-gradient-to-r from-primary to-primaryLight text-xl font-bold font-headline rounded-full px-10 py-5 shadow-[0_0_20px_rgba(138,43,226,0.5)] hover:shadow-[0_0_40px_rgba(138,43,226,0.7)] hover:scale-105 transition-all duration-300">
-                        Reservar llamada
-                    </a>
-                    <a href="diagnostico.html"
-                        class="w-full sm:w-auto btn btn-secondary bg-white/10 text-base rounded-full px-8 py-3 border border-white/20 hover:bg-white/20 opacity-80 hover:opacity-100 transition-all duration-300">
-                        Hacer diagnóstico
-                    </a>
+                            <!-- Screen WhatsApp Content -->
+                            <div class="py-4 space-y-4 text-sm leading-relaxed">
+                                <div
+                                    class="bg-deep-onyx border border-glass-border p-3.5 rounded-2xl rounded-tl-none max-w-[85%] text-white-broken">
+                                    Hola Clara, ¿te viene bien reservar para tu Tratamiento Hidrafacial este miércoles?
+                                    <p class="text-xs text-grey-warm/60 mt-1.5">11:02</p>
+                                </div>
+                                <div
+                                    class="bg-action-purple/10 border border-action-purple/15 p-3.5 rounded-2xl rounded-tr-none max-w-[85%] ml-auto text-white-broken">
+                                    Hola. Sí, por favor, pero tiene que ser por la tarde a partir de las 17h.
+                                    <p class="text-xs text-action-purple/60 mt-1.5">11:03</p>
+                                </div>
+                                <div
+                                    class="bg-deep-onyx border border-glass-border p-3.5 rounded-2xl rounded-tl-none max-w-[85%] text-white-broken">
+                                    Perfecto, tengo libre el miércoles a las 17:30. ¿Te agendo a esa hora?
+                                    <p class="text-xs text-grey-warm/60 mt-1.5">11:03</p>
+                                </div>
+                                <div
+                                    class="bg-action-purple/10 border border-action-purple/15 p-3.5 rounded-2xl rounded-tr-none max-w-[85%] ml-auto text-white-broken">
+                                    Sí, perfecto. Apúntame a esa hora por favor.
+                                    <p class="text-xs text-action-purple/60 mt-1.5">11:03</p>
+                                </div>
+                                <div
+                                    class="bg-deep-onyx border border-glass-border p-3.5 rounded-2xl rounded-tl-none max-w-[85%] text-white-broken">
+                                    ¡Listo, Clara! Ya está reservado el miércoles a las 17:30. Te acabo de enviar los
+                                    detalles por correo. ¡Que tengas un gran día!
+                                    <p class="text-xs text-grey-warm/60 mt-1.5">11:04</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Ambient aura -->
+                        <div
+                            class="absolute -inset-4 bg-action-purple/5 blur-3xl rounded-full -z-10 animate-pulse-slow">
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- 2. PROBLEMA Y TRANSICIÓN -->
-        <section class="py-20 relative border-t border-white/5 bg-surface/30 px-6">
-            <div class="max-w-3xl mx-auto text-center">
-                <p class="font-headline text-2xl md:text-3xl font-bold mb-4 text-white">
-                    Si tienes un centro de estética, seguramente ya haces muchas cosas bien en el día a día.
-                </p>
-                <p class="text-xl text-white/70 mb-10">
-                    Aun así, hay situaciones que suelen aparecer de forma natural:
-                </p>
+        <!-- Cinematic Block 1: Los clientes recuerdan cómo les hiciste sentir -->
+        <section class="relative min-h-[70vh] flex items-center justify-center bg-black overflow-hidden py-32">
+            <div class="absolute inset-0 z-0">
+                <img alt="Clienta sonriendo después de un tratamiento relajante"
+                    class="w-full h-full object-cover opacity-60 filter brightness-[0.9]"
+                    src="assets/imagen/atencion_cliente.png" />
+                <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/45 to-black/65 z-10"></div>
+            </div>
+            <div class="relative z-20 max-w-4xl mx-auto px-margin-mobile text-center space-y-8">
+                <blockquote
+                    class="font-display-lg text-[32px] sm:text-[44px] md:text-[56px] leading-tight text-white font-light italic">
+                    "Los clientes recuerdan cómo les hiciste sentir."
+                </blockquote>
+                <div class="w-16 h-0.5 bg-action-purple/60 mx-auto"></div>
+            </div>
+        </section>
 
-                <ul class="space-y-6 max-w-2xl mx-auto mb-12 text-left">
-                    <li class="flex items-start gap-4">
-                        <div
-                            class="min-w-6 min-h-6 mt-1 rounded-full bg-primary/20 text-primaryLight flex items-center justify-center">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                <polyline points="20 6 9 17 4 12"></polyline>
-                            </svg>
-                        </div>
-                        <p class="text-lg text-white/80">Cuando estás atendiendo, no siempre es fácil coger todas las
-                            llamadas</p>
-                    </li>
-                    <li class="flex items-start gap-4">
-                        <div
-                            class="min-w-6 min-h-6 mt-1 rounded-full bg-primary/20 text-primaryLight flex items-center justify-center">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                <polyline points="20 6 9 17 4 12"></polyline>
-                            </svg>
-                        </div>
-                        <p class="text-lg text-white/80">Los mensajes de WhatsApp a veces se responden cuando hay un
-                            hueco</p>
-                    </li>
-                    <li class="flex items-start gap-4">
-                        <div
-                            class="min-w-6 min-h-6 mt-1 rounded-full bg-primary/20 text-primaryLight flex items-center justify-center">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                <polyline points="20 6 9 17 4 12"></polyline>
-                            </svg>
-                        </div>
-                        <p class="text-lg text-white/80">La agenda cambia constantemente entre citas, cambios y
-                            cancelaciones</p>
-                    </li>
-                    <li class="flex items-start gap-4">
-                        <div
-                            class="min-w-6 min-h-6 mt-1 rounded-full bg-primary/20 text-primaryLight flex items-center justify-center">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                <polyline points="20 6 9 17 4 12"></polyline>
-                            </svg>
-                        </div>
-                        <p class="text-lg text-white/80">Hay personas interesadas que preguntan pero no siempre reservan
-                            en ese momento</p>
-                    </li>
-                    <li class="flex items-start gap-4">
-                        <div
-                            class="min-w-6 min-h-6 mt-1 rounded-full bg-primary/20 text-primaryLight flex items-center justify-center">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                <polyline points="20 6 9 17 4 12"></polyline>
-                            </svg>
-                        </div>
-                        <p class="text-lg text-white/80">Y clientes que podrían volver, pero requieren un seguimiento
-                            que cuesta mantener</p>
-                    </li>
-                </ul>
+        <!-- Sección 2: Una Historia (Antes vs Después) -->
+        <section id="dia-a-dia" class="py-32 bg-dark-surface border-t border-glass-border">
+            <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+                <!-- Centered Header Block -->
+                <div class="text-center max-w-3xl mx-auto mb-16 reveal-element">
 
-                <div class="mb-12">
-                    <p class="text-xl font-medium text-white/90 mb-2">Y no es por falta de trabajo.</p>
-                    <p class="text-xl font-medium text-primaryLight font-bold">Es porque todo depende de ti y de tu
-                        equipo.</p>
-                </div>
-
-                <div class="p-8 rounded-2xl bg-white/5 border border-white/10 text-center">
-                    <p class="text-xl font-bold text-white mb-6">Cuando todo esto se organiza bien, el cambio se nota:
-                    </p>
-                    <div class="flex flex-col md:flex-row justify-center gap-6 md:gap-12 text-lg text-white/80">
-                        <p>✓ Más tranquilidad en el día a día</p>
-                        <p>✓ Más control sobre la agenda</p>
-                        <p>✓ Y una experiencia más cuidada para cada cliente</p>
-                    </div>
-                </div>
-            </div> <!-- 3. SOLUCIÓN -->
-            <section class="py-20 relative px-6">
-                <div
-                    class="absolute right-0 top-1/2 -translate-y-1/2 w-64 h-64 bg-primary/10 rounded-full blur-[80px] pointer-events-none">
-                </div>
-                <div class="max-w-4xl mx-auto text-center">
-                    <h2 class="font-headline text-3xl md:text-5xl font-bold mb-6">
-                        Ahí es entramos nosotros.
+                    <h2
+                        class="font-display-md text-[36px] md:text-[48px] text-white-broken tracking-tight leading-tight">
+                        Un día en tu centro, antes y después
                     </h2>
-                    <p class="text-xl text-white/80 max-w-2xl mx-auto mb-12">
-                        Te ayudamos a que puedas centrarte en lo importante sin estar pendiente de todo a la vez.
+                    <p class="mt-4 text-grey-warm text-sm leading-relaxed max-w-2xl mx-auto">
+                        Explicamos cómo cambia la energía del negocio al tener un flujo constante de respuestas
+                        tranquilas en segundo plano.
                     </p>
-
-                    <div class="grid md:grid-cols-2 gap-6 mt-12 mb-12 text-left">
-                        <div class="glass-panel-custom p-6 flex flex-col gap-3">
-                            <div
-                                class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primaryLight mb-2">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2">
-                                    <path
-                                        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-                                </svg>
-                            </div>
-                            <h4 class="font-bold text-lg">Responde cuando tú no puedes</h4>
-                            <p class="text-white/70 text-sm">Si estás con una clienta y alguien llama o escribe, se le
-                                atiende en ese momento sin que tengas que dejar lo que estás haciendo.</p>
-                        </div>
-
-                        <div class="glass-panel-custom p-6 flex flex-col gap-3">
-                            <div
-                                class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primaryLight mb-2">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2">
-                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-                                    <line x1="16" y1="2" x2="16" y2="6" />
-                                    <line x1="8" y1="2" x2="8" y2="6" />
-                                    <line x1="3" y1="10" x2="21" y2="10" />
-                                </svg>
-                            </div>
-                            <h4 class="font-bold text-lg">La agenda se mueve sola</h4>
-                            <p class="text-white/70 text-sm">Las citas, cambios o huecos se organizan sin tener que ir
-                                detrás de cada mensaje o cada llamada.</p>
-                        </div>
-
-                        <div class="glass-panel-custom p-6 flex flex-col gap-3">
-                            <div
-                                class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primaryLight mb-2">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2">
-                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-                                    <polyline points="22 4 12 14.01 9 11.01" />
-                                </svg>
-                            </div>
-                            <h4 class="font-bold text-lg">Cada cita está más controlada</h4>
-                            <p class="text-white/70 text-sm">Antes de venir, el cliente recibe recordatorios y confirma,
-                                para que todo esté más claro y estable.</p>
-                        </div>
-
-                        <div class="glass-panel-custom p-6 flex flex-col gap-3">
-                            <div
-                                class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primaryLight mb-2">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2">
-                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                                    <circle cx="9" cy="7" r="4" />
-                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-                                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                                </svg>
-                            </div>
-                            <h4 class="font-bold text-lg">Los clientes no se quedan en el olvido</h4>
-                            <p class="text-white/70 text-sm">Si alguien preguntó o ya vino, se le vuelve a escribir en
-                                el momento adecuado sin que tengas que acordarte.</p>
-                        </div>
-                    </div>
-
-
-                    <div class="bg-dark p-8 rounded-2xl border border-white/5 shadow-2xl inline-block mt-4 text-center">
-                        <p class="text-xl font-bold text-primaryLight mb-2">Tu equipo no cambia.</p>
-                        <p class="text-lg text-white/90">Solo deja de hacer lo repetitivo para poder centrarse en lo
-                            importante: <span class="font-bold">atender bien a cada persona.</span></p>
-                    </div>
-                </div>
-            </section>
-        </section>
-
-        <!-- 4. BENEFICIOS -->
-        <section class="py-20 relative bg-primary/5 border-y border-white/5 px-6">
-            <div class="max-w-4xl mx-auto">
-                <div class="grid md:grid-cols-2 gap-8 mb-12">
-                    <div class="border-l-2 border-primary pl-6">
-                        <h3 class="font-headline text-2xl font-bold mb-2 text-white">Más estabilidad en la agenda</h3>
-                        <p class="text-white/70">Porque todo está mejor organizado.</p>
-                    </div>
-                    <div class="border-l-2 border-primary pl-6">
-                        <h3 class="font-headline text-2xl font-bold mb-2 text-white">Clientes más acompañados</h3>
-                        <p class="text-white/70">Porque reciben atención incluso cuando tú estás ocupada.</p>
-                    </div>
-                    <div class="border-l-2 border-primary pl-6">
-                        <h3 class="font-headline text-2xl font-bold mb-2 text-white">Más recurrencia</h3>
-                        <p class="text-white/70">Porque hay un seguimiento constante sin esfuerzo.</p>
-                    </div>
-                    <div class="border-l-2 border-primary pl-6">
-                        <h3 class="font-headline text-2xl font-bold mb-2 text-white">Más tiempo para el equipo</h3>
-                        <p class="text-white/70">Menos interrupciones, más foco en la experiencia en cabina.</p>
-                    </div>
                 </div>
 
-                <div class="text-center mt-16">
-                    <p class="text-xl md:text-2xl font-medium text-white/90 mb-2">Es pasar de llevar todo encima…</p>
-                    <p
-                        class="text-2xl md:text-3xl font-bold font-headline text-primaryLight drop-shadow-[0_0_10px_rgba(138,43,226,0.3)]">
-                        a tener un sistema que te acompaña y te da control.
-                    </p>
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-stretch">
+                    <!-- Left side: Square photo (The Center) -->
+                    <div class="lg:col-span-6 reveal-element h-full">
+                        <div
+                            class="relative h-[400px] lg:h-full rounded-[32px] overflow-hidden border border-glass-border shadow-lg">
+                            <img alt="Teléfono móvil mostrando la agenda de EvolveHub sobre el mostrador de recepción"
+                                class="w-full h-full object-cover filter brightness-[0.98]"
+                                src="assets/imagen/movil_recepcion.jpg" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10"></div>
+                        </div>
+                    </div>
+                    <!-- Right side: Antes/Después Comparison -->
+                    <div class="lg:col-span-6 space-y-6 reveal-element">
+                        <!-- Antes -->
+                        <div
+                            class="bg-deep-onyx border border-red-500/10 p-8 rounded-3xl space-y-6 relative overflow-hidden">
+                            <div class="absolute top-0 right-0 w-24 h-24 bg-red-500/5 blur-2xl rounded-full"></div>
+                            <span class="text-[10px] font-label-caps text-red-500 font-semibold tracking-wider block">LA
+                                REALIDAD ANTERIOR</span>
+                            <h3 class="font-headline-lg text-[22px] text-white-broken font-medium">El ruido en cabina
+                            </h3>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-grey-warm">
+                                <div class="border-l-2 border-red-500/20 pl-4 py-1">
+                                    <p class="font-semibold text-white-broken">1. Escriben con dudas</p>
+                                    <p class="text-[11px] mt-0.5">Una clienta interesada pregunta por WhatsApp sobre un
+                                        tratamiento.</p>
+                                </div>
+                                <div class="border-l-2 border-red-500/20 pl-4 py-1">
+                                    <p class="font-semibold text-white-broken">2. Teléfono silenciado</p>
+                                    <p class="text-[11px] mt-0.5">Estás en cabina concentrada en un tratamiento. No
+                                        puedes responder.</p>
+                                </div>
+                                <div class="border-l-2 border-red-500/20 pl-4 py-1">
+                                    <p class="font-semibold text-white-broken">3. La espera y pérdida</p>
+                                    <p class="text-[11px] mt-0.5">Pasan las horas y ella escribe a otro centro que
+                                        responde antes.</p>
+                                </div>
+                                <div class="border-l-2 border-red-500/20 pl-4 py-1">
+                                    <p class="font-semibold text-white-broken">4. Estrés final</p>
+                                    <p class="text-[11px] mt-0.5">Encuentras decenas de mensajes acumulados al final de
+                                        tu jornada.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Después -->
+                        <div
+                            class="bg-deep-onyx border border-action-purple/10 p-8 rounded-3xl space-y-6 relative overflow-hidden shadow-sm">
+                            <div class="absolute top-0 right-0 w-24 h-24 bg-action-purple/5 blur-2xl rounded-full">
+                            </div>
+                            <span
+                                class="text-[10px] font-label-caps text-action-purple font-semibold tracking-wider block">LA
+                                EXPERIENCIA EVOLVEHUB</span>
+                            <h3 class="font-headline-lg text-[22px] text-white-broken font-medium">La atención con calma
+                            </h3>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-grey-warm">
+                                <div class="border-l-2 border-action-purple/30 pl-4 py-1">
+                                    <p class="font-semibold text-white-broken">1. Respuesta instantánea</p>
+                                    <p class="text-[11px] mt-0.5">La clienta escribe y el asistente responde en menos de
+                                        un minuto.</p>
+                                </div>
+                                <div class="border-l-2 border-action-purple/30 pl-4 py-1">
+                                    <p class="font-semibold text-white-broken">2. Agenda coordinada</p>
+                                    <p class="text-[11px] mt-0.5">El sistema revisa tus huecos reales y le ofrece las
+                                        mejores opciones.</p>
+                                </div>
+                                <div class="border-l-2 border-action-purple/30 pl-4 py-1">
+                                    <p class="font-semibold text-white-broken">3. Reserva autónoma</p>
+                                    <p class="text-[11px] mt-0.5">Ella confirma y la cita queda agendada sin que toques
+                                        el móvil.</p>
+                                </div>
+                                <div class="border-l-2 border-action-purple/30 pl-4 py-1">
+                                    <p class="font-semibold text-white-broken">4. Concentración protegida</p>
+                                    <p class="text-[11px] mt-0.5">Tú sigues atendiendo con presencia absoluta y la
+                                        agenda organizada.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- 5. PRUEBA -->
-        <section class="py-20 px-6">
+        <!-- Cinematic Block 2: El cuidado está en los pequeños detalles -->
+        <section class="relative min-h-[70vh] flex items-center justify-center bg-black overflow-hidden py-32">
+            <div class="absolute inset-0 z-0">
+                <img alt="Detalles de cosméticos y una vela encendida en el spa"
+                    class="w-full h-full object-cover opacity-60 filter brightness-[0.85]"
+                    src="assets/imagen/cosmeticos_vela.png" />
+                <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/45 to-black/65 z-10"></div>
+            </div>
+            <div class="relative z-20 max-w-4xl mx-auto px-margin-mobile text-center space-y-8">
+                <blockquote
+                    class="font-display-lg text-[32px] sm:text-[44px] md:text-[56px] leading-tight text-white font-light italic">
+                    "El cuidado está en los pequeños detalles."
+                </blockquote>
+                <div class="w-16 h-0.5 bg-action-purple/60 mx-auto"></div>
+            </div>
+        </section>
+
+        <!-- Sección 3: Sensaciones (Tarjetas de Beneficios Emocionales) -->
+        <section id="beneficios" class="py-32 bg-deep-onyx">
+            <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+                <!-- Centered Header Block -->
+                <div class="text-center max-w-3xl mx-auto mb-16 reveal-element">
+
+                    <h2
+                        class="font-display-md text-[36px] md:text-[48px] text-white-broken tracking-tight leading-tight">
+                        Cómo se siente un centro que funciona en calma
+                    </h2>
+                    <p class="mt-4 text-grey-warm text-sm leading-relaxed max-w-2xl mx-auto">
+                        No se trata de añadir tecnología, se trata de simplificar la vida de quienes hacen especial tu
+                        negocio.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-stretch">
+                    <!-- Left Column: 6 Cards Grid -->
+                    <div class="lg:col-span-6 reveal-element">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Tarjeta 1 -->
+                            <div
+                                class="bg-dark-surface border border-glass-border p-6 rounded-2xl space-y-3 shadow-sm hover:translate-y-[-2px] transition-transform duration-300">
+                                <span class="material-symbols-outlined text-action-purple text-2xl">spa</span>
+                                <h4 class="text-base font-semibold text-white-broken">Concentración total</h4>
+                                <p class="text-[15px] text-grey-warm leading-relaxed">
+                                    Tu equipo puede centrar toda su energía en la clienta que tiene en cabina, sin
+                                    interrupciones telefónicas constantes.
+                                </p>
+                            </div>
+                            <!-- Tarjeta 2 -->
+                            <div
+                                class="bg-dark-surface border border-glass-border p-6 rounded-2xl space-y-3 shadow-sm hover:translate-y-[-2px] transition-transform duration-300">
+                                <span class="material-symbols-outlined text-action-purple text-2xl">chat_bubble</span>
+                                <h4 class="text-base font-semibold text-white-broken">Atención impecable</h4>
+                                <p class="text-[15px] text-grey-warm leading-relaxed">
+                                    Tus clientas reciben respuestas amables en menos de un minuto a cualquier hora,
+                                    incluso los domingos y festivos.
+                                </p>
+                            </div>
+                            <!-- Tarjeta 3 -->
+                            <div
+                                class="bg-dark-surface border border-glass-border p-6 rounded-2xl space-y-3 shadow-sm hover:translate-y-[-2px] transition-transform duration-300">
+                                <span
+                                    class="material-symbols-outlined text-action-purple text-2xl">calendar_today</span>
+                                <h4 class="text-base font-semibold text-white-broken">Reservas en movimiento</h4>
+                                <p class="text-[15px] text-grey-warm leading-relaxed">
+                                    La agenda sigue completándose sola mientras duermes, descansas o estás disfrutando
+                                    de tu tiempo libre.
+                                </p>
+                            </div>
+                            <!-- Tarjeta 4 -->
+                            <div
+                                class="bg-dark-surface border border-glass-border p-6 rounded-2xl space-y-3 shadow-sm hover:translate-y-[-2px] transition-transform duration-300">
+                                <span class="material-symbols-outlined text-action-purple text-2xl">assignment</span>
+                                <h4 class="text-base font-semibold text-white-broken">Información organizada</h4>
+                                <p class="text-[15px] text-grey-warm leading-relaxed">
+                                    Se eliminan los post-its y los malentendidos. Las reservas y cancelaciones se anotan
+                                    directamente en tu agenda.
+                                </p>
+                            </div>
+                            <!-- Tarjeta 5 -->
+                            <div
+                                class="bg-dark-surface border border-glass-border p-6 rounded-2xl space-y-3 shadow-sm hover:translate-y-[-2px] transition-transform duration-300">
+                                <span class="material-symbols-outlined text-action-purple text-2xl">psychology</span>
+                                <h4 class="text-base font-semibold text-white-broken">Personalidad del centro</h4>
+                                <p class="text-[15px] text-grey-warm leading-relaxed">
+                                    El sistema se adapta a tus reglas de juego: tiempos de tratamiento, políticas de
+                                    cancelación y tu tono preferido.
+                                </p>
+                            </div>
+                            <!-- Tarjeta 6 -->
+                            <div
+                                class="bg-dark-surface border border-glass-border p-6 rounded-2xl space-y-3 shadow-sm hover:translate-y-[-2px] transition-transform duration-300">
+                                <span class="material-symbols-outlined text-action-purple text-2xl">wb_sunny</span>
+                                <h4 class="text-base font-semibold text-white-broken">Tranquilidad pura</h4>
+                                <p class="text-[15px] text-grey-warm leading-relaxed">
+                                    La seguridad de saber que tu negocio sigue funcionando perfectamente sin necesidad
+                                    de que estés físicamente presente.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Big image of cabin tablet (The Tool) -->
+                    <div class="lg:col-span-6 reveal-element h-full">
+                        <div
+                            class="relative h-[400px] lg:h-full rounded-[32px] overflow-hidden border border-glass-border shadow-lg">
+                            <img alt="Camilla de tratamiento en cabina con una tablet mostrando la agenda de EvolveHub"
+                                class="w-full h-full object-cover filter brightness-[0.98]"
+                                src="assets/imagen/camilla_tablet.jpg" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección 4: Así encaja en tu día (Línea Temporal del Cliente) -->
+        <section id="sistema" class="py-32 bg-dark-surface border-y border-glass-border">
+            <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-stretch">
+                    <!-- Left Side: Square photo -->
+                    <div class="lg:col-span-6 reveal-element h-full">
+                        <div
+                            class="relative h-[400px] lg:h-full rounded-[32px] overflow-hidden border border-glass-border shadow-lg">
+                            <img alt="Atmósfera tranquila de un centro de estética con cosméticos y vela"
+                                class="w-full h-full object-cover filter brightness-[0.97]"
+                                src="assets/imagen/cabina_tablet_claro.png" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10"></div>
+                        </div>
+                    </div>
+
+                    <!-- Right Side: Timeline Process -->
+                    <div class="lg:col-span-6 space-y-12 reveal-element">
+                        <div>
+
+                            <h2
+                                class="font-display-md text-[36px] md:text-[48px] text-white-broken tracking-tight leading-tight">
+                                El viaje del cliente, con fluidez
+                            </h2>
+                            <p class="mt-4 text-grey-warm text-sm leading-relaxed max-w-xl">
+                                Visualiza cómo fluye la interacción desde que descubren tu centro hasta que acuden y
+                                vuelven.
+                            </p>
+                        </div>
+
+                        <div class="relative pl-6 md:pl-10 border-l border-glass-border space-y-10">
+                            <!-- Paso 1 -->
+                            <div class="relative">
+                                <div
+                                    class="absolute -left-[31px] md:-left-[47px] top-1.5 w-5 h-5 rounded-full bg-action-purple/10 border-2 border-action-purple flex items-center justify-center">
+                                    <span class="w-1.5 h-1.5 bg-action-purple rounded-full"></span>
+                                </div>
+                                <div class="space-y-1">
+                                    <h4 class="text-base font-semibold text-white-broken">1. Descubrimiento</h4>
+                                    <p class="text-sm text-grey-warm leading-relaxed">
+                                        Una clienta nueva encuentra tu centro estético en redes sociales o gracias a la
+                                        recomendación de una amiga.
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- Paso 2 -->
+                            <div class="relative">
+                                <div
+                                    class="absolute -left-[31px] md:-left-[47px] top-1.5 w-5 h-5 rounded-full bg-action-purple/10 border-2 border-action-purple flex items-center justify-center">
+                                    <span class="w-1.5 h-1.5 bg-action-purple rounded-full"></span>
+                                </div>
+                                <div class="space-y-1">
+                                    <h4 class="text-base font-semibold text-white-broken">2. Consulta Inicial</h4>
+                                    <p class="text-sm text-grey-warm leading-relaxed">
+                                        Escribe a tu WhatsApp preguntando sobre la duración de un tratamiento o tus
+                                        tarifas. El sistema le responde educadamente al instante.
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- Paso 3 -->
+                            <div class="relative">
+                                <div
+                                    class="absolute -left-[31px] md:-left-[47px] top-1.5 w-5 h-5 rounded-full bg-action-purple/10 border-2 border-action-purple flex items-center justify-center">
+                                    <span class="w-1.5 h-1.5 bg-action-purple rounded-full"></span>
+                                </div>
+                                <div class="space-y-1">
+                                    <h4 class="text-base font-semibold text-white-broken">3. Selección y Reserva</h4>
+                                    <p class="text-sm text-grey-warm leading-relaxed">
+                                        El asistente le presenta los huecos libres y ella elige el miércoles a las
+                                        17:30. La reserva se sincroniza en tu calendario.
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- Paso 4 -->
+                            <div class="relative">
+                                <div
+                                    class="absolute -left-[31px] md:-left-[47px] top-1.5 w-5 h-5 rounded-full bg-action-purple/10 border-2 border-action-purple flex items-center justify-center">
+                                    <span class="w-1.5 h-1.5 bg-action-purple rounded-full"></span>
+                                </div>
+                                <div class="space-y-1">
+                                    <h4 class="text-base font-semibold text-white-broken">4. Cambio Imprevisto</h4>
+                                    <p class="text-sm text-grey-warm leading-relaxed">
+                                        Le surge una reunión familiar. Vuelve a escribir al chat y cambia su cita para
+                                        el jueves a la misma hora sin fricciones.
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- Paso 5 -->
+                            <div class="relative">
+                                <div
+                                    class="absolute -left-[31px] md:-left-[47px] top-1.5 w-5 h-5 rounded-full bg-action-purple/10 border-2 border-action-purple flex items-center justify-center">
+                                    <span class="w-1.5 h-1.5 bg-action-purple rounded-full"></span>
+                                </div>
+                                <div class="space-y-1">
+                                    <h4 class="text-base font-semibold text-white-broken">5. Recordatorio y Asistencia
+                                    </h4>
+                                    <p class="text-sm text-grey-warm leading-relaxed">
+                                        El día anterior recibe una alerta de confirmación. Acude a tu centro y recibe tu
+                                        tratamiento con total dedicación.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Demo Section (WhatsApp simulator integrated in a real elegant reception scene) -->
+        <section id="demo" class="relative py-32 overflow-hidden bg-black text-white">
+            <!-- Full-bleed Background Scene with soft blur -->
+            <div class="absolute inset-0 z-0">
+                <img alt="Recepción elegante y minimalista de un centro estético moderno"
+                    class="w-full h-full object-cover opacity-50 filter blur-[3px]"
+                    src="assets/imagen/recepcion_logo.png" />
+                <div class="absolute inset-0 bg-black/60 z-10"></div>
+            </div>
+
+            <div class="relative z-20 max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop w-full">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-stretch">
+                    <!-- Left Side: Informative panel in premium glass container -->
+                    <div
+                        class="lg:col-span-5 flex flex-col justify-between p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-md reveal-element">
+                        <div class="space-y-6">
+
+                            <h2
+                                class="font-display-md text-[36px] md:text-[48px] leading-tight text-white font-semibold">
+                                Prueba el asistente virtual en vivo
+                            </h2>
+                            <p class="text-gray-300 text-xs leading-relaxed">
+                                Escribe al simulador para comprobar el tono de respuesta y la naturalidad de la
+                                conversación. Simula agendar una cita o mover un horario.
+                            </p>
+
+                            <div class="space-y-3">
+                                <div class="flex gap-3 items-start text-xs text-gray-300">
+                                    <span
+                                        class="material-symbols-outlined text-purple-300 text-base">check_circle</span>
+                                    <div>
+                                        <p class="font-semibold text-white">Caso 1: Solicitar cita</p>
+                                        <p class="text-[10px] text-gray-400">Prueba escribiendo: "Quiero una limpieza
+                                            facial el lunes"</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-3 items-start text-xs text-gray-300">
+                                    <span
+                                        class="material-symbols-outlined text-purple-300 text-base">check_circle</span>
+                                    <div>
+                                        <p class="font-semibold text-white">Caso 2: Cambiar cita</p>
+                                        <p class="text-[10px] text-gray-400">Prueba escribiendo: "Quiero cambiar mi hora
+                                            de mañana"</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Webhook KPI Fields / Status (Visible when unlocked) -->
+                        <div id="demo-dashboard"
+                            class="hidden bg-black/30 border border-white/10 rounded-2xl p-5 space-y-4 mt-6">
+                            <div class="flex justify-between items-center border-b border-white/10 pb-3">
+                                <span class="text-[10px] font-label-caps text-gray-300 uppercase tracking-wider">Estado
+                                    de Conexión</span>
+                                <span id="webhookBadge"
+                                    class="text-[9px] font-bold text-red-400 uppercase flex items-center gap-1.5 bg-red-400/10 px-2.5 py-1 rounded-full">
+                                    <span class="w-1.5 h-1.5 bg-red-500 rounded-full"></span> Desconectado
+                                </span>
+                            </div>
+                            <div class="grid grid-cols-3 gap-3 text-center text-xs">
+                                <div class="bg-black/20 border border-white/5 p-2 rounded-xl">
+                                    <p class="text-[8px] text-gray-400 uppercase mb-1 tracking-wider">Mensajes</p>
+                                    <p class="text-sm font-bold text-white" id="kpiMessages">0</p>
+                                </div>
+                                <div class="bg-black/20 border border-white/5 p-2 rounded-xl">
+                                    <p class="text-[8px] text-gray-400 uppercase mb-1 tracking-wider">Reservas</p>
+                                    <p class="text-sm font-bold text-white" id="kpiBookings">0</p>
+                                </div>
+                                <div class="bg-black/20 border border-white/5 p-2 rounded-xl">
+                                    <p class="text-[8px] text-gray-400 uppercase mb-1 tracking-wider">Latencia</p>
+                                    <p class="text-sm font-bold text-white" id="kpiLatency">—</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-2">
+                                <button
+                                    class="flex-1 bg-black/40 border border-white/10 hover:bg-white/10 text-white font-label-caps text-[9px] py-2 rounded-lg transition-all flex items-center justify-center gap-1.5"
+                                    id="pingWebhook" type="button">
+                                    <span class="material-symbols-outlined text-[13px] text-purple-300">sync</span>
+                                    <span>Verificar Canal</span>
+                                </button>
+                                <button
+                                    class="bg-red-950/20 border border-red-900/30 hover:bg-red-900/20 text-red-400 font-label-caps text-[9px] px-3 py-2 rounded-lg transition-all flex items-center justify-center"
+                                    id="resetDemoBtn" type="button">
+                                    <span class="material-symbols-outlined text-[13px]">restart_alt</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Lock form placeholder -->
+                        <div id="demo-unlock-fields" class="space-y-4 mt-8">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label
+                                        class="block text-[9px] font-label-caps text-gray-300 mb-2 uppercase tracking-widest"
+                                        for="demo-name-input">Nombre</label>
+                                    <input
+                                        class="w-full bg-white/5 border border-white/15 rounded-lg px-4 py-3 text-xs text-white focus:border-purple-400 focus:ring-0 transition-colors"
+                                        placeholder="Tu nombre" type="text" id="demo-name-input" required />
+                                </div>
+                                <div>
+                                    <label
+                                        class="block text-[9px] font-label-caps text-gray-300 mb-2 uppercase tracking-widest"
+                                        for="demo-email-input">Correo Electrónico</label>
+                                    <input
+                                        class="w-full bg-white/5 border border-white/15 rounded-lg px-4 py-3 text-xs text-white focus:border-purple-400 focus:ring-0 transition-colors"
+                                        placeholder="ejemplo@correo.com" type="email" id="demo-email-input" required />
+                                </div>
+                            </div>
+                            <button
+                                class="w-full bg-action-purple text-white py-4 rounded-xl font-label-caps text-[12px] hover:bg-opacity-95 transition-all flex items-center justify-center gap-2 font-medium border border-white/10"
+                                id="demo-start-btn">
+                                <span>Activar simulador</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Right Side: ChatGPT-like Simulator styled as floating dark glass application -->
+                    <div
+                        class="lg:col-span-7 flex flex-col h-[560px] relative rounded-3xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-2xl reveal-element">
+                        <!-- Locked glass overlay (dark theme) -->
+                        <div id="demo-lock-overlay"
+                            class="absolute inset-0 bg-black/85 backdrop-blur-[6px] z-30 flex flex-col items-center justify-center p-8 text-center transition-all duration-500">
+                            <div
+                                class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-4 text-purple-300">
+                                <span class="material-symbols-outlined text-xl">lock</span>
+                            </div>
+                            <h4 class="text-sm font-semibold text-white mb-2">Simulación Protegida</h4>
+                            <p class="text-xs text-gray-400 max-w-sm leading-relaxed mb-6">
+                                Introduce tus datos a la izquierda para interactuar en tiempo real.
+                            </p>
+                        </div>
+
+                        <!-- Chat Header -->
+                        <div class="bg-black/20 p-4 border-b border-white/10 flex justify-between items-center">
+                            <div class="flex items-center gap-3">
+                                <div
+                                    class="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-purple-300">
+                                    <span class="material-symbols-outlined text-base">spa</span>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-semibold text-white">Tu Centro Estético</p>
+                                    <p class="text-[9px] text-green-400 flex items-center gap-1 font-medium">
+                                        <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span> en
+                                        línea
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Chat Area -->
+                        <div class="flex-1 p-5 space-y-4 overflow-y-auto bg-black/10 flex flex-col" id="chat-messages"
+                            aria-live="polite" aria-relevant="additions">
+                            <!-- Default placeholder prompt -->
+                            <div class="text-center py-10 max-w-md mx-auto space-y-2">
+                                <span class="material-symbols-outlined text-gray-500 text-4xl">sms</span>
+                                <p class="text-xs text-gray-400">Desbloquea el simulador a la izquierda para iniciar la
+                                    conversación.</p>
+                            </div>
+                        </div>
+
+                        <!-- Suggestion Chips -->
+                        <div class="px-4 py-3 bg-black/20 border-t border-white/10 flex gap-2 flex-wrap hidden"
+                            id="chat-suggestions-container">
+                        </div>
+
+                        <!-- Form Input -->
+                        <form id="chat-form" class="p-4 bg-black/20 border-t border-white/10 flex gap-2.5">
+
+                            <label class="sr-only" for="chat-text-input">Escribe un mensaje de prueba...</label>
+                            <input
+                                class="flex-1 bg-black/35 border border-white/10 rounded-lg px-4 py-3 text-xs text-white focus:outline-none focus:border-action-purple focus:ring-0"
+                                id="chat-text-input" placeholder="Escribe un mensaje de prueba..." type="text" required
+                                disabled />
+                            <button type="submit" id="chat-submit-btn" aria-label="Enviar mensaje al asistente"
+                                class="bg-black/35 hover:bg-white/5 text-gray-400 p-3 rounded-lg flex items-center justify-center transition-colors border border-white/10"
+                                disabled>
+                                <span class="material-symbols-outlined text-base">send</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección 5: Conexión Humana (No sustituimos personas) -->
+        <section class="relative py-32 overflow-hidden bg-black text-white border-y border-glass-border">
+            <!-- Background Image Layer -->
+            <div class="absolute inset-0 z-0">
+                <img alt="Recepción EvolveHub"
+                    class="w-full h-full object-cover opacity-25 filter brightness-[0.8] contrast-[0.9]"
+                    src="assets/imagen/recepcion_logo.png" />
+                <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70 z-10"></div>
+            </div>
             <div
-                class="max-w-3xl mx-auto bg-dark border border-white/10 rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden text-center">
-                <div class="absolute top-0 right-0 w-32 h-32 bg-primary/10 blur-[50px] pointer-events-none"></div>
+                class="relative z-20 max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center space-y-8 reveal-element">
 
-                <h3 class="font-headline text-2xl font-bold mb-6 text-white">
-                    En muchos centros, simplemente organizando mejor esta parte, se nota rápido:
-                </h3>
-
-                <p class="text-lg text-white/80 mb-8 max-w-2xl mx-auto">
-                    Con agendas de unas 30 citas semanales y tickets medios habituales, pequeños ajustes en la gestión
-                    pueden tener un impacto real en ingresos y en tranquilidad.
-                </p>
-
-                <div class="bg-primary/10 border border-primary/20 p-6 rounded-xl inline-block">
-                    <p class="text-xl font-medium text-white">
-                        No es hacer más.<br />
-                        <span class="text-primaryLight font-bold">Es hacerlo mejor estructurado.</span>
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- 6. CTA / CIERRE INTERMEDIO -->
-        <section class="py-20 relative px-6 text-center">
-            <div
-                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] h-64 bg-primary/20 rounded-full blur-[100px] pointer-events-none">
-            </div>
-
-            <div class="max-w-2xl mx-auto relative z-10">
-                <h2 class="font-headline text-3xl font-bold mb-8">
-                    Si quieres ver cómo encajaría esto en tu caso concreto y si realmente tiene sentido para tu centro:
+                <h2
+                    class="font-display-md text-[36px] md:text-[52px] text-white tracking-tight leading-tight max-w-4xl mx-auto font-semibold">
+                    La mejor tecnología es la que casi no se nota.
                 </h2>
-
-                <a href="https://calendly.com/oliversanjr/30min"
-                    class="inline-block btn btn-primary bg-gradient-to-r from-primary to-primaryLight text-2xl font-bold font-headline rounded-full px-10 py-5 w-full sm:w-auto shadow-[0_0_20px_rgba(138,43,226,0.6)] hover:shadow-[0_0_40px_rgba(138,43,226,0.8)] hover:scale-105 transition-all duration-300">
-                    Reservar llamada
-                </a>
-
-                <p class="mt-6 text-white/50 text-sm">
-                    En 10–15 minutos lo vemos contigo, sin compromiso y aplicado a tu caso.
+                <p class="font-body-lg text-[18px] md:text-[20px] text-purple-100/90 leading-relaxed max-w-3xl mx-auto">
+                    Nuestro trabajo no consiste en hablar por ti. Consiste en ayudarte a cuidar mejor de cada cliente
+                    siguiendo la forma de trabajar que hace único a tu centro. Cuando quieres intervenir, lo haces.
+                    Cuando prefieres centrarte en una clienta, todo sigue funcionando.
                 </p>
+            </div>
+        </section>
+
+        <!-- Sección 6: Filosofía y Principios -->
+        <section class="py-32 bg-[#FAF8F5]">
+            <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+                <div class="max-w-3xl mx-auto text-center mb-20 reveal-element">
+
+                    <h2 class="font-display-md text-[36px] md:text-[52px] text-gray-900 tracking-tight leading-tight">
+                        Lo que nos guía
+                    </h2>
+                </div>
+
+                <div class="max-w-3xl mx-auto space-y-10 reveal-element">
+                    <div class="flex gap-6 items-start">
+                        <span class="text-xl font-display-md font-bold text-action-purple mt-1">01</span>
+                        <div class="space-y-1">
+                            <h4 class="text-lg font-semibold text-gray-900">La tecnología debe devolver tranquilidad
+                            </h4>
+                            <p class="text-xs text-gray-600 leading-relaxed">
+                                Un sistema solo es útil si disminuye tu carga mental, nunca si añade complejidad o te
+                                ata a otra pantalla.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex gap-6 items-start">
+                        <span class="text-xl font-display-md font-bold text-action-purple mt-1">02</span>
+                        <div class="space-y-1">
+                            <h4 class="text-lg font-semibold text-gray-900">La opinión de un cliente empieza antes
+                                de cruzar la puerta</h4>
+                            <p class="text-xs text-gray-600 leading-relaxed">
+                                Una respuesta rápida, amable y disponible a deshora es el primer paso de un servicio
+                                sobresaliente.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex gap-6 items-start">
+                        <span class="text-xl font-display-md font-bold text-action-purple mt-1">03</span>
+                        <div class="space-y-1">
+                            <h4 class="text-lg font-semibold text-gray-900">Los pequeños detalles construyen grandes
+                                experiencias</h4>
+                            <p class="text-xs text-gray-600 leading-relaxed">
+                                Confirmar a tiempo, recordar con amabilidad y dar facilidades para reprogramar marcan la
+                                diferencia.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex gap-6 items-start">
+                        <span class="text-xl font-display-md font-bold text-action-purple mt-1">04</span>
+                        <div class="space-y-1">
+                            <h4 class="text-lg font-semibold text-gray-900">Cada día es una oportunidad para cuidar
+                            </h4>
+                            <p class="text-xs text-gray-600 leading-relaxed">
+                                Protegiendo el tiempo del equipo logramos que cada clienta reciba una atención al 100%
+                                libre de estrés.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex gap-6 items-start">
+                        <span class="text-xl font-display-md font-bold text-action-purple mt-1">05</span>
+                        <div class="space-y-1">
+                            <h4 class="text-lg font-semibold text-gray-900">El crecimiento debe ser sostenible</h4>
+                            <p class="text-xs text-gray-600 leading-relaxed">
+                                Tu centro puede aumentar su clienta y reservas sin necesidad de exigir cada vez más a
+                                las personas que lo forman.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección 7: CTA (Descubre cómo sería tu centro) -->
+        <section id="calendario"
+            class="py-40 bg-dark-surface border-t border-glass-border text-center relative overflow-hidden">
+            <div class="absolute inset-0 z-0 opacity-10">
+                <!-- Usar fondo negro en el degradado para que empaste bien con dark-surface -->
+                <div class="absolute inset-0 bg-gradient-to-b from-[#111111] via-transparent to-[#111111] z-10"></div>
+                <img alt="Fondo Texturado Calma" class="w-full h-full object-cover"
+                    src="assets/imagen/recepcion_logo.png" />
+            </div>
+
+            <div
+                class="relative z-10 w-full max-w-6xl mx-auto px-margin-mobile md:px-margin-desktop space-y-12 reveal-element">
+                <div class="max-w-4xl mx-auto space-y-8">
+                    <h2
+                        class="font-display-md text-[36px] md:text-[52px] text-white-broken tracking-tight leading-tight">
+                        Imagina tu centro funcionando de otra manera.
+                    </h2>
+                    <p class="font-body-lg text-[18px] md:text-[20px] text-grey-warm leading-relaxed max-w-2xl mx-auto">
+                        Imagina por un momento cómo sería trabajar sabiendo que muchas de esas pequeñas tareas ya no
+                        dependen constantemente de ti. Eso es lo que queremos enseñarte. Agenda una llamada y hablaremos
+                        tranquilamente sobre cómo encajaría en el día a día de tu centro.
+                    </p>
+                </div>
+
+                <div class="w-full">
+                    <div class="w-full" id="calendar-widget-container">
+                        <!-- Cal inline embed code begins -->
+                        <div style="width:100%;height:650px;overflow:hidden"
+                            id="my-cal-inline-consultoria-de-diagnostico"></div>
+                        <script type="text/javascript">
+                            (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+                            Cal("init", "consultoria-de-diagnostico", { origin: "https://app.cal.com" });
+                            Cal.config = Cal.config || {};
+                            Cal.config.forwardQueryParams = true;
+
+                            Cal.ns["consultoria-de-diagnostico"]("inline", {
+                                elementOrSelector: "#my-cal-inline-consultoria-de-diagnostico",
+                                config: { "layout": "month_view", "useSlotsViewOnSmallScreen": "true", "theme": "light" },
+                                calLink: "oliversanjose/consultoria-de-diagnostico",
+                            });
+
+                            Cal.ns["consultoria-de-diagnostico"]("ui", { "theme": "light", "cssVarsPerTheme": { "light": { "cal-brand": "#FAF8F5" } }, "hideEventTypeDetails": false, "layout": "month_view", "hideBranding": true });
+                        </script>
+                        <!-- Cal inline embed code ends -->
+                    </div>
+                </div>
             </div>
         </section>
 
     </main>
 
     <!-- Footer -->
-    <footer class="border-t border-white/10 bg-dark py-12 relative z-10">
-        <div class="max-w-7xl mx-auto px-6 flex flex-col items-center text-center">
-            <img src="./imagen/logo_evolvehub.png" alt="EvolveHub"
-                class="h-10 md:h-12 w-auto mb-8 opacity-80 hover:opacity-100 transition-opacity">
-            <p class="text-white/60 mb-6 font-medium">Si lo prefieres, puedes escribirnos directamente:</p>
-            <div class="flex flex-col md:flex-row justify-center items-center gap-6">
-                <a href="tel:+34689519776"
-                    class="flex items-center gap-2 text-white hover:text-primary transition-colors">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path
-                            d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-                    </svg>
-                    +34 689 519 776
+    <footer class="bg-dark-surface border-t border-glass-border py-16">
+        <div
+            class="flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto gap-8">
+            <div class="flex flex-col gap-3 items-center md:items-start">
+                <a href="index.html">
+                    <img alt="EvolveHub Logo" class="logo-footer" src="assets/imagen/logo_evolvehub.png" />
                 </a>
-                <a href="mailto:contacto@evolvehub.es"
-                    class="flex items-center gap-2 text-white hover:text-primary transition-colors">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                        <polyline points="22,6 12,13 2,6" />
-                    </svg>
-                    oliversanjr@evolvehub.es
-                </a>
+                <p class="text-[13px] text-grey-warm/60 text-center md:text-left">
+                    Tecnología que trabaja contigo para que dirigir tu centro vuelva a sentirse bien.
+                </p>
             </div>
-            <p class="text-white/30 text-xs mt-12">&copy; 2026 EvolveHub. Todos los derechos reservados.</p>
+            <div class="flex flex-wrap gap-x-8 gap-y-3 text-sm font-label-caps justify-center md:justify-end">
+                <a class="text-grey-warm hover:text-white-broken transition-colors duration-300"
+                    href="https://wa.me/34689519776" target="_blank">WhatsApp</a>
+                <a class="text-grey-warm hover:text-white-broken transition-colors duration-300"
+                    href="https://www.instagram.com/evolvehub_sd?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                    target="_blank">Instagram</a>
+                <a class="text-grey-warm hover:text-white-broken transition-colors duration-300"
+                    href="legal.html#terminos">Términos</a>
+                <a class="text-grey-warm hover:text-white-broken transition-colors duration-300"
+                    href="legal.html#privacidad">Privacidad</a>
+                <a class="text-grey-warm hover:text-white-broken transition-colors duration-300"
+                    href="legal.html#cookies">Cookies</a>
+                <a class="text-grey-warm hover:text-white-broken transition-colors duration-300"
+                    href="legal.html#accesibilidad">Accesibilidad</a>
+            </div>
         </div>
     </footer>
 
-
-    <!-- Popup Modal -->
-    <div id="interestPopup"
-        class="fixed inset-0 z-[100] hidden items-center justify-center px-4 transition-opacity duration-500 opacity-0 bg-[#121214]/80 backdrop-blur-sm">
-        <div class="glass-panel-custom p-8 md:p-10 max-w-lg w-full relative transform scale-95 transition-transform duration-500"
+    <!-- Interest Popup Modal -->
+    <div class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-[#111111]/60 backdrop-blur-sm transition-opacity duration-300 opacity-0 pointer-events-none"
+        id="interestPopup">
+        <div class="bg-dark-surface p-8 md:p-10 max-w-md w-full rounded-3xl relative transform scale-95 transition-transform duration-500 shadow-xl border border-glass-border"
             id="interestPopupContent">
             <!-- Close button -->
-            <button onclick="closePopup()"
-                class="absolute top-4 right-4 text-white/50 hover:text-white transition-colors">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <button onclick="closePopup()" aria-label="Cerrar ventana de información"
+                class="absolute top-5 right-5 text-grey-warm/50 hover:text-white transition-colors">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <line x1="18" y1="6" x2="6" y2="18"></line>
                     <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
             </button>
 
-            <h3 class="font-headline text-2xl font-bold text-white mb-3">¿Te interesa ver cómo funcionaría en tu
-                caso?</h3>
-            <p class="text-white/70 mb-6">Puedes dejar tu contacto y te explico cómo se adaptaría a tu centro, sin
-                presión.</p>
+            <div>
+                <label for="popupName"
+                    class="block text-[13px] font-label-caps text-grey-warm mb-2 uppercase tracking-wider">Nombre
+                    completo</label>
+                <input type="text" name="nombre" id="popupName" required
+                    class="w-full bg-deep-onyx border border-glass-border rounded-lg px-4 py-3 text-sm text-white-broken focus:outline-none focus:border-action-purple focus:ring-0 transition-colors">
+            </div>
 
-            <form id="popupForm" onsubmit="submitPopup(event)" class="space-y-4">
-                <div>
-                    <label class="block text-sm font-medium text-white/80 mb-2">Nombre *</label>
-                    <input type="text" name="nombre" required
-                        class="w-full bg-dark/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors">
-                </div>
+            <div>
+                <label for="popupTel"
+                    class="block text-[13px] font-label-caps text-grey-warm mb-2 uppercase tracking-wider">Teléfono
+                    de contacto</label>
+                <input type="tel" name="telefono" id="popupTel"
+                    class="w-full bg-deep-onyx border border-glass-border rounded-lg px-4 py-3 text-sm text-white-broken focus:outline-none focus:border-action-purple focus:ring-0 transition-colors"
+                    placeholder="Ej: +34 600... (Opcional si dejas correo)">
+            </div>
 
-                <div>
-                    <label class="block text-sm font-medium text-white/80 mb-2">Teléfono *</label>
-                    <input type="tel" name="telefono" id="popupTel"
-                        class="w-full bg-dark/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors"
-                        placeholder="Ej: +34 600... (Opcional si dejas correo)">
-                </div>
+            <div>
+                <label for="popupEmail"
+                    class="block text-[13px] font-label-caps text-grey-warm mb-2 uppercase tracking-wider">Correo
+                    Electrónico</label>
+                <input type="email" name="email" id="popupEmail"
+                    class="w-full bg-deep-onyx border border-glass-border rounded-lg px-4 py-3 text-sm text-white-broken focus:outline-none focus:border-action-purple focus:ring-0 transition-colors"
+                    placeholder="Ej: correo@ejemplo.com (Opcional si dejas teléfono)">
+            </div>
 
-                <div>
-                    <label class="block text-sm font-medium text-white/80 mb-2">Correo electrónico *</label>
-                    <input type="email" name="email" id="popupEmail"
-                        class="w-full bg-dark/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors"
-                        placeholder="Ej: correo@ejemplo.com (Opcional si dejas teléfono)">
-                </div>
-
-                <button type="submit"
-                    class="w-full mt-4 btn btn-primary bg-primary hover:bg-primaryLight text-white font-bold font-headline rounded-xl py-4 shadow-[0_4px_20px_rgba(138,43,226,0.4)] transition-all duration-300">
-                    Enviar
-                </button>
-                <p class="text-center text-sm text-white/70 mt-4">Solo si te interesa, si no puedes seguir viendo la web
-                    sin problema</p>
+            <button type="submit"
+                class="w-full mt-4 bg-action-purple hover:bg-opacity-95 text-white-broken font-label-caps text-sm rounded-lg py-4 transition-all duration-300 action-button-glow">
+                Solicitar información
+            </button>
             </form>
 
-            <div id="popupSuccess" class="hidden text-center py-6">
+            <div id="popupSuccess" class="hidden text-center py-6 space-y-4">
                 <div
-                    class="w-16 h-16 rounded-full bg-green-500/20 text-green-500 flex items-center justify-center mx-auto mb-4">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="20 6 9 17 4 12"></polyline>
-                    </svg>
+                    class="w-12 h-12 rounded-full bg-action-purple/10 border border-action-purple/20 text-action-purple flex items-center justify-center mx-auto">
+                    <span class="material-symbols-outlined text-xl">check</span>
                 </div>
-                <h4 class="font-headline text-xl font-bold text-white mb-2">¡Gracias!</h4>
-                <p class="text-white/70">Nos pondremos en contacto contigo pronto.</p>
+                <h4 class="text-lg font-bold text-white-broken">¡Solicitud recibida!</h4>
+                <p class="text-xs text-grey-warm">Nos pondremos en contacto contigo lo antes posible para analizar tu
+                    caso.</p>
                 <button type="button" onclick="closePopup()"
-                    class="mt-6 text-primaryLight hover:text-white transition-colors">Cerrar</button>
+                    class="mt-4 text-action-purple hover:underline text-xs">Cerrar ventana</button>
             </div>
         </div>
     </div>
 
-    <!-- Popup Logic -->
+    <!-- Web Application Logic Scripts -->
     <script>
+        // ==========================================
+        // LOCALSTORAGE HELPERS (WCAG 2.2 REDUNDANT ENTRY COMPLIANT)
+        // ==========================================
+        function saveUserData(data) {
+            if (data.nombre) localStorage.setItem('evolvehub_user_name', data.nombre.trim());
+            if (data.email) localStorage.setItem('evolvehub_user_email', data.email.trim());
+            if (data.telefono) localStorage.setItem('evolvehub_user_phone', data.telefono.trim());
+            syncFormFields();
+        }
+
+        function syncFormFields() {
+            const name = localStorage.getItem('evolvehub_user_name') || "";
+            const email = localStorage.getItem('evolvehub_user_email') || "";
+            const phone = localStorage.getItem('evolvehub_user_phone') || "";
+
+            // Demo unlock fields
+            const demoName = document.getElementById("demo-name-input");
+            const demoEmail = document.getElementById("demo-email-input");
+            if (demoName && !demoName.value && name) demoName.value = name;
+            if (demoEmail && !demoEmail.value && email) demoEmail.value = email;
+
+            // Calendar Form
+            const calName = document.getElementById("cal-name");
+            const calEmail = document.getElementById("cal-email");
+            const calTel = document.getElementById("cal-tel");
+            if (calName && !calName.value && name) calName.value = name;
+            if (calEmail && !calEmail.value && email) calEmail.value = email;
+            if (calTel && !calTel.value && phone) calTel.value = phone;
+
+            // Popup Form
+            const popupName = document.getElementById("popupName");
+            const popupEmail = document.getElementById("popupEmail");
+            const popupTel = document.getElementById("popupTel");
+            if (popupName && !popupName.value && name) popupName.value = name;
+            if (popupEmail && !popupEmail.value && email) popupEmail.value = email;
+            if (popupTel && !popupTel.value && phone) popupTel.value = phone;
+        }
+
+        // ==========================================
+        // SCROLL REVEAL EFFECT
+        // ==========================================
+        document.addEventListener('DOMContentLoaded', () => {
+            syncFormFields();
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal-element').forEach(el => {
+                el.classList.add('reveal-element');
+                observer.observe(el);
+            });
+        });
+
+        // ==========================================
+        // INTEREST POPUP MODAL LOGIC
+        // ==========================================
         let popupShown = false;
 
         function showPopup() {
@@ -462,7 +1223,6 @@
             popup.classList.remove('hidden');
             popup.style.display = 'flex';
 
-            // Allow display:flex to apply before animating opacity
             setTimeout(() => {
                 popup.classList.remove('opacity-0');
                 popupContent.classList.remove('scale-95');
@@ -482,10 +1242,10 @@
             }, 500);
         }
 
-        // Trigger on 20 seconds
+        // Trigger popup on 20 seconds
         setTimeout(showPopup, 20000);
 
-        // Trigger on 50% scroll
+        // Trigger popup on 50% scroll
         window.addEventListener('scroll', () => {
             const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
             if (scrollPercent >= 50) {
@@ -493,7 +1253,7 @@
             }
         });
 
-        // Form Submission
+        // Popup Form Submission
         function submitPopup(e) {
             e.preventDefault();
 
@@ -524,8 +1284,8 @@
                 return;
             }
 
-            // Valid, submit via fetch
             const nombre = form.querySelector('input[name="nombre"]').value;
+            saveUserData({ nombre, email: emailValue, telefono: telValue });
             const webhookUrl = 'https://n8n-n8n.gk97dq.easypanel.host/webhook/evolvehub-form';
 
             const btn = form.querySelector('button[type="submit"]');
@@ -550,6 +1310,734 @@
                 alert('Hubo un error al enviar tus datos. Por favor, inténtalo de nuevo.');
             });
         }
+
+        // ==========================================
+        // INTERACTIVE REAL WEBHOOK CHAT LOGIC (DEMO)
+        // ==========================================
+        const WEBHOOK_URL = "https://n8n-n8n.gk97dq.easypanel.host/webhook/whatsapp-clinica-inbound";
+        const WEBHOOK_PING_URL = "https://n8n-n8n.gk97dq.easypanel.host/webhook/evolvehub-health";
+
+        const state = {
+            sessionId: createSessionId(),
+            channel: "web",
+            lastLatency: null,
+            messagesSent: 0,
+            bookings: 0,
+            name: "",
+            email: "",
+            demoPhone: ""
+        };
+
+        function createSessionId() {
+            return "sess_" + Date.now() + "_" + Math.random().toString(36).slice(2, 8);
+        }
+
+        function validateEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        function updateMeta(status = "Listo") {
+            const badge = document.getElementById("webhookBadge");
+            if (badge) {
+                if (status === "Conectado") {
+                    badge.className = "text-[10px] font-bold text-green-500 uppercase flex items-center gap-1.5 bg-green-500/10 px-2.5 py-1 rounded-full";
+                    badge.innerHTML = `<span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span> Conectado`;
+                } else if (status === "Conectando...") {
+                    badge.className = "text-[10px] font-bold text-yellow-500 uppercase flex items-center gap-1.5 bg-yellow-500/10 px-2.5 py-1 rounded-full";
+                    badge.innerHTML = `<span class="w-1.5 h-1.5 bg-yellow-500 rounded-full animate-bounce"></span> Conectando...`;
+                } else {
+                    badge.className = "text-[10px] font-bold text-red-500 uppercase flex items-center gap-1.5 bg-red-500/10 px-2.5 py-1 rounded-full";
+                    badge.innerHTML = `<span class="w-1.5 h-1.5 bg-red-500 rounded-full"></span> ${status}`;
+                }
+            }
+            document.getElementById("kpiMessages").textContent = state.messagesSent;
+            document.getElementById("kpiBookings").textContent = state.bookings;
+            document.getElementById("kpiLatency").textContent = state.lastLatency ? `${state.lastLatency} ms` : "—";
+        }
+
+        async function postJSON(url, payload) {
+            const started = performance.now();
+            const res = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            });
+            const ended = performance.now();
+            state.lastLatency = Math.round(ended - started);
+            if (!res.ok) {
+                throw new Error(`HTTP ${res.status}`);
+            }
+            return res.json();
+        }
+
+        async function pingWebhook() {
+            updateMeta("Conectando...");
+            try {
+                const data = await postJSON(WEBHOOK_PING_URL, {
+                    event: "health_check",
+                    session_id: state.sessionId,
+                    timestamp: new Date().toISOString()
+                });
+                if (data?.ok) {
+                    updateMeta("Conectado");
+                } else {
+                    updateMeta("Sin respuesta");
+                }
+            } catch (err) {
+                updateMeta("Error");
+            }
+        }
+
+        function startDemo() {
+            const nameInput = document.getElementById("demo-name-input");
+            const emailInput = document.getElementById("demo-email-input");
+            const name = nameInput.value.trim();
+            const email = emailInput.value.trim();
+
+            if (!name) {
+                nameInput.classList.add('border-red-500', 'focus:border-red-500');
+                setTimeout(() => nameInput.classList.remove('border-red-500', 'focus:border-red-500'), 2000);
+                alert('Por favor, introduce tu nombre para iniciar la demo.');
+                return;
+            }
+
+            if (!email || !validateEmail(email)) {
+                emailInput.classList.add('border-red-500', 'focus:border-red-500');
+                setTimeout(() => emailInput.classList.remove('border-red-500', 'focus:border-red-500'), 2000);
+                alert('Por favor, introduce un email válido para iniciar la demo.');
+                return;
+            }
+
+            state.name = name;
+            state.email = email;
+            state.demoPhone = "+34600" + Math.floor(100000 + Math.random() * 899999);
+            saveUserData({ nombre: name, email: email });
+
+            // Hide lock overlay
+            const lockOverlay = document.getElementById('demo-lock-overlay');
+            if (lockOverlay) {
+                lockOverlay.classList.add('opacity-0', 'pointer-events-none');
+            }
+
+            // Toggle dashboard columns
+            document.getElementById('demo-unlock-fields').classList.add('hidden');
+            // Keep dashboard hidden as requested
+            // document.getElementById('demo-dashboard').classList.remove('hidden');
+
+            // Enable Chat Inputs
+            const chatTextInput = document.getElementById('chat-text-input');
+            const chatSubmitBtn = document.getElementById('chat-submit-btn');
+
+            chatTextInput.disabled = false;
+            chatSubmitBtn.disabled = false;
+            chatSubmitBtn.classList.remove('text-grey-warm/40');
+            chatSubmitBtn.classList.add('text-action-purple', 'bg-action-purple/10', 'border-action-purple/30');
+
+            // Reset chat messages window and add initial message
+            const chatMessages = document.getElementById('chat-messages');
+            chatMessages.innerHTML = '';
+            addMessage("¡Hola! ¿Qué tal? ¿En qué podemos ayudarte hoy?", "bot");
+
+            // Load Suggestion Chips
+            const suggestContainer = document.getElementById('chat-suggestions-container');
+            suggestContainer.classList.remove('hidden');
+            suggestContainer.innerHTML = `
+                <button type="button" onclick="sendSuggestion('Quiero reservar una Limpieza Facial')" class="border border-glass-border bg-deep-onyx text-grey-warm text-[10px] px-3 py-1.5 rounded-full hover:text-white-broken hover:border-action-purple transition-all">Reservar Limpieza Facial</button>
+                <button type="button" onclick="sendSuggestion('¿Qué tratamientos tenéis y precios?')" class="border border-glass-border bg-deep-onyx text-grey-warm text-[10px] px-3 py-1.5 rounded-full hover:text-white-broken hover:border-action-purple transition-all">Tratamientos y Precios</button>
+                <button type="button" onclick="sendSuggestion('Quiero cancelar mi cita')" class="border border-glass-border bg-deep-onyx text-grey-warm text-[10px] px-3 py-1.5 rounded-full hover:text-white-broken hover:border-action-purple transition-all">Cancelar Cita</button>
+            `;
+
+            // Registrar demo start
+            postJSON(WEBHOOK_URL, {
+                event: "demo_start",
+                session_id: state.sessionId,
+                timestamp: new Date().toISOString(),
+                contact: {
+                    name: state.name,
+                    email: state.email,
+                    phone: state.demoPhone
+                }
+            }).catch(e => console.error("demo_start webhook failed:", e));
+
+            updateMeta("Conectado");
+            pingWebhook();
+        }
+
+        function sendSuggestion(text) {
+            document.getElementById('chat-text-input').value = text;
+            const chatForm = document.getElementById('chat-form');
+            chatForm.dispatchEvent(new Event('submit'));
+        }
+
+        function addMessage(text, role = "bot") {
+            const wrap = document.getElementById("chat-messages");
+            if (!wrap) return;
+            const el = document.createElement("div");
+
+            const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+            if (role === "user") {
+                el.className = "bg-action-purple border border-action-purple/50 p-3.5 max-w-[85%] ml-auto text-sm text-white rounded-2xl rounded-tr-none leading-relaxed animate-fade-in mb-2 shadow-sm";
+                el.innerHTML = `
+                    <p class="font-semibold text-[11px] text-white/80 mb-1">Tú</p>
+                    <p class="text-[14px] leading-relaxed">${text}</p>
+                    <div class="text-right text-[10px] text-white/60 mt-1">${time}</div>
+                `;
+            } else {
+                el.className = "bg-dark-surface border border-glass-border p-3.5 max-w-[85%] text-sm text-white-broken rounded-2xl rounded-tl-none leading-relaxed animate-fade-in mb-2 shadow-sm";
+                el.innerHTML = `
+                    <p class="font-semibold text-[11px] text-action-purple mb-1">Asistente</p>
+                    <p class="text-[14px] leading-relaxed">${text}</p>
+                    <div class="text-right text-[10px] text-grey-warm/40 mt-1">${time}</div>
+                `;
+            }
+            wrap.appendChild(el);
+            wrap.scrollTop = wrap.scrollHeight;
+        }
+
+        function showTypingIndicator() {
+            const wrap = document.getElementById("chat-messages");
+            if (!wrap) return null;
+            const indicator = document.createElement('div');
+            indicator.className = 'bg-dark-surface border border-glass-border p-3.5 max-w-[80px] rounded-2xl rounded-tl-none flex items-center gap-1 w-16 mb-2';
+            indicator.id = 'typing-indicator';
+            indicator.innerHTML = `
+                <span class="typing-dot"></span>
+                <span class="typing-dot"></span>
+                <span class="typing-dot"></span>
+            `;
+            wrap.appendChild(indicator);
+            wrap.scrollTop = wrap.scrollHeight;
+            return indicator;
+        }
+
+        async function sendChatMessage(text) {
+            addMessage(text, "user");
+            updateMeta("Enviando...");
+
+            const indicator = showTypingIndicator();
+
+            const payload = {
+                email: state.email,
+                name: state.name,
+                message: text,
+                event: "web_message",
+                session_id: state.sessionId,
+                channel: state.channel
+            };
+
+            try {
+                const data = await postJSON(WEBHOOK_URL, payload);
+                if (indicator) indicator.remove();
+
+                state.messagesSent += 1;
+                const reply = data?.message || "Recibido. Estamos procesando tu consulta en el calendario.";
+                addMessage(reply, "bot");
+
+                if (data?.status === "BOOKED" || data?.status === "WAITING_FOR_SELECTION") {
+                    if (data?.status === "BOOKED") {
+                        state.bookings += 1;
+                        triggerLiveAgendaBookingSim();
+                    }
+                }
+                updateMeta("Conectado");
+            } catch (err) {
+                if (indicator) indicator.remove();
+                addMessage("El asistente virtual no responde en este momento. Inténtalo de nuevo.", "bot");
+                updateMeta("Error de conexión");
+            }
+        }
+
+        function triggerLiveAgendaBookingSim() {
+            // Live simulation of calendar booking inside the demo if booked via chatbot
+            console.log("Booking simulator triggered in simulator.");
+        }
+
+        function changeChannel(ch) {
+            state.channel = ch;
+            const webBtn = document.getElementById('channel-tab-web');
+            const waBtn = document.getElementById('channel-tab-whatsapp');
+
+            if (ch === 'web') {
+                webBtn.className = "px-3 py-1.5 text-[9px] font-label-caps border border-action-purple rounded-full text-white-broken bg-action-purple font-medium";
+                waBtn.className = "px-3 py-1.5 text-[9px] font-label-caps border border-glass-border rounded-full text-grey-warm hover:bg-glass-surface";
+            } else {
+                waBtn.className = "px-3 py-1.5 text-[9px] font-label-caps border border-action-purple rounded-full text-white-broken bg-action-purple font-medium";
+                webBtn.className = "px-3 py-1.5 text-[9px] font-label-caps border border-glass-border rounded-full text-grey-warm hover:bg-glass-surface";
+            }
+            updateMeta("Canal cambiado");
+        }
+
+        function resetDemo() {
+            state.sessionId = createSessionId();
+            state.messagesSent = 0;
+            state.bookings = 0;
+            state.lastLatency = null;
+            state.name = "";
+            state.email = "";
+            state.demoPhone = "";
+
+            document.getElementById('demo-name-input').value = "";
+            document.getElementById('demo-email-input').value = "";
+            document.getElementById('chat-text-input').value = "";
+
+            document.getElementById('chat-text-input').disabled = true;
+
+            const chatSubmitBtn = document.getElementById('chat-submit-btn');
+            chatSubmitBtn.disabled = true;
+            chatSubmitBtn.className = "bg-glass-surface hover:bg-glass-surface/85 text-grey-warm/40 p-3 rounded-lg flex items-center justify-center transition-colors border border-glass-border";
+
+            const lockOverlay = document.getElementById('demo-lock-overlay');
+            if (lockOverlay) {
+                lockOverlay.classList.remove('opacity-0', 'pointer-events-none');
+            }
+
+            document.getElementById('demo-unlock-fields').classList.remove('hidden');
+            // Keep dashboard hidden as requested
+            // document.getElementById('demo-dashboard').classList.add('hidden');
+            document.getElementById('chat-suggestions-container').classList.add('hidden');
+
+            document.getElementById('chat-messages').innerHTML = `
+                <div class="text-center py-10 max-w-md mx-auto space-y-2">
+                    <span class="material-symbols-outlined text-grey-warm/20 text-4xl">sms</span>
+                    <p class="text-xs text-grey-warm">Desbloquea el simulador para iniciar una conversación con el asistente virtual.</p>
+                </div>
+            `;
+
+            updateMeta("Desconectado");
+        }
+
+
+        // ==========================================
+        // CUSTOM AGENDA CALENDAR LOGIC (FIRESTORE)
+        // ==========================================
+        // Firestore integration setup
+        const firebaseConfig = {
+            apiKey: "AIzaSyPlaceholderAPIKeyForEvolveHubRedesign",
+            authDomain: "evolvehub-citas.firebaseapp.com",
+            projectId: "evolvehub-citas",
+            storageBucket: "evolvehub-citas.appspot.com",
+            messagingSenderId: "123456789",
+            appId: "1:12345:web:12345"
+        };
+
+        let db = null;
+        let useFirebase = false;
+
+        // Try initialization
+        if (firebaseConfig.apiKey && !firebaseConfig.apiKey.includes("Placeholder")) {
+            try {
+                firebase.initializeApp(firebaseConfig);
+                db = firebase.firestore();
+                useFirebase = true;
+                console.log("Firestore calendar synced successfully.");
+            } catch (e) {
+                console.warn("Firestore not loaded. Running in local fallback mode.", e);
+            }
+        }
+
+        // Horario de reserva: de 9:00 a 18:00, cada hora en punto
+        const CALENDAR_SLOTS_HOURS = [];
+        for (let h = 9; h <= 18; h++) {
+            CALENDAR_SLOTS_HOURS.push(String(h).padStart(2, '0') + ':00');
+        }
+        // Máximo de días hacia adelante que se pueden reservar
+        const CALENDAR_MAX_DAYS_AHEAD = 15;
+
+        // Endpoints n8n: disponibilidad real desde Google Calendar y creación de reserva
+        const WEBHOOK_AVAILABILITY_URL = 'https://n8n-n8n.gk97dq.easypanel.host/webhook/evolvehub-calendar-availability';
+        const WEBHOOK_BOOKING_URL = 'https://n8n-n8n.gk97dq.easypanel.host/webhook/evolvehub-booking';
+
+        let selectedDayString = "";
+        let selectedHourString = "";
+        let appointments = [];
+
+        // Load real availability from n8n (Google Calendar), with Firestore/local fallback
+        async function fetchAppointments() {
+            try {
+                const res = await fetch(WEBHOOK_AVAILABILITY_URL, {
+                    method: 'GET',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data && Array.isArray(data.busy)) {
+                        appointments = data.busy;
+                        return;
+                    }
+                }
+                throw new Error('Respuesta de disponibilidad inválida');
+            } catch (e) {
+                console.warn('No se pudo obtener disponibilidad en vivo desde n8n. Usando datos locales.', e);
+            }
+
+            if (useFirebase && db) {
+                try {
+                    const snapshot = await db.collection("citas").get();
+                    appointments = snapshot.docs.map(doc => doc.data());
+                    return;
+                } catch (e) {
+                    console.error("Error reading Firestore appointments:", e);
+                }
+            }
+            loadLocalFallbackAppointments();
+        }
+
+        function loadLocalFallbackAppointments() {
+            const data = localStorage.getItem("evolvehub_citas");
+            appointments = data ? JSON.parse(data) : [
+                // Some mock appointments to look realistic on load
+                { fecha: getFormattedDate(1), hora: "11:00" },
+                { fecha: getFormattedDate(2), hora: "16:30" },
+                { fecha: getFormattedDate(3), hora: "12:30" }
+            ];
+        }
+
+        function saveAppointment(apt) {
+            appointments.push(apt);
+            if (useFirebase && db) {
+                db.collection("citas").add({
+                    ...apt,
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                }).catch(e => console.error("Error adding to Firestore:", e));
+            } else {
+                localStorage.setItem("evolvehub_citas", JSON.stringify(appointments));
+            }
+        }
+
+        function getFormattedDate(offsetDays) {
+            const d = new Date();
+            d.setDate(d.getDate() + offsetDays);
+            // Skip Sunday
+            if (d.getDay() === 0) d.setDate(d.getDate() + 1);
+            return d.toISOString().split('T')[0];
+        }
+
+        function getDayName(offsetDays) {
+            const d = new Date();
+            d.setDate(d.getDate() + offsetDays);
+            if (d.getDay() === 0) d.setDate(d.getDate() + 1);
+
+            const weekday = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"][d.getDay()];
+            const dayNum = d.getDate();
+            const month = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"][d.getMonth()];
+
+            return { label: `${weekday} ${dayNum}`, dateString: d.toISOString().split('T')[0] };
+        }
+
+        async function initCalendarWidget() {
+            await fetchAppointments();
+            const row = document.getElementById("calendar-days-row");
+            if (!row) return;
+
+            row.innerHTML = "";
+            for (let i = 1; i <= CALENDAR_MAX_DAYS_AHEAD; i++) {
+                const day = getDayName(i);
+                const btn = document.createElement("button");
+                btn.type = "button";
+                btn.className = "flex-shrink-0 flex flex-col items-center bg-deep-onyx border border-glass-border hover:border-action-purple/50 px-5 py-4 rounded-xl min-w-[76px] transition-all";
+                btn.dataset.date = day.dateString;
+                btn.setAttribute("aria-label", `Seleccionar día ${day.label}`);
+                btn.setAttribute("aria-selected", "false");
+                btn.innerHTML = `
+                    <span class="text-[10px] text-grey-warm/50 font-label-caps uppercase tracking-wider block mb-1">${day.label.split(' ')[0]}</span>
+                    <span class="text-base font-bold text-white-broken">${day.label.split(' ')[1]}</span>
+                `;
+                btn.addEventListener("click", () => selectDay(day.dateString, btn));
+                row.appendChild(btn);
+            }
+
+            // Auto-select first day
+            const firstBtn = row.querySelector("button");
+            if (firstBtn) firstBtn.click();
+        }
+
+        function selectDay(dateString, btnElement) {
+            selectedDayString = dateString;
+
+            // Toggle active classes on days buttons
+            document.querySelectorAll("#calendar-days-row button").forEach(b => {
+                b.classList.remove("border-action-purple", "bg-action-purple/10");
+                b.classList.add("border-glass-border", "bg-deep-onyx");
+                b.setAttribute("aria-selected", "false");
+            });
+            btnElement.classList.add("border-action-purple", "bg-action-purple/10");
+            btnElement.classList.remove("border-glass-border", "bg-deep-onyx");
+            btnElement.setAttribute("aria-selected", "true");
+
+            renderHours(dateString);
+        }
+
+        function renderHours(dateString) {
+            const grid = document.getElementById("calendar-hours-grid");
+            if (!grid) return;
+
+            grid.innerHTML = "";
+
+            // Disable Continue button until slot is selected
+            const contBtn = document.getElementById("calendar-continue-btn");
+            if (contBtn) {
+                contBtn.disabled = true;
+            }
+            selectedHourString = "";
+
+            CALENDAR_SLOTS_HOURS.forEach(hr => {
+                // Check if appointment is already taken
+                const isBooked = appointments.some(apt => apt.fecha === dateString && apt.hora === hr);
+
+                const btn = document.createElement("button");
+                btn.type = "button";
+                if (isBooked) {
+                    btn.className = "bg-[#161618] border border-glass-border/30 text-grey-warm/30 text-xs py-3.5 rounded-lg font-medium cursor-not-allowed flex items-center justify-center gap-1";
+                    btn.disabled = true;
+                    btn.setAttribute("aria-label", `Hora ${hr} no disponible`);
+                    btn.innerHTML = `<span>${hr}</span> <span class="text-[9px] opacity-50 font-light font-sans">(Reservado)</span>`;
+                } else {
+                    btn.className = "bg-deep-onyx border border-glass-border hover:border-action-purple text-white-broken text-xs py-3.5 rounded-lg font-medium transition-all duration-300";
+                    btn.textContent = hr;
+                    btn.setAttribute("aria-label", `Seleccionar hora ${hr}`);
+                    btn.addEventListener("click", () => selectHourSlot(hr, btn));
+                }
+                grid.appendChild(btn);
+            });
+        }
+
+        function selectHourSlot(hr, btnElement) {
+            selectedHourString = hr;
+
+            // Remove active classes from all hours buttons
+            document.querySelectorAll("#calendar-hours-grid button").forEach(b => {
+                if (!b.disabled) {
+                    b.classList.remove("border-action-purple", "bg-action-purple/10");
+                    b.classList.add("border-glass-border", "bg-deep-onyx");
+                }
+            });
+
+            // Add active classes to selected button
+            btnElement.classList.add("border-action-purple", "bg-action-purple/10");
+            btnElement.classList.remove("border-glass-border", "bg-deep-onyx");
+
+            // Enable Continue button
+            const contBtn = document.getElementById("calendar-continue-btn");
+            if (contBtn) {
+                contBtn.disabled = false;
+            }
+        }
+
+        function backToCalendar() {
+            document.getElementById("calendar-step-form").classList.add("hidden");
+            document.getElementById("calendar-step-picker").classList.remove("hidden");
+        }
+
+        async function handleCalendarSubmit(e) {
+            e.preventDefault();
+
+            const nameInput = document.getElementById("cal-name");
+            const telInput = document.getElementById("cal-tel");
+            const emailInput = document.getElementById("cal-email");
+            const infoInput = document.getElementById("cal-info");
+            const termsInput = document.getElementById("cal-terms");
+            const submitBtn = document.getElementById("calendar-submit-btn");
+
+            if (!termsInput.checked) {
+                termsInput.setCustomValidity('Debes aceptar los términos y condiciones para continuar.');
+                termsInput.reportValidity();
+                return;
+            } else {
+                termsInput.setCustomValidity('');
+            }
+
+            const apt = {
+                nombre: nameInput.value.trim(),
+                telefono: telInput.value.trim(),
+                email: emailInput.value.trim(),
+                info_adicional: infoInput.value.trim(),
+                terminos_aceptados: termsInput.checked,
+                fecha: selectedDayString,
+                hora: selectedHourString
+            };
+
+            saveUserData({ nombre: apt.nombre, email: apt.email, telefono: apt.telefono });
+
+            const originalBtnText = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'Reservando...';
+
+            try {
+                const res = await fetch(WEBHOOK_BOOKING_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        source: 'calendario_booking',
+                        data: { ...apt, timestamp: new Date().toISOString() }
+                    })
+                });
+
+                let result = {};
+                try { result = await res.json(); } catch (_) { /* respuesta sin JSON */ }
+
+                if (!res.ok || result.status === 'SLOT_TAKEN') {
+                    // El hueco se ha ocupado justo antes de confirmar: refrescamos disponibilidad
+                    await fetchAppointments();
+                    renderHours(selectedDayString);
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalBtnText;
+                    backToCalendar();
+                    alert('Uy, ese horario se acaba de reservar. Por favor, elige otro hueco disponible.');
+                    return;
+                }
+
+                // Guardamos también localmente para reflejar el hueco al instante en esta sesión
+                saveAppointment({ fecha: apt.fecha, hora: apt.hora });
+
+                document.getElementById("calendar-step-form").classList.add("hidden");
+                document.getElementById("calendar-step-success").classList.remove("hidden");
+                document.getElementById("booking-success-message").innerHTML = `
+                    Tu consultoría está agendada para el <strong class="text-white-broken">${selectedHourString}h</strong> del día <strong class="text-white-broken">${selectedDayString}</strong>.<br>
+                    Te hemos enviado un correo de confirmación y hemos añadido la cita a nuestro Google Calendar.
+                `;
+            } catch (err) {
+                console.error("Webhook booking sync failed:", err);
+                alert('No hemos podido completar la reserva. Por favor, inténtalo de nuevo en unos segundos.');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnText;
+            }
+        }
+
+        function resetCalendarWidget() {
+            document.getElementById("calendar-step-success").classList.add("hidden");
+            document.getElementById("calendar-step-form").classList.add("hidden");
+            document.getElementById("calendar-step-picker").classList.remove("hidden");
+
+            document.getElementById("cal-name").value = "";
+            document.getElementById("cal-tel").value = "";
+            document.getElementById("cal-email").value = "";
+            document.getElementById("cal-info").value = "";
+            document.getElementById("cal-terms").checked = false;
+
+            initCalendarWidget();
+        }
+
+        // ==========================================
+        // DOM EVENTS BINDING
+        // ==========================================
+        document.addEventListener('DOMContentLoaded', () => {
+            // Unlock Demo Button
+            const startBtn = document.getElementById('demo-start-btn');
+            if (startBtn) {
+                startBtn.addEventListener('click', startDemo);
+            }
+
+            const emailInput = document.getElementById('demo-email-input');
+            const nameInput = document.getElementById('demo-name-input');
+            [emailInput, nameInput].forEach(inp => {
+                if (inp) {
+                    inp.addEventListener('keypress', (e) => {
+                        if (e.key === 'Enter') startDemo();
+                    });
+                }
+            });
+
+            // Ping Webhook
+            const pingBtn = document.getElementById('pingWebhook');
+            if (pingBtn) {
+                pingBtn.addEventListener('click', pingWebhook);
+            }
+
+            // Reset Demo
+            const resetBtn = document.getElementById('resetDemoBtn');
+            if (resetBtn) {
+                resetBtn.addEventListener('click', resetDemo);
+            }
+
+            // Chat form submit
+            const chatForm = document.getElementById('chat-form');
+            if (chatForm) {
+                chatForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const input = document.getElementById('chat-text-input');
+                    const text = input.value.trim();
+                    if (!text) return;
+                    input.value = "";
+                    sendChatMessage(text);
+                });
+            }
+
+            // Custom Calendar Initializer
+            initCalendarWidget();
+
+            // Calendar Booking Form Submit
+            const calForm = document.getElementById("calendar-booking-form");
+            if (calForm) {
+                calForm.addEventListener("submit", handleCalendarSubmit);
+            }
+
+            // Calendar Continue Button Click
+            const contBtn = document.getElementById("calendar-continue-btn");
+            if (contBtn) {
+                contBtn.addEventListener("click", () => {
+                    if (!selectedHourString) return;
+
+                    // Switch steps in widget
+                    document.getElementById("calendar-step-picker").classList.add("hidden");
+                    document.getElementById("calendar-step-form").classList.remove("hidden");
+
+                    const dateObj = new Date(selectedDayString);
+                    const friendlyDate = dateObj.toLocaleDateString("es-ES", { weekday: 'long', day: 'numeric', month: 'long' });
+                    document.getElementById("selected-slot-summary").textContent = `${friendlyDate} a las ${selectedHourString}h`;
+                });
+            }
+
+            // Mobile Menu Toggler
+            const mobileToggle = document.querySelector('.mobile-toggle');
+            const mobileNav = document.querySelector('.mobile-nav-overlay');
+
+            if (mobileToggle && mobileNav) {
+                mobileToggle.addEventListener('click', () => {
+                    mobileNav.classList.toggle('hidden');
+                    const isHidden = mobileNav.classList.contains('hidden');
+                    const iconSpan = mobileToggle.querySelector('.material-symbols-outlined');
+                    if (iconSpan) {
+                        iconSpan.textContent = isHidden ? 'menu' : 'close';
+                    }
+                });
+            }
+
+            // Smooth Scroll for Anchor Links with Header Offset
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        e.preventDefault();
+
+                        // Close mobile menu overlay if open
+                        if (mobileNav && !mobileNav.classList.contains('hidden')) {
+                            mobileNav.classList.add('hidden');
+                            const iconSpan = mobileToggle ? mobileToggle.querySelector('.material-symbols-outlined') : null;
+                            if (iconSpan) {
+                                iconSpan.textContent = 'menu';
+                            }
+                        }
+
+                        // Scroll smoothly with offset
+                        const headerOffset = 80;
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
     </script>
 </body>
 

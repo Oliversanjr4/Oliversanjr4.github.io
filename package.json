@@ -1,5 +1,19 @@
 {
   "dependencies": {
     "@n8n/chat": "^1.9.3"
+  },
+  "scripts": {
+    "build:tailwind-index": "tailwindcss -i ./assets/index-input.css -o ./assets/index-tailwind.css --config tailwind.index.config.js --minify",
+    "build:tailwind-diagnostico": "tailwindcss -i ./assets/diagnostico-input.css -o ./assets/styles.css --config tailwind.diagnostico.config.js --minify",
+    "build": "npm run build:tailwind-index && npm run build:tailwind-diagnostico",
+    "watch:tailwind-index": "tailwindcss -i ./assets/index-input.css -o ./assets/index-tailwind.css --config tailwind.index.config.js --watch",
+    "watch:tailwind-diagnostico": "tailwindcss -i ./assets/diagnostico-input.css -o ./assets/styles.css --config tailwind.diagnostico.config.js --watch",
+    "dev": "concurrently \"npm run watch:tailwind-index\" \"npm run watch:tailwind-diagnostico\""
+  },
+  "devDependencies": {
+    "@tailwindcss/container-queries": "^0.1.1",
+    "@tailwindcss/forms": "^0.5.11",
+    "concurrently": "^10.0.3",
+    "tailwindcss": "^3.4.19"
   }
 }
