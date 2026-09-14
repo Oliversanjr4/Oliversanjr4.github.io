@@ -281,8 +281,8 @@
                     href="index.html#beneficios">Beneficios</a>
                 <a class="text-grey-warm hover:text-white-broken transition-colors duration-300 font-label-caps text-label-caps"
                     href="index.html#sistema">Cómo funciona</a>
-                <a class="text-grey-warm hover:text-white-broken transition-colors duration-300 font-label-caps text-label-caps"
-                    href="index.html#demo">Probar demo</a>
+                <!-- <a class="text-grey-warm hover:text-white-broken transition-colors duration-300 font-label-caps text-label-caps"
+                    href="index.html#demo">Probar demo</a> -->
                 <a class="text-grey-warm hover:text-white-broken transition-colors duration-300 font-label-caps text-label-caps"
                     href="index.html#calendario">Reservar hueco</a>
             </div>
@@ -311,8 +311,8 @@
                 href="index.html#beneficios">Beneficios</a>
             <a class="text-grey-warm hover:text-white-broken transition-colors duration-300 font-label-caps text-sm py-2 border-b border-glass-border/30"
                 href="index.html#sistema">Cómo funciona</a>
-            <a class="text-grey-warm hover:text-white-broken transition-colors duration-300 font-label-caps text-sm py-2 border-b border-glass-border/30"
-                href="index.html#demo">Probar demo</a>
+            <!-- <a class="text-grey-warm hover:text-white-broken transition-colors duration-300 font-label-caps text-sm py-2 border-b border-glass-border/30"
+                href="index.html#demo">Probar demo</a> -->
             <a class="text-grey-warm hover:text-white-broken transition-colors duration-300 font-label-caps text-sm py-2 border-b border-glass-border/30"
                 href="index.html#calendario">Reservar hueco</a>
             <a class="inline-block bg-action-purple text-center text-white font-label-caps text-[11px] py-3.5 rounded-lg font-medium transition-all duration-300"
@@ -366,7 +366,7 @@
                                     Antes de empezar...
                                 </h1>
                                 <p class="text-gray-300 text-sm leading-relaxed">
-                                    Queremos entender la realidad de tu centro para darte un análisis útil. Por favor,
+                                    Queremos entender la realidad de tu negocio para darte un análisis útil. Por favor,
                                     dinos tu nombre y a dónde enviamos el diagnóstico.
                                 </p>
                             </div>
@@ -414,10 +414,10 @@
                             <div class="space-y-3">
                                 <h2
                                     class="font-display-md text-3xl md:text-5xl text-white tracking-tight leading-tight">
-                                    Cuéntanos sobre tu centro estético
+                                    Cuéntanos sobre tu negocio
                                 </h2>
                                 <p class="text-gray-300 text-sm leading-relaxed">
-                                    Selecciona el volumen aproximado de tu centro para adaptar los cálculos de
+                                    Selecciona el volumen aproximado de tu negocio para adaptar los cálculos de
                                     rendimiento.
                                 </p>
                             </div>
@@ -836,7 +836,7 @@
                             <div class="w-16 h-16 rounded-full border-4 border-white/10 border-t-action-purple animate-spin mx-auto"
                                 id="spinner"></div>
                             <h2 class="font-display-md text-2xl text-white tracking-tight">Analizando la gestión de tu
-                                centro...</h2>
+                                negocio...</h2>
                             <p class="text-sm text-gray-300 max-w-xs mx-auto">Calculando márgenes de mejora en la
                                 agenda, tasa de cancelaciones e impacto financiero.</p>
                         </div>
@@ -866,7 +866,7 @@
 
                             <div class="space-y-4 pt-4">
                                 <p class="text-sm text-gray-300 max-w-xs mx-auto leading-relaxed">¿Te gustaría ver cómo
-                                    sería un día en tu centro con esta forma de trabajar?</p>
+                                    sería un día en tu negocio con esta forma de trabajar?</p>
                                 <a href="index.html#calendario"
                                     class="w-full max-w-xs mx-auto bg-action-purple text-white font-label-caps text-sm py-5 rounded-lg flex items-center justify-center gap-2 font-medium transition-all duration-300 action-button-glow">
                                     <span>Reservar llamada de 30 min</span>
@@ -911,7 +911,7 @@
             5: { img: "assets/imagen/atencion_cliente.png", quote: "Una relación cercana en cada detalle." },
             6: { img: "assets/imagen/cosmeticos_vela.png", quote: "Resultados que transforman tu día." },
             'analyzingState': { img: "assets/imagen/recepcion_logo.png", quote: "Calculando tu tranquilidad..." },
-            'resultState': { img: "assets/imagen/recepcion_logo.png", quote: "El camino hacia un centro más fluido." }
+            'resultState': { img: "assets/imagen/recepcion_logo.png", quote: "El camino hacia un negocio más fluido." }
         };
 
         let activeBgLayer = 1;
@@ -1163,7 +1163,7 @@
             if (analisis.experiencia >= 75 || data.preguntan_no_reservan === "Hacemos seguimiento") {
                 bloques.push("Se nota que <strong>cuidas mucho la experiencia de tus clientas</strong> y que has construido algo con dedicación.");
             } else if (analisis.organizacion >= 75 || data.reorganizacion === "Reorganizamos manualmente") {
-                bloques.push("Lo primero que transmite tu diagnóstico es que <strong>hay un centro detrás al que le importa hacer bien las cosas</strong>.");
+                bloques.push("Lo primero que transmite tu diagnóstico es que <strong>hay un negocio detrás al que le importa hacer bien las cosas</strong>.");
             } else {
                 bloques.push("Has conseguido sacar adelante un negocio que requiere <strong>mucho compromiso</strong>. Eso ya dice mucho de ti.");
             }
@@ -1179,7 +1179,7 @@
 
             // 3. Reforzar lo que ya hace bien
             if (analisis.organizacion >= 70) {
-                bloques.push("También destaca algo muy positivo: <strong>la organización de tu centro parece bastante sólida</strong> y eso hace mucho más fácil seguir creciendo sin complicarlo todo.");
+                bloques.push("También destaca algo muy positivo: <strong>la organización de tu negocio parece bastante sólida</strong> y eso hace mucho más fácil seguir creciendo sin complicarlo todo.");
             } else if (analisis.atencion >= 70 || analisis.experiencia >= 70) {
                 bloques.push("Tus clientas probablemente <strong>ya reciben una buena atención</strong>. Ahora el siguiente paso consiste en que esa experiencia sea igual de buena incluso antes de entrar por la puerta.");
             } else {
@@ -1194,7 +1194,7 @@
             }
 
             // 5. Cierre con ilusión
-            bloques.push("La buena noticia es que la mayoría de estos cambios no requieren trabajar más. Solo <strong>reorganizar la forma en la que el centro funciona</strong>. Si algún día quieres ver cómo podría ser aplicado a tu caso concreto, estaré encantado de enseñártelo.");
+            bloques.push("La buena noticia es que la mayoría de estos cambios no requieren trabajar más. Solo <strong>reorganizar la forma en la que el negocio funciona</strong>. Si algún día quieres ver cómo podría ser aplicado a tu caso concreto, estaré encantado de enseñártelo.");
 
             return bloques;
         }
@@ -1202,12 +1202,12 @@
         function obtenerFaseHumana(data) {
             if (data.whatsapp === "A veces tardamos" || data.whatsapp === "Depende del día" || data.llamadas === "A veces se queda sin atender") {
                 return {
-                    titulo: "Tu centro transmite cercanía.",
+                    titulo: "Tu negocio transmite cercanía.",
                     subtitulo: "Ahora el siguiente paso es conseguir que esa cercanía también se note cuando una clienta escribe un domingo o a las diez de la noche."
                 };
             } else {
                 return {
-                    titulo: "Tu centro está en una fase de crecimiento muy bonita.",
+                    titulo: "Tu negocio está en una fase de crecimiento muy bonita.",
                     subtitulo: "Ya hay una base sólida. Ahora toca recuperar tranquilidad mientras mejoras la experiencia que reciben tus clientas."
                 };
             }

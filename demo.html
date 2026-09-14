@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html class="dark" lang="es">
+
+<head>
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-P6WZNMNS');</script>
+    <!-- End Google Tag Manager -->
+
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>EvolveHub | Tranquilidad y Control para tu negocio</title>
+
+    <!-- Meta Description for SEO -->
+    <meta name="description"
+        content="Sistemas de gestión y atención automatizada para negocios. Diseñado para devolverte la tranquilidad en tu día a día." />
+
+    <link rel="stylesheet" href="assets/index-tailwind.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/imagen/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/imagen/favicon-16x16.png">
+    <link rel="shortcut icon" href="assets/imagen/favicon.ico">
+
+    <!-- Firebase Compat SDKs (Loaded conditionally for the custom calendar) -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            background-color: #FAF8F5;
+            color: #111827;
+        }
+
+        /* Focus state for keyboard navigation (WCAG AA compliant) */
+        :focus-visible {
+            outline: 2px solid #7C3AED !important;
+            outline-offset: 4px !important;
+        }
+
+        input:focus-visible,
+        textarea:focus-visible,
+        select:focus-visible {
+            outline: none !important;
+            border-color: #7C3AED !important;
+            box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.4) !important;
+        }
+
+        /* Reduced Motion media query */
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto !important;
+            }
+
+            .reveal-element {
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
+            }
+
+            * {
+                animation-delay: 0s !important;
+                animation-duration: 0s !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0s !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* Custom Scrollbar for premium aesthetic */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #FAF8F5;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #E5E7EB;
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #7C3AED;
+        }
+
+        /* Custom Scrollbar for Chat */
+        #chat-messages::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        #chat-messages::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+        }
+
+        #chat-messages::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
+
+        #chat-messages::-webkit-scrollbar-thumb:hover {
+            background: rgba(124, 58, 237, 0.5);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #111827 30%, #4B5563 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .action-button-glow:hover {
+            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .glass-blur-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(17, 24, 39, 0.06);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+        }
+
+        .glass-tab-active {
+            background: rgba(124, 58, 237, 0.08);
+            border-color: rgba(124, 58, 237, 0.2);
+        }
+
+        /* Typing indicator CSS */
+        .typing-dot {
+            width: 5px;
+            height: 5px;
+            background-color: #111827;
+            border-radius: 50%;
+            opacity: 0.4;
+            animation: typing-bounce 1s infinite alternate;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing-bounce {
+            to {
+                transform: translateY(-4px);
+                opacity: 1;
+            }
+        }
+
+        /* Scroll reveal class */
+        .reveal-element {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal-element.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .logo-navbar {
+            height: 40px;
+            width: auto;
+            display: block;
+        }
+
+        .logo-footer {
+            height: 48px;
+            width: auto;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .logo-navbar {
+                height: 31px;
+            }
+
+            .logo-footer {
+                height: 42px;
+            }
+        }
+
+        /* Smooth scrolling and scrollbar hidden for horizontal days row */
+        #calendar-days-row {
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+            /* Firefox */
+        }
+
+        #calendar-days-row::-webkit-scrollbar {
+            display: none;
+            /* Safari and Chrome */
+        }
+    </style>
+</head>
+
+<body
+    class="overflow-x-hidden font-body-md bg-deep-onyx text-white-broken selection:bg-action-purple selection:text-white-broken">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P6WZNMNS" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <!-- Skip to main content link for keyboard users -->
+    <a href="#main-content"
+        class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-action-purple focus:text-white-broken focus:px-6 focus:py-3 focus:rounded-lg focus:font-semibold focus:border focus:border-white-broken/20 focus:shadow-lg">
+        Saltar al contenido principal
+    </a>
+
+    <!-- Header / Navigation -->
+
+    <!-- Mobile Dropdown Navigation Overlay -->
+    </header>
+
+    <main id="main-content">
+        <section id="demo" class="relative py-32 overflow-hidden bg-black text-white">
+            <!-- Full-bleed Background Scene with soft blur -->
+            <div class="absolute inset-0 z-0">
+                <img alt="Recepción elegante y minimalista de un centro estético moderno"
+                    class="w-full h-full object-cover opacity-50 filter blur-[3px]"
+                    src="assets/imagen/recepcion_logo.png" />
+                <div class="absolute inset-0 bg-black/60 z-10"></div>
+            </div>
+
+            <div class="relative z-20 max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop w-full">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-stretch">
+                    <!-- Left Side: Informative panel in premium glass container -->
+                    <div
+                        class="lg:col-span-5 flex flex-col justify-between p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-md reveal-element">
+                        <div class="space-y-6">
+
+                            <h2
+                                class="font-display-md text-[36px] md:text-[48px] leading-tight text-white font-semibold">
+                                Prueba el asistente virtual en vivo
+                            </h2>
+                            <p class="text-gray-300 text-xs leading-relaxed">
+                                Escribe al simulador para comprobar el tono de respuesta y la naturalidad de la
+                                conversación. Simula agendar una cita o mover un horario.
+                            </p>
+
+                            <div class="space-y-3">
+                                <div class="flex gap-3 items-start text-xs text-gray-300">
+                                    <span
+                                        class="material-symbols-outlined text-purple-300 text-base">check_circle</span>
+                                    <div>
+                                        <p class="font-semibold text-white">Caso 1: Solicitar cita</p>
+                                        <p class="text-[10px] text-gray-400">Prueba escribiendo: "Quiero una limpieza
+                                            facial el lunes"</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-3 items-start text-xs text-gray-300">
+                                    <span
+                                        class="material-symbols-outlined text-purple-300 text-base">check_circle</span>
+                                    <div>
+                                        <p class="font-semibold text-white">Caso 2: Cambiar cita</p>
+                                        <p class="text-[10px] text-gray-400">Prueba escribiendo: "Quiero cambiar mi hora
+                                            de mañana"</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Webhook KPI Fields / Status (Visible when unlocked) -->
+                        <div id="demo-dashboard"
+                            class="hidden bg-black/30 border border-white/10 rounded-2xl p-5 space-y-4 mt-6">
+                            <div class="flex justify-between items-center border-b border-white/10 pb-3">
+                                <span class="text-[10px] font-label-caps text-gray-300 uppercase tracking-wider">Estado
+                                    de Conexión</span>
+                                <span id="webhookBadge"
+                                    class="text-[9px] font-bold text-red-400 uppercase flex items-center gap-1.5 bg-red-400/10 px-2.5 py-1 rounded-full">
+                                    <span class="w-1.5 h-1.5 bg-red-500 rounded-full"></span> Desconectado
+                                </span>
+                            </div>
+                            <div class="grid grid-cols-3 gap-3 text-center text-xs">
+                                <div class="bg-black/20 border border-white/5 p-2 rounded-xl">
+                                    <p class="text-[8px] text-gray-400 uppercase mb-1 tracking-wider">Mensajes</p>
+                                    <p class="text-sm font-bold text-white" id="kpiMessages">0</p>
+                                </div>
+                                <div class="bg-black/20 border border-white/5 p-2 rounded-xl">
+                                    <p class="text-[8px] text-gray-400 uppercase mb-1 tracking-wider">Reservas</p>
+                                    <p class="text-sm font-bold text-white" id="kpiBookings">0</p>
+                                </div>
+                                <div class="bg-black/20 border border-white/5 p-2 rounded-xl">
+                                    <p class="text-[8px] text-gray-400 uppercase mb-1 tracking-wider">Latencia</p>
+                                    <p class="text-sm font-bold text-white" id="kpiLatency">—</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-2">
+                                <button
+                                    class="flex-1 bg-black/40 border border-white/10 hover:bg-white/10 text-white font-label-caps text-[9px] py-2 rounded-lg transition-all flex items-center justify-center gap-1.5"
+                                    id="pingWebhook" type="button">
+                                    <span class="material-symbols-outlined text-[13px] text-purple-300">sync</span>
+                                    <span>Verificar Canal</span>
+                                </button>
+                                <button
+                                    class="bg-red-950/20 border border-red-900/30 hover:bg-red-900/20 text-red-400 font-label-caps text-[9px] px-3 py-2 rounded-lg transition-all flex items-center justify-center"
+                                    id="resetDemoBtn" type="button">
+                                    <span class="material-symbols-outlined text-[13px]">restart_alt</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Lock form placeholder -->
+                        <div id="demo-unlock-fields" class="space-y-4 mt-8">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label
+                                        class="block text-[9px] font-label-caps text-gray-300 mb-2 uppercase tracking-widest"
+                                        for="demo-name-input">Nombre</label>
+                                    <input
+                                        class="w-full bg-white/5 border border-white/15 rounded-lg px-4 py-3 text-xs text-white focus:border-purple-400 focus:ring-0 transition-colors"
+                                        placeholder="Tu nombre" type="text" id="demo-name-input" required />
+                                </div>
+                                <div>
+                                    <label
+                                        class="block text-[9px] font-label-caps text-gray-300 mb-2 uppercase tracking-widest"
+                                        for="demo-email-input">Correo Electrónico</label>
+                                    <input
+                                        class="w-full bg-white/5 border border-white/15 rounded-lg px-4 py-3 text-xs text-white focus:border-purple-400 focus:ring-0 transition-colors"
+                                        placeholder="ejemplo@correo.com" type="email" id="demo-email-input" required />
+                                </div>
+                            </div>
+                            <button
+                                class="w-full bg-action-purple text-white py-4 rounded-xl font-label-caps text-[12px] hover:bg-opacity-95 transition-all flex items-center justify-center gap-2 font-medium border border-white/10"
+                                id="demo-start-btn">
+                                <span>Activar simulador</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Right Side: ChatGPT-like Simulator styled as floating dark glass application -->
+                    <div
+                        class="lg:col-span-7 flex flex-col h-[560px] relative rounded-3xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md shadow-2xl reveal-element">
+                        <!-- Locked glass overlay (dark theme) -->
+                        <div id="demo-lock-overlay"
+                            class="absolute inset-0 bg-black/85 backdrop-blur-[6px] z-30 flex flex-col items-center justify-center p-8 text-center transition-all duration-500">
+                            <div
+                                class="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-4 text-purple-300">
+                                <span class="material-symbols-outlined text-xl">lock</span>
+                            </div>
+                            <h4 class="text-sm font-semibold text-white mb-2">Simulación Protegida</h4>
+                            <p class="text-xs text-gray-400 max-w-sm leading-relaxed mb-6">
+                                Introduce tus datos para interactuar en tiempo real.
+                            </p>
+                        </div>
+
+                        <!-- Chat Header -->
+                        <div class="bg-black/20 p-4 border-b border-white/10 flex justify-between items-center">
+                            <div class="flex items-center gap-3">
+                                <div
+                                    class="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-purple-300">
+                                    <span class="material-symbols-outlined text-base">spa</span>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-semibold text-white">Asistente</p>
+                                    <p class="text-[9px] text-green-400 flex items-center gap-1 font-medium">
+                                        <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span> en
+                                        línea
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Chat Area -->
+                        <div class="flex-1 p-5 space-y-4 overflow-y-auto bg-black/10 flex flex-col" id="chat-messages"
+                            aria-live="polite" aria-relevant="additions">
+                            <!-- Default placeholder prompt -->
+                            <div class="text-center py-10 max-w-md mx-auto space-y-2">
+                                <span class="material-symbols-outlined text-gray-500 text-4xl">sms</span>
+                                <p class="text-xs text-gray-400">Desbloquea el simulador a la izquierda para iniciar la
+                                    conversación.</p>
+                            </div>
+                        </div>
+
+                        <!-- Suggestion Chips -->
+                        <div class="px-4 py-3 bg-black/20 border-t border-white/10 flex gap-2 flex-wrap hidden"
+                            id="chat-suggestions-container">
+                        </div>
+
+                        <!-- Form Input -->
+                        <form id="chat-form" class="p-4 bg-black/20 border-t border-white/10 flex gap-2.5">
+
+                            <label class="sr-only" for="chat-text-input">Escribe un mensaje de prueba...</label>
+                            <input
+                                class="flex-1 bg-black/35 border border-white/10 rounded-lg px-4 py-3 text-xs text-white focus:outline-none focus:border-action-purple focus:ring-0"
+                                id="chat-text-input" placeholder="Escribe un mensaje de prueba..." type="text" required
+                                disabled />
+                            <button type="submit" id="chat-submit-btn" aria-label="Enviar mensaje al asistente"
+                                class="bg-black/35 hover:bg-white/5 text-gray-400 p-3 rounded-lg flex items-center justify-center transition-colors border border-white/10"
+                                disabled>
+                                <span class="material-symbols-outlined text-base">send</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+
+    <!-- Web Application Logic Scripts -->
+    <script>
+        // ==========================================
+        // LOCALSTORAGE HELPERS (WCAG 2.2 REDUNDANT ENTRY COMPLIANT)
+        // ==========================================
+        function saveUserData(data) {
+            if (data.nombre) localStorage.setItem('evolvehub_user_name', data.nombre.trim());
+            if (data.email) localStorage.setItem('evolvehub_user_email', data.email.trim());
+            if (data.telefono) localStorage.setItem('evolvehub_user_phone', data.telefono.trim());
+            syncFormFields();
+        }
+
+        function syncFormFields() {
+            const name = localStorage.getItem('evolvehub_user_name') || "";
+            const email = localStorage.getItem('evolvehub_user_email') || "";
+            const phone = localStorage.getItem('evolvehub_user_phone') || "";
+
+            // Demo unlock fields
+            const demoName = document.getElementById("demo-name-input");
+            const demoEmail = document.getElementById("demo-email-input");
+            if (demoName && !demoName.value && name) demoName.value = name;
+            if (demoEmail && !demoEmail.value && email) demoEmail.value = email;
+
+            // Calendar Form
+            const calName = document.getElementById("cal-name");
+            const calEmail = document.getElementById("cal-email");
+            const calTel = document.getElementById("cal-tel");
+            if (calName && !calName.value && name) calName.value = name;
+            if (calEmail && !calEmail.value && email) calEmail.value = email;
+            if (calTel && !calTel.value && phone) calTel.value = phone;
+
+        }
+
+        // ==========================================
+        // SCROLL REVEAL EFFECT
+        // ==========================================
+        document.addEventListener('DOMContentLoaded', () => {
+            syncFormFields();
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal-element').forEach(el => {
+                el.classList.add('reveal-element');
+                observer.observe(el);
+            });
+        });
+
+
+        // ==========================================
+        // INTERACTIVE REAL WEBHOOK CHAT LOGIC (DEMO)
+        // ==========================================
+        const WEBHOOK_URL = "https://n8n-n8n.gk97dq.easypanel.host/webhook/whatsapp-clinica-inbound";
+        const WEBHOOK_PING_URL = "https://n8n-n8n.gk97dq.easypanel.host/webhook/evolvehub-health";
+
+        const state = {
+            sessionId: createSessionId(),
+            channel: "web",
+            lastLatency: null,
+            messagesSent: 0,
+            bookings: 0,
+            name: "",
+            email: "",
+            demoPhone: ""
+        };
+
+        function createSessionId() {
+            return "sess_" + Date.now() + "_" + Math.random().toString(36).slice(2, 8);
+        }
+
+        function validateEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        function updateMeta(status = "Listo") {
+            const badge = document.getElementById("webhookBadge");
+            if (badge) {
+                if (status === "Conectado") {
+                    badge.className = "text-[10px] font-bold text-green-500 uppercase flex items-center gap-1.5 bg-green-500/10 px-2.5 py-1 rounded-full";
+                    badge.innerHTML = `<span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span> Conectado`;
+                } else if (status === "Conectando...") {
+                    badge.className = "text-[10px] font-bold text-yellow-500 uppercase flex items-center gap-1.5 bg-yellow-500/10 px-2.5 py-1 rounded-full";
+                    badge.innerHTML = `<span class="w-1.5 h-1.5 bg-yellow-500 rounded-full animate-bounce"></span> Conectando...`;
+                } else {
+                    badge.className = "text-[10px] font-bold text-red-500 uppercase flex items-center gap-1.5 bg-red-500/10 px-2.5 py-1 rounded-full";
+                    badge.innerHTML = `<span class="w-1.5 h-1.5 bg-red-500 rounded-full"></span> ${status}`;
+                }
+            }
+            document.getElementById("kpiMessages").textContent = state.messagesSent;
+            document.getElementById("kpiBookings").textContent = state.bookings;
+            document.getElementById("kpiLatency").textContent = state.lastLatency ? `${state.lastLatency} ms` : "—";
+        }
+
+        async function postJSON(url, payload) {
+            const started = performance.now();
+            const res = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            });
+            const ended = performance.now();
+            state.lastLatency = Math.round(ended - started);
+            if (!res.ok) {
+                throw new Error(`HTTP ${res.status}`);
+            }
+            return res.json();
+        }
+
+        async function pingWebhook() {
+            updateMeta("Conectando...");
+            try {
+                const data = await postJSON(WEBHOOK_PING_URL, {
+                    event: "health_check",
+                    session_id: state.sessionId,
+                    timestamp: new Date().toISOString()
+                });
+                if (data?.ok) {
+                    updateMeta("Conectado");
+                } else {
+                    updateMeta("Sin respuesta");
+                }
+            } catch (err) {
+                updateMeta("Error");
+            }
+        }
+
+        function startDemo() {
+            const nameInput = document.getElementById("demo-name-input");
+            const emailInput = document.getElementById("demo-email-input");
+            const name = nameInput.value.trim();
+            const email = emailInput.value.trim();
+
+            if (!name) {
+                nameInput.classList.add('border-red-500', 'focus:border-red-500');
+                setTimeout(() => nameInput.classList.remove('border-red-500', 'focus:border-red-500'), 2000);
+                alert('Por favor, introduce tu nombre para iniciar la demo.');
+                return;
+            }
+
+            if (!email || !validateEmail(email)) {
+                emailInput.classList.add('border-red-500', 'focus:border-red-500');
+                setTimeout(() => emailInput.classList.remove('border-red-500', 'focus:border-red-500'), 2000);
+                alert('Por favor, introduce un email válido para iniciar la demo.');
+                return;
+            }
+
+            state.name = name;
+            state.email = email;
+            state.demoPhone = "+34600" + Math.floor(100000 + Math.random() * 899999);
+            saveUserData({ nombre: name, email: email });
+
+            // Hide lock overlay
+            const lockOverlay = document.getElementById('demo-lock-overlay');
+            if (lockOverlay) {
+                lockOverlay.classList.add('opacity-0', 'pointer-events-none');
+            }
+
+            // Toggle dashboard columns
+            document.getElementById('demo-unlock-fields').classList.add('hidden');
+            // Keep dashboard hidden as requested
+            // document.getElementById('demo-dashboard').classList.remove('hidden');
+
+            // Enable Chat Inputs
+            const chatTextInput = document.getElementById('chat-text-input');
+            const chatSubmitBtn = document.getElementById('chat-submit-btn');
+
+            chatTextInput.disabled = false;
+            chatSubmitBtn.disabled = false;
+            chatSubmitBtn.classList.remove('text-grey-warm/40');
+            chatSubmitBtn.classList.add('text-action-purple', 'bg-action-purple/10', 'border-action-purple/30');
+
+            // Reset chat messages window and add initial message
+            const chatMessages = document.getElementById('chat-messages');
+            chatMessages.innerHTML = '';
+            addMessage("¡Hola! ¿Qué tal? ¿En qué podemos ayudarte hoy?", "bot");
+
+            // Load Suggestion Chips
+            const suggestContainer = document.getElementById('chat-suggestions-container');
+            suggestContainer.classList.remove('hidden');
+            suggestContainer.innerHTML = `
+                <button type="button" onclick="sendSuggestion('Quiero reservar una Limpieza Facial')" class="border border-glass-border bg-deep-onyx text-grey-warm text-[10px] px-3 py-1.5 rounded-full hover:text-white-broken hover:border-action-purple transition-all">Reservar Limpieza Facial</button>
+                <button type="button" onclick="sendSuggestion('¿Qué tratamientos tenéis y precios?')" class="border border-glass-border bg-deep-onyx text-grey-warm text-[10px] px-3 py-1.5 rounded-full hover:text-white-broken hover:border-action-purple transition-all">Tratamientos y Precios</button>
+                <button type="button" onclick="sendSuggestion('Quiero cancelar mi cita')" class="border border-glass-border bg-deep-onyx text-grey-warm text-[10px] px-3 py-1.5 rounded-full hover:text-white-broken hover:border-action-purple transition-all">Cancelar Cita</button>
+            `;
+
+            // Registrar demo start
+            postJSON(WEBHOOK_URL, {
+                event: "demo_start",
+                session_id: state.sessionId,
+                timestamp: new Date().toISOString(),
+                contact: {
+                    name: state.name,
+                    email: state.email,
+                    phone: state.demoPhone
+                }
+            }).catch(e => console.error("demo_start webhook failed:", e));
+
+            updateMeta("Conectado");
+            pingWebhook();
+        }
+
+        function sendSuggestion(text) {
+            document.getElementById('chat-text-input').value = text;
+            const chatForm = document.getElementById('chat-form');
+            chatForm.dispatchEvent(new Event('submit'));
+        }
+
+        function addMessage(text, role = "bot") {
+            const wrap = document.getElementById("chat-messages");
+            if (!wrap) return;
+            const el = document.createElement("div");
+
+            const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+            if (role === "user") {
+                el.className = "bg-action-purple border border-action-purple/50 p-3.5 max-w-[85%] ml-auto text-sm text-white rounded-2xl rounded-tr-none leading-relaxed animate-fade-in mb-2 shadow-sm";
+                el.innerHTML = `
+                    <p class="font-semibold text-[11px] text-white/80 mb-1">Tú</p>
+                    <p class="text-[14px] leading-relaxed">${text}</p>
+                    <div class="text-right text-[10px] text-white/60 mt-1">${time}</div>
+                `;
+            } else {
+                el.className = "bg-dark-surface border border-glass-border p-3.5 max-w-[85%] text-sm text-white-broken rounded-2xl rounded-tl-none leading-relaxed animate-fade-in mb-2 shadow-sm";
+                el.innerHTML = `
+                    <p class="font-semibold text-[11px] text-action-purple mb-1">Asistente</p>
+                    <p class="text-[14px] leading-relaxed">${text}</p>
+                    <div class="text-right text-[10px] text-grey-warm/40 mt-1">${time}</div>
+                `;
+            }
+            wrap.appendChild(el);
+            wrap.scrollTop = wrap.scrollHeight;
+        }
+
+        function showTypingIndicator() {
+            const wrap = document.getElementById("chat-messages");
+            if (!wrap) return null;
+            const indicator = document.createElement('div');
+            indicator.className = 'bg-dark-surface border border-glass-border p-3.5 max-w-[80px] rounded-2xl rounded-tl-none flex items-center gap-1 w-16 mb-2';
+            indicator.id = 'typing-indicator';
+            indicator.innerHTML = `
+                <span class="typing-dot"></span>
+                <span class="typing-dot"></span>
+                <span class="typing-dot"></span>
+            `;
+            wrap.appendChild(indicator);
+            wrap.scrollTop = wrap.scrollHeight;
+            return indicator;
+        }
+
+        async function sendChatMessage(text) {
+            addMessage(text, "user");
+            updateMeta("Enviando...");
+
+            const indicator = showTypingIndicator();
+
+            const payload = {
+                email: state.email,
+                name: state.name,
+                message: text,
+                event: "web_message",
+                session_id: state.sessionId,
+                channel: state.channel
+            };
+
+            try {
+                const data = await postJSON(WEBHOOK_URL, payload);
+                if (indicator) indicator.remove();
+
+                state.messagesSent += 1;
+                const reply = data?.message || "Recibido. Estamos procesando tu consulta en el calendario.";
+                addMessage(reply, "bot");
+
+                if (data?.status === "BOOKED" || data?.status === "WAITING_FOR_SELECTION") {
+                    if (data?.status === "BOOKED") {
+                        state.bookings += 1;
+                        triggerLiveAgendaBookingSim();
+                    }
+                }
+                updateMeta("Conectado");
+            } catch (err) {
+                if (indicator) indicator.remove();
+                addMessage("El asistente virtual no responde en este momento. Inténtalo de nuevo.", "bot");
+                updateMeta("Error de conexión");
+            }
+        }
+
+        function triggerLiveAgendaBookingSim() {
+            // Live simulation of calendar booking inside the demo if booked via chatbot
+            console.log("Booking simulator triggered in simulator.");
+        }
+
+        function changeChannel(ch) {
+            state.channel = ch;
+            const webBtn = document.getElementById('channel-tab-web');
+            const waBtn = document.getElementById('channel-tab-whatsapp');
+
+            if (ch === 'web') {
+                webBtn.className = "px-3 py-1.5 text-[9px] font-label-caps border border-action-purple rounded-full text-white-broken bg-action-purple font-medium";
+                waBtn.className = "px-3 py-1.5 text-[9px] font-label-caps border border-glass-border rounded-full text-grey-warm hover:bg-glass-surface";
+            } else {
+                waBtn.className = "px-3 py-1.5 text-[9px] font-label-caps border border-action-purple rounded-full text-white-broken bg-action-purple font-medium";
+                webBtn.className = "px-3 py-1.5 text-[9px] font-label-caps border border-glass-border rounded-full text-grey-warm hover:bg-glass-surface";
+            }
+            updateMeta("Canal cambiado");
+        }
+
+        function resetDemo() {
+            state.sessionId = createSessionId();
+            state.messagesSent = 0;
+            state.bookings = 0;
+            state.lastLatency = null;
+            state.name = "";
+            state.email = "";
+            state.demoPhone = "";
+
+            document.getElementById('demo-name-input').value = "";
+            document.getElementById('demo-email-input').value = "";
+            document.getElementById('chat-text-input').value = "";
+
+            document.getElementById('chat-text-input').disabled = true;
+
+            const chatSubmitBtn = document.getElementById('chat-submit-btn');
+            chatSubmitBtn.disabled = true;
+            chatSubmitBtn.className = "bg-glass-surface hover:bg-glass-surface/85 text-grey-warm/40 p-3 rounded-lg flex items-center justify-center transition-colors border border-glass-border";
+
+            const lockOverlay = document.getElementById('demo-lock-overlay');
+            if (lockOverlay) {
+                lockOverlay.classList.remove('opacity-0', 'pointer-events-none');
+            }
+
+            document.getElementById('demo-unlock-fields').classList.remove('hidden');
+            // Keep dashboard hidden as requested
+            // document.getElementById('demo-dashboard').classList.add('hidden');
+            document.getElementById('chat-suggestions-container').classList.add('hidden');
+
+            document.getElementById('chat-messages').innerHTML = `
+                <div class="text-center py-10 max-w-md mx-auto space-y-2">
+                    <span class="material-symbols-outlined text-grey-warm/20 text-4xl">sms</span>
+                    <p class="text-xs text-grey-warm">Desbloquea el simulador para iniciar una conversación con el asistente virtual.</p>
+                </div>
+            `;
+
+            updateMeta("Desconectado");
+        }
+
+
+        // ==========================================
+        // CUSTOM AGENDA CALENDAR LOGIC (FIRESTORE)
+        // ==========================================
+        // Firestore integration setup
+        const firebaseConfig = {
+            apiKey: "AIzaSyPlaceholderAPIKeyForEvolveHubRedesign",
+            authDomain: "evolvehub-citas.firebaseapp.com",
+            projectId: "evolvehub-citas",
+            storageBucket: "evolvehub-citas.appspot.com",
+            messagingSenderId: "123456789",
+            appId: "1:12345:web:12345"
+        };
+
+        let db = null;
+        let useFirebase = false;
+
+        // Try initialization
+        if (firebaseConfig.apiKey && !firebaseConfig.apiKey.includes("Placeholder")) {
+            try {
+                firebase.initializeApp(firebaseConfig);
+                db = firebase.firestore();
+                useFirebase = true;
+                console.log("Firestore calendar synced successfully.");
+            } catch (e) {
+                console.warn("Firestore not loaded. Running in local fallback mode.", e);
+            }
+        }
+
+        // Horario de reserva: de 9:00 a 18:00, cada hora en punto
+        const CALENDAR_SLOTS_HOURS = [];
+        for (let h = 9; h <= 18; h++) {
+            CALENDAR_SLOTS_HOURS.push(String(h).padStart(2, '0') + ':00');
+        }
+        // Máximo de días hacia adelante que se pueden reservar
+        const CALENDAR_MAX_DAYS_AHEAD = 15;
+
+        // Endpoints n8n: disponibilidad real desde Google Calendar y creación de reserva
+        const WEBHOOK_AVAILABILITY_URL = 'https://n8n-n8n.gk97dq.easypanel.host/webhook/evolvehub-calendar-availability';
+        const WEBHOOK_BOOKING_URL = 'https://n8n-n8n.gk97dq.easypanel.host/webhook/evolvehub-booking';
+
+        let selectedDayString = "";
+        let selectedHourString = "";
+        let appointments = [];
+
+        // Load real availability from n8n (Google Calendar), with Firestore/local fallback
+        async function fetchAppointments() {
+            try {
+                const res = await fetch(WEBHOOK_AVAILABILITY_URL, {
+                    method: 'GET',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data && Array.isArray(data.busy)) {
+                        appointments = data.busy;
+                        return;
+                    }
+                }
+                throw new Error('Respuesta de disponibilidad inválida');
+            } catch (e) {
+                console.warn('No se pudo obtener disponibilidad en vivo desde n8n. Usando datos locales.', e);
+            }
+
+            if (useFirebase && db) {
+                try {
+                    const snapshot = await db.collection("citas").get();
+                    appointments = snapshot.docs.map(doc => doc.data());
+                    return;
+                } catch (e) {
+                    console.error("Error reading Firestore appointments:", e);
+                }
+            }
+            loadLocalFallbackAppointments();
+        }
+
+        function loadLocalFallbackAppointments() {
+            const data = localStorage.getItem("evolvehub_citas");
+            appointments = data ? JSON.parse(data) : [
+                // Some mock appointments to look realistic on load
+                { fecha: getFormattedDate(1), hora: "11:00" },
+                { fecha: getFormattedDate(2), hora: "16:30" },
+                { fecha: getFormattedDate(3), hora: "12:30" }
+            ];
+        }
+
+        function saveAppointment(apt) {
+            appointments.push(apt);
+            if (useFirebase && db) {
+                db.collection("citas").add({
+                    ...apt,
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                }).catch(e => console.error("Error adding to Firestore:", e));
+            } else {
+                localStorage.setItem("evolvehub_citas", JSON.stringify(appointments));
+            }
+        }
+
+        function getFormattedDate(offsetDays) {
+            const d = new Date();
+            d.setDate(d.getDate() + offsetDays);
+            // Skip Sunday
+            if (d.getDay() === 0) d.setDate(d.getDate() + 1);
+            return d.toISOString().split('T')[0];
+        }
+
+        function getDayName(offsetDays) {
+            const d = new Date();
+            d.setDate(d.getDate() + offsetDays);
+            if (d.getDay() === 0) d.setDate(d.getDate() + 1);
+
+            const weekday = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"][d.getDay()];
+            const dayNum = d.getDate();
+            const month = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"][d.getMonth()];
+
+            return { label: `${weekday} ${dayNum}`, dateString: d.toISOString().split('T')[0] };
+        }
+
+        async function initCalendarWidget() {
+            await fetchAppointments();
+            const row = document.getElementById("calendar-days-row");
+            if (!row) return;
+
+            row.innerHTML = "";
+            for (let i = 1; i <= CALENDAR_MAX_DAYS_AHEAD; i++) {
+                const day = getDayName(i);
+                const btn = document.createElement("button");
+                btn.type = "button";
+                btn.className = "flex-shrink-0 flex flex-col items-center bg-deep-onyx border border-glass-border hover:border-action-purple/50 px-5 py-4 rounded-xl min-w-[76px] transition-all";
+                btn.dataset.date = day.dateString;
+                btn.setAttribute("aria-label", `Seleccionar día ${day.label}`);
+                btn.setAttribute("aria-selected", "false");
+                btn.innerHTML = `
+                    <span class="text-[10px] text-grey-warm/50 font-label-caps uppercase tracking-wider block mb-1">${day.label.split(' ')[0]}</span>
+                    <span class="text-base font-bold text-white-broken">${day.label.split(' ')[1]}</span>
+                `;
+                btn.addEventListener("click", () => selectDay(day.dateString, btn));
+                row.appendChild(btn);
+            }
+
+            // Auto-select first day
+            const firstBtn = row.querySelector("button");
+            if (firstBtn) firstBtn.click();
+        }
+
+        function selectDay(dateString, btnElement) {
+            selectedDayString = dateString;
+
+            // Toggle active classes on days buttons
+            document.querySelectorAll("#calendar-days-row button").forEach(b => {
+                b.classList.remove("border-action-purple", "bg-action-purple/10");
+                b.classList.add("border-glass-border", "bg-deep-onyx");
+                b.setAttribute("aria-selected", "false");
+            });
+            btnElement.classList.add("border-action-purple", "bg-action-purple/10");
+            btnElement.classList.remove("border-glass-border", "bg-deep-onyx");
+            btnElement.setAttribute("aria-selected", "true");
+
+            renderHours(dateString);
+        }
+
+        function renderHours(dateString) {
+            const grid = document.getElementById("calendar-hours-grid");
+            if (!grid) return;
+
+            grid.innerHTML = "";
+
+            // Disable Continue button until slot is selected
+            const contBtn = document.getElementById("calendar-continue-btn");
+            if (contBtn) {
+                contBtn.disabled = true;
+            }
+            selectedHourString = "";
+
+            CALENDAR_SLOTS_HOURS.forEach(hr => {
+                // Check if appointment is already taken
+                const isBooked = appointments.some(apt => apt.fecha === dateString && apt.hora === hr);
+
+                const btn = document.createElement("button");
+                btn.type = "button";
+                if (isBooked) {
+                    btn.className = "bg-[#161618] border border-glass-border/30 text-grey-warm/30 text-xs py-3.5 rounded-lg font-medium cursor-not-allowed flex items-center justify-center gap-1";
+                    btn.disabled = true;
+                    btn.setAttribute("aria-label", `Hora ${hr} no disponible`);
+                    btn.innerHTML = `<span>${hr}</span> <span class="text-[9px] opacity-50 font-light font-sans">(Reservado)</span>`;
+                } else {
+                    btn.className = "bg-deep-onyx border border-glass-border hover:border-action-purple text-white-broken text-xs py-3.5 rounded-lg font-medium transition-all duration-300";
+                    btn.textContent = hr;
+                    btn.setAttribute("aria-label", `Seleccionar hora ${hr}`);
+                    btn.addEventListener("click", () => selectHourSlot(hr, btn));
+                }
+                grid.appendChild(btn);
+            });
+        }
+
+        function selectHourSlot(hr, btnElement) {
+            selectedHourString = hr;
+
+            // Remove active classes from all hours buttons
+            document.querySelectorAll("#calendar-hours-grid button").forEach(b => {
+                if (!b.disabled) {
+                    b.classList.remove("border-action-purple", "bg-action-purple/10");
+                    b.classList.add("border-glass-border", "bg-deep-onyx");
+                }
+            });
+
+            // Add active classes to selected button
+            btnElement.classList.add("border-action-purple", "bg-action-purple/10");
+            btnElement.classList.remove("border-glass-border", "bg-deep-onyx");
+
+            // Enable Continue button
+            const contBtn = document.getElementById("calendar-continue-btn");
+            if (contBtn) {
+                contBtn.disabled = false;
+            }
+        }
+
+        function backToCalendar() {
+            document.getElementById("calendar-step-form").classList.add("hidden");
+            document.getElementById("calendar-step-picker").classList.remove("hidden");
+        }
+
+        async function handleCalendarSubmit(e) {
+            e.preventDefault();
+
+            const nameInput = document.getElementById("cal-name");
+            const telInput = document.getElementById("cal-tel");
+            const emailInput = document.getElementById("cal-email");
+            const infoInput = document.getElementById("cal-info");
+            const termsInput = document.getElementById("cal-terms");
+            const submitBtn = document.getElementById("calendar-submit-btn");
+
+            if (!termsInput.checked) {
+                termsInput.setCustomValidity('Debes aceptar los términos y condiciones para continuar.');
+                termsInput.reportValidity();
+                return;
+            } else {
+                termsInput.setCustomValidity('');
+            }
+
+            const apt = {
+                nombre: nameInput.value.trim(),
+                telefono: telInput.value.trim(),
+                email: emailInput.value.trim(),
+                info_adicional: infoInput.value.trim(),
+                terminos_aceptados: termsInput.checked,
+                fecha: selectedDayString,
+                hora: selectedHourString
+            };
+
+            saveUserData({ nombre: apt.nombre, email: apt.email, telefono: apt.telefono });
+
+            const originalBtnText = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'Reservando...';
+
+            try {
+                const res = await fetch(WEBHOOK_BOOKING_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        source: 'calendario_booking',
+                        data: { ...apt, timestamp: new Date().toISOString() }
+                    })
+                });
+
+                let result = {};
+                try { result = await res.json(); } catch (_) { /* respuesta sin JSON */ }
+
+                if (!res.ok || result.status === 'SLOT_TAKEN') {
+                    // El hueco se ha ocupado justo antes de confirmar: refrescamos disponibilidad
+                    await fetchAppointments();
+                    renderHours(selectedDayString);
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalBtnText;
+                    backToCalendar();
+                    alert('Uy, ese horario se acaba de reservar. Por favor, elige otro hueco disponible.');
+                    return;
+                }
+
+                // Guardamos también localmente para reflejar el hueco al instante en esta sesión
+                saveAppointment({ fecha: apt.fecha, hora: apt.hora });
+
+                document.getElementById("calendar-step-form").classList.add("hidden");
+                document.getElementById("calendar-step-success").classList.remove("hidden");
+                document.getElementById("booking-success-message").innerHTML = `
+                    Tu consultoría está agendada para el <strong class="text-white-broken">${selectedHourString}h</strong> del día <strong class="text-white-broken">${selectedDayString}</strong>.<br>
+                    Te hemos enviado un correo de confirmación y hemos añadido la cita a nuestro Google Calendar.
+                `;
+            } catch (err) {
+                console.error("Webhook booking sync failed:", err);
+                alert('No hemos podido completar la reserva. Por favor, inténtalo de nuevo en unos segundos.');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnText;
+            }
+        }
+
+        function resetCalendarWidget() {
+            document.getElementById("calendar-step-success").classList.add("hidden");
+            document.getElementById("calendar-step-form").classList.add("hidden");
+            document.getElementById("calendar-step-picker").classList.remove("hidden");
+
+            document.getElementById("cal-name").value = "";
+            document.getElementById("cal-tel").value = "";
+            document.getElementById("cal-email").value = "";
+            document.getElementById("cal-info").value = "";
+            document.getElementById("cal-terms").checked = false;
+
+            initCalendarWidget();
+        }
+
+        // ==========================================
+        // DOM EVENTS BINDING
+        // ==========================================
+        document.addEventListener('DOMContentLoaded', () => {
+            // Unlock Demo Button
+            const startBtn = document.getElementById('demo-start-btn');
+            if (startBtn) {
+                startBtn.addEventListener('click', startDemo);
+            }
+
+            const emailInput = document.getElementById('demo-email-input');
+            const nameInput = document.getElementById('demo-name-input');
+            [emailInput, nameInput].forEach(inp => {
+                if (inp) {
+                    inp.addEventListener('keypress', (e) => {
+                        if (e.key === 'Enter') startDemo();
+                    });
+                }
+            });
+
+            // Ping Webhook
+            const pingBtn = document.getElementById('pingWebhook');
+            if (pingBtn) {
+                pingBtn.addEventListener('click', pingWebhook);
+            }
+
+            // Reset Demo
+            const resetBtn = document.getElementById('resetDemoBtn');
+            if (resetBtn) {
+                resetBtn.addEventListener('click', resetDemo);
+            }
+
+            // Chat form submit
+            const chatForm = document.getElementById('chat-form');
+            if (chatForm) {
+                chatForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const input = document.getElementById('chat-text-input');
+                    const text = input.value.trim();
+                    if (!text) return;
+                    input.value = "";
+                    sendChatMessage(text);
+                });
+            }
+
+            // Custom Calendar Initializer
+            initCalendarWidget();
+
+            // Calendar Booking Form Submit
+            const calForm = document.getElementById("calendar-booking-form");
+            if (calForm) {
+                calForm.addEventListener("submit", handleCalendarSubmit);
+            }
+
+            // Calendar Continue Button Click
+            const contBtn = document.getElementById("calendar-continue-btn");
+            if (contBtn) {
+                contBtn.addEventListener("click", () => {
+                    if (!selectedHourString) return;
+
+                    // Switch steps in widget
+                    document.getElementById("calendar-step-picker").classList.add("hidden");
+                    document.getElementById("calendar-step-form").classList.remove("hidden");
+
+                    const dateObj = new Date(selectedDayString);
+                    const friendlyDate = dateObj.toLocaleDateString("es-ES", { weekday: 'long', day: 'numeric', month: 'long' });
+                    document.getElementById("selected-slot-summary").textContent = `${friendlyDate} a las ${selectedHourString}h`;
+                });
+            }
+
+            // Mobile Menu Toggler
+            const mobileToggle = document.querySelector('.mobile-toggle');
+            const mobileNav = document.querySelector('.mobile-nav-overlay');
+
+            if (mobileToggle && mobileNav) {
+                mobileToggle.addEventListener('click', () => {
+                    mobileNav.classList.toggle('hidden');
+                    const isHidden = mobileNav.classList.contains('hidden');
+                    const iconSpan = mobileToggle.querySelector('.material-symbols-outlined');
+                    if (iconSpan) {
+                        iconSpan.textContent = isHidden ? 'menu' : 'close';
+                    }
+                });
+            }
+
+            // Smooth Scroll for Anchor Links with Header Offset
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        e.preventDefault();
+
+                        // Close mobile menu overlay if open
+                        if (mobileNav && !mobileNav.classList.contains('hidden')) {
+                            mobileNav.classList.add('hidden');
+                            const iconSpan = mobileToggle ? mobileToggle.querySelector('.material-symbols-outlined') : null;
+                            if (iconSpan) {
+                                iconSpan.textContent = 'menu';
+                            }
+                        }
+
+                        // Scroll smoothly with offset
+                        const headerOffset = 80;
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
