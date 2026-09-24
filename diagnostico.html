@@ -1135,12 +1135,17 @@
             */
         }
 
-        // Prevent Enter from submitting the form unexpectedly
-        document.getElementById('diagnosticoForm').addEventListener('keydown', function (e) {
-            if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') {
-                e.preventDefault();
-            }
-        });
+        
+       document.getElementById('diagnosticoForm').addEventListener('keydown', function (e) {
+    const isEnter = e.key === 'Enter';
+    const isInput = e.target.matches('input:not([type="button"]):not([type="submit"])');
+
+    // Evita el comportamiento no deseado solo al pulsar Enter
+    // dentro de campos de entrada, nunca sobre botones.
+    if (isEnter && isInput) {
+        e.preventDefault();
+    }
+});
 
         function roundIntelligently(num) {
             if (num < 100) return Math.round(num / 10) * 10;
