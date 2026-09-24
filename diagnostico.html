@@ -3,30 +3,31 @@
 
 <head>
     <!-- Google Consent Mode start-->
-    <script
-        data-cookieconsent="ignore">    
-        window.dataLayer = window.dataLayer || []; 
-        function gtag() { dataLayer.push(arguments); } 
-        gtag("consent", "default", { 
-            ad_personalization: "denied", 
-            ad_storage: "denied", 
-            ad_user_data: "denied", 
-            analytics_storage: "denied", 
-            functionality_storage: "denied", 
-            personalization_storage: "denied", 
-            security_storage: "granted", 
-            wait_for_update: 500, }); 
-            gtag("set", "ads_data_redaction", true); 
-            gtag("set", "url_passthrough", false);</script>
+    <script data-cookieconsent="ignore">
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag("consent", "default", {
+            ad_personalization: "denied",
+            ad_storage: "denied",
+            ad_user_data: "denied",
+            analytics_storage: "denied",
+            functionality_storage: "denied",
+            personalization_storage: "denied",
+            security_storage: "granted",
+            wait_for_update: 500,
+        });
+        gtag("set", "ads_data_redaction", true);
+        gtag("set", "url_passthrough", false);</script>
     <!-- Google Consent Mode end-->
 
     <!-- Cookiebot start -->
-    <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="011631c0-a944-4e4d-b69e-92c1c42b386e" data-blockingmode="auto" type="text/javascript"></script>
-    
+    <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="011631c0-a944-4e4d-b69e-92c1c42b386e"
+        data-blockingmode="auto" type="text/javascript"></script>
+
     <!-- Cookiebot end -->
 
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QPN9T163L1" data-cookieconsent="ignore" ></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QPN9T163L1" data-cookieconsent="ignore"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
@@ -266,6 +267,16 @@
             color: #7C3AED !important;
             background-color: rgba(124, 58, 237, 0.08) !important;
             border-color: rgba(124, 58, 237, 0.2) !important;
+        }
+
+        .enlace-privacidad {
+            color: #7C3AED;
+            transition: color 0.2s ease;
+        }
+
+        .enlace-privacidad:hover {
+            color: #6D28D9;
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -843,6 +854,28 @@
                                 </div>
                             </div>
 
+                            <div class="space-y-3 pt-2 pb-4">
+                                <label class="flex items-start gap-3 cursor-pointer">
+                                    <input type="checkbox" name="acepta_privacidad"
+                                        class="mt-1 w-4 h-4 text-action-purple bg-transparent border-gray-400 rounded focus:ring-action-purple focus:ring-2"
+                                        required>
+                                    <span class="text-sm text-gray-300">
+                                        He leído y acepto la <a href="legal.html#privacidad" target="_blank"
+                                            rel="noopener noreferrer" class="enlace-privacidad">
+                                            Política de Privacidad
+                                        </a>
+                                    </span>
+                                </label>
+                                <label class="flex items-start gap-3 cursor-pointer">
+                                    <input type="checkbox" name="acepta_comunicaciones"
+                                        class="mt-1 w-4 h-4 text-action-purple bg-transparent border-gray-400 rounded focus:ring-action-purple focus:ring-2">
+                                    <span class="text-sm text-gray-300">
+                                        Deseo recibir comunicaciones comerciales, ofertas y novedades por correo
+                                        electrónico.
+                                    </span>
+                                </label>
+                            </div>
+
                             <div class="flex items-center justify-between gap-4 pt-4">
                                 <button type="button" onclick="prevStep(5)"
                                     class="border border-white/10 text-gray-400 hover:text-white px-6 py-4 rounded-xl font-label-caps text-sm transition-colors">Atrás</button>
@@ -1276,6 +1309,10 @@
             for (const key in data) {
                 if (Array.isArray(data[key])) data[key] = data[key].join(', ');
             }
+
+            // Explicitar los consentimientos legales como booleanos
+            data.acepta_privacidad = form.querySelector('input[name="acepta_privacidad"]')?.checked || false;
+            data.acepta_comunicaciones = form.querySelector('input[name="acepta_comunicaciones"]')?.checked || false;
 
             // Calculations
             const ticketMedioEl = form.querySelector('input[name="ticket_medio"]:checked');
